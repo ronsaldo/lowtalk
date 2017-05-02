@@ -1,0 +1,3 @@
+expressions
+floatNumber
+	^ dottedFloatNumber / scientificFloatNumber

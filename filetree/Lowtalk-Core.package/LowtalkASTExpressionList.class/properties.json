@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkASTExpression",
+	"category" : "Lowtalk-Core-AST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"expressions",
+		"pragmaList",
+		"locals"
+	],
+	"name" : "LowtalkASTExpressionList",
+	"type" : "normal"
+}

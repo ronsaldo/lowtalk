@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkASTExpression",
+	"category" : "Lowtalk-Core-AST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"receiver",
+		"messages"
+	],
+	"name" : "LowtalkASTMessageChain",
+	"type" : "normal"
+}

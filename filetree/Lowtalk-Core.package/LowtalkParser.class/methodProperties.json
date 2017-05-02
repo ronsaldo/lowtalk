@@ -1,0 +1,24 @@
+{
+	"instance" : {
+		"localDeclaration" : "RonieSalgado 4/11/2017 19:05",
+		"localDeclarations" : "RonieSalgado 3/12/2017 14:56",
+		"expressionList" : "RonieSalgado 3/12/2017 14:54",
+		"chainUnaryMessage" : "RonieSalgado 3/12/2017 14:18",
+		"parentExpression" : "RonieSalgado 3/12/2017 14:35",
+		"integerNumber" : "RonieSalgado 3/12/2017 13:56",
+		"dottedFloatNumber" : "RonieSalgado 3/12/2017 14:00",
+		"letExpression" : "RonieSalgado 4/11/2017 19:05",
+		"scientificFloatNumber" : "RonieSalgado 3/12/2017 13:59",
+		"parse:" : "RonieSalgado 4/11/2017 19:12",
+		"binaryExpression" : "RonieSalgado 3/12/2017 14:01",
+		"chainKeywordMessage" : "RonieSalgado 3/12/2017 14:16",
+		"identifierExpression" : "RonieSalgado 3/12/2017 13:48",
+		"assignmentExpression" : "RonieSalgado 3/12/2017 14:04",
+		"chainExpression" : "RonieSalgado 3/12/2017 14:27",
+		"arrayExpression" : "RonieSalgado 3/12/2017 14:37",
+		"returnExpression" : "RonieSalgado 3/12/2017 14:13",
+		"start" : "RonieSalgado 3/12/2017 13:39",
+		"unaryExpression" : "RonieSalgado 3/12/2017 14:00"
+	},
+	"class" : { }
+}

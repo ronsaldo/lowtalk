@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Lowtalk-Core-AST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"collection",
+		"start",
+		"stop",
+		"line",
+		"column"
+	],
+	"name" : "LowtalkASTPosition",
+	"type" : "normal"
+}

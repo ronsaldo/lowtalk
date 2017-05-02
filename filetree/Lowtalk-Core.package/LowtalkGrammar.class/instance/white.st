@@ -1,0 +1,3 @@
+tokens
+white
+	^ #space asParser
