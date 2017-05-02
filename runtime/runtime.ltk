@@ -1,0 +1,3 @@
+Compiler
+    evaluateFileNamed: 'kernel/kernel.ltk';
+    yourself

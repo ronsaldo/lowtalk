@@ -5,7 +5,7 @@ chainKeywordMessage
 		selector := ''.
 		list do: [ :each | selector := selector , each first inputValue ].
 		LowtalkASTMessage new
-			position: list first;
+			position: list first first;
 			selector: selector asSymbol;
 			arguments: (list collect: #second);
 			yourself

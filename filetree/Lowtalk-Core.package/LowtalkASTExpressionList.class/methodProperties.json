@@ -1,11 +1,12 @@
 {
 	"instance" : {
 		"pragmaList:" : "RonieSalgado 3/12/2017 14:54",
+		"evaluateInLowtalkEnvironment:" : "RonieSalgado 5/2/2017 16:38",
 		"printOn:" : "RonieSalgado 3/12/2017 14:33",
 		"expressions:" : "RonieSalgado 3/12/2017 14:28",
 		"pragmaList" : "RonieSalgado 3/12/2017 14:54",
-		"locals:" : "RonieSalgado 3/12/2017 14:54",
 		"expressions" : "RonieSalgado 3/12/2017 14:28",
+		"locals:" : "RonieSalgado 3/12/2017 14:54",
 		"locals" : "RonieSalgado 3/12/2017 14:54"
 	},
 	"class" : { }

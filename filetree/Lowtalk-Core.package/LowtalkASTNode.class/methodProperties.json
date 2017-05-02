@@ -1,9 +1,12 @@
 {
 	"instance" : {
-		"position:" : "RonieSalgado 4/11/2017 19:06",
+		"evaluateInLowtalkEnvironment:" : "RonieSalgado 5/2/2017 16:37",
 		"asLowtalkASTPosition" : "RonieSalgado 4/11/2017 19:10",
+		"environment:semanticError:format:" : "RonieSalgado 5/2/2017 16:44",
+		"position" : "RonieSalgado 3/12/2017 13:37",
+		"environment:semanticError:" : "RonieSalgado 5/2/2017 16:45",
 		"isMessageSend" : "RonieSalgado 3/12/2017 14:23",
-		"position" : "RonieSalgado 3/12/2017 13:37"
+		"position:" : "RonieSalgado 4/11/2017 19:06"
 	},
 	"class" : { }
 }

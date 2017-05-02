@@ -1,0 +1,15 @@
+{
+	"instance" : {
+		"parent:" : "RonieSalgado 5/2/2017 16:27",
+		"lookSymbolRecursively:ifAbsent:" : "RonieSalgado 5/2/2017 16:31",
+		"initialize" : "RonieSalgado 5/2/2017 16:28",
+		"parent" : "RonieSalgado 5/2/2017 16:27",
+		"lookSymbol:ifAbsent:" : "RonieSalgado 5/2/2017 16:29",
+		"setSymbol:value:" : "RonieSalgado 5/2/2017 16:29",
+		"setSymbol:value:ifPresent:" : "RonieSalgado 5/2/2017 16:30"
+	},
+	"class" : {
+		"parent:" : "RonieSalgado 5/2/2017 16:37",
+		"empty" : "RonieSalgado 5/2/2017 16:27"
+	}
+}

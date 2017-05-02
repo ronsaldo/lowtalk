@@ -69,7 +69,11 @@
 		"lessThan",
 		"greaterThan",
 		"letExpression",
-		"letKeyword"
+		"letKeyword",
+		"stringLiteral",
+		"symbolLiteral",
+		"symbolIdentifierLiteral",
+		"symbolStringLiteral"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

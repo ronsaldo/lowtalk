@@ -2,8 +2,9 @@
 	"instance" : {
 		"localDeclaration" : "RonieSalgado 4/11/2017 19:05",
 		"localDeclarations" : "RonieSalgado 3/12/2017 14:56",
-		"expressionList" : "RonieSalgado 3/12/2017 14:54",
+		"expressionList" : "RonieSalgado 5/2/2017 16:24",
 		"chainUnaryMessage" : "RonieSalgado 3/12/2017 14:18",
+		"symbolIdentifierLiteral" : "RonieSalgado 5/2/2017 17:06",
 		"parentExpression" : "RonieSalgado 3/12/2017 14:35",
 		"integerNumber" : "RonieSalgado 3/12/2017 13:56",
 		"dottedFloatNumber" : "RonieSalgado 3/12/2017 14:00",
@@ -11,14 +12,19 @@
 		"scientificFloatNumber" : "RonieSalgado 3/12/2017 13:59",
 		"parse:" : "RonieSalgado 4/11/2017 19:12",
 		"binaryExpression" : "RonieSalgado 3/12/2017 14:01",
-		"chainKeywordMessage" : "RonieSalgado 3/12/2017 14:16",
+		"chainKeywordMessage" : "RonieSalgado 5/2/2017 16:51",
 		"identifierExpression" : "RonieSalgado 3/12/2017 13:48",
+		"stringLiteral" : "RonieSalgado 5/2/2017 17:04",
+		"parseFromFileNamed:" : "RonieSalgado 5/2/2017 16:14",
 		"assignmentExpression" : "RonieSalgado 3/12/2017 14:04",
-		"chainExpression" : "RonieSalgado 3/12/2017 14:27",
+		"chainExpression" : "RonieSalgado 5/2/2017 16:52",
+		"symbolStringLiteral" : "RonieSalgado 5/2/2017 17:06",
 		"arrayExpression" : "RonieSalgado 3/12/2017 14:37",
 		"returnExpression" : "RonieSalgado 3/12/2017 14:13",
 		"start" : "RonieSalgado 3/12/2017 13:39",
 		"unaryExpression" : "RonieSalgado 3/12/2017 14:00"
 	},
-	"class" : { }
+	"class" : {
+		"parseFromFileNamed:" : "RonieSalgado 5/2/2017 16:13"
+	}
 }

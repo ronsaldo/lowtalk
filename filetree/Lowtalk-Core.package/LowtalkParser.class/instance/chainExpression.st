@@ -9,7 +9,7 @@ chainExpression
 			]
 		] ifNotEmpty: [
 			| position chained |
-			position := list third first.
+			position := list third first first.
 			chained := list third collect: #second.
 			list second ifNil: [
 				list first isMessageSend ifFalse: [ 
