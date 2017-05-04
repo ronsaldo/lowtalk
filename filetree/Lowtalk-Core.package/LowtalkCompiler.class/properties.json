@@ -1,12 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "LowtalkBObject",
+	"super" : "Object",
 	"category" : "Lowtalk-Core-FrontEnd",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"globalEnvironment"
+		"globalEnvironment",
+		"currentDirectory",
+		"compilerEnvironment"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

@@ -1,3 +1,3 @@
 expressions
 symbolStringLiteral
-	^ self token: '#''' asParser , ($' asParser negate | ($' asParser , $' asParser)) star , $' asParser
+	^ self token: '#''' asParser , ($' asParser negate / ($' asParser , $' asParser)) star , $' asParser

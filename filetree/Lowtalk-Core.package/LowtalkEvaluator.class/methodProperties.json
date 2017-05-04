@@ -1,0 +1,19 @@
+{
+	"instance" : {
+		"visitIdentifierReferenceNode:" : "RonieSalgado 5/3/2017 22:21",
+		"environment" : "RonieSalgado 5/3/2017 22:17",
+		"visitMessageChainNode:" : "RonieSalgado 5/3/2017 22:56",
+		"visitExpressionListNode:" : "RonieSalgado 5/3/2017 22:20",
+		"evaluate:" : "RonieSalgado 5/3/2017 22:16",
+		"visitIntegerLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
+		"visitFloatLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
+		"visitMessageNode:" : "RonieSalgado 5/3/2017 22:57",
+		"environment:" : "RonieSalgado 5/3/2017 22:17",
+		"evaluateMessage:receiver:inSuperclass:" : "RonieSalgado 5/3/2017 22:55",
+		"visitSymbolLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
+		"visitStringLiteralNode:" : "RonieSalgado 5/3/2017 23:05"
+	},
+	"class" : {
+		"evaluate:environment:" : "RonieSalgado 5/3/2017 22:18"
+	}
+}

@@ -1,7 +1,14 @@
 compiling
 evaluateFileNamed: aFileName
-	| ast fileEnvironment result |
-	ast := LowtalkParser parseFromFileNamed: aFileName.
-	fileEnvironment := LowtalkEnvironment parent: globalEnvironment.
-	result := ast evaluateInLowtalkEnvironment: fileEnvironment.
-	^ result
+	<compileTime>
+	| ast fileEnvironment result fileReference oldDirectory |
+	fileReference := currentDirectory resolve: aFileName asFileReference.
+	oldDirectory := currentDirectory.
+	currentDirectory := fileReference parent.
+
+	[ 
+		ast := LowtalkParser parseFromFileNamed: fileReference.
+		fileEnvironment := LowtalkLocalEnvironment parent: globalEnvironment.
+		result := LowtalkEvaluator evaluate: ast environment: fileEnvironment.
+		^ result
+	] ensure: [  currentDirectory := oldDirectory ]

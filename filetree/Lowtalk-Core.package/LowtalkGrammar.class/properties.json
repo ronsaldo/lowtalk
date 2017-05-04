@@ -73,7 +73,11 @@
 		"stringLiteral",
 		"symbolLiteral",
 		"symbolIdentifierLiteral",
-		"symbolStringLiteral"
+		"symbolStringLiteral",
+		"comment",
+		"blockExpression",
+		"lbracket",
+		"arrayExpressionList"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

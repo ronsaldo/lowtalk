@@ -1,0 +1,3 @@
+visiting
+visitMessageChainNode: aNode
+	self subclassResponsibility

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkASTVisitor",
+	"category" : "Lowtalk-Core-Interpreter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"environment"
+	],
+	"name" : "LowtalkEvaluator",
+	"type" : "normal"
+}

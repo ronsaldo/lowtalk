@@ -1,0 +1,15 @@
+{
+	"instance" : {
+		"namespaceEnvironment" : "RonieSalgado 5/4/2017 00:56",
+		"lookSymbol:ifAbsent:" : "RonieSalgado 5/4/2017 00:56",
+		"lookSymbol:ifAbsentPut:" : "RonieSalgado 5/4/2017 00:56",
+		"isNamespace" : "RonieSalgado 5/4/2017 01:03",
+		"setSymbol:value:" : "RonieSalgado 5/4/2017 00:56",
+		"lookSymbolRecursively:ifAbsent:" : "RonieSalgado 5/4/2017 00:57",
+		"parent" : "RonieSalgado 5/4/2017 00:55",
+		"lookSymbol:ifPresent:" : "RonieSalgado 5/4/2017 00:56",
+		"parent:" : "RonieSalgado 5/4/2017 00:55",
+		"setSymbol:value:ifPresent:" : "RonieSalgado 5/4/2017 00:57"
+	},
+	"class" : { }
+}

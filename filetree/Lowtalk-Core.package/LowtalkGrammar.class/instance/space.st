@@ -1,3 +1,3 @@
 tokens
 space
-	^ white plus
+	^ (comment / white ) plus

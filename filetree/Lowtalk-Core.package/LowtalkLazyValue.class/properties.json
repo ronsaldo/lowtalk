@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Lowtalk-Core-AST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"evaluator",
+		"node",
+		"value",
+		"evaluated"
+	],
+	"name" : "LowtalkLazyValue",
+	"type" : "normal"
+}

@@ -1,12 +1,15 @@
 {
 	"instance" : {
-		"evaluateInLowtalkEnvironment:" : "RonieSalgado 5/2/2017 16:37",
-		"asLowtalkASTPosition" : "RonieSalgado 4/11/2017 19:10",
+		"semanticError:format:" : "RonieSalgado 5/3/2017 22:39",
+		"semanticError:" : "RonieSalgado 5/3/2017 22:40",
+		"environment:semanticError:" : "RonieSalgado 5/2/2017 16:45",
+		"position:" : "RonieSalgado 4/11/2017 19:06",
+		"superClassForValue:" : "RonieSalgado 5/3/2017 22:56",
 		"environment:semanticError:format:" : "RonieSalgado 5/2/2017 16:44",
 		"position" : "RonieSalgado 3/12/2017 13:37",
-		"environment:semanticError:" : "RonieSalgado 5/2/2017 16:45",
+		"accept:" : "RonieSalgado 5/3/2017 22:09",
 		"isMessageSend" : "RonieSalgado 3/12/2017 14:23",
-		"position:" : "RonieSalgado 4/11/2017 19:06"
+		"asLowtalkASTPosition" : "RonieSalgado 4/11/2017 19:10"
 	},
 	"class" : { }
 }

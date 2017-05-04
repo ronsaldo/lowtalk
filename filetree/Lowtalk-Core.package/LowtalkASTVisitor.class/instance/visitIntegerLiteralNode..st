@@ -1,0 +1,3 @@
+visiting
+visitIntegerLiteralNode: aNode
+	self subclassResponsibility

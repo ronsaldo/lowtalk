@@ -1,3 +1,3 @@
 accessing
 start
-	^ expressionList , #eof asParser
+	^ expressionList , space star, #eof asParser

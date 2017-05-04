@@ -1,0 +1,8 @@
+{
+	"instance" : { },
+	"class" : {
+		"initialize" : "RonieSalgado 5/3/2017 23:42",
+		"checkMethod:receiver:node:" : "RonieSalgado 5/3/2017 22:50",
+		"dispatchSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/3/2017 22:59"
+	}
+}

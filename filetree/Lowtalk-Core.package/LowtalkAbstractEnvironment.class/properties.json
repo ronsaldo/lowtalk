@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkBObject",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"parent"
+	],
+	"name" : "LowtalkAbstractEnvironment",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkGlobalObjectBuilder",
+	"category" : "Lowtalk-Core-FrontEnd",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LowtalkNamespaceBuilder",
+	"type" : "normal"
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"SelectorsAlwaysAllowed"
+	],
+	"instvars" : [ ],
+	"name" : "LowtalkWhiteList",
+	"type" : "normal"
+}

@@ -1,3 +1,3 @@
 expressions
 arrayExpression
-	^ lcbracket , expressionList , rcbracket
+	^ lcbracket , arrayExpressionList , rcbracket

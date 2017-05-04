@@ -1,4 +1,5 @@
 compiling
 initialize
 	super initialize.
-	self createEnvironment
+	self createEnvironment.
+	currentDirectory := FileSystem workingDirectory.

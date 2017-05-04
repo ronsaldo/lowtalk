@@ -1,0 +1,21 @@
+{
+	"instance" : {
+		"visitBlockNode:" : "RonieSalgado 5/4/2017 00:26",
+		"visitIdentifierReferenceNode:" : "RonieSalgado 5/3/2017 22:11",
+		"visitMessageChainNode:" : "RonieSalgado 5/3/2017 22:14",
+		"visitExpressionListNode:" : "RonieSalgado 5/3/2017 22:11",
+		"visitSuperNode:" : "RonieSalgado 5/3/2017 22:14",
+		"visitSelfNode:" : "RonieSalgado 5/3/2017 22:14",
+		"visitArrayNode:" : "RonieSalgado 5/3/2017 22:10",
+		"visitIntegerLiteralNode:" : "RonieSalgado 5/3/2017 22:12",
+		"visitFloatLiteralNode:" : "RonieSalgado 5/3/2017 22:12",
+		"visitLocalVariableNode:" : "RonieSalgado 5/3/2017 22:13",
+		"visitMessageNode:" : "RonieSalgado 5/3/2017 22:14",
+		"visitAssignmentNode:" : "RonieSalgado 5/3/2017 22:11",
+		"visitSymbolLiteralNode:" : "RonieSalgado 5/3/2017 22:13",
+		"visitStringLiteralNode:" : "RonieSalgado 5/3/2017 22:12",
+		"visitLetExpressionNode:" : "RonieSalgado 5/3/2017 22:11",
+		"visitReturnNode:" : "RonieSalgado 5/3/2017 22:14"
+	},
+	"class" : { }
+}

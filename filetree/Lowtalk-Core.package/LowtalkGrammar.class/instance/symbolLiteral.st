@@ -1,3 +1,3 @@
 expressions
 symbolLiteral
-	^ symbolIdentifierLiteral | symbolStringLiteral
+	^ symbolIdentifierLiteral / symbolStringLiteral

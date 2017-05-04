@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "Error",
 	"category" : "Lowtalk-Core-Exception",
 	"classinstvars" : [ ],
 	"pools" : [ ],

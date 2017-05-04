@@ -1,0 +1,3 @@
+visiting
+visitLocalVariableNode: aNode
+	self subclassResponsibility

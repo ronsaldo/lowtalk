@@ -1,0 +1,3 @@
+Compiler
+    evaluateFileNamed: 'objectModelSpur32.ltk';
+    yourself

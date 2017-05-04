@@ -1,0 +1,3 @@
+visiting
+visitIdentifierReferenceNode: aNode
+	self subclassResponsibility
