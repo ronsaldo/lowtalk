@@ -1,0 +1,26 @@
+"This is the part, where we define the Spur32 object model. This where things get very
+tricky. Before this part, we cannot even define classes, or things like that."
+
+Namespace named: #ObjectModel members: [
+
+    "The object header"
+    Structure named: #ObjectHeader slots: {
+        #classIndex => (UInt32 bits: 22).
+        #reserved => (UInt32 bits: 2).
+        #objectFormat => (UInt32 bits: 5).
+        #gcColor => (UInt32 bits: 3).
+        #identityHash => (UInt32 bits: 22).
+        #isPinned => (UInt32 bits: 1).
+        #isImmutable => (UInt32 bits: 1).
+        #slotCount => (UInt32 bits: 8).
+    }.
+
+    "The class table"
+    Global named: #ClassTable type: (ObjectHeader pointer array: 4096).
+    Global named: #ClassTableSize type: UInt32.
+
+    "Function to register a class"
+    Constant named: #registerClassInTable value: [:object<ObjectHeader pointer> |
+
+    ]
+]

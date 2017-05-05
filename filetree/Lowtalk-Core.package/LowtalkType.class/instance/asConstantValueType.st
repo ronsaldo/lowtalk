@@ -1,0 +1,3 @@
+accessing
+asConstantValueType
+	^ self asValueType

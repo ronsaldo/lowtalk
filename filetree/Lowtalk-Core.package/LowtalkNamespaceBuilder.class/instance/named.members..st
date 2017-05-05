@@ -9,7 +9,11 @@ named: nameLazyValue members: membersLazyValue
 	baseEnvironment := membersLazyValue environment.
 	
 	definitionEnvironment := baseEnvironment namespaceEnvironment.
-	namespace := definitionEnvironment lookSymbol: name ifAbsentPut: [ LowtalkNamespace parent: definitionEnvironment ].
+	namespace := definitionEnvironment lookSymbol: name ifAbsentPut: [
+		(LowtalkNamespace parent: definitionEnvironment)
+			name: name;
+			compiler: membersLazyValue compiler
+	].
 	
 	"Do not use the namespace environment directly. Bring in the the local scopes that are still present."
 	localEnvironment := LowtalkLocalEnvironment parent: (LowtalkEnvironmentWrapper new parent: baseEnvironment; environment: namespace).

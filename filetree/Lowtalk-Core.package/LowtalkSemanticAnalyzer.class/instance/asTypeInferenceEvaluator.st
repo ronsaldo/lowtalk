@@ -1,0 +1,3 @@
+converting
+asTypeInferenceEvaluator
+	^ LowtalkTypeInferenceEvaluator new environment: environment

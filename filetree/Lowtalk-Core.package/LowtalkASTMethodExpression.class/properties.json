@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkASTExpression",
+	"category" : "Lowtalk-Core-AST",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"selector",
+		"returnTypeExpression",
+		"arguments",
+		"body"
+	],
+	"name" : "LowtalkASTMethodExpression",
+	"type" : "normal"
+}

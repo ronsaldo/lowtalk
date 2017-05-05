@@ -8,7 +8,11 @@
 	"instvars" : [
 		"globalEnvironment",
 		"currentDirectory",
-		"compilerEnvironment"
+		"compilerEnvironment",
+		"compilationTarget",
+		"pendingObjects",
+		"ssaModule",
+		"objectType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

@@ -1,12 +1,18 @@
 {
 	"instance" : {
 		"environment" : "RonieSalgado 5/4/2017 00:06",
-		"value" : "RonieSalgado 5/3/2017 22:33",
+		"compiler" : "RonieSalgado 5/4/2017 17:52",
+		"inferValueType" : "RonieSalgado 5/4/2017 21:11",
+		"validTypeValue" : "RonieSalgado 5/4/2017 22:15",
+		"value" : "RonieSalgado 5/4/2017 21:32",
+		"evaluator" : "RonieSalgado 5/3/2017 22:28",
 		"initialize" : "RonieSalgado 5/3/2017 22:32",
 		"node" : "RonieSalgado 5/3/2017 22:28",
-		"evaluator" : "RonieSalgado 5/3/2017 22:28",
+		"asTypeExpression" : "RonieSalgado 5/4/2017 17:41",
 		"node:" : "RonieSalgado 5/3/2017 22:28",
-		"evaluator:" : "RonieSalgado 5/3/2017 22:28"
+		"evaluator:" : "RonieSalgado 5/3/2017 22:28",
+		"inferConstantValueType" : "RonieSalgado 5/4/2017 23:46",
+		"inferType" : "RonieSalgado 5/4/2017 23:13"
 	},
 	"class" : { }
 }

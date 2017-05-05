@@ -14,4 +14,5 @@ named: nameLazyValue slots: slotsLazyValue
 		nameLazyValue node semanticError: 'Symbol {1} is already used' format: { name printString }
 	].
 	
+	compiler addPendingObject: structure.
 	^ structure

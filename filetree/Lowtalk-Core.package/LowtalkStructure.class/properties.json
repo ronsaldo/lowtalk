@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"slotsExpression"
+		"slotsExpression",
+		"slots",
+		"type"
 	],
 	"name" : "LowtalkStructure",
 	"type" : "normal"

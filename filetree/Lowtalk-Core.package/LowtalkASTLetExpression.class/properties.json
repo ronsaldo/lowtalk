@@ -8,7 +8,8 @@
 	"instvars" : [
 		"identifier",
 		"typeExpression",
-		"initialValue"
+		"initialValue",
+		"valueType"
 	],
 	"name" : "LowtalkASTLetExpression",
 	"type" : "normal"

@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkVariable",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"definitionEnvironment",
+		"ssaValue",
+		"isExternal",
+		"isVisibleInC",
+		"typeExpression"
+	],
+	"name" : "LowtalkGlobalVariable",
+	"type" : "normal"
+}

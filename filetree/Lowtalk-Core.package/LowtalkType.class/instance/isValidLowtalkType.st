@@ -1,0 +1,3 @@
+testing
+isValidLowtalkType
+	^ true

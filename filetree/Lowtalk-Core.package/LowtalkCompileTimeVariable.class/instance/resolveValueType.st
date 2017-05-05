@@ -1,0 +1,3 @@
+accessing
+resolveValueType
+	^ compiler objectType

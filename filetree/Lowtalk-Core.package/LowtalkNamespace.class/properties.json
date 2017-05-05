@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"name"
+		"compiler",
+		"name",
+		"compileTimeOnly"
 	],
 	"name" : "LowtalkNamespace",
 	"type" : "normal"

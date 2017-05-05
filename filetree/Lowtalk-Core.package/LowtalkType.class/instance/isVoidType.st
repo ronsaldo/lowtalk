@@ -1,0 +1,3 @@
+testing
+isVoidType
+	^ false

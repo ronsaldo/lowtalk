@@ -1,3 +1,3 @@
 expressions
 letExpression
-	^ letKeyword , identifier , (lessThan , typeExpression , greaterThan) optional, (assignOperator , expression) optional
+	^ letKeyword , identifier , optionalTypeExpression, (assignOperator , expression) optional

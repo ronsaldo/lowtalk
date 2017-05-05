@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkType",
+	"category" : "Lowtalk-Core-Types",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"callingConvention",
+		"arguments",
+		"returnType"
+	],
+	"name" : "LowtalkFunctionType",
+	"type" : "normal"
+}

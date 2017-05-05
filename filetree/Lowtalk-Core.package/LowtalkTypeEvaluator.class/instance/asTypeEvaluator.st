@@ -1,0 +1,3 @@
+converting
+asTypeEvaluator
+	^ self

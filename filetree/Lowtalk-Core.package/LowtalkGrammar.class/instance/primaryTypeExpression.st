@@ -1,3 +1,0 @@
-type expression
-primaryTypeExpression
-	^ identifierExpression

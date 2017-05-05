@@ -1,3 +1,3 @@
 expressions
 blockExpression
-	^ lbracket , expressionList , rbracket
+	^ lbracket , blockContent , rbracket

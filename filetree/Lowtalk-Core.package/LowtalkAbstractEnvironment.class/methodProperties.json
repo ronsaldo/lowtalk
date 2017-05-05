@@ -2,13 +2,17 @@
 	"instance" : {
 		"namespaceEnvironment" : "RonieSalgado 5/4/2017 00:56",
 		"lookSymbol:ifAbsent:" : "RonieSalgado 5/4/2017 00:56",
+		"compiler" : "RonieSalgado 5/4/2017 17:54",
 		"lookSymbol:ifAbsentPut:" : "RonieSalgado 5/4/2017 00:56",
 		"isNamespace" : "RonieSalgado 5/4/2017 01:03",
 		"setSymbol:value:" : "RonieSalgado 5/4/2017 00:56",
 		"lookSymbolRecursively:ifAbsent:" : "RonieSalgado 5/4/2017 00:57",
+		"lookSymbol:" : "RonieSalgado 5/4/2017 18:38",
 		"parent" : "RonieSalgado 5/4/2017 00:55",
+		">>" : "RonieSalgado 5/4/2017 01:50",
 		"lookSymbol:ifPresent:" : "RonieSalgado 5/4/2017 00:56",
 		"parent:" : "RonieSalgado 5/4/2017 00:55",
+		"setCompileTimeVariable:value:" : "RonieSalgado 5/4/2017 21:36",
 		"setSymbol:value:ifPresent:" : "RonieSalgado 5/4/2017 00:57"
 	},
 	"class" : { }

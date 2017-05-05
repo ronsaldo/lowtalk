@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"value"
+		"value",
+		"binding"
 	],
 	"name" : "LowtalkASTIdentifierReference",
 	"type" : "normal"

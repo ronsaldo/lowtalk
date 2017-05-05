@@ -1,0 +1,8 @@
+"Bindings for some of the functions available in the C standard library"
+
+Namespace named: #LibC members: [
+    Global named: #SizeT value: UIntPointer.
+
+    "Function to register a class"
+    Constant externalC: #malloc type: (SizeT -> UInt8 pointer).
+]

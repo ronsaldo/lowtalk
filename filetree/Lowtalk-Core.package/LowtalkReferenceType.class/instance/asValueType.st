@@ -1,0 +1,3 @@
+converting
+asValueType
+	^ referenced asValueType

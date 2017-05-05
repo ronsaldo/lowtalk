@@ -1,0 +1,3 @@
+testing
+alignment
+	^ compilationTarget pointerAlignment

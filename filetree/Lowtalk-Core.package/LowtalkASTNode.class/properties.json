@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"position"
+		"position",
+		"type"
 	],
 	"name" : "LowtalkASTNode",
 	"type" : "normal"

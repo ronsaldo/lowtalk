@@ -1,17 +1,17 @@
 {
 	"instance" : {
-		"visitIdentifierReferenceNode:" : "RonieSalgado 5/3/2017 22:21",
-		"environment" : "RonieSalgado 5/3/2017 22:17",
-		"visitMessageChainNode:" : "RonieSalgado 5/3/2017 22:56",
+		"visitMessageChainNode:" : "RonieSalgado 5/4/2017 23:00",
 		"visitExpressionListNode:" : "RonieSalgado 5/3/2017 22:20",
-		"evaluate:" : "RonieSalgado 5/3/2017 22:16",
-		"visitIntegerLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
-		"visitFloatLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
-		"visitMessageNode:" : "RonieSalgado 5/3/2017 22:57",
-		"environment:" : "RonieSalgado 5/3/2017 22:17",
+		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 21:34",
+		"visitArrayNode:" : "RonieSalgado 5/4/2017 21:26",
+		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
+		"visitFloatLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
+		"visitMessageNode:" : "RonieSalgado 5/4/2017 23:01",
+		"visitIntegerLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
+		"inferType:" : "RonieSalgado 5/4/2017 23:16",
 		"evaluateMessage:receiver:inSuperclass:" : "RonieSalgado 5/3/2017 22:55",
-		"visitSymbolLiteralNode:" : "RonieSalgado 5/3/2017 23:05",
-		"visitStringLiteralNode:" : "RonieSalgado 5/3/2017 23:05"
+		"visitSymbolLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
+		"visitStringLiteralNode:" : "RonieSalgado 5/4/2017 21:52"
 	},
 	"class" : {
 		"evaluate:environment:" : "RonieSalgado 5/3/2017 22:18"

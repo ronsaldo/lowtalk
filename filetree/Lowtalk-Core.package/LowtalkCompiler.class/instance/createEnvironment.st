@@ -1,15 +1,22 @@
 compiling
 createEnvironment
-	compilerEnvironment := 	LowtalkNamespace empty name: #_Compiler.
+	compilerEnvironment := LowtalkNamespace empty name: #_Compiler.
 	compilerEnvironment
-		setSymbol: #Compiler value: self;
-		setSymbol: #Structure value: (LowtalkStructureBuilder new compiler: self);
-		setSymbol: #Namespace value: (LowtalkNamespaceBuilder new compiler: self).
+		compileTimeOnly: true;
+		compiler: self;
+		setCompileTimeVariable: #Compiler value: self;
+		setCompileTimeVariable: #Structure value: (LowtalkStructureBuilder new compiler: self);
+		setCompileTimeVariable: #Namespace value: (LowtalkNamespaceBuilder new compiler: self);
+		setCompileTimeVariable: #Global value: (LowtalkGlobalBuilder new compiler: self);
+		setCompileTimeVariable: #Constant value: (LowtalkConstantBuilder new compiler: self).
+	LowtalkType addStandardTypesToEnvironment: compilerEnvironment target: compilationTarget.
+	objectType := (compilerEnvironment lookSymbol: #_ObjectType) value.
 
-	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_Global.
+	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GN.
 	globalEnvironment
-		"setSymbol: compilerEnvironment name value: compilerEnvironment;"
-		setSymbol: globalEnvironment name value: globalEnvironment.
+		compiler: self;
+		"setCompileTimeVariable: compilerEnvironment name value: compilerEnvironment;"
+		setCompileTimeVariable: globalEnvironment name value: globalEnvironment.
 		
 	compilerEnvironment
-		setSymbol: globalEnvironment name value: globalEnvironment.
+		setCompileTimeVariable: globalEnvironment name value: globalEnvironment.

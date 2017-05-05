@@ -1,5 +1,6 @@
 {
 	"instance" : {
+		"type:" : "RonieSalgado 5/4/2017 21:29",
 		"semanticError:format:" : "RonieSalgado 5/3/2017 22:39",
 		"semanticError:" : "RonieSalgado 5/3/2017 22:40",
 		"environment:semanticError:" : "RonieSalgado 5/2/2017 16:45",
@@ -9,6 +10,7 @@
 		"position" : "RonieSalgado 3/12/2017 13:37",
 		"accept:" : "RonieSalgado 5/3/2017 22:09",
 		"isMessageSend" : "RonieSalgado 3/12/2017 14:23",
+		"type" : "RonieSalgado 5/4/2017 21:30",
 		"asLowtalkASTPosition" : "RonieSalgado 4/11/2017 19:10"
 	},
 	"class" : { }

@@ -8,6 +8,7 @@ slots: slotsLazyValue
 	definitionEnvironment := baseEnvironment namespaceEnvironment.
 
 	structure := LowtalkStructure parent: definitionEnvironment.
-	structure slotsExpression: slotsLazyValue.
+	structure compiler: slotsLazyValue compiler;
+		slotsExpression: slotsLazyValue.
 	
 	^ structure

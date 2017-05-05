@@ -1,3 +1,3 @@
 expressions
 localDeclaration
-	^ identifier , (lessThan , typeExpression , greaterThan) optional
+	^ identifier , optionalTypeExpression

@@ -1,9 +1,0 @@
-"This is the part, where we define the Spur32 object model. This where things get very
-tricky. Before this part, we cannot even define classes, or things like that."
-
-Namespace named: #ObjectModel members: [
-
-    "The object header"
-    Structure named: #_ObjectHeader slots: {
-    }.
-]

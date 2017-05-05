@@ -1,3 +1,3 @@
 type expression
 typeExpression
-	^ primaryTypeExpression
+	^ expression

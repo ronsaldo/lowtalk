@@ -1,0 +1,19 @@
+{
+	"instance" : {
+		"isFunctionType" : "RonieSalgado 5/4/2017 22:30",
+		"callingConvention:" : "RonieSalgado 5/4/2017 22:22",
+		"smalltalk" : "RonieSalgado 5/4/2017 22:25",
+		"callingConvention" : "RonieSalgado 5/4/2017 22:22",
+		"returnType" : "RonieSalgado 5/4/2017 22:19",
+		"buildSSAType" : "RonieSalgado 5/4/2017 23:08",
+		"hasSmalltalkConvention" : "RonieSalgado 5/4/2017 23:11",
+		"arguments" : "RonieSalgado 5/4/2017 22:19",
+		"initialize" : "RonieSalgado 5/4/2017 22:23",
+		"arguments:" : "RonieSalgado 5/4/2017 22:19",
+		"stdcall" : "RonieSalgado 5/4/2017 22:24",
+		"block" : "RonieSalgado 5/4/2017 23:44",
+		"cdecl" : "RonieSalgado 5/4/2017 22:24",
+		"returnType:" : "RonieSalgado 5/4/2017 22:19"
+	},
+	"class" : { }
+}

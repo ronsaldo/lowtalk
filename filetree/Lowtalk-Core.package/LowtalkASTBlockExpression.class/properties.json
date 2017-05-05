@@ -6,6 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"returnType",
+		"returnTypeExpression",
+		"arguments",
 		"body"
 	],
 	"name" : "LowtalkASTBlockExpression",

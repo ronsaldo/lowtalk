@@ -1,7 +1,7 @@
 accessing
 value
 	evaluated ifFalse: [
-		value := evaluator evaluate: node.
+		value := evaluator evaluateValue: node.
 		evaluated := true.
 	].
 

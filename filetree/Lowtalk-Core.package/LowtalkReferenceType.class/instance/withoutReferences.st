@@ -1,0 +1,3 @@
+accessing
+withoutReferences
+	^ referenced withoutReferences

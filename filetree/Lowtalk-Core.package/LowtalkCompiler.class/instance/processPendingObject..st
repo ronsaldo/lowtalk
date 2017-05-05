@@ -1,0 +1,3 @@
+initialization
+processPendingObject: anObject
+	anObject finishCompiling

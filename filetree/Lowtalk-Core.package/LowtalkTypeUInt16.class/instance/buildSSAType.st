@@ -1,0 +1,3 @@
+accessing
+buildSSAType
+	^ SLVMType ushortType

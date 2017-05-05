@@ -7,7 +7,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"name",
-		"type",
+		"valueType",
 		"typeExpression"
 	],
 	"name" : "LowtalkASTLocalVariable",

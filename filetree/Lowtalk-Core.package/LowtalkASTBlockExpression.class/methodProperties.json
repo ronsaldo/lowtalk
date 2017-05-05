@@ -1,8 +1,15 @@
 {
 	"instance" : {
-		"accept:" : "RonieSalgado 5/4/2017 00:26",
 		"body:" : "RonieSalgado 5/4/2017 00:25",
-		"body" : "RonieSalgado 5/4/2017 00:25"
+		"returnType" : "RonieSalgado 5/4/2017 23:36",
+		"arguments" : "RonieSalgado 5/4/2017 23:28",
+		"returnTypeExpression:" : "RonieSalgado 5/4/2017 22:48",
+		"arguments:" : "RonieSalgado 5/4/2017 23:28",
+		"printOn:" : "RonieSalgado 5/4/2017 23:36",
+		"returnTypeExpression" : "RonieSalgado 5/4/2017 22:48",
+		"accept:" : "RonieSalgado 5/4/2017 00:26",
+		"body" : "RonieSalgado 5/4/2017 00:25",
+		"returnType:" : "RonieSalgado 5/4/2017 23:36"
 	},
 	"class" : { }
 }
