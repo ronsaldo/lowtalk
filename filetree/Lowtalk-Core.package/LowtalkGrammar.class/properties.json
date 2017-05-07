@@ -95,7 +95,8 @@
 		"unaryExpressionSuffixMessage",
 		"unaryExpressionSuffixCall",
 		"sharpLCBracket",
-		"callExpressionArguments"
+		"callExpressionArguments",
+		"cstringLiteral"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

@@ -2,4 +2,5 @@ initialization
 initialize
 	super initialize.
 	callingConvention := SLVMFunctionType smalltalkCallingConvention.
-	variadic := false
+	variadic := false.
+	readOnly := true.

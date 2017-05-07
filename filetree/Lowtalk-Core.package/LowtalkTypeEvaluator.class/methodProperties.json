@@ -1,8 +1,10 @@
 {
 	"instance" : {
+		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 22:02",
+		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"visitIdentifierReferenceNode:" : "RonieSalgado 5/4/2017 22:02",
 		"asTypeEvaluator" : "RonieSalgado 5/4/2017 17:43",
-		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 22:02"
+		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19"
 	},
 	"class" : { }
 }

@@ -20,7 +20,7 @@ Namespace named: #ObjectModel members: [
     Global named: #ClassTableSize type: UInt32.
 
     "Function to register a class"
-    Constant named: #registerClassInTable value: [:object<ObjectHeader pointer> |
+    "Constant named: #registerClassInTable value: [<Void> :object<ObjectHeader pointer> |
 
-    ]
+    ]"
 ]

@@ -1,0 +1,3 @@
+testing
+isCompileTimeType
+	^ false

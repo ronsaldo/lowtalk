@@ -3,7 +3,7 @@ visitBlockArgumentNode: argumentNode
 	| variable |
 	self solveBlockArgumentType: argumentNode.
 	
-	variable := LowtalkMethodLocalVariable new
+	variable := LowtalkMethodArgument new
 		valueType: argumentNode type;
 		name: argumentNode name;
 		isConstant: true.

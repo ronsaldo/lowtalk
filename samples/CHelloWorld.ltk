@@ -1,0 +1,4 @@
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    LibC printf #{c'Used arguments: %d\n' . argc}.
+    ^ 0
+]

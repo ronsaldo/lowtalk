@@ -18,7 +18,8 @@
 		"rationalLiteralType",
 		"stringLiteralType",
 		"symbolLiteralType",
-		"voidType"
+		"voidType",
+		"compileTimeType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

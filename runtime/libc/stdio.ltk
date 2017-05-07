@@ -1,0 +1,4 @@
+"Bindings for Stdio"
+Namespace named: #LibC members: [
+    Constant externalC: #printf type: (ConstCString -> Int32) cvariadic.
+]

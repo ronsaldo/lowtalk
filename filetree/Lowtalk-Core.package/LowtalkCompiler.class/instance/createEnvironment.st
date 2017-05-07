@@ -18,6 +18,7 @@ createEnvironment
 	rationalLiteralType := (compilerEnvironment lookSymbol: #_RationalLiteral) value.
 	stringLiteralType := (compilerEnvironment lookSymbol: #_StringLiteral) value.
 	symbolLiteralType := (compilerEnvironment lookSymbol: #_SymbolLiteral) value.
+	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
 
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GN.
 	globalEnvironment

@@ -6,7 +6,7 @@ visitMessageChainNode: messageChain
 	result := receiver.
 	messageChain messages do: [ :message |
 		self solveMessageType: message withReceiverType: messageChain receiver type.
-		result := self evaluateMessage: message receiver: receiver inSuperclass: superClass.
+		result := self evaluateMessage: message receiver: receiver receiverType: messageChain receiver type inSuperclass: superClass.
 		messageChain type: message type.
 	].
 

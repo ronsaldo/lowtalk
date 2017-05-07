@@ -1,16 +1,18 @@
 {
 	"instance" : {
 		"visitBlockNode:" : "RonieSalgado 5/6/2017 22:07",
-		"visitMessageChainNode:" : "RonieSalgado 5/4/2017 23:00",
+		"evaluateMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/7/2017 19:27",
+		"visitMessageChainNode:" : "RonieSalgado 5/7/2017 19:04",
+		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19",
 		"visitExpressionListNode:" : "RonieSalgado 5/3/2017 22:20",
 		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 21:34",
 		"visitArrayNode:" : "RonieSalgado 5/4/2017 21:26",
-		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
+		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"visitFloatLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
-		"visitIntegerLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
 		"inferType:" : "RonieSalgado 5/4/2017 23:16",
-		"evaluateMessage:receiver:inSuperclass:" : "RonieSalgado 5/3/2017 22:55",
-		"visitMessageNode:" : "RonieSalgado 5/4/2017 23:01",
+		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
+		"visitIntegerLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
+		"visitMessageNode:" : "RonieSalgado 5/7/2017 19:13",
 		"visitSymbolLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
 		"visitStringLiteralNode:" : "RonieSalgado 5/4/2017 21:52"
 	},

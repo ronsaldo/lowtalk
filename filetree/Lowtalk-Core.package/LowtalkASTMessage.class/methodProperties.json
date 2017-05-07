@@ -1,14 +1,16 @@
 {
 	"instance" : {
-		"selector:" : "RonieSalgado 3/12/2017 13:28",
-		"printOn:" : "RonieSalgado 3/12/2017 14:10",
-		"arguments:" : "RonieSalgado 3/12/2017 13:51",
 		"receiver" : "RonieSalgado 3/12/2017 13:28",
-		"receiver:" : "RonieSalgado 3/12/2017 13:28",
-		"isMessageSend" : "RonieSalgado 3/12/2017 14:23",
 		"arguments" : "RonieSalgado 3/12/2017 13:51",
+		"arguments:" : "RonieSalgado 3/12/2017 13:51",
+		"printOn:" : "RonieSalgado 3/12/2017 14:10",
 		"selector" : "RonieSalgado 3/12/2017 13:28",
-		"accept:" : "RonieSalgado 5/3/2017 22:13"
+		"compileTimeValue" : "RonieSalgado 5/7/2017 19:11",
+		"receiver:" : "RonieSalgado 3/12/2017 13:28",
+		"compileTimeValue:" : "RonieSalgado 5/7/2017 19:11",
+		"accept:" : "RonieSalgado 5/3/2017 22:13",
+		"selector:" : "RonieSalgado 3/12/2017 13:28",
+		"isMessageSend" : "RonieSalgado 3/12/2017 14:23"
 	},
 	"class" : { }
 }

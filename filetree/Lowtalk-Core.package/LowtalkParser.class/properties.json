@@ -4,7 +4,9 @@
 	"category" : "Lowtalk-Core-Parser",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"CEscapeSequenceMap"
+	],
 	"instvars" : [ ],
 	"name" : "LowtalkParser",
 	"type" : "normal"

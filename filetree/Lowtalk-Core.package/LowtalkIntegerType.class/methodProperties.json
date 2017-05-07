@@ -1,6 +1,7 @@
 {
 	"instance" : {
 		"isIntegerType" : "RonieSalgado 5/6/2017 23:47",
+		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 5/7/2017 16:19",
 		"isSigned" : "RonieSalgado 5/6/2017 23:21",
 		"isUnsigned" : "RonieSalgado 5/7/2017 00:36"
 	},

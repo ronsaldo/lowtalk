@@ -1,0 +1,6 @@
+Compiler
+    evaluateFileNamed: 'ctypes.ltk';
+    evaluateFileNamed: 'stddef.ltk';
+    evaluateFileNamed: 'stdio.ltk';
+    evaluateFileNamed: 'stdlib.ltk';
+    yourself

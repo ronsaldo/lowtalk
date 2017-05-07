@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"ssaType",
-		"compilationTarget"
+		"compilationTarget",
+		"readOnly"
 	],
 	"name" : "LowtalkType",
 	"type" : "normal"

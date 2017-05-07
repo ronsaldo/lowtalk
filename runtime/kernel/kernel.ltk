@@ -1,4 +1,3 @@
 Compiler
-    evaluateFileNamed: 'libc.ltk';
     evaluateFileNamed: 'objectModel.ltk';
     yourself

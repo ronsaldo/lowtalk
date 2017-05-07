@@ -8,7 +8,8 @@
 	"instvars" : [
 		"selector",
 		"receiver",
-		"arguments"
+		"arguments",
+		"compileTimeValue"
 	],
 	"name" : "LowtalkASTMessage",
 	"type" : "normal"

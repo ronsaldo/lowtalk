@@ -2,14 +2,15 @@
 	"instance" : {
 		"asTypeInferenceEvaluator" : "RonieSalgado 5/4/2017 23:31",
 		"environment" : "RonieSalgado 5/4/2017 23:18",
-		"solveMessageType:withReceiverType:" : "RonieSalgado 5/4/2017 23:22",
 		"evaluate:" : "RonieSalgado 5/4/2017 23:18",
+		"solveMessageType:withReceiverType:" : "RonieSalgado 5/4/2017 23:22",
 		"solveBlockType:" : "RonieSalgado 5/4/2017 23:45",
 		"compiler" : "RonieSalgado 5/4/2017 23:18",
 		"solveTypeExpression:defaultType:" : "RonieSalgado 5/4/2017 23:34",
 		"solveBlockArgumentType:" : "RonieSalgado 5/6/2017 22:16",
 		"visitIdentifierReferenceNode:" : "RonieSalgado 5/6/2017 22:49",
 		"solveTypeExpression:" : "RonieSalgado 5/4/2017 23:35",
+		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"asTypeEvaluator" : "RonieSalgado 5/4/2017 23:31",
 		"environment:" : "RonieSalgado 5/4/2017 23:18",
 		"evaluateTypeExpression:" : "RonieSalgado 5/4/2017 23:32"

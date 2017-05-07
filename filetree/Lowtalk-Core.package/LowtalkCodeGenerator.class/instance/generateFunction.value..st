@@ -9,7 +9,7 @@ generateFunction: ssaFunction value: functionValue
 		| ssaArgument |
 		ssaArgument := ssaFunction arguments at: index.
 		ssaArgument name: arg name.
-		arg value: ssaArgument.
+		arg ssaValue: ssaArgument.
 	].
 
 	allocaBuilder := SLVMBuilder on: ssaFunction.

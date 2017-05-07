@@ -1,3 +1,3 @@
-accessing
+converting
 asConstantValueType
-	^ self asValueType
+	^ self asValueType const

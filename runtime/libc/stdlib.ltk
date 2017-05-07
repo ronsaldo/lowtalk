@@ -1,0 +1,25 @@
+"Bindings for Stdlib"
+Namespace named: #LibC members: [
+    "Exit points"
+    Constant externalC: #abort type: (Void) -> Void.
+    Constant externalC: #exit type: (CInt) -> Void.
+
+    "String conversions"
+    Constant externalC: #atol type: (ConstCString) -> CLong.
+    Constant externalC: #atoll type: (ConstCString) -> CLongLong.
+    Constant externalC: #atoi type: (ConstCString) -> CInt.
+    Constant externalC: #atof type: (ConstCString) -> CDouble.
+
+    Constant externalC: #strtod type: (ConstCString restrict, CString restrict) -> CDouble.
+    Constant externalC: #strtof type: (ConstCString restrict, CString restrict) -> CFloat.
+    Constant externalC: #strtol type: (ConstCString restrict, CString restrict) -> CLong.
+    Constant externalC: #strtoll type: (ConstCString restrict, CString restrict, CInt) -> CLongLong.
+    Constant externalC: #strtoul type: (ConstCString restrict, CString restrict, CInt) -> CULong.
+    Constant externalC: #strtoull type: (ConstCString restrict, CString restrict, CInt) -> CULongLong.
+
+    "Memory management."
+    Constant externalC: #calloc type: (SizeT, SizeT) -> Void pointer.
+    Constant externalC: #malloc type: (SizeT) -> Void pointer.
+    Constant externalC: #free type: (Void) -> Void pointer.
+    Constant externalC: #realloc type: (Void pointer, SizeT) -> Void pointer.
+]

@@ -2,13 +2,15 @@
 	"instance" : {
 		"visitIdentifierReferenceNode:" : "RonieSalgado 5/7/2017 04:15",
 		"returnReceiver" : "RonieSalgado 5/7/2017 00:16",
-		"visitCallExpression:" : "RonieSalgado 5/7/2017 04:21",
-		"compiler" : "RonieSalgado 5/6/2017 23:51",
+		"visitCallExpression:" : "RonieSalgado 5/7/2017 16:23",
 		"visitExpressionListNode:" : "RonieSalgado 5/7/2017 00:26",
 		"compiler:" : "RonieSalgado 5/6/2017 23:51",
-		"generateFunction:value:" : "RonieSalgado 5/7/2017 00:25",
+		"compiler" : "RonieSalgado 5/6/2017 23:51",
+		"coerceVariadicArgument:type:at:" : "RonieSalgado 5/7/2017 16:17",
+		"generateFunction:value:" : "RonieSalgado 5/7/2017 16:32",
 		"tryToReturnImplicitly" : "RonieSalgado 5/7/2017 00:18",
 		"visitIntegerLiteralNode:" : "RonieSalgado 5/7/2017 00:32",
+		"visitMessageNode:" : "RonieSalgado 5/7/2017 19:34",
 		"coerceImplicitly:type:to:at:" : "RonieSalgado 5/7/2017 00:39",
 		"visitStringLiteralNode:" : "RonieSalgado 5/7/2017 04:18",
 		"visitReturnNode:" : "RonieSalgado 5/7/2017 00:30"

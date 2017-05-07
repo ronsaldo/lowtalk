@@ -11,6 +11,7 @@
 		"unaryExpressionSuffixCall" : "RonieSalgado 5/7/2017 03:46",
 		"integerNumber" : "RonieSalgado 3/12/2017 13:56",
 		"arrayExpression" : "RonieSalgado 3/12/2017 14:37",
+		"cstringLiteral" : "RonieSalgado 5/7/2017 16:12",
 		"unaryExpressionSuffixMessage" : "RonieSalgado 5/7/2017 03:40",
 		"identifierExpression" : "RonieSalgado 3/12/2017 13:48",
 		"unaryMethodHeader" : "RonieSalgado 5/4/2017 20:06",
@@ -39,6 +40,7 @@
 		"scientificFloatNumber" : "RonieSalgado 3/12/2017 13:59"
 	},
 	"class" : {
+		"initialize" : "RonieSalgado 5/7/2017 16:07",
 		"parseFromFileNamed:" : "RonieSalgado 5/2/2017 16:13"
 	}
 }

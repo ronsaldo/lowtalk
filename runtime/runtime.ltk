@@ -1,3 +1,4 @@
 Compiler
+    evaluateFileNamed: 'libc/libc.ltk';
     evaluateFileNamed: 'kernel/kernel.ltk';
     yourself

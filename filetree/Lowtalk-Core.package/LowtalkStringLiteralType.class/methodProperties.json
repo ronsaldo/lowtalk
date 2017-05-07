@@ -2,7 +2,8 @@
 	"instance" : {
 		"name" : "RonieSalgado 5/6/2017 23:09",
 		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/7/2017 04:06",
-		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/7/2017 04:20"
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/7/2017 04:20",
+		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 5/7/2017 16:19"
 	},
 	"class" : { }
 }

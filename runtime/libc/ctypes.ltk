@@ -1,0 +1,24 @@
+"Some C types"
+Namespace named: #LibC members: [
+    "CTypes"
+    Constant named: #CChar value: UInt8.
+    Constant named: #CString value: CChar pointer.
+    Constant named: #ConstCString value: CChar const pointer.
+
+    Constant named: #CShort value: Int16.
+    Constant named: #CUShort value: UInt16.
+
+    Constant named: #CInt value: Int32.
+    Constant named: #CUInt value: UInt32.
+
+    Constant named: #CLongLong value: Int64.
+    Constant named: #CULongLong value: UInt64.
+
+    "TODO: Select the correct long type according to the target platform."
+    Constant named: #CLong value: Int32.
+    Constant named: #CULong value: UInt32.
+
+    Constant named: #CFloat value: Float32.
+    Constant named: #CDouble value: Float64.
+
+]
