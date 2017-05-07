@@ -8,7 +8,8 @@
 	"instvars" : [
 		"callingConvention",
 		"arguments",
-		"returnType"
+		"returnType",
+		"variadic"
 	],
 	"name" : "LowtalkFunctionType",
 	"type" : "normal"

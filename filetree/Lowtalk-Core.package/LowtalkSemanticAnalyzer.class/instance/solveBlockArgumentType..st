@@ -1,4 +1,7 @@
 as yet unclassified
 solveBlockArgumentType: argument
-	argument type: (self solveTypeExpression: argument typeExpression).
+	argument type ifNil: [ 
+		argument type: (self solveTypeExpression: argument typeExpression).
+	]
+	
 	

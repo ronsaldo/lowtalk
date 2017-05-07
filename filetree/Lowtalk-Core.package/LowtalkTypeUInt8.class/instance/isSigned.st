@@ -1,0 +1,3 @@
+testing
+isSigned
+	^ false

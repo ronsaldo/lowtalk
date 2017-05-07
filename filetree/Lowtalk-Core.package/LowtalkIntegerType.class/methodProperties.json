@@ -1,4 +1,8 @@
 {
-	"instance" : { },
+	"instance" : {
+		"isIntegerType" : "RonieSalgado 5/6/2017 23:47",
+		"isSigned" : "RonieSalgado 5/6/2017 23:21",
+		"isUnsigned" : "RonieSalgado 5/7/2017 00:36"
+	},
 	"class" : { }
 }

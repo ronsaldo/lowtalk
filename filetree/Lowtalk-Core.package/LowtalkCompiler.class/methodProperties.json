@@ -2,17 +2,20 @@
 	"instance" : {
 		"evaluateFileNamed:" : "RonieSalgado 5/4/2017 00:36",
 		"buildModule" : "RonieSalgado 5/4/2017 17:23",
-		"floatLiteralType" : "RonieSalgado 5/4/2017 21:53",
+		"floatLiteralType" : "RonieSalgado 5/6/2017 23:17",
 		"addPendingObject:" : "RonieSalgado 5/4/2017 21:14",
-		"integerLiteralType" : "RonieSalgado 5/4/2017 21:53",
-		"objectType" : "RonieSalgado 5/4/2017 18:40",
+		"integerLiteralType" : "RonieSalgado 5/6/2017 23:17",
 		"initializeWithCompilationTarget:" : "RonieSalgado 5/4/2017 16:51",
+		"objectType" : "RonieSalgado 5/4/2017 18:40",
 		"ssaModule" : "RonieSalgado 5/4/2017 17:23",
 		"compilationTarget" : "RonieSalgado 5/4/2017 17:48",
-		"symbolLiteralType" : "RonieSalgado 5/4/2017 21:53",
-		"stringLiteralType" : "RonieSalgado 5/4/2017 21:53",
+		"generateFunction:value:" : "RonieSalgado 5/6/2017 23:50",
+		"rationalLiteralType" : "RonieSalgado 5/6/2017 23:18",
+		"symbolLiteralType" : "RonieSalgado 5/6/2017 23:18",
+		"voidType" : "RonieSalgado 5/7/2017 00:18",
+		"stringLiteralType" : "RonieSalgado 5/6/2017 23:18",
 		"processPendingObject:" : "RonieSalgado 5/4/2017 17:30",
-		"createEnvironment" : "RonieSalgado 5/4/2017 21:21"
+		"createEnvironment" : "RonieSalgado 5/7/2017 00:13"
 	},
 	"class" : {
 		"new" : "RonieSalgado 5/4/2017 16:32",

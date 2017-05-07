@@ -1,4 +1,4 @@
 type composition
 ref
 	<compileTime>
-	^ (LowtalkReferenceType target: compilationTarget) pointed: self
+	^ (LowtalkReferenceType target: compilationTarget) referenced: self

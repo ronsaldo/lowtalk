@@ -1,0 +1,3 @@
+instructions
+returnReceiver
+	self halt

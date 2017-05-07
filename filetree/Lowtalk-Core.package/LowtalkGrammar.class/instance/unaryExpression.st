@@ -1,3 +1,3 @@
 expressions
 unaryExpression
-	^ primaryExpression , identifier star
+	^ primaryExpression , unaryExpressionSuffix star

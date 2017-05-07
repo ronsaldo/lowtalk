@@ -1,11 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "LowtalkBoxedObjectType",
+	"super" : "LowtalkSpecificDynamicObjectType",
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"functionType"
+	],
 	"name" : "LowtalkBlockObjectType",
 	"type" : "normal"
 }

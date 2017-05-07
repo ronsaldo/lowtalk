@@ -1,25 +1,31 @@
 adding
 addStandardTypesToEnvironment: anEnvironment target: aCompilationTarget
 	anEnvironment
-		setCompileTimeVariable: #Float16 value: (LowtalkTypeFloat16 target: aCompilationTarget);
-		setCompileTimeVariable: #Float32 value: (LowtalkTypeFloat32 target: aCompilationTarget);
-		setCompileTimeVariable: #Float64 value: (LowtalkTypeFloat64 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeFloat16 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeFloat32 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeFloat64 target: aCompilationTarget);
 
-		setCompileTimeVariable: #Int8 value: (LowtalkTypeInt8 target: aCompilationTarget);
-		setCompileTimeVariable: #UInt8 value: (LowtalkTypeUInt8 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeInt8 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeUInt8 target: aCompilationTarget);
 
-		setCompileTimeVariable: #Int16 value: (LowtalkTypeInt16 target: aCompilationTarget);
-		setCompileTimeVariable: #UInt16 value: (LowtalkTypeUInt16 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeInt16 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeUInt16 target: aCompilationTarget);
 		
-		setCompileTimeVariable: #Int32 value: (LowtalkTypeInt32 target: aCompilationTarget);
-		setCompileTimeVariable: #UInt32 value: (LowtalkTypeUInt32 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeInt32 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeUInt32 target: aCompilationTarget);
 
-		setCompileTimeVariable: #Int64 value: (LowtalkTypeInt64 target: aCompilationTarget);
-		setCompileTimeVariable: #UInt64 value: (LowtalkTypeUInt64 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeInt64 target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkTypeUInt64 target: aCompilationTarget);
 		
-		setCompileTimeVariable: #Void value: (LowtalkVoidType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkVoidType target: aCompilationTarget);
 
-		setCompileTimeVariable: #_ObjectType value: (LowtalkDynamicObjectType target: aCompilationTarget).
+		addCompileTimeVariableValue: (LowtalkDynamicObjectType target: aCompilationTarget);
+		
+		addCompileTimeVariableValue: (LowtalkFloatLiteralType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkIntegerLiteralType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkRationalLiteralType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkStringLiteralType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkSymbolLiteralType target: aCompilationTarget).
 		
 	aCompilationTarget pointerSize == 4 ifTrue: [ 
 		anEnvironment

@@ -1,4 +1,3 @@
 accessing
 type
-	type ifNil: [ self resolveType ].
-	^ type
+	self subclassResponsibility

@@ -5,5 +5,10 @@ buildSSAFunction
 		ssaValue makeExternal.
 		^ self.
 	].
+
+	self value ifNil: [ 
+		self error: 'Non external function without definition'.
+	].
 	
+	compiler generateFunction: ssaValue value: self value.
 	

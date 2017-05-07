@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkBObject",
+	"category" : "Lowtalk-Core-Interpreter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"node",
+		"environment",
+		"arguments",
+		"temporaries",
+		"returnType",
+		"receiverType"
+	],
+	"name" : "LowtalkInterpreterMethod",
+	"type" : "normal"
+}

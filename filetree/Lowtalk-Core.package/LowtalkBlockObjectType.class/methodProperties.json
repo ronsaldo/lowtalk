@@ -1,6 +1,10 @@
 {
 	"instance" : {
-		"isBlockType" : "RonieSalgado 5/4/2017 23:44"
+		"functionType" : "RonieSalgado 5/6/2017 23:25",
+		"functionType:" : "RonieSalgado 5/6/2017 23:25",
+		"isBlockType" : "RonieSalgado 5/4/2017 23:44",
+		"name" : "RonieSalgado 5/6/2017 23:07",
+		"asConstantValueType" : "RonieSalgado 5/6/2017 23:44"
 	},
 	"class" : { }
 }

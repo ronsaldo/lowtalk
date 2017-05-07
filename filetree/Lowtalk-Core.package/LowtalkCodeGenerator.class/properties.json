@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkASTVisitor",
+	"category" : "Lowtalk-Core-CodeGeneration",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"compiler",
+		"method",
+		"allocaBlock",
+		"allocaBuilder",
+		"bodyBlock",
+		"builder",
+		"receiverType"
+	],
+	"name" : "LowtalkCodeGenerator",
+	"type" : "normal"
+}

@@ -1,3 +1,3 @@
 types
 symbolLiteralType
-	^ objectType
+	^ symbolLiteralType

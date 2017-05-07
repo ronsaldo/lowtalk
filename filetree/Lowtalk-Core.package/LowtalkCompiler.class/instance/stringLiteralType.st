@@ -1,3 +1,3 @@
 types
 stringLiteralType
-	^ objectType
+	^ stringLiteralType

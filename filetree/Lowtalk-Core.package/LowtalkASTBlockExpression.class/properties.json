@@ -9,7 +9,8 @@
 		"returnType",
 		"returnTypeExpression",
 		"arguments",
-		"body"
+		"body",
+		"definition"
 	],
 	"name" : "LowtalkASTBlockExpression",
 	"type" : "normal"

@@ -90,7 +90,12 @@
 		"binaryMethodHeader",
 		"keywordMethodHeader",
 		"keywordMethodHeaderKeyword",
-		"methodExpression"
+		"methodExpression",
+		"unaryExpressionSuffix",
+		"unaryExpressionSuffixMessage",
+		"unaryExpressionSuffixCall",
+		"sharpLCBracket",
+		"callExpressionArguments"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

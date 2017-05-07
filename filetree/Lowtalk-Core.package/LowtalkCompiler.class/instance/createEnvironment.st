@@ -10,7 +10,14 @@ createEnvironment
 		setCompileTimeVariable: #Global value: (LowtalkGlobalBuilder new compiler: self);
 		setCompileTimeVariable: #Constant value: (LowtalkConstantBuilder new compiler: self).
 	LowtalkType addStandardTypesToEnvironment: compilerEnvironment target: compilationTarget.
-	objectType := (compilerEnvironment lookSymbol: #_ObjectType) value.
+
+	voidType := (compilerEnvironment lookSymbol: #Void) value.
+	objectType := (compilerEnvironment lookSymbol: #_DynamicObject) value.
+	integerLiteralType := (compilerEnvironment lookSymbol: #_IntegerLiteral) value.
+	floatLiteralType := (compilerEnvironment lookSymbol: #_FloatLiteral) value.
+	rationalLiteralType := (compilerEnvironment lookSymbol: #_RationalLiteral) value.
+	stringLiteralType := (compilerEnvironment lookSymbol: #_StringLiteral) value.
+	symbolLiteralType := (compilerEnvironment lookSymbol: #_SymbolLiteral) value.
 
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GN.
 	globalEnvironment

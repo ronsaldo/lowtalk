@@ -1,4 +1,3 @@
 accessing
 valueType
-	valueType ifNil: [ self resolveType ].
-	^ valueType
+	self subclassResponsibility

@@ -1,3 +1,3 @@
 accessing
 ssaValue
-	^ ssaValue ifNil: [ self buildSSAValue ]
+	^ ssaValue ifNil: [ self buildSSAValue . ssaValue]

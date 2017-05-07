@@ -1,3 +1,3 @@
 accessing
 locals: anObject
-	locals := anObject
+	locals := anObject ifNil: [ #() ]

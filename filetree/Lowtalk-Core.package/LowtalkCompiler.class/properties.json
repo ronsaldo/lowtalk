@@ -12,7 +12,13 @@
 		"compilationTarget",
 		"pendingObjects",
 		"ssaModule",
-		"objectType"
+		"objectType",
+		"integerLiteralType",
+		"floatLiteralType",
+		"rationalLiteralType",
+		"stringLiteralType",
+		"symbolLiteralType",
+		"voidType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

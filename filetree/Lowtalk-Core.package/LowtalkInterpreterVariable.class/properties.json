@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkVariable",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"type",
+		"valueType",
+		"value",
+		"valueExpression"
+	],
+	"name" : "LowtalkInterpreterVariable",
+	"type" : "normal"
+}

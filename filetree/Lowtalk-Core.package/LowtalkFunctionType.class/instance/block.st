@@ -1,3 +1,3 @@
-accessing
+as yet unclassified
 block
-	^ (LowtalkBlockObjectType target: compilationTarget) boxed: self
+	^ (LowtalkBlockObjectType target: compilationTarget) functionType: self

@@ -1,0 +1,3 @@
+testing
+isEnvironment
+	^ true

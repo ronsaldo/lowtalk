@@ -1,0 +1,3 @@
+testing
+isSpecificDynamicObjectType
+	^ false
