@@ -9,6 +9,6 @@ evaluateFileNamed: aFileName
 	[ 
 		ast := LowtalkParser parseFromFileNamed: fileReference.
 		fileEnvironment := LowtalkLocalEnvironment parent: globalEnvironment.
-		result := LowtalkEvaluator evaluate: ast environment: fileEnvironment.
+		result := LowtalkEvaluator evaluateValue: ast environment: fileEnvironment.
 		^ result
 	] ensure: [  currentDirectory := oldDirectory ]

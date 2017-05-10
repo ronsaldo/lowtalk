@@ -1,3 +1,3 @@
 accessing
 validName
-	^ #unnamed
+	^ name ifNil: [#unnamed]

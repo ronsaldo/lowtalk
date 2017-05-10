@@ -6,8 +6,13 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"name",
 		"fields",
-		"environment"
+		"fieldNames",
+		"environment",
+		"slots",
+		"slotsExpression",
+		"compiler"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

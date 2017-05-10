@@ -2,7 +2,7 @@
 	"instance" : { },
 	"class" : {
 		"initialize" : "RonieSalgado 5/7/2017 22:10",
-		"createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/7/2017 22:15",
+		"createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/10/2017 02:11",
 		"checkMethod:receiver:node:" : "RonieSalgado 5/7/2017 22:11",
 		"dispatchSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/7/2017 22:12"
 	}

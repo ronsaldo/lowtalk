@@ -1,9 +1,7 @@
-as yet unclassified
+slots
 specialMessageTypeForSelector: selector
-	environment ifNotNil: [
-		environment lookSymbol: selector ifPresent: [ :member |
-			^ member specialSelectorType
-		]
+	self slots ifNotNil: [
+		slots at: selector ifPresent: [ :slot | ^ slot specialSelectorType ]
 	].
 
 	^ super specialMessageTypeForSelector: selector

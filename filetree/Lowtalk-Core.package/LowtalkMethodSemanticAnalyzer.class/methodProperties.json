@@ -33,7 +33,7 @@
 		"visitStringLiteralNode:" : "RonieSalgado 5/6/2017 22:59",
 		"visitInlinedBlock:types:from:" : "RonieSalgado 5/9/2017 21:25",
 		"visitMessageNode:" : "RonieSalgado 5/9/2017 00:45",
-		"checkSlotMessage:receiver:" : "RonieSalgado 5/7/2017 22:39",
+		"checkSlotMessage:receiver:" : "RonieSalgado 5/10/2017 02:39",
 		"isMessageACandidateForInlining:receiver:" : "RonieSalgado 5/9/2017 23:01",
 		"visitIntegerLiteralNode:" : "RonieSalgado 5/6/2017 22:59",
 		"visitInlinedBlock:" : "RonieSalgado 5/9/2017 21:35"

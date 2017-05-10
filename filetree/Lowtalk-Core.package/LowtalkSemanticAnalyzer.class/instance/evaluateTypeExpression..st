@@ -1,3 +1,9 @@
 as yet unclassified
 evaluateTypeExpression: typeExpression
-	^ self asTypeEvaluator evaluate: typeExpression
+	| result |
+	result := self asEvaluator evaluateValue: typeExpression.
+	result isLowtalkType ifFalse: [ 
+		typeExpression semanticError: 'Expected a type expression.'
+	].
+
+	^ result

@@ -1,3 +1,3 @@
-accessing
+slots
 slotsExpression: anObject
 	slotsExpression := anObject

@@ -23,7 +23,8 @@
 		"intPointerType",
 		"uintPointerType",
 		"booleanType",
-		"nilType"
+		"nilType",
+		"globalBuilder"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

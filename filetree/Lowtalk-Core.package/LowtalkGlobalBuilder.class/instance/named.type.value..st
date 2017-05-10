@@ -13,7 +13,7 @@ named: nameLazyValue type: typeLazyValue value: lazyValue
 		name: name;
 		definitionEnvironment: definitionEnvironment;
 		compiler: definitionEnvironment compiler;
-		typeExpression: typeLazyValue asTypeExpression;
+		typeExpression: typeLazyValue;
 		valueExpression: lazyValue.
 	definitionEnvironment setSymbol: name value: global ifPresent: [ 
 		nameLazyValue node semanticError: 'Symbol {1} is already used.' format: { name printString }

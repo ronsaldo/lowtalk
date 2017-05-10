@@ -4,7 +4,7 @@
 		"evaluateMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/7/2017 19:27",
 		"visitMessageChainNode:" : "RonieSalgado 5/7/2017 19:04",
 		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19",
-		"visitExpressionListNode:" : "RonieSalgado 5/3/2017 22:20",
+		"visitExpressionListNode:" : "RonieSalgado 5/10/2017 02:10",
 		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 21:34",
 		"visitArrayNode:" : "RonieSalgado 5/7/2017 22:22",
 		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
@@ -17,6 +17,7 @@
 		"visitStringLiteralNode:" : "RonieSalgado 5/4/2017 21:52"
 	},
 	"class" : {
+		"evaluateValue:environment:" : "RonieSalgado 5/10/2017 02:08",
 		"evaluate:environment:" : "RonieSalgado 5/3/2017 22:18"
 	}
 }

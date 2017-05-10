@@ -1,3 +1,0 @@
-converting
-asTypeEvaluator
-	^ self

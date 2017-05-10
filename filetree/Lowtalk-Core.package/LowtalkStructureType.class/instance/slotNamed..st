@@ -1,4 +1,4 @@
 slots
 slotNamed: slotName
-	^ environment lookSymbol: slotName
+	^ self slots at: slotName
 	
