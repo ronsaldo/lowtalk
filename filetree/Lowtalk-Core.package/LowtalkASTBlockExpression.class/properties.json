@@ -10,7 +10,8 @@
 		"returnTypeExpression",
 		"arguments",
 		"body",
-		"definition"
+		"definition",
+		"inlined"
 	],
 	"name" : "LowtalkASTBlockExpression",
 	"type" : "normal"

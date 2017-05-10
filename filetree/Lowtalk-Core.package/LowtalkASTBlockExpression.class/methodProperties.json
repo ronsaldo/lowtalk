@@ -1,17 +1,21 @@
 {
 	"instance" : {
 		"body:" : "RonieSalgado 5/4/2017 00:25",
+		"value" : "RonieSalgado 5/6/2017 22:05",
 		"returnType" : "RonieSalgado 5/4/2017 23:36",
+		"inlined:" : "RonieSalgado 5/8/2017 21:51",
 		"arguments" : "RonieSalgado 5/4/2017 23:28",
 		"returnTypeExpression:" : "RonieSalgado 5/4/2017 22:48",
 		"arguments:" : "RonieSalgado 5/4/2017 23:28",
-		"printOn:" : "RonieSalgado 5/4/2017 23:36",
-		"definition:" : "RonieSalgado 5/6/2017 22:06",
 		"definition" : "RonieSalgado 5/6/2017 22:06",
+		"definition:" : "RonieSalgado 5/6/2017 22:06",
+		"printOn:" : "RonieSalgado 5/4/2017 23:36",
+		"pragmasDo:" : "RonieSalgado 5/7/2017 20:49",
 		"returnTypeExpression" : "RonieSalgado 5/4/2017 22:48",
-		"value" : "RonieSalgado 5/6/2017 22:05",
-		"accept:" : "RonieSalgado 5/4/2017 00:26",
+		"isBlockNode" : "RonieSalgado 5/8/2017 21:52",
 		"body" : "RonieSalgado 5/4/2017 00:25",
+		"inlined" : "RonieSalgado 5/8/2017 21:51",
+		"accept:" : "RonieSalgado 5/4/2017 00:26",
 		"returnType:" : "RonieSalgado 5/4/2017 23:36"
 	},
 	"class" : { }

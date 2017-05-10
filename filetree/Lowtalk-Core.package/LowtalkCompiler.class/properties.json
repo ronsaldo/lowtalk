@@ -19,7 +19,11 @@
 		"stringLiteralType",
 		"symbolLiteralType",
 		"voidType",
-		"compileTimeType"
+		"compileTimeType",
+		"intPointerType",
+		"uintPointerType",
+		"booleanType",
+		"nilType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

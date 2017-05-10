@@ -13,15 +13,5 @@ visitCallExpression: callExpression
 		^ self.
 	].
 
-	"Check the number of arguments."
-	(callExpression arguments size < receiverType arguments size or:
-	[callExpression arguments size > receiverType arguments size and: [ receiverType variadic not ]]) ifTrue: [ 
-		callExpression semanticError: 'Mismatching number of arguments for function of type {1}.' format: { receiverType name }.
-	].
-
-	"Check the type of the argumetns"
-	receiverType arguments doWithIndex: [ :expectedType :index |
-		(callExpression arguments at: index) type implicitlyConvertedTo: expectedType at: callExpression.
-	].
-
+	self checkCall: receiverType argumentTypes: (callExpression arguments collect: #type) at: callExpression.
 	callExpression type: receiverType returnType.

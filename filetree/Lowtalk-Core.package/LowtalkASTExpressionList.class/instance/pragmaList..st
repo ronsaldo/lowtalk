@@ -1,3 +1,3 @@
 accessing
 pragmaList: anObject
-	pragmaList := anObject
+	pragmaList := anObject.

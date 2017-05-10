@@ -4,7 +4,10 @@
 	"category" : "Lowtalk-Core-Interpreter",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"BlockMessages",
+		"BooleanControlFlowMessages"
+	],
 	"instvars" : [
 		"method"
 	],

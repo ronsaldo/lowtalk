@@ -5,6 +5,17 @@ generateFunction: ssaFunction value: functionValue
 	method := functionValue.
 	receiverType := functionValue receiverType.
 	
+	"Create the builders"
+	allocaBuilder := SLVMBuilder on: ssaFunction.
+	builder := SLVMBuilder on: ssaFunction.
+	
+	allocaBlock := allocaBuilder newBasicBlock: #entry.
+	allocaBuilder currentBlock: allocaBlock.
+	
+	bodyBlock := builder newBasicBlock: #body.
+	builder currentBlock: bodyBlock.
+
+	"Create the temporaries."
 	functionValue arguments doWithIndex: [ :arg :index |
 		| ssaArgument |
 		ssaArgument := ssaFunction arguments at: index.
@@ -12,14 +23,11 @@ generateFunction: ssaFunction value: functionValue
 		arg ssaValue: ssaArgument.
 	].
 
-	allocaBuilder := SLVMBuilder on: ssaFunction.
-	builder := SLVMBuilder on: ssaFunction.
+	functionValue temporaries do: [ :temp |
+		temp ssaValue: (allocaBuilder alloca: temp valueType ssaType name: temp name).
+	].
 
-	allocaBlock := allocaBuilder newBasicBlock: #entry.
-	allocaBuilder currentBlock: allocaBlock.
-	
-	bodyBlock := builder newBasicBlock: #body.
-	builder currentBlock: bodyBlock.
+	self flag: 'TODO: Initialize the temporary variables with 0 or nil.'.
 	
 	node body accept: self.
 	

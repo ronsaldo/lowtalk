@@ -1,8 +1,8 @@
 coercions
 ssaCoerce: value implicitlyTo: targetType with: builder at: node
-	referenced = targetType ifTrue: [
+	(referenced canBeImplicitlyConvertedTo: targetType) ifTrue: [
 		referenced isFunctionType ifTrue: [ ^ value ].
-		^ builder load: value
+		^ referenced ssaCoerce: (builder load: value) implicitlyTo: targetType with: builder at: node
 	].
 
 	^ super ssaCoerce: value implicitlyTo: targetType with: builder at: node

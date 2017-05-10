@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithFloatLiteral: otherType
+	^ self

@@ -8,6 +8,10 @@ dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass:
 
 	self checkMethod: method receiver: receiver node: sendingNode.
 	
+	OverridenMethods at: method ifPresent: [ :override |
+		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode }
+	].
+	
 	(method hasPragmaNamed: #lazy) ifTrue: [
 		^ receiver perform: selector withArguments: arguments inSuperclass: superClass
 	] ifFalse: [

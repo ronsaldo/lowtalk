@@ -1,19 +1,40 @@
 {
 	"instance" : {
-		"visitIdentifierReferenceNode:" : "RonieSalgado 5/7/2017 04:15",
-		"returnReceiver" : "RonieSalgado 5/7/2017 00:16",
 		"visitCallExpression:" : "RonieSalgado 5/7/2017 16:23",
+		"emitComparison:left:right:type:at:" : "RonieSalgado 5/9/2017 22:10",
+		"generateFunction:value:" : "RonieSalgado 5/9/2017 01:01",
+		"convertValue:type:toConditionOf:at:" : "RonieSalgado 5/8/2017 22:18",
 		"visitExpressionListNode:" : "RonieSalgado 5/7/2017 00:26",
-		"compiler:" : "RonieSalgado 5/6/2017 23:51",
-		"compiler" : "RonieSalgado 5/6/2017 23:51",
-		"coerceVariadicArgument:type:at:" : "RonieSalgado 5/7/2017 16:17",
-		"generateFunction:value:" : "RonieSalgado 5/7/2017 16:32",
+		"inlineBlock:cull:types:" : "RonieSalgado 5/8/2017 22:49",
+		"visitAssignmentNode:" : "RonieSalgado 5/7/2017 23:12",
 		"tryToReturnImplicitly" : "RonieSalgado 5/7/2017 00:18",
-		"visitIntegerLiteralNode:" : "RonieSalgado 5/7/2017 00:32",
-		"visitMessageNode:" : "RonieSalgado 5/7/2017 19:34",
-		"coerceImplicitly:type:to:at:" : "RonieSalgado 5/7/2017 00:39",
 		"visitStringLiteralNode:" : "RonieSalgado 5/7/2017 04:18",
-		"visitReturnNode:" : "RonieSalgado 5/7/2017 00:30"
+		"generateSpecialMessage:" : "RonieSalgado 5/7/2017 23:14",
+		"generateRangeLoopMessage:" : "RonieSalgado 5/9/2017 22:35",
+		"generateEqualityMessage:" : "RonieSalgado 5/8/2017 22:19",
+		"coerceImplicitly:type:to:at:" : "RonieSalgado 5/7/2017 00:39",
+		"visitIdentifierReferenceNode:" : "RonieSalgado 5/7/2017 04:15",
+		"generateIfSelectionMessage:" : "RonieSalgado 5/8/2017 23:22",
+		"inlinedBlockReturnType:" : "RonieSalgado 5/8/2017 23:10",
+		"generateComparisonMessage:" : "RonieSalgado 5/9/2017 22:04",
+		"visitIntegerLiteralNode:" : "RonieSalgado 5/7/2017 00:32",
+		"generateArithmeticMessage:" : "RonieSalgado 5/9/2017 22:03",
+		"emitDynamicMessage:arguments:at:" : "RonieSalgado 5/9/2017 22:06",
+		"coerceVariadicArgument:type:at:" : "RonieSalgado 5/7/2017 16:17",
+		"generateWhileLoopMessage:" : "RonieSalgado 5/9/2017 00:50",
+		"emitArithmetic:left:right:type:at:" : "RonieSalgado 5/9/2017 22:10",
+		"compiler" : "RonieSalgado 5/6/2017 23:51",
+		"generateNormalMessage:" : "RonieSalgado 5/9/2017 22:09",
+		"generatePointerDeReferenceMessage:" : "RonieSalgado 5/9/2017 22:39",
+		"returnReceiver" : "RonieSalgado 5/7/2017 00:16",
+		"visitLetExpressionNode:" : "RonieSalgado 5/9/2017 00:22",
+		"visitMessageNode:" : "RonieSalgado 5/7/2017 23:13",
+		"visitReturnNode:" : "RonieSalgado 5/7/2017 00:30",
+		"compiler:" : "RonieSalgado 5/6/2017 23:51",
+		"generateSlotMessage:" : "RonieSalgado 5/7/2017 23:22",
+		"inlineBlock:arguments:types:" : "RonieSalgado 5/9/2017 22:13"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "RonieSalgado 5/8/2017 22:32"
+	}
 }

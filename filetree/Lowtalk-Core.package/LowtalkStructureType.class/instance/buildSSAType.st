@@ -1,3 +1,8 @@
 accessing
 buildSSAType
-	^ SLVMStructureType name: self validName types: (fields collect: #ssaType) kind: SLVMStructureType genericKind names: self validFieldNames
+	ssaType := SLVMStructureType new.
+	ssaType name: self validName;
+		kind: SLVMStructureType genericKind;
+		types: (fields collect: #ssaType);
+		names: self validFieldNames.
+	^ ssaType

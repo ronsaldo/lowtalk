@@ -1,3 +1,3 @@
 expressions
 pragma
-	^ lessThan , chainKeywordMessage , greaterThan
+	^ lessThan , chainedMessage , greaterThan

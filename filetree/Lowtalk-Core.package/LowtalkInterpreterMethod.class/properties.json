@@ -11,7 +11,8 @@
 		"arguments",
 		"temporaries",
 		"returnType",
-		"receiverType"
+		"receiverType",
+		"parentMethod"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

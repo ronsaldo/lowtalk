@@ -4,7 +4,10 @@
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"BlockSpecialMessages",
+		"CommonSpecialMessages"
+	],
 	"instvars" : [
 		"ssaType",
 		"compilationTarget",

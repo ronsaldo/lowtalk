@@ -9,7 +9,8 @@
 		"callingConvention",
 		"arguments",
 		"returnType",
-		"variadic"
+		"variadic",
+		"name"
 	],
 	"name" : "LowtalkFunctionType",
 	"type" : "normal"

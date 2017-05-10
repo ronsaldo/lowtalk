@@ -12,12 +12,16 @@ createEnvironment
 	LowtalkType addStandardTypesToEnvironment: compilerEnvironment target: compilationTarget.
 
 	voidType := (compilerEnvironment lookSymbol: #Void) value.
+	nilType := (compilerEnvironment lookSymbol: #_Nil) value.
 	objectType := (compilerEnvironment lookSymbol: #_DynamicObject) value.
 	integerLiteralType := (compilerEnvironment lookSymbol: #_IntegerLiteral) value.
 	floatLiteralType := (compilerEnvironment lookSymbol: #_FloatLiteral) value.
 	rationalLiteralType := (compilerEnvironment lookSymbol: #_RationalLiteral) value.
 	stringLiteralType := (compilerEnvironment lookSymbol: #_StringLiteral) value.
 	symbolLiteralType := (compilerEnvironment lookSymbol: #_SymbolLiteral) value.
+	uintPointerType := (compilerEnvironment lookSymbol: #UIntPointer) value.
+	intPointerType := (compilerEnvironment lookSymbol: #IntPointer) value.
+	booleanType := (compilerEnvironment lookSymbol: #BooleanBit) value.
 	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
 
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GN.

@@ -1,6 +1,10 @@
 {
 	"instance" : {
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/7/2017 22:55",
 		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 5/7/2017 16:19",
+		"operationSignature" : "RonieSalgado 5/7/2017 23:31",
+		"arithmeticCoerceWithFloatLiteral:" : "RonieSalgado 5/9/2017 00:02",
+		"arithmeticCoerceWithIntegerLiteral:" : "RonieSalgado 5/9/2017 00:02",
 		"isFloatType" : "RonieSalgado 5/4/2017 16:25"
 	},
 	"class" : { }

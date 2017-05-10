@@ -4,9 +4,12 @@
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"PointerMessages"
+	],
 	"instvars" : [
-		"pointed"
+		"pointed",
+		"name"
 	],
 	"name" : "LowtalkPointerType",
 	"type" : "normal"

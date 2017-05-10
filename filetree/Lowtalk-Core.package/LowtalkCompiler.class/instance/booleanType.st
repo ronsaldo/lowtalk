@@ -1,0 +1,3 @@
+types
+booleanType
+	^ booleanType

@@ -4,7 +4,10 @@
 	"category" : "Lowtalk-Core-CodeGeneration",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"BinaryOperationMap",
+		"MessageConditionTypes"
+	],
 	"instvars" : [
 		"compiler",
 		"method",

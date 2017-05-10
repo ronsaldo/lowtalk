@@ -1,3 +1,5 @@
 as yet unclassified
 buildType
-	^ LowtalkStructureType target: self compilationTarget
+	type := LowtalkStructureType target: self compilationTarget.
+	self buildStructureLayout.
+	^ type

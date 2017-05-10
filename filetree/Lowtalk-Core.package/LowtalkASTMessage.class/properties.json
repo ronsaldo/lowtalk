@@ -9,7 +9,9 @@
 		"selector",
 		"receiver",
 		"arguments",
-		"compileTimeValue"
+		"compileTimeValue",
+		"specialMessageType",
+		"coercionType"
 	],
 	"name" : "LowtalkASTMessage",
 	"type" : "normal"

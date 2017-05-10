@@ -33,3 +33,7 @@ initialize
 		,
 	).
 	
+	OverridenMethods := Dictionary newFromPairs: { 
+		Symbol >> #=> . #createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:
+	}
+	

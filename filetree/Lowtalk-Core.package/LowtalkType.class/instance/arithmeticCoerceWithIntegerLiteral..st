@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithIntegerLiteral: otherType
+	^ nil

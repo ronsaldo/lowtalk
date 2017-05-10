@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"fields"
+		"fields",
+		"environment"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

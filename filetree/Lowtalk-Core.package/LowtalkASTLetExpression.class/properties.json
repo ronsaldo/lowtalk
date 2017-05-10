@@ -9,7 +9,8 @@
 		"identifier",
 		"typeExpression",
 		"initialValue",
-		"valueType"
+		"valueType",
+		"binding"
 	],
 	"name" : "LowtalkASTLetExpression",
 	"type" : "normal"

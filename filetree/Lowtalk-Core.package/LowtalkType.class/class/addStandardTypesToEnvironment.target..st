@@ -1,6 +1,8 @@
 adding
 addStandardTypesToEnvironment: anEnvironment target: aCompilationTarget
 	anEnvironment
+		addCompileTimeVariableValue: (LowtalkBooleanType target: aCompilationTarget);
+		
 		addCompileTimeVariableValue: (LowtalkTypeFloat16 target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkTypeFloat32 target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkTypeFloat64 target: aCompilationTarget);
@@ -18,6 +20,7 @@ addStandardTypesToEnvironment: anEnvironment target: aCompilationTarget
 		addCompileTimeVariableValue: (LowtalkTypeUInt64 target: aCompilationTarget);
 		
 		addCompileTimeVariableValue: (LowtalkVoidType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkNilType target: aCompilationTarget);
 
 		addCompileTimeVariableValue: (LowtalkDynamicObjectType target: aCompilationTarget);
 		

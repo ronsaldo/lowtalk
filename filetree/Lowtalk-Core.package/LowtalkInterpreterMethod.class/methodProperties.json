@@ -1,17 +1,20 @@
 {
 	"instance" : {
+		"returnType:" : "RonieSalgado 5/6/2017 22:37",
 		"environment" : "RonieSalgado 5/6/2017 22:14",
 		"returnType" : "RonieSalgado 5/6/2017 22:37",
+		"parentMethod:" : "RonieSalgado 5/8/2017 21:40",
 		"receiverType" : "RonieSalgado 5/7/2017 00:14",
 		"temporaries" : "RonieSalgado 5/6/2017 22:17",
 		"receiverType:" : "RonieSalgado 5/7/2017 00:14",
+		"parentMethod" : "RonieSalgado 5/8/2017 21:40",
 		"arguments" : "RonieSalgado 5/6/2017 22:15",
 		"initialize" : "RonieSalgado 5/6/2017 22:18",
 		"arguments:" : "RonieSalgado 5/6/2017 22:15",
 		"node" : "RonieSalgado 5/6/2017 22:12",
 		"environment:" : "RonieSalgado 5/6/2017 22:14",
 		"node:" : "RonieSalgado 5/6/2017 22:12",
-		"returnType:" : "RonieSalgado 5/6/2017 22:37"
+		"addTemporary:" : "RonieSalgado 5/8/2017 23:54"
 	},
 	"class" : { }
 }

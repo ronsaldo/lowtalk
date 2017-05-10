@@ -1,0 +1,3 @@
+types
+intPointerType
+	^ intPointerType
