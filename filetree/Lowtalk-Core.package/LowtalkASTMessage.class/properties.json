@@ -11,7 +11,8 @@
 		"arguments",
 		"compileTimeValue",
 		"specialMessageType",
-		"coercionType"
+		"coercionType",
+		"isCascaded"
 	],
 	"name" : "LowtalkASTMessage",
 	"type" : "normal"

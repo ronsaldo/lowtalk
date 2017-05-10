@@ -1,6 +1,10 @@
 special messages
 checkWhileLoopMessage: message receiver: receiver
 	| conditionBlockType conditionType |
+	(self isMessageACandidateForInlining: message receiver: receiver) ifFalse: [
+		^ self checkNormalMessage: message receiver: receiver
+	].
+
 	self assert: message arguments size <= 1.
 	
 	message specialMessageType: #WhileLoop.

@@ -1,6 +1,10 @@
 special messages
 checkIfSelectionMessage: message receiver: receiver
 	| firstResultType secondResultType selector receiverType firstType secondType resultType |
+	(self isMessageACandidateForInlining: message receiver: receiver) ifFalse: [
+		^ self checkNormalMessage: message receiver: receiver
+	].
+
 	self assert: message arguments size >= 1.
 	self assert: message arguments size <= 2.
 	receiverType := receiver type.

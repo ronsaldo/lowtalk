@@ -1,6 +1,10 @@
 special messages
 checkRangeLoopMessage: message receiver: receiver
 	| start increment body end coercionType blockType startType |
+	(self isMessageACandidateForInlining: message receiver: receiver) ifFalse: [
+		^ self checkNormalMessage: message receiver: receiver
+	].
+
 	start := message receiver.
 	startType := start type withoutReferences.
 	message type: startType.

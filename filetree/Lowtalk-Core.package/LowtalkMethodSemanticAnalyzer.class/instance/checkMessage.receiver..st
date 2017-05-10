@@ -1,7 +1,8 @@
 visiting
 checkMessage: message receiver: receiver
 	| receiverType |
-	(receiver isBlockNode and: [ BlockMessages includes: message selector ]) ifTrue: [ 
+	
+	(receiver isBlockNode and: [ (BlockMessages includes: message selector) and: [self isMessageACandidateForInlining: message receiver: receiver]]) ifTrue: [ 
 		self flag: 'TODO: Support more block special messages'.
 		^ self checkWhileLoopMessage: message receiver: receiver
 	].
