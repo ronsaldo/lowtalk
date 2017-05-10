@@ -20,6 +20,6 @@ Namespace named: #LibC members: [
     "Memory management."
     Constant externalC: #calloc type: (SizeT, SizeT) -> Void pointer.
     Constant externalC: #malloc type: (SizeT) -> Void pointer.
-    Constant externalC: #free type: (Void) -> Void pointer.
+    Constant externalC: #free type: (Void pointer) -> Void pointer.
     Constant externalC: #realloc type: (Void pointer, SizeT) -> Void pointer.
 ]

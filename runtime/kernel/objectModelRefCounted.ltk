@@ -1,0 +1,32 @@
+"This is the definition of a reference counted object model."
+Namespace named: #ObjectModel members: [
+
+    "The object header"
+    Structure named: #ObjectHeader slots: {
+        #class => ObjectHeader pointer.
+        #count => UInt32.
+    }.
+
+    "Reference counting"
+    Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        "TODO: Use an atomic operation."
+        object value count := object value count + 1.
+    ].
+
+    Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        "TODO: Use an atomic operation."
+        object value count := object value count - 1.
+        object value count = 0 ifTrue: [
+            destroyObject #{object}
+        ]
+    ].
+
+    Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        "TODO: Call the object finalizer"
+        LibC free #{object}
+    ].
+
+]

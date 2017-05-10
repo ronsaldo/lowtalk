@@ -1,3 +1,8 @@
-Compiler
+"Compiler
     evaluateFileNamed: 'objectModelSpur.ltk';
+    yourself
+"
+
+Compiler
+    evaluateFileNamed: 'objectModelRefCounted.ltk';
     yourself
