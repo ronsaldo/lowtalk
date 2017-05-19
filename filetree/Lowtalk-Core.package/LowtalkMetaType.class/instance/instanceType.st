@@ -1,0 +1,4 @@
+accessing
+instanceType
+	<compileTime>
+	^ instanceType

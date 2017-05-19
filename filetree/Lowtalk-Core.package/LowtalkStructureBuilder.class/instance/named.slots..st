@@ -4,6 +4,6 @@ named: nameLazyValue slots: slotsLazyValue
 	<lazy>
 	| structure |
 	structure := self slots: slotsLazyValue. 
-	compiler globalBuilder named: nameLazyValue type: compiler objectType value: structure.
+	compiler globalBuilder named: nameLazyValue type: structure metaType value: structure.
 	structure name: nameLazyValue value.
 	^ structure

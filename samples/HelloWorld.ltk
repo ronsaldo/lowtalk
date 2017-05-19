@@ -1,0 +1,16 @@
+Global named: #Main value: [:arguments |
+    LibC printf #{c'ArgumentCount: %d\n' arguments size asNativeInt32}.
+    ^ 0
+].
+
+
+Namespace named: #EntryPoint members: [
+    Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+        let arguments := Array new: argc.
+        1 to: argc do: [ :i |
+            arguments at: i put: (argv at: i) readString.
+        ].
+
+        ^ (Main value: arguments) asNativeInt32
+    ]
+]
