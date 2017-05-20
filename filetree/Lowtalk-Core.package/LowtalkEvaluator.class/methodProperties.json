@@ -1,23 +1,29 @@
 {
 	"instance" : {
-		"visitBlockNode:" : "RonieSalgado 5/6/2017 22:07",
-		"evaluateMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/7/2017 19:27",
-		"visitMessageChainNode:" : "RonieSalgado 5/7/2017 19:04",
-		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19",
+		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
+		"evaluateMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/19/2017 18:32",
 		"visitExpressionListNode:" : "RonieSalgado 5/10/2017 02:10",
+		"visitMessageChainNode:" : "RonieSalgado 5/7/2017 19:04",
+		"visitSymbolLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
 		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 21:34",
-		"visitArrayNode:" : "RonieSalgado 5/7/2017 22:22",
-		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
+		"visitStringLiteralNode:" : "RonieSalgado 5/4/2017 21:52",
+		"evaluateInlineBlock:arguments:types:at:" : "RonieSalgado 5/19/2017 18:31",
+		"visitBlockNode:" : "RonieSalgado 5/6/2017 22:07",
+		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19",
 		"visitFloatLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
 		"inferType:" : "RonieSalgado 5/4/2017 23:16",
-		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
+		"evaluateInlineIfMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/19/2017 18:18",
 		"visitIntegerLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
+		"cullInlineBlock:arguments:at:" : "RonieSalgado 5/19/2017 18:18",
+		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"visitMessageNode:" : "RonieSalgado 5/7/2017 19:13",
-		"visitSymbolLiteralNode:" : "RonieSalgado 5/4/2017 21:53",
-		"visitStringLiteralNode:" : "RonieSalgado 5/4/2017 21:52"
+		"cullInlineBlock:arguments:types:at:" : "RonieSalgado 5/19/2017 18:20",
+		"evaluateNormalMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/19/2017 16:11",
+		"visitArrayNode:" : "RonieSalgado 5/7/2017 22:22"
 	},
 	"class" : {
 		"evaluateValue:environment:" : "RonieSalgado 5/10/2017 02:08",
+		"initialize" : "RonieSalgado 5/19/2017 16:22",
 		"evaluate:environment:" : "RonieSalgado 5/3/2017 22:18"
 	}
 }

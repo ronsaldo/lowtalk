@@ -1,5 +1,22 @@
 "This is the definition of a reference counted object model."
 Namespace named: #ObjectModel members: [
+    UIntPointer size = 4 ifTrue: [
+        Constant named: #OopTagMask value: 3.
+
+        Constant named: #OopSmallIntegerTagMask value: 1.
+        Constant named: #OopSmallIntegerTagValue value: 1.
+
+        Constant named: #OopPointerTagMask value: OopTagMask.
+        Constant named: #OopPointerTagValue value: 0.
+    ] ifFalse: [
+        Constant named: #OopTagMask value: 3.
+
+        Constant named: #OopSmallIntegerTagMask value: 1.
+        Constant named: #OopSmallIntegerTagValue value: 1.
+
+        Constant named: #OopPointerTagMask value: OopTagMask.
+        Constant named: #OopPointerTagValue value: 0.
+    ].
 
     "The object header"
     Structure named: #ObjectHeader slots: {
@@ -10,8 +27,11 @@ Namespace named: #ObjectModel members: [
     "Reference counting"
     Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
-        "TODO: Use an atomic operation."
-        object value count := object value count + 1.
+"        let oop := object asUIntPointer.
+        ((oop & OopPointerTagMask) = OopPointerTagValue) ifTrue: [
+"            "TODO: Use an atomic operation."
+            object value count := object value count + 1.
+"        ]"
     ].
 
     Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
@@ -28,5 +48,16 @@ Namespace named: #ObjectModel members: [
         "TODO: Call the object finalizer"
         LibC free #{object}
     ].
+
+    Constant named: #writeBarrier value: [<Void> :variable<ObjectHeader pointer pointer> :value<ObjectHeader pointer> |
+        <cdecl>
+        increaseReference #{value}.
+        releaseReference #{variable value}.
+        variable value := value.
+    ].
+
+    Compiler objectModel
+    	headerType: ObjectModel ObjectHeader;
+    	writeBarrier: writeBarrier.
 
 ]

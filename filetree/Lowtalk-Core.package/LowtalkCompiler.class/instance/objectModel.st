@@ -1,0 +1,4 @@
+accessing
+objectModel
+	<compileTime>
+	^ objectModel

@@ -1,0 +1,4 @@
+accessing
+writeBarrier
+	<compileTime>
+	^ writeBarrier

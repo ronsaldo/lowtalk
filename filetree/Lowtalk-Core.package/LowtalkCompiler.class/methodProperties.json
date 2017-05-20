@@ -2,6 +2,7 @@
 	"instance" : {
 		"integerLiteralType" : "RonieSalgado 5/6/2017 23:17",
 		"booleanType" : "RonieSalgado 5/8/2017 21:01",
+		"objectModel" : "RonieSalgado 5/19/2017 13:42",
 		"generateFunction:value:" : "RonieSalgado 5/6/2017 23:50",
 		"stringLiteralType" : "RonieSalgado 5/6/2017 23:18",
 		"symbolLiteralType" : "RonieSalgado 5/6/2017 23:18",
@@ -23,7 +24,7 @@
 		"evaluateString:" : "RonieSalgado 5/10/2017 02:08",
 		"processPendingObject:" : "RonieSalgado 5/4/2017 17:30",
 		"ssaModule" : "RonieSalgado 5/4/2017 17:23",
-		"initializeWithCompilationTarget:" : "RonieSalgado 5/4/2017 16:51"
+		"initializeWithCompilationTarget:" : "RonieSalgado 5/19/2017 13:41"
 	},
 	"class" : {
 		"new" : "RonieSalgado 5/4/2017 16:32",

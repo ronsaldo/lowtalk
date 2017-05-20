@@ -6,4 +6,4 @@ visitIdentifierReferenceNode: identifier
 	].
 
 	identifier type ifNil: [ identifier type: result type ].
-	^ result
+	^ identifier type isReferenceType ifTrue: [ result ] ifFalse: [ result value ]

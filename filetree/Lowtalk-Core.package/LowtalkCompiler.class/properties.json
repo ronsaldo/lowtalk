@@ -24,7 +24,8 @@
 		"uintPointerType",
 		"booleanType",
 		"nilType",
-		"globalBuilder"
+		"globalBuilder",
+		"objectModel"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"
