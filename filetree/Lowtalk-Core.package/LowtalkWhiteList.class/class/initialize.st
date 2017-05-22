@@ -32,8 +32,12 @@ initialize
 		"Sequences operations"
 		,
 	).
+
+	AddedMethods := Dictionary newFromPairs: #(
+		#castTo: #castTo:receiver:arguments:inSuperclass:node:
+	).
 	
 	OverridenMethods := Dictionary newFromPairs: { 
 		Symbol >> #=> . #createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:
-	}
+	}.
 	

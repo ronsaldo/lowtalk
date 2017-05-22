@@ -6,6 +6,10 @@ initialize
 		value: PointerElementAssignment
 		at:put: PointerElementAssignment
 		
+		fetchAndAdd: AtomicFetchAndAdd
+		fetchAndSubtract: AtomicFetchAndAdd
+		swapValue: AtomicSwapValue
+		
 		+ PointerArithmetic
 		- PointerArithmetic
 	)

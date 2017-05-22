@@ -1,9 +1,10 @@
 {
 	"instance" : {
-		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/7/2017 00:39",
-		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/7/2017 00:12",
 		"convertValue:toType:at:" : "RonieSalgado 5/18/2017 21:51",
-		"isLiteralType" : "RonieSalgado 5/6/2017 23:07"
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/20/2017 21:53",
+		"isLiteralType" : "RonieSalgado 5/6/2017 23:07",
+		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 5/20/2017 21:18",
+		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/7/2017 00:12"
 	},
 	"class" : { }
 }

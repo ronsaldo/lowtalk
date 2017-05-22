@@ -4,7 +4,10 @@ buildSSAVariable
 
 	self isExternal ifTrue: [
 		ssaValue makeExternal.
+	] ifFalse: [ 
+		ssaValue makePublic.
 	].
+
 	self isConstant ifTrue: [ 
 		ssaValue readOnly: true
 	].

@@ -1,9 +1,10 @@
 {
 	"instance" : { },
 	"class" : {
-		"initialize" : "RonieSalgado 5/7/2017 22:10",
+		"initialize" : "RonieSalgado 5/21/2017 19:26",
+		"castTo:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/21/2017 19:34",
+		"checkMethod:receiver:node:" : "RonieSalgado 5/21/2017 19:29",
 		"createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/10/2017 02:11",
-		"checkMethod:receiver:node:" : "RonieSalgado 5/7/2017 22:11",
-		"dispatchSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/7/2017 22:12"
+		"dispatchSelector:receiver:arguments:inSuperclass:node:" : "RonieSalgado 5/21/2017 19:29"
 	}
 }

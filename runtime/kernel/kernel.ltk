@@ -1,3 +1,4 @@
 Compiler
     evaluateFileNamed: 'objectModel.ltk';
+    evaluateFileNamed: 'bootstrap.ltk';
     yourself

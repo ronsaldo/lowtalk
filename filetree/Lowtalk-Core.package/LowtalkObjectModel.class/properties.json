@@ -6,9 +6,14 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"compiler",
 		"headerType",
 		"writeBarrier",
-		"readBarrier"
+		"readBarrier",
+		"newObjectHeaderWithPointers",
+		"newObjectHeaderWithWeakPointers",
+		"newObjectHeaderWithBytes",
+		"newObjectHeaderWithWords"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

@@ -3,7 +3,7 @@ generateFunction: ssaFunction value: functionValue
 	| node |
 	node := functionValue node.
 	method := functionValue.
-	receiverType := functionValue receiverType.
+	selfType := functionValue receiverType.
 	
 	"Create the builders"
 	allocaBuilder := SLVMBuilder on: ssaFunction.

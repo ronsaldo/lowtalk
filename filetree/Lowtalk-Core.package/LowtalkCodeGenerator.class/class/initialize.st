@@ -30,6 +30,20 @@ initialize
 		'int <=' ile
 		'int >' igt
 		'int >=' ige
+		
+		'uint &' bitand
+		'uint bitAnd:' bitand
+		'uint |' bitor
+		'uint bitOr:' bitor
+		'uint ^' bitxor
+		'uint bitXor:' bitxor
+
+		'int &' bitand
+		'int bitAnd:' bitand
+		'int |' bitor
+		'int bitOr:' bitor
+		'int ^' bitxor
+		'int bitXor:' bitxor
 	).
 	
 	MessageConditionTypes := Dictionary newFromPairs: #(
@@ -47,4 +61,13 @@ initialize
 		whileFalse: false
 		whileNil: nil
 		whileNotNil: 0
+	).
+	
+	BlockMessages := Dictionary newFromPairs: #(
+		whileTrue WhileLoop
+		whileTrue: WhileLoop
+		whileFalse WhileLoop
+		whileFalse: WhileLoop
+		whileNotNil: WhileLoop
+		whileNil: WhileLoop
 	).

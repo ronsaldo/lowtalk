@@ -3,7 +3,7 @@ visitLetExpressionNode: node
 	"Infer the proper type of the let expression."
 	| variable |
 	node typeExpression ifNotNil: [
-		node valueType: node typeExpression value.
+		node valueType: (self solveTypeExpression: node typeExpression).
 	].
 
 	"Check the node value"

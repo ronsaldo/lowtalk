@@ -1,0 +1,4 @@
+accessing
+newObjectHeaderWithWords
+	<compileTime>
+	^ newObjectHeaderWithWords

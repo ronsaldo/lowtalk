@@ -1,14 +1,15 @@
 {
 	"instance" : {
-		"type" : "RonieSalgado 5/7/2017 22:17",
 		"defaultValue" : "RonieSalgado 5/18/2017 20:36",
-		"specialSelectorType" : "RonieSalgado 5/7/2017 22:31",
-		"index:" : "RonieSalgado 5/7/2017 22:17",
 		"type:" : "RonieSalgado 5/7/2017 22:35",
 		"index" : "RonieSalgado 5/7/2017 22:17",
 		"name" : "RonieSalgado 5/7/2017 22:17",
+		"specialSelectorType" : "RonieSalgado 5/7/2017 22:31",
+		"name:" : "RonieSalgado 5/7/2017 22:17",
 		"slot" : "RonieSalgado 5/7/2017 22:17",
-		"name:" : "RonieSalgado 5/7/2017 22:17"
+		"type" : "RonieSalgado 5/7/2017 22:17",
+		"index:" : "RonieSalgado 5/7/2017 22:17",
+		"setterSpecialSelectorType" : "RonieSalgado 5/21/2017 18:54"
 	},
 	"class" : { }
 }

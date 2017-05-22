@@ -1,4 +1,4 @@
 coercions
 arithmeticCoerceWithInteger: otherType
-	otherType size < 4 ifTrue: [ self halt.  ].
+	otherType size < 4 ifTrue: [ ^ LowtalkTypeInt32 target: compilationTarget  ].
 	^ otherType

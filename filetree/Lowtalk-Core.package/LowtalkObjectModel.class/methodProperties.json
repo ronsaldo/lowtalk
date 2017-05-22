@@ -1,11 +1,25 @@
 {
 	"instance" : {
-		"headerType" : "RonieSalgado 5/19/2017 13:41",
-		"readBarrier:" : "RonieSalgado 5/19/2017 13:48",
+		"newObjectHeaderWithWords:" : "RonieSalgado 5/21/2017 18:31",
+		"newObjectHeaderWithWeakPointers" : "RonieSalgado 5/21/2017 18:31",
+		"newObjectWithWeakPointers:" : "RonieSalgado 5/21/2017 19:39",
 		"readBarrier" : "RonieSalgado 5/19/2017 13:48",
+		"newObjectWithWords:" : "RonieSalgado 5/21/2017 19:40",
+		"newObjectWithPointers:" : "RonieSalgado 5/21/2017 19:37",
+		"newObjectHeaderWithPointers" : "RonieSalgado 5/21/2017 18:31",
+		"newObjectHeaderWithBytes:" : "RonieSalgado 5/21/2017 18:31",
 		"writeBarrier" : "RonieSalgado 5/19/2017 13:48",
+		"headerType:" : "RonieSalgado 5/19/2017 13:41",
+		"newObjectHeaderWithWords" : "RonieSalgado 5/21/2017 18:31",
+		"newObjectHeaderWithWeakPointers:" : "RonieSalgado 5/21/2017 18:31",
+		"newObjectHeaderWithPointers:" : "RonieSalgado 5/21/2017 18:31",
+		"compiler" : "RonieSalgado 5/21/2017 19:36",
+		"newObjectWithBytes:" : "RonieSalgado 5/21/2017 19:40",
 		"writeBarrier:" : "RonieSalgado 5/19/2017 13:48",
-		"headerType:" : "RonieSalgado 5/19/2017 13:41"
+		"newObjectHeaderWithBytes" : "RonieSalgado 5/21/2017 18:31",
+		"headerType" : "RonieSalgado 5/19/2017 13:41",
+		"compiler:" : "RonieSalgado 5/21/2017 19:36",
+		"readBarrier:" : "RonieSalgado 5/19/2017 13:48"
 	},
 	"class" : { }
 }

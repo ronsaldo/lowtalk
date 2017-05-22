@@ -1,9 +1,9 @@
 visiting
 visitCallExpression: callExpression
-	| receiver arguments argumentValue expectedType |
+	| receiver arguments argumentValue expectedType receiverType |
 	receiverType := callExpression receiver type withoutReferences.
 	receiverType isBlockType ifTrue: [ receiverType := receiverType functionType ].
-	
+
 	receiverType isFunctionType ifFalse: [
 		self halt.
 	].

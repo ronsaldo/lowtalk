@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithInteger: otherType
+	^ self

@@ -6,6 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [
 		"BinaryOperationMap",
+		"BlockMessages",
 		"MessageConditionTypes"
 	],
 	"instvars" : [
@@ -15,7 +16,7 @@
 		"allocaBuilder",
 		"bodyBlock",
 		"builder",
-		"receiverType"
+		"selfType"
 	],
 	"name" : "LowtalkCodeGenerator",
 	"type" : "normal"

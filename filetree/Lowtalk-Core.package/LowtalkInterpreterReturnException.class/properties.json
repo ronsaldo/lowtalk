@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "RonieSalgado 5/21/2017 19:24",
+	"super" : "Exception",
+	"category" : "Lowtalk-Core-Interpreter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"value",
+		"type"
+	],
+	"name" : "LowtalkInterpreterReturnException",
+	"type" : "normal"
+}

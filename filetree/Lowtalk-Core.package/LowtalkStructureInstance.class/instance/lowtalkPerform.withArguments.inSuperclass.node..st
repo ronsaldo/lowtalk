@@ -15,7 +15,7 @@ lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node:
 			value := arguments first value.
 			valueType := arguments first inferType.
 			slot value: (valueType convertValue: value toType: slot valueType at: sendingNode).
-			^ self
+			^ slot
 		]
 	].
 

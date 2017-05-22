@@ -1,3 +1,3 @@
 adding
 target: aCompilationTarget
-	^ self new compilationTarget: aCompilationTarget; yourself
+	^ self basicNew compilationTarget: aCompilationTarget; initialize; yourself

@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithFloat: otherType
+	^ otherType

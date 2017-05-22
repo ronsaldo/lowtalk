@@ -3,6 +3,7 @@ checkMethod: method receiver: receiver node: sendingNode
 	| selector |
 	(OverridenMethods includesKey: method) ifTrue: [ ^ self ].
 	selector := method selector.
+	
 	(method hasPragmaNamed: #compileTime) ifTrue: [ ^ self ].
 	(SelectorsAlwaysAllowed includes: selector) ifTrue: [ ^ self ].
 

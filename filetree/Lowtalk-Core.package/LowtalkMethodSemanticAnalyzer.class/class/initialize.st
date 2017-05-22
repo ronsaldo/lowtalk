@@ -1,6 +1,6 @@
 initialization
 initialize
-	BlockMessages := Set newFrom: #(
+	BlockMessages := Dictionary newFromPairs: #(
 		whileTrue WhileLoop
 		whileTrue: WhileLoop
 		whileFalse WhileLoop

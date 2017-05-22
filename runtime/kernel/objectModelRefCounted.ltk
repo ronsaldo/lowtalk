@@ -1,50 +1,76 @@
-"This is the definition of a reference counted object model."
+"This is the definition of a reference refCounted object model."
 Namespace named: #ObjectModel members: [
     UIntPointer size = 4 ifTrue: [
-        Constant named: #OopTagMask value: 3.
+        Constant named: #OopTagMask type: UIntPointer value: 3.
 
-        Constant named: #OopSmallIntegerTagMask value: 1.
-        Constant named: #OopSmallIntegerTagValue value: 1.
+        Constant named: #OopSmallIntegerTagMask type: UIntPointer value: 1.
+        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
 
-        Constant named: #OopPointerTagMask value: OopTagMask.
-        Constant named: #OopPointerTagValue value: 0.
+        Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
+        Constant named: #OopPointerTagValue type: UIntPointer value: 0.
     ] ifFalse: [
-        Constant named: #OopTagMask value: 3.
+        Constant named: #OopTagMask type: UIntPointer value: 3.
 
-        Constant named: #OopSmallIntegerTagMask value: 1.
-        Constant named: #OopSmallIntegerTagValue value: 1.
+        Constant named: #OopSmallIntegerTagMask type: UIntPointer value: 1.
+        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
 
-        Constant named: #OopPointerTagMask value: OopTagMask.
-        Constant named: #OopPointerTagValue value: 0.
+        Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
+        Constant named: #OopPointerTagValue type: UIntPointer value: 0.
     ].
+
+    Constant named: #ObjectFormatEmpty value: 0.
+    Constant named: #ObjectFormatFixedSize value: 1.
+    Constant named: #ObjectFormatVariableSizeNoIVars value: 2.
+    Constant named: #ObjectFormatVariableSizeWithIVars value: 3.
+    Constant named: #ObjectFormatWeakVariableSize value: 4.
+    Constant named: #ObjectFormatWeakFixedSize value: 5.
+    Constant named: #ObjectFormatIndexable64 value: 9.
+    Constant named: #ObjectFormatIndexable32 value: 10.
+    Constant named: #ObjectFormatIndexable16 value: 12.
+    Constant named: #ObjectFormatIndexable8 value: 16.
+    Constant named: #ObjectFormatMixedObject value: 24.
+
+    Constant named: #StaticOopFlag type: UInt8 value: 1.
+    Global named: #ImmediateClassTable type: (ObjectHeader pointer array: 16).
 
     "The object header"
     Structure named: #ObjectHeader slots: {
         #class => ObjectHeader pointer.
-        #count => UInt32.
+        #refCount => UIntPointer.
+
+        #identityHash => UInt16.
+        #flags => UInt8.
+        #format => UInt8.
+        #slotCount => UInt32.
     }.
+
+    Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
+        <cdecl>
+        let oop := object castTo: UIntPointer.
+        ^ (oop & OopPointerTagMask) = OopPointerTagValue
+    ].
 
     "Reference counting"
     Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
-"        let oop := object asUIntPointer.
-        ((oop & OopPointerTagMask) = OopPointerTagValue) ifTrue: [
-"            "TODO: Use an atomic operation."
-            object value count := object value count + 1.
-"        ]"
+        isNonImmediateObject #{object} ifTrue: [
+            object value refCount address fetchAndAdd: 1
+        ]
     ].
 
     Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
-        "TODO: Use an atomic operation."
-        object value count := object value count - 1.
-        object value count = 0 ifTrue: [
-            destroyObject #{object}
+        isNonImmediateObject #{object} ifTrue: [
+            (object value refCount address fetchAndAdd: -1) = 0 ifTrue: [
+                destroyObject #{object}
+            ]
         ]
     ].
 
     Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
+        (object value flags & StaticOopFlag) ~= 0 ifTrue: [ ^ nil ].
+
         "TODO: Call the object finalizer"
         LibC free #{object}
     ].
@@ -52,12 +78,28 @@ Namespace named: #ObjectModel members: [
     Constant named: #writeBarrier value: [<Void> :variable<ObjectHeader pointer pointer> :value<ObjectHeader pointer> |
         <cdecl>
         increaseReference #{value}.
-        releaseReference #{variable value}.
-        variable value := value.
+        releaseReference #{variable swapValue: value}.
+    ].
+
+"
+newObjectHeaderWithWeakPointers
+newObjectHeaderWithBytes
+newObjectHeaderWithWords
+"
+
+    Constant named: #newObjectHeaderWithPointers value: [<ObjectHeader> :slotCount<UInt32> |
+        <cdecl>
+        ^ ObjectHeader new
+            slotCount: slotCount;
+            flags: StaticOopFlag;
+            format: ((slotCount > 0 ifTrue: [ObjectFormatFixedSize] ifFalse: [ObjectFormatEmpty]) castTo: UInt8);
+            yourself
     ].
 
     Compiler objectModel
     	headerType: ObjectModel ObjectHeader;
-    	writeBarrier: writeBarrier.
+    	writeBarrier: writeBarrier;
+        newObjectHeaderWithPointers: newObjectHeaderWithPointers;
+        yourself
 
 ]

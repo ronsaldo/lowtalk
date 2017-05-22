@@ -9,7 +9,7 @@ resultTypeForSelector: selector message: messageNode compiler: aCompiler
 	].
 	precedence = 3 ifTrue: [
 		self slotNamed: selector allButLast ifPresent: [ :slotDescription |
-			^ self
+			^ slotDescription type ref
 		]
 	].
 

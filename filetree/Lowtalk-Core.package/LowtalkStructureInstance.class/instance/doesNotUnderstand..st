@@ -14,7 +14,7 @@ doesNotUnderstand: aMessage
 			value := arguments first.
 			valueType := value lowtalkLiteralTypeWith: type compiler.
 			slot value: (valueType convertValue: value toType: slot valueType at: (LowtalkASTNode new)).
-			^ self
+			^ slot value
 		]
 	].
 

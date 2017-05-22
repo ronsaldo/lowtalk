@@ -4,6 +4,8 @@ buildSSAFunction
 	self isExternal ifTrue: [
 		ssaValue makeExternal.
 		^ self.
+	] ifFalse: [ 
+		ssaValue makePublic.
 	].
 
 	self value ifNil: [ 

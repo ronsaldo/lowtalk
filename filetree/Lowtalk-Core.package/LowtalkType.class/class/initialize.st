@@ -8,6 +8,17 @@ initialize
 		* Arithmetic
 		/ Arithmetic
 		
+		negated UnaryArithmeric
+
+		| BinaryBitwise
+		bitOr: BinaryBitwise
+		& BinaryBitwise
+		bitAnd: BinaryBitwise
+		bitXor: BinaryBitwise
+		
+		bitInvert UnaryLogicalBitwise
+		bitInvert32 UnaryLogicalBitwise
+		
 		== IdentityEquality
 		~~ IdentityEquality
 		
@@ -31,6 +42,10 @@ initialize
 		
 		to:do: RangeLoop
 		to:by:do: RangeLoop
+		
+		castTo: CastTo
+		
+		yourself Yourself
 	).
 	
 	BlockSpecialMessages  := Dictionary newFromPairs: #(

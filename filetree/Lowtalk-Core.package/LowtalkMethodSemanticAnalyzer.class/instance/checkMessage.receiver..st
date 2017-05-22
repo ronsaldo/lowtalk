@@ -1,20 +1,24 @@
 visiting
 checkMessage: message receiver: receiver
-	| receiverType |
+	| receiverValueType |
 	
-	(receiver isBlockNode and: [ (BlockMessages includes: message selector) and: [self isMessageACandidateForInlining: message receiver: receiver]]) ifTrue: [ 
+	(receiver isBlockNode and: [ (BlockMessages includesKey: message selector) and: [self isMessageACandidateForInlining: message receiver: receiver]]) ifTrue: [ 
 		self flag: 'TODO: Support more block special messages'.
 		^ self checkWhileLoopMessage: message receiver: receiver
 	].
 
 	message compileTimeValue ifNotNil: [ ^ self ].
 
-	receiverType := receiver type withoutReferences.
-	receiverType isCompileTimeType ifTrue: [
+	receiverValueType := receiver type withoutReferences.
+	receiverValueType isCompileTimeType ifTrue: [
 		^ self evaluateCompileTimeMessage: message receiver: receiver
 	].
 
-	message specialMessageType: (receiverType specialMessageTypeForSelector: message selector).
+	message specialMessageType: (receiver type specialMessageTypeForSelector: message selector).
+	message specialMessageType ifNil: [ 
+		message specialMessageType: (receiverValueType specialMessageTypeForSelector: message selector).
+	].
+
 	message specialMessageType ifNotNil: [ ^ self checkSpecialMessage: message messageType: message specialMessageType receiver: receiver ].
 
 	^ self checkNormalMessage: message receiver: receiver

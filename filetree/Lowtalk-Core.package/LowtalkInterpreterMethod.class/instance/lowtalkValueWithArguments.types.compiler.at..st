@@ -15,6 +15,13 @@ lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes co
 		activationEnvironment setSymbol: argumentVariable name value: argumentVariable
 	].
 	
-	result := LowtalkEvaluator evaluate: node body environment: activationEnvironment.
-	resultType := node body type.
+	result := nil.
+	[
+		result := LowtalkEvaluator evaluate: node body environment: activationEnvironment.
+		resultType := node body type.
+	] on: LowtalkInterpreterReturnException do: [ :returnExc |
+		result := returnExc value.
+		resultType := returnExc type.
+	].
+	
 	^ resultType convertValue: result toType: node returnType at: node

@@ -5,6 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [
+		"AddedMethods",
 		"OverridenMethods",
 		"SelectorsAlwaysAllowed"
 	],

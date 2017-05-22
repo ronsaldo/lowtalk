@@ -1,0 +1,3 @@
+testing
+isNilType
+	^ false

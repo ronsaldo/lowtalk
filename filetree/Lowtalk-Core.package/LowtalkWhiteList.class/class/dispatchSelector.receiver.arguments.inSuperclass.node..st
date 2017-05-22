@@ -1,6 +1,10 @@
 as yet unclassified
 dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass: superClass node: sendingNode 
 	| method |
+	AddedMethods at: selector ifPresent: [ :override |
+		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode }
+	].
+
 	method := superClass lookupSelector: selector.
 	method ifNil: [
 		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector }.
@@ -11,7 +15,7 @@ dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass:
 	OverridenMethods at: method ifPresent: [ :override |
 		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode }
 	].
-	
+
 	(method hasPragmaNamed: #lazy) ifTrue: [
 		^ receiver perform: selector withArguments: arguments inSuperclass: superClass
 	] ifFalse: [

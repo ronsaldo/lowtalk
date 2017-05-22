@@ -1,0 +1,3 @@
+accessing
+lowtalkLiteralTypeWith: aLowtalkCompiler
+	^ aLowtalkCompiler objectType
