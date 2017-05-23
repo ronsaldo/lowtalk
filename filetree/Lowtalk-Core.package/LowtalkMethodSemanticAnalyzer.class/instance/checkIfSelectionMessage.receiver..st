@@ -14,7 +14,7 @@ checkIfSelectionMessage: message receiver: receiver
 
 	selector := message selector.
 	(#(ifNotNil: ifNotNil:ifNil:) includes: selector) ifTrue: [
-		self visitInlinedBlock:  message arguments first cullTypes: { receiverType }.
+		self visitInlinedBlock:  message arguments first cullTypes: { receiverType } from: message.
 	].
 	self visitInlinedBlock: message arguments first.
 	firstType := self extractInlinedBlockType: message arguments first.

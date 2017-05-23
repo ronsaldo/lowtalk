@@ -11,7 +11,7 @@ evaluateInlineIfMessage: message receiver: receiver receiverType: receiverType i
 		] ifNotNil: [
 			blockIndex := (#(ifNotNil: ifNotNil:ifNil:) includes: selector) ifTrue: [ 1 ] ifFalse: [ 2 ].
 			blockCullArguments := { receiver }.
-			blockCullArgumentTypes := { receiver type withoutReferences }
+			blockCullArgumentTypes := { receiverType withoutReferences }
 		]
 	].
 

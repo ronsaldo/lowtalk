@@ -1,3 +1,3 @@
 expressions
 primaryExpression
-	^ parentExpression / specialLiterals / stringLiteral / cstringLiteral / symbolLiteral / byteArrayExpression / arrayExpression / blockExpression / methodExpression / identifierExpression / number
+	^ parentExpression / stringLiteral / cstringLiteral / identifierExpression / specialLiterals / symbolLiteral / byteArrayExpression / literalArrayExpression / arrayExpression / blockExpression / methodExpression  / number

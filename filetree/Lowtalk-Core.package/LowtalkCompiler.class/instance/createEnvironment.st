@@ -24,7 +24,7 @@ createEnvironment
 	booleanType := (compilerEnvironment lookSymbol: #BooleanBit) value.
 	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
 
-	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GN.
+	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GlobalNamespace.
 	globalEnvironment
 		compiler: self;
 		"setCompileTimeVariable: compilerEnvironment name value: compilerEnvironment;"

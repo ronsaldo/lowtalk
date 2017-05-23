@@ -1,3 +1,162 @@
 "
 Bootstrap Smalltalk kernel.
 "
+
+let bootstrapClassHierarchy := #(
+    "Core classes"
+    (nil ProtoObject pointers () ())
+    (ProtoObject Object pointers () ())
+
+    (Object Behavior pointers (superclass methodDict format layout) ())
+        (Behavior ClassDescription pointers (instanceVariables organization) ())
+            (ClassDescription Class pointers (subclasses name classPool sharedPools environment category traitComposition localSelectors) ())
+            (ClassDescription Metaclass pointers (thisClass traitComposition localSelectors) ())
+
+    (Object UndefinedObject pointers () ())
+    (Object Boolean pointers () ())
+        (Object True pointers () ())
+        (Object False pointers () ())
+
+    "Magnitude
+    typedef SLVM_Object SLVM_Magnitude;
+        typedef SLVM_Oop SLVM_Character;
+        typedef SLVM_Object SLVM_Number;
+            typedef SLVM_Object SLVM_Float;
+                typedef struct SLVM_BoxedFloat64_ SLVM_BoxedFloat64;
+                typedef uint64_t SLVM_SmallFloat;
+        typedef struct SLVM_Fraction_ SLVM_Fraction;
+        typedef SLVM_Object SLVM_Integer;
+            typedef struct SLVM_LargeInteger_ SLVM_LargeInteger;
+                typedef struct SLVM_LargeInteger_ SLVM_LargeNegativeInteger;
+                typedef struct SLVM_LargeInteger_ SLVM_LargePositiveInteger;
+            typedef SLVM_SOop SLVM_SmallInteger;
+        typedef struct SLVM_LookupKey_ SLVM_LookupKey;
+            typedef struct SLVM_Association_ SLVM_Association;
+                typedef SLVM_Association SLVM_LiteralVariable;
+                    typedef SLVM_LiteralVariable SLVM_ClassVariable;
+                    typedef SLVM_LiteralVariable SLVM_GlobalVariable;
+                    typedef SLVM_LiteralVariable SLVM_WorkspaceVariable;
+    typedef struct SLVM_Point_ SLVM_Point;
+    "
+
+    "Collections
+    typedef SLVM_Object SLVM_Collection;
+        typedef struct SLVM_HashedCollection_ SLVM_HashedCollection;
+            typedef SLVM_HashedCollection SLVM_Dictionary;
+                typedef SLVM_Dictionary SLVM_IdentityDictionary;
+                    typedef struct SLVM_SystemDictionary_ SLVM_SystemDictionary;
+                typedef struct SLVM_MethodDictionary_ SLVM_MethodDictionary;
+            typedef SLVM_HashedCollection SLVM_Set;
+                typedef SLVM_Set SLVM_IdentitySet;
+                typedef struct SLVM_WeakSet_ SLVM_WeakSet;
+        typedef SLVM_Collection SLVM_SequenceableCollection;
+            typedef struct SLVM_OrderedCollection_ SLVM_OrderedCollection;
+            typedef SLVM_SequenceableCollection SLVM_ArrayedCollection;
+                typedef struct SLVM_Array_ SLVM_Array;
+                    typedef SLVM_Array SLVM_WeakArray;
+                typedef struct SLVM_ByteArray_ SLVM_ByteArray;
+                typedef SLVM_ArrayedCollection SLVM_String;
+                    typedef struct SLVM_ByteString_ SLVM_ByteString;
+                    typedef struct SLVM_WideString_ SLVM_WideString;
+                    typedef SLVM_String SLVM_Symbol;
+                        typedef struct SLVM_ByteSymbol_ SLVM_ByteSymbol;
+                        typedef struct SLVM_WideSymbol_ SLVM_WideSymbol;
+    "
+
+    "Context
+    typedef struct SLVM_CompiledMethod_ SLVM_CompiledMethod;
+    typedef struct SLVM_PrimitiveMethod_ SLVM_PrimitiveMethod;
+
+    typedef SLVM_Object SLVM_Message;
+    typedef struct SLVM_InstructionStream_ SLVM_InstructionStream;
+    typedef struct SLVM_MethodContext_ SLVM_MethodContext;
+    typedef struct SLVM_BlockClosure_ SLVM_BlockClosure;
+        typedef struct SLVM_FullBlockClosure_ SLVM_FullBlockClosure;
+
+    typedef SLVM_Object SLVM_Mutex;
+    typedef SLVM_Object SLVM_Semaphore;
+    "
+
+    "FFI"
+"    (Object ExternalAddress bytes () (wordSize))
+    (Object ExternalObject pointers (handle) ())
+        (ExternalObject ExternalFunction pointers (flags argTypes) ())
+        (ExternalObject ExternalLibrary pointers (name) ())
+        (ExternalObject ExternalStructure pointers () ())
+            (ExternalStructure ExternalData pointers (type) ())
+
+    (ByteArray Alien bytes () ())
+    (Object UnsafeAlien pointers (nonPointerObject) ())"
+).
+
+let superClassSlotIndex := 1.
+
+"Compute the size of the instance side"
+let classInstanceSizeDictionary := Compiler newDictionary.
+bootstrapClassHierarchy do: [:classDefinition |
+    let baseName := classDefinition at: 1.
+    let name := classDefinition at: 2.
+    let type := classDefinition at: 3.
+    let instanceVariables := classDefinition at: 4.
+    let metaInstanceVariables := classDefinition at: 5.
+
+    let instanceSize := instanceVariables size.
+    let metaInstanceSize := metaInstanceVariables size.
+    baseName ifNotNil: [
+        instanceSize := instanceSize + (classInstanceSizeDictionary at: baseName).
+    ].
+
+    classInstanceSizeDictionary at: name put: instanceSize.
+].
+
+"Compute the size of the meta side"
+let metaclassInstanceSizeDictionary := Compiler newDictionary.
+bootstrapClassHierarchy do: [:classDefinition |
+    let baseName := classDefinition at: 1.
+    let name := classDefinition at: 2.
+    let type := classDefinition at: 3.
+    let instanceVariables := classDefinition at: 4.
+    let metaInstanceVariables := classDefinition at: 5.
+
+    let metaInstanceSize := metaInstanceVariables size.
+    baseName ifNotNil: [
+        metaInstanceSize := metaInstanceSize + (metaclassInstanceSizeDictionary at: baseName).
+    ] ifNil: [
+        metaInstanceSize := metaInstanceSize + (classInstanceSizeDictionary at: #Class).
+    ].
+
+    metaclassInstanceSizeDictionary at: name put: metaInstanceSize.
+].
+
+"Build the class objects"
+let metaClassSize := classInstanceSizeDictionary at: #Metaclass.
+bootstrapClassHierarchy do: [:classDefinition |
+    let baseName := classDefinition at: 1.
+    let name := classDefinition at: 2.
+    let type := classDefinition at: 3.
+    let instanceVariables := classDefinition at: 4.
+    let metaInstanceVariables := classDefinition at: 5.
+
+    let instanceSize := classInstanceSizeDictionary at: name.
+    let metaInstanceSize := metaclassInstanceSizeDictionary at: name.
+
+    "Create the meta class"
+    let metaClass := Compiler objectModel newObjectWithPointers: metaClassSize.
+    Compiler objectModel registerClass: metaClass.
+
+    "Create the class"
+    let class := Compiler objectModel newObjectWithPointers: metaInstanceSize.
+    Compiler objectModel setObject: class class: metaClass.
+    Compiler objectModel registerClass: class.
+
+    "Link the super classes."
+    baseName ifNotNil: [
+        let superClass := _GlobalNamespace at: baseName.
+        Compiler objectModel setObject: class slot: superClassSlotIndex value: superClass.
+        "TODO: Connect the meta class super class"
+    ].
+
+    Global named: name type: _DynamicObject value: class
+].
+
+"TODO: Fix the ProtoObject class superClass"

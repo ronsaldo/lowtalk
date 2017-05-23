@@ -96,7 +96,12 @@
 		"unaryExpressionSuffixCall",
 		"sharpLCBracket",
 		"callExpressionArguments",
-		"cstringLiteral"
+		"cstringLiteral",
+		"literalArrayExpression",
+		"laparent",
+		"literalArrayElement",
+		"literalArrayParent",
+		"literalPunctuation"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

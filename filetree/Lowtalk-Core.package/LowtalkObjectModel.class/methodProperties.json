@@ -1,7 +1,8 @@
 {
 	"instance" : {
-		"newObjectHeaderWithWords:" : "RonieSalgado 5/21/2017 18:31",
+		"readBarrier:" : "RonieSalgado 5/19/2017 13:48",
 		"newObjectHeaderWithWeakPointers" : "RonieSalgado 5/21/2017 18:31",
+		"getObject:slot:" : "RonieSalgado 5/23/2017 04:49",
 		"newObjectWithWeakPointers:" : "RonieSalgado 5/21/2017 19:39",
 		"readBarrier" : "RonieSalgado 5/19/2017 13:48",
 		"newObjectWithWords:" : "RonieSalgado 5/21/2017 19:40",
@@ -9,17 +10,21 @@
 		"newObjectHeaderWithPointers" : "RonieSalgado 5/21/2017 18:31",
 		"newObjectHeaderWithBytes:" : "RonieSalgado 5/21/2017 18:31",
 		"writeBarrier" : "RonieSalgado 5/19/2017 13:48",
+		"getObject:class:" : "RonieSalgado 5/23/2017 04:54",
 		"headerType:" : "RonieSalgado 5/19/2017 13:41",
 		"newObjectHeaderWithWords" : "RonieSalgado 5/21/2017 18:31",
+		"registerClass:" : "RonieSalgado 5/23/2017 04:53",
 		"newObjectHeaderWithWeakPointers:" : "RonieSalgado 5/21/2017 18:31",
+		"setObject:slot:value:" : "RonieSalgado 5/23/2017 04:50",
 		"newObjectHeaderWithPointers:" : "RonieSalgado 5/21/2017 18:31",
 		"compiler" : "RonieSalgado 5/21/2017 19:36",
 		"newObjectWithBytes:" : "RonieSalgado 5/21/2017 19:40",
 		"writeBarrier:" : "RonieSalgado 5/19/2017 13:48",
 		"newObjectHeaderWithBytes" : "RonieSalgado 5/21/2017 18:31",
+		"setObject:class:" : "RonieSalgado 5/23/2017 04:54",
 		"headerType" : "RonieSalgado 5/19/2017 13:41",
 		"compiler:" : "RonieSalgado 5/21/2017 19:36",
-		"readBarrier:" : "RonieSalgado 5/19/2017 13:48"
+		"newObjectHeaderWithWords:" : "RonieSalgado 5/21/2017 18:31"
 	},
 	"class" : { }
 }
