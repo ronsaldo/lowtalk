@@ -1,3 +1,3 @@
 expressions
 blockHeader
-	^ blockArgument plus
+	^ blockArgument star

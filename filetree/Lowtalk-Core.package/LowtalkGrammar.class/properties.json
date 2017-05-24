@@ -101,7 +101,9 @@
 		"laparent",
 		"literalArrayElement",
 		"literalArrayParent",
-		"literalPunctuation"
+		"literalPunctuation",
+		"blockSelfType",
+		"typeSpecifier"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

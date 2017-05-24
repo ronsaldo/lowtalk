@@ -1,3 +1,3 @@
 expressions
 blockWithHeader
-	^ optionalTypeExpression , blockHeader , (bar , expressionList) optional
+	^ optionalTypeExpression , blockSelfType optional , blockHeader , bar , expressionList

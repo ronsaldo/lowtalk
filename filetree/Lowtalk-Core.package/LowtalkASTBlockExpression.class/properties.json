@@ -8,6 +8,8 @@
 	"instvars" : [
 		"returnType",
 		"returnTypeExpression",
+		"selfType",
+		"selfTypeExpression",
 		"arguments",
 		"body",
 		"definition",

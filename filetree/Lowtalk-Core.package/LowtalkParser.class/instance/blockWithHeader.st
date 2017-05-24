@@ -3,7 +3,8 @@ blockWithHeader
 	^ super blockWithHeader ==> [ :list |
 		LowtalkASTBlockExpression new
 			returnTypeExpression: list first;
-			arguments: list second;
-			body: (list third ifNotNil: #second);
+			selfTypeExpression: list second;
+			arguments: list third;
+			body: list last;
 			yourself
 	]
