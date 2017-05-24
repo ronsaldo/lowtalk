@@ -5,5 +5,5 @@ Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString poin
     ].
 
     LibC printf #{c'Hello World\n'}.
-    ^ 0
+    0
 ]

@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithPointer: pointerType
+	^ nil

@@ -89,7 +89,7 @@ let bootstrapClassHierarchy := #(
 ).
 
 let superClassSlotIndex := 1.
-
+let methodDictionarySlotIndex := 2.
 "Compute the size of the instance side"
 let classInstanceSizeDictionary := Compiler newDictionary.
 bootstrapClassHierarchy do: [:classDefinition |
@@ -141,21 +141,66 @@ bootstrapClassHierarchy do: [:classDefinition |
 
     "Create the meta class"
     let metaClass := Compiler objectModel newObjectWithPointers: metaClassSize.
-    Compiler objectModel registerClass: metaClass.
+    (Compiler objectModel registerClass: metaClass)
+        instanceVariables: instanceVariables.
 
     "Create the class"
     let class := Compiler objectModel newObjectWithPointers: metaInstanceSize.
     Compiler objectModel setObject: class class: metaClass.
-    Compiler objectModel registerClass: class.
+    (Compiler objectModel registerClass: class)
+        instanceVariables: metaInstanceVariables.
 
     "Link the super classes."
     baseName ifNotNil: [
         let superClass := _GlobalNamespace at: baseName.
         Compiler objectModel setObject: class slot: superClassSlotIndex value: superClass.
-        "TODO: Connect the meta class super class"
+
+        let superMeta := Compiler objectModel getObjectClass: superClass.
+        Compiler objectModel setObject: metaClass slot: superClassSlotIndex value: superMeta.
     ].
 
     Global named: name type: _DynamicObject value: class
 ].
 
-"TODO: Fix the ProtoObject class superClass"
+"Tricky parts on the class hierarchy."
+let classHierarchyShortCirtcuit := [
+    "Make 'Class' the super class of 'ProtoObject class'"
+    let protoObjectMeta := Compiler objectModel getObjectClass: ProtoObject.
+    Compiler objectModel setObject: protoObjectMeta slot: superClassSlotIndex value: Class.
+
+    "Set the classes of the special literals."
+    Compiler objectModel
+        setObject: nil class: UndefinedObject;
+        setObject: true class: True;
+        setObject: false class: False.
+
+    "Instantiate the special literals."
+    Constant
+        named: #nil type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: UndefinedObject);
+        named: #true type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: True);
+        named: #false type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: False).
+
+    "Finish this part"
+    let methodDictionarySize := classInstanceSizeDictionary at: #MethodDictionary.
+    bootstrapClassHierarchy do: [:classDefinition |
+        let name := classDefinition at: 2.
+
+        "Create the method dictionaries."
+        let class := _GlobalNamespace at: name.
+        let classMethodDictionary := Compiler objectModel newObjectWithPointers: methodDictionarySize.
+
+        Compiler objectModel
+            setObject: classMethodDictionary class: MethodDictionary;
+            setObject: class slot: methodDictionarySlotIndex value: classMethodDictionary.
+
+        let metaClass := Compiler objectModel getObjectClass: class.
+        let metaClassMethodDictionary := Compiler objectModel newObjectWithPointers: methodDictionarySize.
+        Compiler objectModel
+            setObject: metaClassMethodDictionary class: MethodDictionary;
+            setObject: metaClass slot: methodDictionarySlotIndex value: metaClassMethodDictionary.
+
+        "Set the metaclass class. Parallel hierarchy shortcircuiting."
+        Compiler objectModel setObject: metaClass class: Metaclass.
+    ]
+].
+classHierarchyShortCirtcuit value

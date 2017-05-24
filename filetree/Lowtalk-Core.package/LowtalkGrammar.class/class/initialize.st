@@ -4,7 +4,7 @@ initialize
 	
 	Keywords := Set newFrom: #(
 		"Standard Smalltalk keywords"
-		self super nil true false
+		self super #'nil' #'true' #'false'
 		
 		"Lowtalk keywords"
 		let

@@ -24,6 +24,7 @@ addStandardTypesToEnvironment: anEnvironment target: aCompilationTarget
 
 		addCompileTimeVariableValue: (LowtalkDynamicObjectType target: aCompilationTarget);
 		
+		addCompileTimeVariableValue: (LowtalkBooleanLiteralType target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkFloatLiteralType target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkIntegerLiteralType target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkRationalLiteralType target: aCompilationTarget);

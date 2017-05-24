@@ -25,7 +25,8 @@
 		"booleanType",
 		"nilType",
 		"globalBuilder",
-		"objectModel"
+		"objectModel",
+		"booleanLiteralType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

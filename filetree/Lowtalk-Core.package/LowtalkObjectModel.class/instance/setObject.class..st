@@ -1,4 +1,9 @@
-object accessing
+class creation
 setObject: anObject class: class
 	<compileTime>
-	^ setObjectClassFunction lowtalkValueWithArguments: { anObject . class } types: { headerType pointer . headerType pointer } compiler: compiler at: nil
+	(SpecialLiterals includes: anObject) ifTrue: [
+		^ specialLiteralClasses at: anObject put: class
+	].
+
+	setObjectClassFunction lowtalkValueWithArguments: { anObject . class } types: { headerType pointer . headerType pointer } compiler: compiler at: nil.
+	^ anObject

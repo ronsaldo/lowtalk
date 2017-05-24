@@ -35,7 +35,7 @@ Namespace named: #ObjectModel members: [
 
     "The object header"
     Structure named: #ObjectHeader slots: {
-        #class => ObjectHeader pointer.
+        #classPointer => ObjectHeader pointer.
         #refCount => UIntPointer.
 
         #identityHash => UInt16.
@@ -69,10 +69,10 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
-        (object value flags & StaticOopFlag) ~= 0 ifTrue: [ ^ nil ].
-
-        "TODO: Call the object finalizer"
-        LibC free #{object}
+        (object value flags & StaticOopFlag) ~= 0 ifFalse: [
+            "TODO: Call the object finalizer"
+            LibC free #{object}
+        ]
     ].
 
     Constant named: #writeBarrier value: [<Void> :variable<ObjectHeader pointer pointer> :value<ObjectHeader pointer> |
@@ -96,12 +96,12 @@ newObjectHeaderWithWords
             yourself
     ].
 
-    let setObjectClass := [<Void> :header<ObjectHeader pointer> :class <ObjectHeader pointer> |
-        header value class: class
+    let setObjectClass := [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
+        header value classPointer: classPointer
     ].
 
     let getObjectClass := [<ObjectHeader pointer> :header<ObjectHeader pointer> |
-        header value class
+        header value classPointer
     ].
 
     Compiler objectModel

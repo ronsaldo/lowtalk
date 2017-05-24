@@ -1,8 +1,7 @@
 evaluating
-lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes compiler: aLowtalkCompiler at: aNode
+lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes closureEnvironment: closureEnvironment compiler: aLowtalkCompiler at: aNode
 	| activationEnvironment argumentDefinition convertedArgument argumentVariable result resultType |
-	activationEnvironment := LowtalkLocalEnvironment parent: environment parent.
-
+	activationEnvironment := LowtalkLocalEnvironment parent: closureEnvironment.
 	evaluationArguments collectWithIndex: [ :arg :index |
 		argumentDefinition := arguments at: index.
 		convertedArgument := (evaluationArgumentTypes at: index) convertValue: arg toType: argumentDefinition type at: aNode.

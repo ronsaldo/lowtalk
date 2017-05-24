@@ -1,6 +1,6 @@
 Global named: #Main value: [:arguments |
     LibC printf #{c'ArgumentCount: %d\n' arguments size asNativeInt32}.
-    ^ 0
+    0
 ].
 
 
@@ -11,6 +11,6 @@ Namespace named: #EntryPoint members: [
             arguments at: i put: (argv at: i) readString.
         ].
 
-        ^ (Main value: arguments) asNativeInt32
+        (Main value: arguments) asNativeInt32
     ]
 ]

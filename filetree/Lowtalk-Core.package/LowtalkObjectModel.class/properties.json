@@ -4,7 +4,9 @@
 	"category" : "Lowtalk-Core-FrontEnd",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"SpecialLiterals"
+	],
 	"instvars" : [
 		"compiler",
 		"headerType",
@@ -15,7 +17,9 @@
 		"newObjectHeaderWithBytes",
 		"newObjectHeaderWithWords",
 		"setObjectClassFunction",
-		"getObjectClassFunction"
+		"getObjectClassFunction",
+		"specialLiteralClasses",
+		"classes"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

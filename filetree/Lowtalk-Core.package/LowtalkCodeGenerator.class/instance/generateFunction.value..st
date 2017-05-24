@@ -1,9 +1,9 @@
 as yet unclassified
 generateFunction: ssaFunction value: functionValue
 	| node result |
-	node := functionValue node.
-	method := functionValue.
-	selfType := functionValue receiverType.
+	node := functionValue definition node.
+	method := functionValue definition.
+	selfType := method receiverType.
 	
 	"Create the builders"
 	allocaBuilder := SLVMBuilder on: ssaFunction.
@@ -16,14 +16,14 @@ generateFunction: ssaFunction value: functionValue
 	builder currentBlock: bodyBlock.
 
 	"Create the temporaries."
-	functionValue arguments doWithIndex: [ :arg :index |
+	method arguments doWithIndex: [ :arg :index |
 		| ssaArgument |
 		ssaArgument := ssaFunction arguments at: index.
 		ssaArgument name: arg name.
 		arg ssaValue: ssaArgument.
 	].
 
-	functionValue temporaries do: [ :temp |
+	method temporaries do: [ :temp |
 		temp ssaValue: (allocaBuilder alloca: temp valueType ssaType name: temp name).
 	].
 

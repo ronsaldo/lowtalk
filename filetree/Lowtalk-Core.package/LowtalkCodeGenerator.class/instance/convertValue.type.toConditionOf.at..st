@@ -7,7 +7,7 @@ convertValue: value type: type toConditionOf: selector at: message
 		self halt.
 	].
 	conditionType = false ifTrue: [ 
-		type isBooleanType ifTrue: [ ^ builder not: value ].
+		type isBooleanType ifTrue: [ ^ builder lnot: value ].
 		self halt.
 	].
 	conditionType = nil ifTrue: [

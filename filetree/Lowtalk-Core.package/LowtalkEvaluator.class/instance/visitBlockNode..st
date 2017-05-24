@@ -4,5 +4,5 @@ visitBlockNode: aBlockNode
 		aBlockNode definition: (LowtalkMethodSemanticAnalyzer new analyzeBlock: aBlockNode environment: environment).
 	].
 
-	^ aBlockNode definition
+	^ aBlockNode definition closureWithEnvironment: environment
 	
