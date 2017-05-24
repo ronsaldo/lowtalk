@@ -47,7 +47,7 @@ Namespace named: #ObjectModel members: [
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
         let oop := object castTo: UIntPointer.
-        ^ (oop & OopPointerTagMask) = OopPointerTagValue
+        (oop & OopPointerTagMask) = OopPointerTagValue
     ].
 
     "Reference counting"
@@ -89,17 +89,27 @@ newObjectHeaderWithWords
 
     Constant named: #newObjectHeaderWithPointers value: [<ObjectHeader> :slotCount<UInt32> |
         <cdecl>
-        ^ ObjectHeader new
+        ObjectHeader new
             slotCount: slotCount;
             flags: StaticOopFlag;
             format: ((slotCount > 0 ifTrue: [ObjectFormatFixedSize] ifFalse: [ObjectFormatEmpty]) castTo: UInt8);
             yourself
     ].
 
+    let setObjectClass := [<Void> :header<ObjectHeader pointer> :class <ObjectHeader pointer> |
+        header value class: class
+    ].
+
+    let getObjectClass := [<ObjectHeader pointer> :header<ObjectHeader pointer> |
+        header value class
+    ].
+
     Compiler objectModel
     	headerType: ObjectModel ObjectHeader;
     	writeBarrier: writeBarrier;
         newObjectHeaderWithPointers: newObjectHeaderWithPointers;
+        setObjectClassFunction: setObjectClass;
+        getObjectClassFunction: getObjectClass;
         yourself
 
 ]

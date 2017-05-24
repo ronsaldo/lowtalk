@@ -17,68 +17,67 @@ let bootstrapClassHierarchy := #(
         (Object True pointers () ())
         (Object False pointers () ())
 
-    "Magnitude
-    typedef SLVM_Object SLVM_Magnitude;
-        typedef SLVM_Oop SLVM_Character;
-        typedef SLVM_Object SLVM_Number;
-            typedef SLVM_Object SLVM_Float;
-                typedef struct SLVM_BoxedFloat64_ SLVM_BoxedFloat64;
-                typedef uint64_t SLVM_SmallFloat;
-        typedef struct SLVM_Fraction_ SLVM_Fraction;
-        typedef SLVM_Object SLVM_Integer;
-            typedef struct SLVM_LargeInteger_ SLVM_LargeInteger;
-                typedef struct SLVM_LargeInteger_ SLVM_LargeNegativeInteger;
-                typedef struct SLVM_LargeInteger_ SLVM_LargePositiveInteger;
-            typedef SLVM_SOop SLVM_SmallInteger;
-        typedef struct SLVM_LookupKey_ SLVM_LookupKey;
-            typedef struct SLVM_Association_ SLVM_Association;
-                typedef SLVM_Association SLVM_LiteralVariable;
-                    typedef SLVM_LiteralVariable SLVM_ClassVariable;
-                    typedef SLVM_LiteralVariable SLVM_GlobalVariable;
-                    typedef SLVM_LiteralVariable SLVM_WorkspaceVariable;
-    typedef struct SLVM_Point_ SLVM_Point;
-    "
+    "Magnitude"
+    (Object Magnitude pointers () ())
+        (Magnitude Character immediate () ())
+        (Magnitude Number pointers () ())
+            (Number Float pointers () ())
+                (Float BoxedFloat64 words () ())
+                (Float SmallFloat immediate () ())
+            (Number Fraction pointers () ())
+            (Number Integer pointers () ())
+                    (Integer LargeInteger bytes () ())
+                            (LargeInteger LargeNegativeInteger bytes () ())
+                            (LargeInteger LargePositiveInteger bytes () ())
+                    (Integer SmallInteger immediate () (minVal maxVal))
+        (Magnitude LookupKey pointers (key) ())
+            (LookupKey Association pointers (value) ())
+                (Association LiteralVariable pointers () ())
+                    (LiteralVariable ClassVariable pointers () ())
+                    (LiteralVariable GlobalVariable pointers () ())
+                    (LiteralVariable WorkspaceVariable pointers () ())
+    (Object Point pointers () ())
 
-    "Collections
-    typedef SLVM_Object SLVM_Collection;
-        typedef struct SLVM_HashedCollection_ SLVM_HashedCollection;
-            typedef SLVM_HashedCollection SLVM_Dictionary;
-                typedef SLVM_Dictionary SLVM_IdentityDictionary;
-                    typedef struct SLVM_SystemDictionary_ SLVM_SystemDictionary;
-                typedef struct SLVM_MethodDictionary_ SLVM_MethodDictionary;
-            typedef SLVM_HashedCollection SLVM_Set;
-                typedef SLVM_Set SLVM_IdentitySet;
-                typedef struct SLVM_WeakSet_ SLVM_WeakSet;
-        typedef SLVM_Collection SLVM_SequenceableCollection;
-            typedef struct SLVM_OrderedCollection_ SLVM_OrderedCollection;
-            typedef SLVM_SequenceableCollection SLVM_ArrayedCollection;
-                typedef struct SLVM_Array_ SLVM_Array;
-                    typedef SLVM_Array SLVM_WeakArray;
-                typedef struct SLVM_ByteArray_ SLVM_ByteArray;
-                typedef SLVM_ArrayedCollection SLVM_String;
-                    typedef struct SLVM_ByteString_ SLVM_ByteString;
-                    typedef struct SLVM_WideString_ SLVM_WideString;
-                    typedef SLVM_String SLVM_Symbol;
-                        typedef struct SLVM_ByteSymbol_ SLVM_ByteSymbol;
-                        typedef struct SLVM_WideSymbol_ SLVM_WideSymbol;
-    "
+    "Collections"
+    (Object Collection pointers () ())
+        (Collection HashedCollection pointers (tally array) ())
+            (HashedCollection Dictionary pointers () ())
+                (Dictionary IdentityDictionary pointers () ())
+                    (IdentityDictionary SystemDictionary pointers () ())
+                (Dictionary MethodDictionary pointers () ())
+            (HashedCollection Set pointers () ())
+                (Set IdentitySet pointers () ())
+                (Set WeakSet pointers () ())
+        (Collection SequenceableCollection pointers () ())
+            (SequenceableCollection OrderedCollection pointers (array firstIndex lastIndex) ())
+            (Collection ArrayedCollection pointers () ())
+                (ArrayedCollection Array variablePointers () ())
+                    (Array WeakArray variableWeakPointers () ())
+                (ArrayedCollection ByteArray bytes () ())
+                (ArrayedCollection String pointers () ())
+                    (String ByteString bytes () ())
+                    (String WideString words () ())
+                    (String Symbol pointers () ())
+                        (Symbol ByteSymbol bytes () ())
+                        (Symbol WideSymbol words () ())
 
-    "Context
-    typedef struct SLVM_CompiledMethod_ SLVM_CompiledMethod;
-    typedef struct SLVM_PrimitiveMethod_ SLVM_PrimitiveMethod;
+    "Context"
+    (ByteArray CompiledCode mixedBytes () ())
+        (CompiledCode CompiledMethod mixedBytes () ())
+        (CompiledCode CompiledBlock mixedBytes () ())
 
-    typedef SLVM_Object SLVM_Message;
-    typedef struct SLVM_InstructionStream_ SLVM_InstructionStream;
-    typedef struct SLVM_MethodContext_ SLVM_MethodContext;
-    typedef struct SLVM_BlockClosure_ SLVM_BlockClosure;
-        typedef struct SLVM_FullBlockClosure_ SLVM_FullBlockClosure;
+    (Object Message pointers (selector args lookupClass) ())
+    (Object InstructionStream pointers (sender pc) ())
+        (InstructionStream Context variablePointers (stackp method closureOrNil receiver) ())
 
-    typedef SLVM_Object SLVM_Mutex;
-    typedef SLVM_Object SLVM_Semaphore;
-    "
+    (Object BlockClosure variablePointers (outerContext startpc numArgs) ())
+        (BlockClosure FullBlockClosure variablePointers (receiver) ())
+
+    (Object Mutex pointers () ())
+    (Object Semaphore pointers () ())
 
     "FFI"
-"    (Object ExternalAddress bytes () (wordSize))
+   (Object ExternalAddress bytes () (wordSize))
     (Object ExternalObject pointers (handle) ())
         (ExternalObject ExternalFunction pointers (flags argTypes) ())
         (ExternalObject ExternalLibrary pointers (name) ())
@@ -86,7 +85,7 @@ let bootstrapClassHierarchy := #(
             (ExternalStructure ExternalData pointers (type) ())
 
     (ByteArray Alien bytes () ())
-    (Object UnsafeAlien pointers (nonPointerObject) ())"
+    (Object UnsafeAlien pointers (nonPointerObject) ())
 ).
 
 let superClassSlotIndex := 1.
