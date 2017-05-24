@@ -1,6 +1,6 @@
 as yet unclassified
 generateFunction: ssaFunction value: functionValue
-	| node |
+	| node result |
 	node := functionValue node.
 	method := functionValue.
 	selfType := functionValue receiverType.
@@ -29,9 +29,9 @@ generateFunction: ssaFunction value: functionValue
 
 	self flag: 'TODO: Initialize the temporary variables with 0 or nil.'.
 	
-	node body accept: self.
+	result := node body accept: self.
 	
 	allocaBuilder jump: bodyBlock.
 	builder isLastTerminator ifFalse: [
-		self tryToReturnImplicitly.
+		self tryToReturnImplicitly: result type: node body type
 	]

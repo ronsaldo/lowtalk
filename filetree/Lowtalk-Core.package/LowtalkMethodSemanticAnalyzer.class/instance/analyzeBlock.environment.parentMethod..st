@@ -2,8 +2,10 @@ as yet unclassified
 analyzeBlock: aBlockNode environment: baseEnvironment parentMethod: parentMethod
 	| blockEnvironment |
 	compiler := baseEnvironment compiler.
-	
-	self solveBlockType: aBlockNode.
+
+	self withEnvironment: baseEnvironment do: [ 	
+		self solveBlockType: aBlockNode.
+	].
 
 	blockEnvironment := LowtalkLocalEnvironment parent: baseEnvironment.
 	method := LowtalkInterpreterMethod new node: aBlockNode;

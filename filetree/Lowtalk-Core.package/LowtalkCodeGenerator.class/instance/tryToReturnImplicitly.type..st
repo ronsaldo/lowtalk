@@ -1,9 +1,11 @@
 as yet unclassified
-tryToReturnImplicitly
+tryToReturnImplicitly: value type: valueType
 	| returnType |
 	returnType := method returnType.
 	returnType isVoidType ifTrue: [ ^ builder returnVoid ].
 	
-	(selfType canBeImplicitlyConvertedTo: returnType) ifTrue: [ self returnSelf ].
+	(valueType canBeImplicitlyConvertedTo: returnType) ifTrue: [
+		^ builder return: (self coerceImplicitly: value type: valueType to: method returnType at: method node)
+	].
 
 	method node semanticError: 'Not all of the method code paths are returning something valid.'

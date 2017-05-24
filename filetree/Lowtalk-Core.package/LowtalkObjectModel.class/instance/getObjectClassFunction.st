@@ -1,0 +1,4 @@
+accessing
+getObjectClassFunction
+	<compileTime>
+	^ getObjectClassFunction

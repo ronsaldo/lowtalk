@@ -13,7 +13,9 @@
 		"newObjectHeaderWithPointers",
 		"newObjectHeaderWithWeakPointers",
 		"newObjectHeaderWithBytes",
-		"newObjectHeaderWithWords"
+		"newObjectHeaderWithWords",
+		"setObjectClassFunction",
+		"getObjectClassFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"
