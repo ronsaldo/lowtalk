@@ -5,17 +5,24 @@ initialize
 		
 		"Comparisons"
 		= ==
+		~= ~~
 		hash
+		identityHash
 		
 		"Arithmetic"
 		+ - * / % * // \\ sqrt
 		< <= > >=
 		negated
 		
+		bitAnd: bitOr: bitXor:
+		bitInvert bitInvert32
+		
+		or: and:
+		
 		"Collection accessors"
-		size
-		at:
-		at:put:
+		basicSize size
+		basicAt: at:
+		basicAt:put: at:put:
 		
 		at:ifAbsent:
 		at:ifAbsentPut:

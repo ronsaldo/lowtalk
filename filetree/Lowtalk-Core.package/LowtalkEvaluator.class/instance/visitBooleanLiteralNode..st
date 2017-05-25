@@ -1,4 +1,4 @@
 visiting
 visitBooleanLiteralNode: aNode
-	aNode type: compiler booleanType.
+	aNode setTypeIfNil: compiler booleanType.
 	^ aNode value

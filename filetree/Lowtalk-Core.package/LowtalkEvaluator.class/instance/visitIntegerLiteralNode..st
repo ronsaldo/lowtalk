@@ -1,4 +1,4 @@
 visiting
 visitIntegerLiteralNode: literal
-	literal type: self compiler integerLiteralType.
+	literal setTypeIfNil: self compiler integerLiteralType.
 	^ literal value

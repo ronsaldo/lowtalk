@@ -1,3 +1,3 @@
 visiting
 visitSelfNode: aNode
-	self halt
+	aNode type: (environment receiverTypeOr: compiler voidType).

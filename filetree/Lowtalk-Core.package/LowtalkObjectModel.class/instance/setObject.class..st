@@ -5,5 +5,5 @@ setObject: anObject class: class
 		^ specialLiteralClasses at: anObject put: class
 	].
 
-	setObjectClassFunction lowtalkValueWithArguments: { anObject . class } types: { headerType pointer . headerType pointer } compiler: compiler at: nil.
+	setObjectClassFunction lowtalkValueWithArguments: { anObject headerPointer. class headerPointer } types: { headerType pointer . headerType pointer } compiler: compiler at: nil.
 	^ anObject

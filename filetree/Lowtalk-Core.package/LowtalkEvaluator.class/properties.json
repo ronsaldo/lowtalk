@@ -5,6 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [
+		"BlockMessages",
 		"InlineMessages"
 	],
 	"instvars" : [ ],

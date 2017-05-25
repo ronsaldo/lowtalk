@@ -1,4 +1,4 @@
 visiting
 visitSymbolLiteralNode: literal
-	literal type: self compiler symbolLiteralType.
+	literal setTypeIfNil: self compiler symbolLiteralType.
 	^ literal value

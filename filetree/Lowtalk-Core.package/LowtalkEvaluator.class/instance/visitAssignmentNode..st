@@ -18,5 +18,5 @@ visitAssignmentNode: node
 	reference value: value.
 	
 	"Set the result type."	
-	node type: referenceType.
+	node setTypeIfNil: referenceType.
 	^ reference

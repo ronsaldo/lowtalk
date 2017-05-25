@@ -1,4 +1,4 @@
 visiting
 visitArrayLiteralNode: literal
-	literal type: self compiler objectType.
+	literal setTypeIfNil: self compiler objectType.
 	^ literal value

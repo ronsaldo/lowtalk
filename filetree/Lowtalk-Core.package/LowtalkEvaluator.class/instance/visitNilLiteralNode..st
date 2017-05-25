@@ -1,4 +1,4 @@
 visiting
 visitNilLiteralNode: aNode
-	aNode type: compiler nilType.
+	aNode setTypeIfNil: compiler nilType.
 	^ nil

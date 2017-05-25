@@ -1,21 +1,27 @@
 {
 	"instance" : {
-		"namespaceEnvironment" : "RonieSalgado 5/4/2017 00:56",
-		"lookSymbol:ifAbsent:" : "RonieSalgado 5/4/2017 00:56",
-		"setSymbol:value:ifPresent:" : "RonieSalgado 5/4/2017 00:57",
-		"compiler" : "RonieSalgado 5/4/2017 17:54",
 		"lookSymbol:ifAbsentPut:" : "RonieSalgado 5/4/2017 00:56",
-		"isNamespace" : "RonieSalgado 5/4/2017 01:03",
-		"setSymbol:value:" : "RonieSalgado 5/4/2017 00:56",
-		"addCompileTimeVariableValue:" : "RonieSalgado 5/6/2017 23:10",
-		"lookSymbolRecursively:ifAbsent:" : "RonieSalgado 5/4/2017 00:57",
-		"lookSymbol:" : "RonieSalgado 5/4/2017 18:38",
-		"parent" : "RonieSalgado 5/4/2017 00:55",
 		">>" : "RonieSalgado 5/4/2017 01:50",
-		"lookSymbol:ifPresent:" : "RonieSalgado 5/4/2017 00:56",
 		"isEnvironment" : "RonieSalgado 5/6/2017 22:36",
+		"namespaceEnvironment" : "RonieSalgado 5/4/2017 00:56",
+		"setCompileTimeVariable:value:" : "RonieSalgado 5/4/2017 21:36",
+		"lookSymbol:ifPresent:" : "RonieSalgado 5/4/2017 00:56",
+		"lookSymbol:" : "RonieSalgado 5/4/2017 18:38",
+		"setSymbol:value:" : "RonieSalgado 5/4/2017 00:56",
+		"lookSymbolRecursively:ifAbsent:" : "RonieSalgado 5/4/2017 00:57",
+		"receiverTypeOr:" : "RonieSalgado 5/25/2017 02:47",
 		"parent:" : "RonieSalgado 5/4/2017 00:55",
-		"setCompileTimeVariable:value:" : "RonieSalgado 5/4/2017 21:36"
+		"receiver" : "RonieSalgado 5/25/2017 01:48",
+		"receiverType" : "RonieSalgado 5/25/2017 01:49",
+		"compiler" : "RonieSalgado 5/4/2017 17:54",
+		"isNamespace" : "RonieSalgado 5/4/2017 01:03",
+		"setSymbol:value:ifPresent:" : "RonieSalgado 5/4/2017 00:57",
+		"lookSymbol:ifAbsent:" : "RonieSalgado 5/4/2017 00:56",
+		"addCompileTimeVariableValue:" : "RonieSalgado 5/6/2017 23:10",
+		"parent" : "RonieSalgado 5/4/2017 00:55"
 	},
-	"class" : { }
+	"class" : {
+		"parent:" : "RonieSalgado 5/25/2017 00:40",
+		"empty" : "RonieSalgado 5/25/2017 00:40"
+	}
 }

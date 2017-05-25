@@ -1,0 +1,4 @@
+accessing
+lookupSelectorFunction
+	<compileTime>
+	^ lookupSelectorFunction

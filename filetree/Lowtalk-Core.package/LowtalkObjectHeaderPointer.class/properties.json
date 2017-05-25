@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkCompileTimePointer",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"object"
+	],
+	"name" : "LowtalkObjectHeaderPointer",
+	"type" : "normal"
+}

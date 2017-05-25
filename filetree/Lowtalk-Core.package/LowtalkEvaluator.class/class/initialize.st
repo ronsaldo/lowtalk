@@ -13,3 +13,11 @@ initialize
 		ifFalse:ifFalse: evaluateInlineIfMessage:receiver:receiverType:inSuperclass:
 	).
 	
+	BlockMessages := Dictionary newFromPairs: #(
+		whileTrue WhileLoop
+		whileTrue: WhileLoop
+		whileFalse WhileLoop
+		whileFalse: WhileLoop
+		whileNotNil: WhileLoop
+		whileNil: WhileLoop
+	).

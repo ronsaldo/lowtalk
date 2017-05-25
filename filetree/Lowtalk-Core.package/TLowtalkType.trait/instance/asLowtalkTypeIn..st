@@ -1,0 +1,3 @@
+converting
+asLowtalkTypeIn: aNode
+	^ self

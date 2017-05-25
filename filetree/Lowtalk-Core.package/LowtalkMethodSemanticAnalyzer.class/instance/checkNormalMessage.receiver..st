@@ -4,9 +4,10 @@ checkNormalMessage: message receiver: receiver
 	| receiverType |
 	message specialMessageType: nil.
 	
-	"Is this an ordinary object message send?"
 	receiverType := receiver type withoutReferences.
-	receiverType isDynamicObjectType ifTrue: [
+		
+	"Is this an ordinary object message send?"
+	(receiverType isDynamicObjectType or: [receiverType canBeImplicitlyConvertedTo: compiler objectType ]) ifTrue: [
 		message arguments do: [ :arg |
 			arg accept: self.
 			arg type implicitlyConvertedTo: compiler objectType at: message
@@ -16,4 +17,4 @@ checkNormalMessage: message receiver: receiver
 		^ self
 	].
 	
-	self halt
+	message semanticError: 'Cannot send message {1} to value of type {2}' format: { message selector printString . receiverType name }

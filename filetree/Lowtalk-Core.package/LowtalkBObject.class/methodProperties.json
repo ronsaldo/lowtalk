@@ -1,10 +1,12 @@
 {
 	"instance" : {
 		"isVariable" : "RonieSalgado 5/6/2017 22:36",
+		"isObjectInstance" : "RonieSalgado 5/25/2017 01:09",
 		"isLocalVariable" : "RonieSalgado 5/6/2017 22:36",
 		"isInlineArgument" : "RonieSalgado 5/9/2017 21:33",
 		"isArgument" : "RonieSalgado 5/6/2017 22:36",
-		"isEnvironment" : "RonieSalgado 5/6/2017 22:36"
+		"isEnvironment" : "RonieSalgado 5/6/2017 22:36",
+		"isStructureInstance" : "RonieSalgado 5/25/2017 01:09"
 	},
 	"class" : { }
 }

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkMethodVariable",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"description",
+		"type"
+	],
+	"name" : "LowtalkMethodReceiverSlot",
+	"type" : "normal"
+}

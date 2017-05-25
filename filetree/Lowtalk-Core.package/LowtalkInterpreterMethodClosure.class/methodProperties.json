@@ -1,5 +1,6 @@
 {
 	"instance" : {
+		"lowtalkPerform:withArguments:inSuperclass:node:" : "RonieSalgado 5/25/2017 03:38",
 		"environment" : "RonieSalgado 5/24/2017 02:44",
 		"value:value:value:" : "RonieSalgado 5/24/2017 02:45",
 		"value:value:" : "RonieSalgado 5/24/2017 02:45",
@@ -13,5 +14,7 @@
 		"valueWithArguments:" : "RonieSalgado 5/24/2017 02:45",
 		"value:value:value:value:" : "RonieSalgado 5/24/2017 02:45"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "RonieSalgado 5/25/2017 03:36"
+	}
 }

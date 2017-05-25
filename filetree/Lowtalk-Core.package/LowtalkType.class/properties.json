@@ -1,18 +1,19 @@
 {
-	"commentStamp" : "",
-	"super" : "LowtalkBObject",
-	"category" : "Lowtalk-Core-Types",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [
-		"BlockSpecialMessages",
-		"CommonSpecialMessages"
-	],
+	"classtraitcomposition" : "TLowtalkType classTrait",
+	"classvars" : [ ],
 	"instvars" : [
 		"ssaType",
 		"compilationTarget",
 		"readOnly"
 	],
 	"name" : "LowtalkType",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "LowtalkBObject",
+	"traitcomposition" : "TLowtalkType - {#isValidLowtalkType}",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"LowtalkTypeSharedPool"
+	],
+	"category" : "Lowtalk-Core-Types"
 }

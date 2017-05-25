@@ -1,0 +1,4 @@
+accessing
+superClassSlotIndex
+	<compileTime>
+	^ superClassSlotIndex

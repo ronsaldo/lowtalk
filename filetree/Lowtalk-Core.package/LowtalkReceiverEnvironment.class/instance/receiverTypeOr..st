@@ -1,0 +1,3 @@
+accessing
+receiverTypeOr: defaultType
+	^ receiverType

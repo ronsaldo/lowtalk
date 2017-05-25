@@ -12,7 +12,8 @@
 		"temporaries",
 		"returnType",
 		"receiverType",
-		"parentMethod"
+		"parentMethod",
+		"hasLocalReturns"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

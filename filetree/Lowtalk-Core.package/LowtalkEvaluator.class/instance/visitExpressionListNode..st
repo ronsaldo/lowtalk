@@ -7,5 +7,5 @@ visitExpressionListNode: expressionList
 		result := self evaluate: expr.
 		resultType := expr type.
 	].
-	expressionList type: resultType.
+	expressionList setTypeIfNil: resultType.
 	^ result

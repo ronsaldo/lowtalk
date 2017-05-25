@@ -19,7 +19,10 @@
 		"setObjectClassFunction",
 		"getObjectClassFunction",
 		"specialLiteralClasses",
-		"classes"
+		"classes",
+		"superClassSlotIndex",
+		"methodDictionarySlotIndex",
+		"lookupSelectorFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

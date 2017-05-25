@@ -44,7 +44,7 @@ let bootstrapClassHierarchy := #(
             (HashedCollection Dictionary pointers () ())
                 (Dictionary IdentityDictionary pointers () ())
                     (IdentityDictionary SystemDictionary pointers () ())
-                (Dictionary MethodDictionary pointers () ())
+                (Dictionary MethodDictionary pointers (values) ())
             (HashedCollection Set pointers () ())
                 (Set IdentitySet pointers () ())
                 (Set WeakSet pointers () ())
@@ -90,6 +90,10 @@ let bootstrapClassHierarchy := #(
 
 let superClassSlotIndex := 1.
 let methodDictionarySlotIndex := 2.
+Compiler objectModel
+    superClassSlotIndex: superClassSlotIndex;
+    methodDictionarySlotIndex: methodDictionarySlotIndex.
+
 "Compute the size of the instance side"
 let classInstanceSizeDictionary := Compiler newDictionary.
 bootstrapClassHierarchy do: [:classDefinition |
@@ -142,24 +146,41 @@ bootstrapClassHierarchy do: [:classDefinition |
     "Create the meta class"
     let metaClass := Compiler objectModel newObjectWithPointers: metaClassSize.
     (Compiler objectModel registerClass: metaClass)
-        instanceVariables: instanceVariables.
+        instanceVariables: metaInstanceVariables.
 
     "Create the class"
     let class := Compiler objectModel newObjectWithPointers: metaInstanceSize.
     Compiler objectModel setObject: class class: metaClass.
     (Compiler objectModel registerClass: class)
-        instanceVariables: metaInstanceVariables.
+        instanceVariables: instanceVariables.
 
     "Link the super classes."
     baseName ifNotNil: [
         let superClass := _GlobalNamespace at: baseName.
-        Compiler objectModel setObject: class slot: superClassSlotIndex value: superClass.
+        Compiler objectModel
+            setObject: class slot: superClassSlotIndex value: superClass.
 
         let superMeta := Compiler objectModel getObjectClass: superClass.
-        Compiler objectModel setObject: metaClass slot: superClassSlotIndex value: superMeta.
+        Compiler objectModel
+            setObject: metaClass slot: superClassSlotIndex value: superMeta.
     ].
 
     Global named: name type: _DynamicObject value: class
+].
+
+"Method dictionary definition."
+let methodDictionarySize := classInstanceSizeDictionary at: #MethodDictionary.
+let MethodDictionary_initialize := [ :self<MethodDictionary> |
+    tally := 0.
+    array := #().
+    values := #().
+].
+
+let MethodDictionary_new := [
+    let result := Compiler objectModel newObjectWithPointers: methodDictionarySize.
+    Compiler objectModel setObject: result class: MethodDictionary.
+    MethodDictionary_initialize value: result.
+    result.
 ].
 
 "Tricky parts on the class hierarchy."
@@ -181,20 +202,19 @@ let classHierarchyShortCirtcuit := [
         named: #false type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: False).
 
     "Finish this part"
-    let methodDictionarySize := classInstanceSizeDictionary at: #MethodDictionary.
     bootstrapClassHierarchy do: [:classDefinition |
         let name := classDefinition at: 2.
 
         "Create the method dictionaries."
         let class := _GlobalNamespace at: name.
-        let classMethodDictionary := Compiler objectModel newObjectWithPointers: methodDictionarySize.
+        let classMethodDictionary := MethodDictionary_new value.
 
         Compiler objectModel
             setObject: classMethodDictionary class: MethodDictionary;
             setObject: class slot: methodDictionarySlotIndex value: classMethodDictionary.
 
         let metaClass := Compiler objectModel getObjectClass: class.
-        let metaClassMethodDictionary := Compiler objectModel newObjectWithPointers: methodDictionarySize.
+        let metaClassMethodDictionary := MethodDictionary_new value.
         Compiler objectModel
             setObject: metaClassMethodDictionary class: MethodDictionary;
             setObject: metaClass slot: methodDictionarySlotIndex value: metaClassMethodDictionary.
@@ -203,4 +223,111 @@ let classHierarchyShortCirtcuit := [
         Compiler objectModel setObject: metaClass class: Metaclass.
     ]
 ].
-classHierarchyShortCirtcuit value
+classHierarchyShortCirtcuit value.
+
+"More of the method dictionary methods."
+let MethodDictionary_scanFor := [<UInt32> :self<MethodDictionary> :key |
+    <localReturn>
+    let finish<UIntPointer> := array basicSize.
+    finish == 0 ifTrue: [
+        ^ 0
+    ].
+
+    let start<UIntPointer> := (key identityHash \\ finish) + 1.
+    let element := nil.
+
+    "Search from (hash mod size) to the end."
+    start to: finish do: [:index<UIntPointer> |
+        ((element := array basicAt: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    "Search from 1 to where we started."
+    1 to: start-1 do: [:index<UIntPointer> |
+        ((element := array basicAt: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    ^ 0  "No match AND no empty slot"
+].
+
+let MethodDictionary_atOrNil := [:self<MethodDictionary> :key |
+    <localReturn>
+    let index := MethodDictionary_scanFor value: self value: key.
+    ^ index ~= 0 ifTrue: [values basicAt: index] ifFalse: [nil].
+].
+
+let MethodDictionary_atPutNoCheck := [:self<MethodDictionary> :key :value |
+    let index := MethodDictionary_scanFor value: self value: key value: value.
+    array basicAt: index put: key.
+    value basicAt: index put: value.
+].
+
+let MethodDictionary_grow := [ :self<MethodDictionary> |
+    let oldKeys := array.
+    let oldValues := values.
+    let oldSize := array basicSize.
+    let newSize := oldSize * 2.
+    newSize < 8 ifTrue: [ newSize := 8 ].
+
+    array := Array basicNew: newSize.
+    values := Array basicNew: newSize.
+
+    1 to: oldSize do: [:i |
+        let key := oldKeys basicAt: i.
+        let value := oldValues basicAt: i.
+        key ifNotNil: [
+            MethodDictionary_atPutNoCheck value: self value: key value: value
+        ]
+    ].
+
+    tally := 0.
+].
+
+let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
+    let index := MethodDictionary_scanFor value: self value: key.
+    index = 0 ifTrue: [
+        MethodDictionary_grow value: self.
+        index := MethodDictionary_scanFor value: self value: key.
+    ].
+
+    array basicAt: index put: key.
+    values basicAt: index put: value.
+].
+"Behavior methods"
+let Behavior_superclass := [ :self<Behavior> | superclass ].
+let Behavior_methodDict := [ :self<Behavior> | methodDict ].
+
+let Behavior_lookupSelector := [ :self<Behavior> :selector |
+    <localReturn>
+    let position := self.
+    [position == nil] whileFalse: [
+        let result := MethodDictionary_atOrNil value: (Behavior_methodDict value: position) value: selector.
+        result ifNotNil: [^ result].
+        position := (Behavior_superclass value: position) castTo: Behavior
+    ].
+
+    ^ nil
+].
+
+Compiler objectModel lookupSelectorFunction: Behavior_lookupSelector.
+
+"Allow putting things on the method dictionaries."
+[ :self<Behavior> |
+    MethodDictionary_atPut value: methodDict value: #methodDict value: Behavior_methodDict
+] value: Behavior.
+
+MethodDictionary_atPut value: MethodDictionary methodDict value: #at:put: value: MethodDictionary_atPut.
+
+"Put the bootstrap methods in their method dictionary"
+ProtoObject methodDict at: #yourself put: [:self<ProtoObject> | self].
+
+Behavior methodDict
+    at: #superclass put: Behavior_superclass;
+    at: #lookupSelector put: Behavior_lookupSelector.
+
+MethodDictionary methodDict
+    at: #atOrNil: put: MethodDictionary_atOrNil;
+    at: #at:putNoCheck: put: MethodDictionary_atPutNoCheck;
+    at: #grow put: MethodDictionary_grow;
+    yourself

@@ -1,13 +1,29 @@
 {
 	"instance" : {
-		"header:" : "RonieSalgado 5/21/2017 19:36",
-		"compiler" : "RonieSalgado 5/21/2017 19:36",
-		"value" : "RonieSalgado 5/23/2017 16:49",
+		"header" : "RonieSalgado 5/21/2017 19:36",
+		"primitive_basicAt:" : "RonieSalgado 5/25/2017 04:19",
+		"behavior" : "RonieSalgado 5/25/2017 04:32",
+		"primitive_basicSize" : "RonieSalgado 5/25/2017 04:10",
+		"type" : "RonieSalgado 5/25/2017 05:18",
+		"isRegisteredClass" : "RonieSalgado 5/25/2017 03:58",
+		"classPrimitive_basicNew" : "RonieSalgado 5/25/2017 04:08",
 		"slots:" : "RonieSalgado 5/21/2017 19:36",
-		"lowtalkLiteralTypeWith:" : "RonieSalgado 5/21/2017 19:38",
-		"compiler:" : "RonieSalgado 5/21/2017 19:36",
+		"lowtalkPerform:withArguments:inSuperclass:node:" : "RonieSalgado 5/25/2017 05:41",
+		"pointerForSlotDescription:" : "RonieSalgado 5/25/2017 01:31",
+		"classPrimitive_basicNew:" : "RonieSalgado 5/25/2017 05:30",
+		"isObjectInstance" : "RonieSalgado 5/25/2017 01:09",
+		"primitive_castTo:" : "RonieSalgado 5/25/2017 05:17",
+		"lowtalkPerform:primitivePrefix:withArguments:inSuperclass:node:" : "RonieSalgado 5/25/2017 03:58",
 		"slots" : "RonieSalgado 5/21/2017 19:36",
-		"header" : "RonieSalgado 5/21/2017 19:36"
+		"compiler" : "RonieSalgado 5/21/2017 19:36",
+		"primitive_basicAt:put:" : "RonieSalgado 5/25/2017 04:23",
+		"asLowtalkTypeIn:" : "RonieSalgado 5/25/2017 00:28",
+		"lowtalkLiteralTypeWith:" : "RonieSalgado 5/21/2017 19:38",
+		"header:" : "RonieSalgado 5/21/2017 19:36",
+		"compiler:" : "RonieSalgado 5/21/2017 19:36",
+		"headerPointer" : "RonieSalgado 5/25/2017 04:04"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "RonieSalgado 5/25/2017 05:13"
+	}
 }

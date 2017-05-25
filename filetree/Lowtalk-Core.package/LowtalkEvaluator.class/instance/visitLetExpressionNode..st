@@ -25,5 +25,5 @@ visitLetExpressionNode: node
 		node semanticError: 'Variable name {1} is already in use in this scope.' format: { variable name printString }.
 	].
 
-	node type: node valueType ref.
+	node setTypeIfNil: node valueType ref.
 	^ variable

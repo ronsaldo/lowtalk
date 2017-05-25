@@ -4,7 +4,10 @@
 	"category" : "Lowtalk-Core-Interpreter",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"CullSelectors",
+		"ValueSelectors"
+	],
 	"instvars" : [
 		"environment",
 		"definition"

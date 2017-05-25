@@ -4,15 +4,15 @@
 		"environment" : "RonieSalgado 5/4/2017 23:18",
 		"solveMessageType:withReceiverType:" : "RonieSalgado 5/4/2017 23:22",
 		"evaluate:" : "RonieSalgado 5/4/2017 23:18",
-		"solveBlockType:" : "RonieSalgado 5/7/2017 20:50",
+		"solveBlockType:" : "RonieSalgado 5/25/2017 04:17",
 		"compiler" : "RonieSalgado 5/4/2017 23:18",
-		"solveTypeExpression:defaultType:" : "RonieSalgado 5/4/2017 23:34",
+		"solveTypeExpression:defaultType:" : "RonieSalgado 5/25/2017 00:26",
 		"solveBlockArgumentType:" : "RonieSalgado 5/6/2017 22:16",
-		"visitIdentifierReferenceNode:" : "RonieSalgado 5/19/2017 18:03",
+		"visitIdentifierReferenceNode:" : "RonieSalgado 5/25/2017 01:36",
 		"solveTypeExpression:" : "RonieSalgado 5/4/2017 23:35",
 		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"environment:" : "RonieSalgado 5/4/2017 23:18",
-		"evaluateTypeExpression:" : "RonieSalgado 5/10/2017 02:13"
+		"evaluateTypeExpression:" : "RonieSalgado 5/25/2017 00:26"
 	},
 	"class" : {
 		"initialize" : "RonieSalgado 5/7/2017 20:53"

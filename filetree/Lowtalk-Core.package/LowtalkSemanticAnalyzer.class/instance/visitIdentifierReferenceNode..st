@@ -5,5 +5,5 @@ visitIdentifierReferenceNode: identifier
 		identifier environment: environment semanticError: 'Undeclared identifier {1}' format: { identifier value }
 	].
 
-	identifier type ifNil: [ identifier type: result type ].
+	identifier setTypeIfNil: result type.
 	^ identifier type isReferenceType ifTrue: [ result ] ifFalse: [ result value ]

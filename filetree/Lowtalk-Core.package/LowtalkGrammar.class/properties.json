@@ -103,7 +103,9 @@
 		"literalArrayParent",
 		"literalPunctuation",
 		"blockSelfType",
-		"typeSpecifier"
+		"typeSpecifier",
+		"symbolKeywordLiteral",
+		"symbolOperatorLiteral"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

@@ -1,14 +1,15 @@
 {
 	"instance" : {
-		"locals" : "RonieSalgado 3/12/2017 14:54",
 		"pragmaList:" : "RonieSalgado 5/7/2017 20:43",
+		"pragmaList" : "RonieSalgado 3/12/2017 14:54",
+		"hasPragmaNamed:" : "RonieSalgado 5/25/2017 02:58",
+		"locals:" : "RonieSalgado 5/6/2017 22:54",
 		"printOn:" : "RonieSalgado 3/12/2017 14:33",
 		"expressions:" : "RonieSalgado 3/12/2017 14:28",
-		"pragmaList" : "RonieSalgado 3/12/2017 14:54",
-		"pragmasDo:" : "RonieSalgado 5/7/2017 20:49",
 		"expressions" : "RonieSalgado 3/12/2017 14:28",
-		"locals:" : "RonieSalgado 5/6/2017 22:54",
-		"accept:" : "RonieSalgado 5/3/2017 22:11"
+		"pragmasDo:" : "RonieSalgado 5/7/2017 20:49",
+		"accept:" : "RonieSalgado 5/3/2017 22:11",
+		"locals" : "RonieSalgado 3/12/2017 14:54"
 	},
 	"class" : { }
 }

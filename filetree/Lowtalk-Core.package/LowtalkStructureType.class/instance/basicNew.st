@@ -5,5 +5,5 @@ basicNew
 	
 	^ LowtalkStructureInstance basicNew 
 		type: self;
-		slots: (self fields collect: [:fieldType | LowtalkInstanceSlotVariable new valueType: fieldType; value: fieldType defaultValue ]);
+		slots: (self fields collect: [:fieldType | LowtalkStructureInstanceSlotVariable new valueType: fieldType; value: fieldType defaultValue ]);
 		yourself

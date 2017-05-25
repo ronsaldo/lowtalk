@@ -1,13 +1,20 @@
 {
 	"instance" : {
+		"slotDictionary" : "RonieSalgado 5/25/2017 00:51",
+		"superclass" : "RonieSalgado 5/25/2017 02:16",
+		"compiler:" : "RonieSalgado 5/24/2017 01:58",
+		"compiler" : "RonieSalgado 5/24/2017 01:58",
+		"slotNamed:ifPresent:" : "RonieSalgado 5/25/2017 02:15",
+		"buildSlotDictionary" : "RonieSalgado 5/25/2017 02:36",
+		"slots:" : "RonieSalgado 5/24/2017 01:58",
+		"slots" : "RonieSalgado 5/24/2017 01:58",
+		"initialize" : "RonieSalgado 5/24/2017 02:03",
+		"slotNamed:ifAbsent:" : "RonieSalgado 5/25/2017 02:15",
 		"classObject:" : "RonieSalgado 5/24/2017 01:58",
 		"classObject" : "RonieSalgado 5/24/2017 01:58",
-		"initialize" : "RonieSalgado 5/24/2017 02:03",
-		"instanceVariables:" : "RonieSalgado 5/24/2017 02:03",
-		"slots:" : "RonieSalgado 5/24/2017 01:58",
-		"compiler:" : "RonieSalgado 5/24/2017 01:58",
-		"slots" : "RonieSalgado 5/24/2017 01:58",
-		"compiler" : "RonieSalgado 5/24/2017 01:58"
+		"methodDict" : "RonieSalgado 5/25/2017 02:13",
+		"instanceSize" : "RonieSalgado 5/25/2017 02:34",
+		"instanceVariables:" : "RonieSalgado 5/25/2017 02:32"
 	},
 	"class" : { }
 }

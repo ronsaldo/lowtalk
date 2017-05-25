@@ -19,7 +19,7 @@ checkWhileLoopMessage: message receiver: receiver
 		^ self checkNormalMessage: message receiver: receiver
 	].
 	
-	conditionType := conditionBlockType functionType returnType withoutReferences.
+	conditionType := conditionBlockType returnType withoutReferences.
 	(conditionType isBooleanType and: [(BooleanControlFlowMessages includes: message selector) not]) ifTrue: [ 
 		message semanticError: '{1} cannot be send to boolean value.' format: { message selector printString }
 	].

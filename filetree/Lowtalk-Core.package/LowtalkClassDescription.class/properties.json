@@ -8,7 +8,9 @@
 	"instvars" : [
 		"compiler",
 		"classObject",
-		"slots"
+		"slots",
+		"slotDictionary",
+		"instanceSize"
 	],
 	"name" : "LowtalkClassDescription",
 	"type" : "normal"

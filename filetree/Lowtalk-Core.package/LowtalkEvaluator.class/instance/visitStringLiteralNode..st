@@ -1,4 +1,4 @@
 visiting
 visitStringLiteralNode: literal
-	literal type: self compiler stringLiteralType.
+	literal setTypeIfNil: self compiler stringLiteralType.
 	^ literal value

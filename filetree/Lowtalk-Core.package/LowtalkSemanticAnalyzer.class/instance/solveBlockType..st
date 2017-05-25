@@ -1,9 +1,10 @@
 as yet unclassified
 solveBlockType: aBlockNode
-	| callingConvention |
+	| callingConvention argumentTypes |
 	aBlockNode type ifNotNil: [ ^ self ].
 	aBlockNode arguments do: [ :arg | self solveBlockArgumentType: arg ].
 	aBlockNode returnType: (self solveTypeExpression: aBlockNode returnTypeExpression).
+	aBlockNode selfType: (self solveTypeExpression: aBlockNode selfTypeExpression defaultType: compiler voidType).
 
 	callingConvention := compiler defaultCallingConvention.
 	aBlockNode pragmasDo: [ :pragma |
@@ -12,8 +13,13 @@ solveBlockType: aBlockNode
 		]
 	].
 
+	argumentTypes := aBlockNode arguments collect: #type.
+	aBlockNode selfType isVoidType ifFalse: [ 
+		argumentTypes := { aBlockNode selfType } , argumentTypes
+	].
+
 	aBlockNode type: ((LowtalkFunctionType target: self compiler compilationTarget)
-			arguments: (aBlockNode arguments collect: #type);
+			arguments: argumentTypes;
 			returnType: aBlockNode returnType;
 			callingConvention: callingConvention;
 			yourself) block.

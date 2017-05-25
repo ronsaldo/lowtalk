@@ -4,7 +4,10 @@
 	"category" : "Lowtalk-Core-Environment",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"ClassPrimitiveSelectors",
+		"ObjectPrimitiveSelectors"
+	],
 	"instvars" : [
 		"header",
 		"slots",

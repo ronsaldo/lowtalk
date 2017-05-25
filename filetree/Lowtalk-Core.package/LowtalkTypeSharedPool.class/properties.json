@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "SharedPool",
+	"category" : "Lowtalk-Core-Types",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"BlockSpecialMessages",
+		"CommonSpecialMessages"
+	],
+	"instvars" : [ ],
+	"name" : "LowtalkTypeSharedPool",
+	"type" : "normal"
+}
