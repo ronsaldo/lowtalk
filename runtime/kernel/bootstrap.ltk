@@ -330,4 +330,24 @@ MethodDictionary methodDict
     at: #atOrNil: put: MethodDictionary_atOrNil;
     at: #at:putNoCheck: put: MethodDictionary_atPutNoCheck;
     at: #grow put: MethodDictionary_grow;
+    yourself.
+
+"Some functions related to the object model."
+Compiler objectModel
+    convertArrayFunction: [:array |
+        let result := Array basicNew: array size.
+        1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
+        result
+    ];
+    convertByteSymbolFunction: [:array |
+        let result := ByteSymbol basicNew: array size.
+        1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
+        "TODO: Compute the identity hash."
+        result
+    ];
+    convertByteStringFunction: [:array |
+        let result := ByteString basicNew: array size.
+        1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
+        result
+    ];
     yourself

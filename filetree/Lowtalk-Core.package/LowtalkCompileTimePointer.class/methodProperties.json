@@ -1,4 +1,7 @@
 {
-	"instance" : { },
+	"instance" : {
+		"isCompileTimePointer" : "RonieSalgado 5/31/2017 22:55",
+		"toSSAPointerConstantWith:" : "RonieSalgado 5/31/2017 22:57"
+	},
 	"class" : { }
 }

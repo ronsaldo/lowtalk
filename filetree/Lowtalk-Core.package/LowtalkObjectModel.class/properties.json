@@ -22,7 +22,10 @@
 		"classes",
 		"superClassSlotIndex",
 		"methodDictionarySlotIndex",
-		"lookupSelectorFunction"
+		"lookupSelectorFunction",
+		"convertArrayFunction",
+		"convertByteSymbolFunction",
+		"convertByteStringFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

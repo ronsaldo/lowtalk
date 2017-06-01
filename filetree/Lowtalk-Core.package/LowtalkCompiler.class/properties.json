@@ -26,7 +26,10 @@
 		"nilType",
 		"globalBuilder",
 		"objectModel",
-		"booleanLiteralType"
+		"booleanLiteralType",
+		"objectInstanceVariableNameMap",
+		"gensymCount",
+		"byteType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

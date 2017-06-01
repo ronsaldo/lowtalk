@@ -5,6 +5,7 @@ visitInlinedBlock: node
 	node inlined: true.
 	
 	blockEnvironment := LowtalkEnvironment parent: environment.
+	node selfType: (self solveTypeExpression: node selfTypeExpression defaultType: compiler voidType).
 	self withEnvironment: blockEnvironment do: [ 
 		argumentTypes := node arguments collect: [ :arg | (self visitInlinedBlockArgument: arg) type ].
 		node body accept: self.

@@ -1,0 +1,4 @@
+accessing
+convertByteSymbolFunction
+	<compileTime>
+	^ convertByteSymbolFunction

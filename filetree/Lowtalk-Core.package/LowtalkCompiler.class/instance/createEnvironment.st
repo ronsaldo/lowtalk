@@ -23,6 +23,7 @@ createEnvironment
 	uintPointerType := (compilerEnvironment lookSymbol: #UIntPointer) value.
 	intPointerType := (compilerEnvironment lookSymbol: #IntPointer) value.
 	booleanType := (compilerEnvironment lookSymbol: #BooleanBit) value.
+	byteType := (compilerEnvironment lookSymbol: #UInt8) value.
 	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
 
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GlobalNamespace.

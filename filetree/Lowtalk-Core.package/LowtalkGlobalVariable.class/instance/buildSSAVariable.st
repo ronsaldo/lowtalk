@@ -11,3 +11,7 @@ buildSSAVariable
 	self isConstant ifTrue: [ 
 		ssaValue readOnly: true
 	].
+
+	self value ifNotNil: [ :actualValue |
+		ssaValue initialValue: (compiler translateSSAConstant: actualValue type: self valueType)
+	].

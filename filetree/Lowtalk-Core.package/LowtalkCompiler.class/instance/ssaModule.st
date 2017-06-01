@@ -1,3 +1,3 @@
-initialization
+module construction
 ssaModule
 	^ ssaModule

@@ -1,20 +1,22 @@
 {
 	"instance" : {
+		"typeExpression:" : "RonieSalgado 5/4/2017 21:43",
 		"isVisibleInC:" : "RonieSalgado 5/4/2017 21:07",
 		"isExternal:" : "RonieSalgado 5/4/2017 21:07",
 		"definitionEnvironment:" : "RonieSalgado 5/4/2017 18:06",
-		"isVisibleInC" : "RonieSalgado 5/4/2017 21:07",
 		"finishCompiling" : "RonieSalgado 5/4/2017 17:30",
+		"isVisibleInC" : "RonieSalgado 5/4/2017 21:07",
 		"initialize" : "RonieSalgado 5/4/2017 21:07",
 		"buildSSAValue" : "RonieSalgado 5/4/2017 22:34",
 		"buildSSAFunction" : "RonieSalgado 5/22/2017 00:34",
-		"mangledName" : "RonieSalgado 5/4/2017 21:07",
-		"buildSSAVariable" : "RonieSalgado 5/22/2017 00:33",
+		"evaluateValueExpression" : "RonieSalgado 5/31/2017 21:34",
+		"buildSSAVariable" : "RonieSalgado 5/31/2017 21:24",
 		"isExternal" : "RonieSalgado 5/4/2017 21:07",
+		"mangledName" : "RonieSalgado 5/4/2017 21:07",
+		"prepareToCompile" : "RonieSalgado 5/31/2017 21:32",
 		"resolveValueType" : "RonieSalgado 5/4/2017 23:10",
 		"ssaValue" : "RonieSalgado 5/7/2017 04:23",
 		"typeExpression" : "RonieSalgado 5/4/2017 21:43",
-		"typeExpression:" : "RonieSalgado 5/4/2017 21:43",
 		"definitionEnvironment" : "RonieSalgado 5/4/2017 18:06"
 	},
 	"class" : { }
