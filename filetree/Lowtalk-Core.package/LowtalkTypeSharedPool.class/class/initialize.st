@@ -45,6 +45,7 @@ initialize
 		to:by:do: RangeLoop
 		
 		castTo: CastTo
+		reinterpretCastTo: ReinterpretCastTo
 		
 		yourself Yourself
 	).

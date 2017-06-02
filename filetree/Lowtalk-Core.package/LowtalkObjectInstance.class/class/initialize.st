@@ -5,6 +5,11 @@ initialize
 		basicAt: basicAt:put: basicSize
 		identityHash class
 		== ~~
-		castTo:
+		castTo: reinterpretCastTo:
 		).
+	NewObjectForType := Dictionary newFromPairs: #(
+		pointers newObjectWithPointers:
+		variablePointers newObjectWithPointers:
+		bytes newObjectWithBytes:
+	)
 	

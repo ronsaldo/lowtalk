@@ -8,6 +8,7 @@
 		"arithmeticCoerceWithNilType:" : "RonieSalgado 5/24/2017 23:17",
 		"isFunctionType" : "RonieSalgado 5/24/2017 23:15",
 		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 5/24/2017 23:19",
+		"canBeReinterpretedTo:" : "RonieSalgado 6/1/2017 02:26",
 		"isArrayType" : "RonieSalgado 5/24/2017 23:15",
 		"isPointerType" : "RonieSalgado 5/24/2017 23:15",
 		"operationSignature" : "RonieSalgado 5/24/2017 23:22",

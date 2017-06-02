@@ -29,7 +29,10 @@
 		"booleanLiteralType",
 		"objectInstanceVariableNameMap",
 		"gensymCount",
-		"byteType"
+		"byteType",
+		"objectSSAValueMap",
+		"valueConstantMap",
+		"objectInstanceVariableMap"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

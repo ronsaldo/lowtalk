@@ -62,9 +62,7 @@ let bootstrapClassHierarchy := #(
                         (Symbol WideSymbol words () ())
 
     "Context"
-    (ByteArray CompiledCode mixedBytes () ())
-        (CompiledCode CompiledMethod mixedBytes () ())
-        (CompiledCode CompiledBlock mixedBytes () ())
+    (Array CompiledMethod variablePointers (entryPoint) ())
 
     (Object Message pointers (selector args lookupClass) ())
     (Object InstructionStream pointers (sender pc) ())
@@ -146,12 +144,14 @@ bootstrapClassHierarchy do: [:classDefinition |
     "Create the meta class"
     let metaClass := Compiler objectModel newObjectWithPointers: metaClassSize.
     (Compiler objectModel registerClass: metaClass)
+        type: #pointers;
         instanceVariables: metaInstanceVariables.
 
     "Create the class"
     let class := Compiler objectModel newObjectWithPointers: metaInstanceSize.
     Compiler objectModel setObject: class class: metaClass.
     (Compiler objectModel registerClass: class)
+        type: type;
         instanceVariables: instanceVariables.
 
     "Link the super classes."
@@ -329,8 +329,11 @@ Behavior methodDict
 MethodDictionary methodDict
     at: #atOrNil: put: MethodDictionary_atOrNil;
     at: #at:putNoCheck: put: MethodDictionary_atPutNoCheck;
-    at: #grow put: MethodDictionary_grow;
-    yourself.
+    at: #grow put: MethodDictionary_grow.
+
+CompiledMethod methodDict
+    at: #entryPoint put: [:self<CompiledMethod> | entryPoint];
+    at: #entryPoint: put: [:self<CompiledMethod> :newEntryPoint | entryPoint := newEntryPoint. self].
 
 "Some functions related to the object model."
 Compiler objectModel
@@ -350,4 +353,32 @@ Compiler objectModel
         1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
         result
     ];
+    convertMethodContextMetadataFunction: [:entryPoint :literals |
+        let result := CompiledMethod basicNew: literals size.
+        result entryPoint: entryPoint.
+        1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
+        result
+    ];
+    yourself.
+
+
+"Message send"
+Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :lookupStart<ObjectModel ObjectHeader pointer> |
+    <smalltalk_supersend>
+    <localReturn>
+    LibC printf #{c'TODO: Super send selector %p lookupStart %p.\n' . (selector reinterpretCastTo: Void pointer) . (lookupStart reinterpretCastTo: Void pointer)}.
+    ^ 0
+].
+
+Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :receiver<ObjectModel ObjectHeader pointer> |
+    <smalltalk_send>
+    <localReturn>
+    let receiverClass := ObjectModel getObjectClass #{receiver}.
+    LibC printf #{c'TODO: Send selector %p receiver %p class %p\n' . (selector reinterpretCastTo: Void pointer) . (receiver reinterpretCastTo: Void pointer) . (receiverClass reinterpretCastTo: Void pointer)}.
+    ^ 0
+].
+
+Compiler objectModel
+    sendTrampolineFunction: sendTrampoline;
+    superSendTrampolineFunction: superSendTrampoline;
     yourself

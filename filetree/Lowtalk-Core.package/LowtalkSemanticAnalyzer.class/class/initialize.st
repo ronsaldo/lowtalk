@@ -4,5 +4,7 @@ initialize
 		cdecl
 		stdcall
 		smalltalk
+		smalltalk_send
+		smalltalk_supersend
 		naked
 	)

@@ -1,3 +1,5 @@
 object primitives
 primitive_basicAt: index
-	^ slots at: index
+	| description |
+	description := self behavior getClassDescription.
+	^ slots at: description instanceSize + index

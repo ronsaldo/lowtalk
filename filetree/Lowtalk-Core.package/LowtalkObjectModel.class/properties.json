@@ -25,7 +25,10 @@
 		"lookupSelectorFunction",
 		"convertArrayFunction",
 		"convertByteSymbolFunction",
-		"convertByteStringFunction"
+		"convertByteStringFunction",
+		"sendTrampolineFunction",
+		"superSendTrampolineFunction",
+		"convertMethodContextMetadataFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

@@ -1,0 +1,3 @@
+trampoline names
+stackLimitTrampoline
+	^ #_slvm_dynrun_stack_limit_trap

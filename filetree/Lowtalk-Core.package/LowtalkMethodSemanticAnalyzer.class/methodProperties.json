@@ -49,6 +49,7 @@
 		"visitStringLiteralNode:" : "RonieSalgado 5/6/2017 22:59",
 		"checkSlotMessage:receiver:" : "RonieSalgado 5/10/2017 02:39",
 		"isMessageACandidateForInlining:receiver:" : "RonieSalgado 5/9/2017 23:01",
+		"checkReinterpretCastToMessage:receiver:" : "RonieSalgado 6/1/2017 02:25",
 		"checkStructureNewMessage:receiver:" : "RonieSalgado 5/21/2017 18:50",
 		"visitIntegerLiteralNode:" : "RonieSalgado 5/6/2017 22:59",
 		"visitSelfNode:" : "RonieSalgado 5/25/2017 04:18",

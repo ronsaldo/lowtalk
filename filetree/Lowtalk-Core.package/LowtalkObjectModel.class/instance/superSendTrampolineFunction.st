@@ -1,0 +1,4 @@
+accessing
+superSendTrampolineFunction
+	<compileTime>
+	^ superSendTrampolineFunction

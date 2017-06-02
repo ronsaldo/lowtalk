@@ -11,6 +11,6 @@ buildSSAFunction
 	self value ifNil: [ 
 		self error: 'Non external function without definition'.
 	].
-	
+	compiler mapValue: value toSSAValue: ssaValue.
 	compiler generateFunction: ssaValue value: self value.
 	

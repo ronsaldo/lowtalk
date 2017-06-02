@@ -1,0 +1,4 @@
+accessing
+type
+	<compileTime>
+	^ type

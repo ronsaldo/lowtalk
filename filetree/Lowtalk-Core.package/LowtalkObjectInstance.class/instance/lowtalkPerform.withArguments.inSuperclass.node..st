@@ -8,6 +8,7 @@ lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node:
 		(selector == #== ) ifTrue: [ ^ self == arguments first value ].
 		(selector == #~~ ) ifTrue: [ ^ self ~~ arguments first value ].
 		(selector == #castTo: ) ifTrue: [ ^ self primitive_castTo: arguments first ].
+		(selector == #reinterpretCastTo: ) ifTrue: [ ^ self primitive_reinterpretCastTo: arguments first ].
 		^ self lowtalkPerform: selector primitivePrefix: #primitive_ withArguments: arguments inSuperclass: superClass node: sendingNode
 	].
 

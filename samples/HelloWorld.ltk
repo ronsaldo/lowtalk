@@ -1,5 +1,5 @@
-Global named: #Main value: [:arguments |
-    LibC printf #{c'ArgumentCount: %d\n' arguments size asNativeInt32}.
+"Global named: #Main value: [:arguments |
+    LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
     0
 ].
 
@@ -8,9 +8,22 @@ Namespace named: #EntryPoint members: [
     Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
         let arguments := Array new: argc.
         1 to: argc do: [ :i |
-            arguments at: i put: (argv at: i) readString.
+            arguments at: i put: (argv at: i) readString
         ].
 
         (Main value: arguments) asNativeInt32
+    ]
+]
+"
+
+Namespace named: #EntryPoint members: [
+    Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+        let arguments := Array new: 10.
+"        1 to: argc do: [ :i |
+            arguments at: i put: (ByteString new: 10)
+        ].
+        LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
+"
+    LibC printf #{c'Allocated array: %p\n' . arguments reinterpretCastTo: Void pointer }.
     ]
 ]

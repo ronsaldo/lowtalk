@@ -7,7 +7,7 @@
 		"arithmeticCoerceWithFloat:" : "RonieSalgado 5/20/2017 21:41",
 		"arithmeticCoerceWithIntegerLiteral:" : "RonieSalgado 5/9/2017 00:03",
 		"canBeExplicitlyConvertedTo:" : "RonieSalgado 5/21/2017 19:15",
-		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/21/2017 01:21",
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 6/1/2017 02:33",
 		"isIntegerType" : "RonieSalgado 5/6/2017 23:47",
 		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/21/2017 01:19",
 		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 5/21/2017 01:23",

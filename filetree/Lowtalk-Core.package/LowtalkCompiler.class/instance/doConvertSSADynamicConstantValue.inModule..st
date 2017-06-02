@@ -18,7 +18,7 @@ doConvertSSADynamicConstantValue: value inModule: module
 	
 	header := convertedObject header asSSAConstantValueIn: module.
 	slotType := convertedObject slotType.
-	slotConstants := convertedObject slots collect: [ :slotValue | slotType convertValue: slotValue toSSAConstantWith: self ].
+	slotConstants := convertedObject slots collect: [ :slotValue | slotType convertValue: slotValue toSSAConstantWith: self ] as: Array.
 	slotConstants := SLVMConstant array: convertedObject slotsType ssaType slots: slotConstants.
 	
 	variable initialValue: (SLVMConstant structure: valueType slots: { header . slotConstants }).

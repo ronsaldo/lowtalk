@@ -10,7 +10,8 @@
 		"classObject",
 		"slots",
 		"slotDictionary",
-		"instanceSize"
+		"instanceSize",
+		"type"
 	],
 	"name" : "LowtalkClassDescription",
 	"type" : "normal"

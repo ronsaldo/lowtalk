@@ -6,7 +6,10 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"compiler"
+		"compiler",
+		"messageSendTrampoline",
+		"messageSuperSendTrampoline",
+		"contextMetaDataHeaderSize"
 	],
 	"name" : "LowtalkSLVMObjectModel",
 	"type" : "normal"

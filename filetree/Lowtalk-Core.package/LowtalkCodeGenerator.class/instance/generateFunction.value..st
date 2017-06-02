@@ -34,4 +34,7 @@ generateFunction: ssaFunction value: functionValue
 	allocaBuilder jump: bodyBlock.
 	builder isLastTerminator ifFalse: [
 		self tryToReturnImplicitly: result type: node body type
-	]
+	].
+
+	"Create the function context metadata"
+	ssaFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ]

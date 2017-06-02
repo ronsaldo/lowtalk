@@ -96,11 +96,22 @@ newObjectHeaderWithWords
             yourself
     ].
 
-    let setObjectClass := [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
+    Constant named: #newObjectHeaderWithBytes value: [<ObjectHeader> :slotCount<UInt32> |
+        <cdecl>
+        ObjectHeader new
+            slotCount: slotCount;
+            flags: StaticOopFlag;
+            format: (ObjectFormatIndexable8 castTo: UInt8);
+            yourself
+    ].
+
+    Constant named: #setObjectClass value: [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
+        <cdecl>
         header value classPointer: classPointer
     ].
 
-    let getObjectClass := [<ObjectHeader pointer> :header<ObjectHeader pointer> |
+    Constant named: #getObjectClass value: [<ObjectHeader pointer> :header<ObjectHeader pointer> |
+        <cdecl>
         header value classPointer
     ].
 
@@ -108,6 +119,7 @@ newObjectHeaderWithWords
     	headerType: ObjectModel ObjectHeader;
     	writeBarrier: writeBarrier;
         newObjectHeaderWithPointers: newObjectHeaderWithPointers;
+        newObjectHeaderWithBytes: newObjectHeaderWithBytes;
         setObjectClassFunction: setObjectClass;
         getObjectClassFunction: getObjectClass;
         yourself

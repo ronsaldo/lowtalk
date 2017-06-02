@@ -11,9 +11,10 @@ buildModule
 		toProcess do: [ :object |
 			object prepareToCompile
 		].
-		pendingObjects removeAll
+		pendingObjects removeAll.
+		elementsToCompile do: #finishCompiling.
 	].
 
-	elementsToCompile do: #finishCompiling.
-	self assert: pendingObjects isEmpty
+	self assert: pendingObjects isEmpty.
+	
 	
