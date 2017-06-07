@@ -30,6 +30,9 @@ initialize
 		<= Comparison
 		> Comparison
 		>= Comparison
+		
+		and: And
+		or: Or
 
 		ifTrue: IfSelection
 		ifFalse: IfSelection

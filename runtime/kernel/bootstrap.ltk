@@ -226,8 +226,9 @@ let classHierarchyShortCirtcuit := [
 classHierarchyShortCirtcuit value.
 
 "More of the method dictionary methods."
-let MethodDictionary_scanFor := [<UInt32> :self<MethodDictionary> :key |
+let MethodDictionary_scanFor := [<UIntPointer> :self<MethodDictionary> :key |
     <localReturn>
+    <selector: #scanFor:>
     let finish<UIntPointer> := array basicSize.
     finish == 0 ifTrue: [
         ^ 0
@@ -253,17 +254,21 @@ let MethodDictionary_scanFor := [<UInt32> :self<MethodDictionary> :key |
 
 let MethodDictionary_atOrNil := [:self<MethodDictionary> :key |
     <localReturn>
-    let index := MethodDictionary_scanFor value: self value: key.
+    <selector: #atOrNil:>
+    let index := MethodDictionary_scanFor #{self . key}.
     ^ index ~= 0 ifTrue: [values basicAt: index] ifFalse: [nil].
 ].
 
 let MethodDictionary_atPutNoCheck := [:self<MethodDictionary> :key :value |
-    let index := MethodDictionary_scanFor value: self value: key value: value.
+    <selector: #at:putNoCheck:>
+    let index := MethodDictionary_scanFor #{self . key}.
     array basicAt: index put: key.
     value basicAt: index put: value.
 ].
 
 let MethodDictionary_grow := [ :self<MethodDictionary> |
+    <selector: #grow>
+
     let oldKeys := array.
     let oldValues := values.
     let oldSize := array basicSize.
@@ -277,7 +282,7 @@ let MethodDictionary_grow := [ :self<MethodDictionary> |
         let key := oldKeys basicAt: i.
         let value := oldValues basicAt: i.
         key ifNotNil: [
-            MethodDictionary_atPutNoCheck value: self value: key value: value
+            MethodDictionary_atPutNoCheck #{self. key. value}.
         ]
     ].
 
@@ -285,10 +290,12 @@ let MethodDictionary_grow := [ :self<MethodDictionary> |
 ].
 
 let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
-    let index := MethodDictionary_scanFor value: self value: key.
+    <selector: #at:put:>
+
+    let index := MethodDictionary_scanFor #{self . key}.
     index = 0 ifTrue: [
-        MethodDictionary_grow value: self.
-        index := MethodDictionary_scanFor value: self value: key.
+        MethodDictionary_grow #{self}.
+        index := MethodDictionary_scanFor #{self . key}
     ].
 
     array basicAt: index put: key.
@@ -375,6 +382,9 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
     <localReturn>
     let receiverClass := ObjectModel getObjectClass #{receiver}.
     LibC printf #{c'TODO: Send selector %p receiver %p class %p\n' . (selector reinterpretCastTo: Void pointer) . (receiver reinterpretCastTo: Void pointer) . (receiverClass reinterpretCastTo: Void pointer)}.
+
+    "let method := Behavior_lookupSelector #{receiverClass reinterpretCastTo: Behavior. selector reinterpretCastTo: _DynamicObject}.
+    LibC printf #{c'Method %p\n' . (method reinterpretCastTo: Void pointer)}."
     ^ 0
 ].
 

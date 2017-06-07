@@ -16,6 +16,8 @@ checkComparisonMessage: message receiver: receiver
 			format:{ message selector printString . leftType name . rightType name }
 	].
 
+	
 	message
 		coercionType: coercionType;
-		type: (coercionType isDynamicObjectType ifTrue: [ compiler objectType ] ifFalse: [ compiler booleanType ])
+		setTypeIfNil: ((coercionType isDynamicObjectType and: [(#(== ~~) includes:message selector) not])
+			ifTrue: [ compiler objectType ] ifFalse: [ compiler booleanType ])

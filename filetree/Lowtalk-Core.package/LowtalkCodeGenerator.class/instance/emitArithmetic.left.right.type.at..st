@@ -1,6 +1,6 @@
 messages
 emitArithmetic: selector left: left right: right type: type at: node
-	type isDynamicObjectType ifTrue: [ 
+	(type isDynamicObjectType and: [(#(== ~~) includes: selector) not]) ifTrue: [ 
 		^ self emitDynamicMessage: selector arguments: { left . right } at: node
 	].
 

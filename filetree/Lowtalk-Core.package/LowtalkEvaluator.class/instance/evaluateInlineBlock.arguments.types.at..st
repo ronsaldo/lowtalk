@@ -7,7 +7,7 @@ evaluateInlineBlock: aBlockNode arguments: blockArguments types: blockArgumentTy
 	blockArguments collectWithIndex: [ :arg :index |
 		argumentDefinition := aBlockNode arguments at: index.
 		convertedArgument := (blockArgumentTypes at: index) convertValue: arg toType: argumentDefinition type at: aNode.
-		argumentVariable := LowtalkCompileTimeLocalVariable new
+		argumentVariable := LowtalkCompileTimeArgumentLocalVariable new
 			name: argumentDefinition name;
 			value: arg;
 			valueType: argumentDefinition type;

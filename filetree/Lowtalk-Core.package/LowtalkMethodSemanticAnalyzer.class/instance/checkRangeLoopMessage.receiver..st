@@ -2,6 +2,7 @@ special messages
 checkRangeLoopMessage: message receiver: receiver
 	| start increment body end coercionType blockType startType |
 	(self isMessageACandidateForInlining: message receiver: receiver) ifFalse: [
+		self halt.
 		^ self checkNormalMessage: message receiver: receiver
 	].
 

@@ -5,6 +5,8 @@ visitIdentifierReferenceNode: identifier
 		identifier environment: environment semanticError: 'Undeclared identifier {1}' format: { identifier value }
 	].
 
-	identifier binding: result.
+	self flag: 'Remove this hack interpreting inlined closures in a proper way'.
+	identifier binding ifNil: [ identifier binding: result ].
+	self assert: identifier binding class ~~ LowtalkSlotPointer.
 	identifier type: result type.
 	^ result

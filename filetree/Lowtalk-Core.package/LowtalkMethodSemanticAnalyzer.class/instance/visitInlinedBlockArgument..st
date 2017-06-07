@@ -11,5 +11,6 @@ visitInlinedBlockArgument: argumentNode
 		argumentNode semanticError: 'Argument variable name {1} is already in use.' format: { variable name printString }
 	].
 
-	argumentNode binding: variable.
-	^ variable
+	self flag: 'Remove this hack'.
+	argumentNode binding ifNil: [ argumentNode binding: variable ].
+	^ argumentNode binding

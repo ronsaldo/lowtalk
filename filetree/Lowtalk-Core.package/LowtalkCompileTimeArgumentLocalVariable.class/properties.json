@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkCompileTimeLocalVariable",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LowtalkCompileTimeArgumentLocalVariable",
+	"type" : "normal"
+}

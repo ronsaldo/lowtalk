@@ -10,6 +10,8 @@ initialize
 		'uint \\' urem
 		'uint %' urem
 		
+		'uint ==' ieq
+		'uint ~~' ine
 		'uint =' ieq
 		'uint ~=' ine
 		'uint <' ilt
@@ -24,6 +26,8 @@ initialize
 		'int \\' rem
 		'int %' rem
 
+		'int ==' ieq
+		'int ~~' ine
 		'int =' ieq
 		'int ~=' ine
 		'int <' ilt
@@ -44,6 +48,9 @@ initialize
 		'int bitOr:' bitor
 		'int ^' bitxor
 		'int bitXor:' bitxor
+		
+		'object ==' dynObjectIdentityEquals
+		'object ~~' dynObjectIdentityNotEquals
 	).
 	
 	MessageConditionTypes := Dictionary newFromPairs: #(

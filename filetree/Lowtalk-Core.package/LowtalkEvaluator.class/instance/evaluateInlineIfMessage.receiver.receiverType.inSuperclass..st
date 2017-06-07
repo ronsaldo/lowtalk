@@ -1,6 +1,6 @@
 as yet unclassified
 evaluateInlineIfMessage: message receiver: receiver receiverType: receiverType inSuperclass: superClass
-	| selector blockCullArguments blockIndex emptyResult blockCullArgumentTypes |
+	| selector blockCullArguments blockIndex emptyResult blockCullArgumentTypes result resultType |
 	selector := message selector.	
 	blockCullArguments := #().
 	blockCullArgumentTypes := #().
@@ -29,4 +29,6 @@ evaluateInlineIfMessage: message receiver: receiver receiverType: receiverType i
 	].
 
 	blockIndex > message arguments size ifTrue: [ ^ emptyResult ].
-	^ self cullInlineBlock: (message arguments at: blockIndex) arguments: blockCullArguments types: blockCullArgumentTypes at: message
+	result := self cullInlineBlock: (message arguments at: blockIndex) arguments: blockCullArguments types: blockCullArgumentTypes at: message.
+	resultType := (message arguments at: blockIndex) type withoutReferences returnType.
+	^ resultType convertValue: result toType: message type at: message

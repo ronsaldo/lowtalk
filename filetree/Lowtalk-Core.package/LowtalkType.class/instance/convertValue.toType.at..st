@@ -6,5 +6,6 @@ convertValue: value toType: targetType at: sendingNode
 	].
 	
 	targetType isDynamicObjectType ifTrue: [ ^ value lowtalkConvertToObjectAt: sendingNode ].
+	targetType isIntegerType ifTrue: [ ^ targetType truncateLiteralValue: value at: sendingNode ].
 
 	self error: ('Unimplemented type conversion from "{1}" to "{2}"' format: {self name . targetType name })

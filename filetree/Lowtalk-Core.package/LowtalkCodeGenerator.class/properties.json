@@ -16,7 +16,8 @@
 		"allocaBuilder",
 		"bodyBlock",
 		"builder",
-		"selfType"
+		"selfType",
+		"selfValue"
 	],
 	"name" : "LowtalkCodeGenerator",
 	"type" : "normal"

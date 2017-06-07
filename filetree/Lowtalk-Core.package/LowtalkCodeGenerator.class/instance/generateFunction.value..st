@@ -1,6 +1,6 @@
 as yet unclassified
 generateFunction: ssaFunction value: functionValue
-	| node result |
+	| node result startArgument |
 	node := functionValue definition node.
 	method := functionValue definition.
 	selfType := method receiverType.
@@ -16,9 +16,15 @@ generateFunction: ssaFunction value: functionValue
 	builder currentBlock: bodyBlock.
 
 	"Create the temporaries."
+	startArgument := 0.
+	selfType isVoidType ifFalse: [ 
+		startArgument := 1.
+		selfValue := ssaFunction arguments first.
+	].
+
 	method arguments doWithIndex: [ :arg :index |
 		| ssaArgument |
-		ssaArgument := ssaFunction arguments at: index.
+		ssaArgument := ssaFunction arguments at: index + startArgument.
 		ssaArgument name: arg name.
 		arg ssaValue: ssaArgument.
 	].

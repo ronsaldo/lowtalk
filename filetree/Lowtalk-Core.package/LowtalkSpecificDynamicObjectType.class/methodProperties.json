@@ -1,14 +1,15 @@
 {
 	"instance" : {
 		"defaultValue" : "RonieSalgado 5/18/2017 20:37",
-		"canBeReinterpretedTo:" : "RonieSalgado 6/1/2017 02:27",
-		"convertValue:toType:at:" : "RonieSalgado 5/25/2017 01:49",
-		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:57",
 		"convertValue:toSSAConstantWith:" : "RonieSalgado 5/31/2017 21:41",
+		"convertValue:toType:at:" : "RonieSalgado 5/25/2017 01:49",
 		"buildSSAType" : "RonieSalgado 5/18/2017 20:30",
-		"isSpecificDynamicObjectType" : "RonieSalgado 5/6/2017 23:23",
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 6/2/2017 00:08",
 		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/24/2017 02:19",
-		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/25/2017 03:23"
+		"canBeReinterpretedTo:" : "RonieSalgado 6/1/2017 02:27",
+		"isSpecificDynamicObjectType" : "RonieSalgado 5/6/2017 23:23",
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/25/2017 03:23",
+		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:57"
 	},
 	"class" : { }
 }

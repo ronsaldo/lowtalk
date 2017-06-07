@@ -36,7 +36,7 @@ lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes cl
 	actualArguments doWithIndex: [ :arg :index |
 		argumentDefinition := arguments at: index.
 		convertedArgument := (actualArgumentTypes at: index) convertValue: arg toType: argumentDefinition type at: aNode.
-		argumentVariable := LowtalkCompileTimeLocalVariable new
+		argumentVariable := LowtalkCompileTimeArgumentLocalVariable new
 			name: argumentDefinition name;
 			value: arg;
 			valueType: argumentDefinition type;

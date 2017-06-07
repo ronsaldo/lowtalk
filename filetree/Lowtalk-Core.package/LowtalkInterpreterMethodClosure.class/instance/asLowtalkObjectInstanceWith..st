@@ -1,4 +1,5 @@
 converting
 asLowtalkObjectInstanceWith: aCompiler
-	self flag: 'Implement myself'.
-	^ nil
+	| function |
+	function := aCompiler generateInterpreterMethod: definition. 
+	^ function

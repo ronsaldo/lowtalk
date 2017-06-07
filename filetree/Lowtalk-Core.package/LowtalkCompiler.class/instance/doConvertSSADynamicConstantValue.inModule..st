@@ -3,6 +3,7 @@ doConvertSSADynamicConstantValue: value inModule: module
 	| variableName convertedObject valueType variable header slotType slotConstants |
 	convertedObject := value asLowtalkObjectInstanceWith: self.
 	convertedObject ifNil: [ ^ self convertDynamicObjectSSAConstant: convertedObject ].
+	convertedObject isSLVMObject ifTrue: [ ^ convertedObject ].
 	
 	variableName := ((objectInstanceVariableNameMap at: value ifAbsentPut: [ self generateSymbol ]) , '_oiv') asSymbol.
 	self assert: convertedObject class == LowtalkObjectInstance.

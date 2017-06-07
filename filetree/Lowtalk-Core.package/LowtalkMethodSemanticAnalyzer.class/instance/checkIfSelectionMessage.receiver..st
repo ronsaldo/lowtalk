@@ -35,7 +35,7 @@ checkIfSelectionMessage: message receiver: receiver
 			ifFalse: [ compiler objectType ].
 	].
 	
-	resultType := firstResultType arithmeticCoerceWith: secondResultType.
+	resultType := (firstResultType arithmeticCoerceWith: secondResultType) asValueType.
 	resultType ifNil: [ 
 		self flag: 'TODO: Maybe try to convert to object?'.
 		self halt.
