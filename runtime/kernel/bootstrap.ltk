@@ -302,16 +302,16 @@ let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
     values basicAt: index put: value.
 ].
 "Behavior methods"
-let Behavior_superclass := [ :self<Behavior> | superclass ].
-let Behavior_methodDict := [ :self<Behavior> | methodDict ].
+let Behavior_superclass := [ <Behavior> :self<Behavior> | superclass castTo: Behavior ].
+let Behavior_methodDict := [ <MethodDictionary> :self<Behavior> | methodDict castTo: MethodDictionary ].
 
 let Behavior_lookupSelector := [ :self<Behavior> :selector |
     <localReturn>
     let position := self.
     [position == nil] whileFalse: [
-        let result := MethodDictionary_atOrNil value: (Behavior_methodDict value: position) value: selector.
+        let result := MethodDictionary_atOrNil #{ Behavior_methodDict #{position} .  selector }.
         result ifNotNil: [^ result].
-        position := (Behavior_superclass value: position) castTo: Behavior
+        position := Behavior_superclass #{position} castTo: Behavior
     ].
 
     ^ nil

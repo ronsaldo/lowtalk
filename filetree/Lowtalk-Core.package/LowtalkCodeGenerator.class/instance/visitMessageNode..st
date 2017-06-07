@@ -4,7 +4,7 @@ visitMessageNode: message
 	message compileTimeValue ifNotNil: [ ^ message compileTimeValue ssaValue ].
 	message specialMessageType ifNotNil: [
 		BlockMessages at: message selector ifPresent: [ :specialType |
-			^ self perform: ('generate' , specialType, 'message:') asSymbol with: message
+			^ self perform: ('generate' , specialType, 'Message:') asSymbol with: message
 		]
 	].
 

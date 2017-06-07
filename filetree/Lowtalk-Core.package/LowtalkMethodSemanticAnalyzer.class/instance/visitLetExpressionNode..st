@@ -22,7 +22,7 @@ visitLetExpressionNode: node
 		node semanticError: 'Local variable name {1} is already in use in the current scope.' format: { variable name printString }
 	].
 
-	node binding: variable.
+	node binding ifNil: [ node binding: variable ].
 	method addTemporary: variable.
-	node type: node valueType ref.
+	node setTypeIfNil: node valueType ref.
 	

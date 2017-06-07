@@ -3,9 +3,9 @@ visitIdentifierReferenceNode: node
 	| binding result |
 	binding := node binding.
 	binding isVariable ifTrue: [
-		binding isInterpreterVariable ifTrue: [ 
+		binding isCompileTimeVariable ifTrue: [ 
 			result := compiler convertDynamicObjectSSAConstant: binding value.
-			self halt
+			^ result
 		].
 	
 		binding isMethodReceiverSlot ifTrue: [

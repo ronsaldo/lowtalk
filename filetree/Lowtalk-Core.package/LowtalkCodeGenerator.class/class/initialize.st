@@ -5,7 +5,7 @@ initialize
 	BinaryOperationMap := Dictionary newFromPairs: #(
 		'uint +' add
 		'uint -' sub
-		'uint *' mull
+		'uint *' mul
 		'uint //' udiv
 		'uint \\' urem
 		'uint %' urem
@@ -21,7 +21,7 @@ initialize
 		
 		'int +' add
 		'int -' sub
-		'int *' mull
+		'int *' mul
 		'int //' div
 		'int \\' rem
 		'int %' rem
@@ -59,6 +59,8 @@ initialize
 		ifTrue:ifFalse: true
 		ifFalse:ifTrue: false
 
+		ifNil: nil
+		ifNotNil: 0
 		ifNil:ifNotNil: nil
 		ifNotNil:ifNil: 0
 		

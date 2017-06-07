@@ -29,18 +29,23 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	"Generate the true block."
 	builder currentBlock: trueBlock.
 	(#(#ifNotNil: #ifNotNil:ifNil:) includes: message selector) ifTrue: [ 
-		trueResult := self inlineBlock: message arguments first cull: value types: valueType
+		trueResult := self inlineBlock: message arguments first cull: {value} types: {valueType}
 	] ifFalse: [ 
 		trueResult := self inlineBlock: message arguments first arguments: #() types: #()
 	].
 
-	coercionType isVoidType ifFalse: [
-		trueResult := self coerceImplicitly: trueResult type: (self inlinedBlockReturnType: message arguments first) to: coercionType at: message.
+	builder isLastTerminator ifTrue: [ 
+		trueResult := nil.
+		trueBlock := nil.
+	] ifFalse: [ 
+		coercionType isVoidType ifFalse: [
+			trueResult := self coerceImplicitly: trueResult type: (self inlinedBlockReturnType: message arguments first) to: coercionType at: message.
+		].
+
+		trueBlock := builder currentBlock.
+		builder jump: mergeBlock
 	].
 
-	trueBlock := builder currentBlock.
-	builder isLastTerminator ifFalse: [ builder jump: mergeBlock ].
-	
 	"Generate the false block"
 	message arguments size = 2 ifTrue: [ 
 		builder currentBlock: falseBlock.
@@ -51,7 +56,7 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 		].
 	
 		coercionType isVoidType ifFalse: [
-			falseResult := self coerceImplicitly: trueResult type: (self inlinedBlockReturnType: message arguments second) to: coercionType at: message.
+			falseResult := self coerceImplicitly: falseResult type: (self inlinedBlockReturnType: message arguments second) to: coercionType at: message.
 		].
 
 		falseBlock := builder currentBlock.
@@ -68,12 +73,15 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	(coercionType isNilType or: [ coercionType isVoidType ]) ifTrue: [ ^ nil ].
 	
 	"Merge the result"	
-	result := builder phi: coercionType ssaType name: #ifResult.
-	result addValue: trueResult from: trueBlock.
-	message arguments = 1 ifTrue: [
-		result addValue: falseResult from: selectionBlock.
-	] ifFalse: [ 
-		result addValue: falseResult from: falseBlock.
-	].
-
-	^ result
+	trueResult ifNotNil: [ 
+		result := builder phi: coercionType ssaType name: #ifResult.
+		result addValue: trueResult from: trueBlock.
+		message arguments = 1 ifTrue: [
+			result addValue: falseResult from: selectionBlock.
+		] ifFalse: [ 
+			result addValue: falseResult from: falseBlock.
+		].
+		^ result
+	] ifNil: [
+		^ falseResult
+	]

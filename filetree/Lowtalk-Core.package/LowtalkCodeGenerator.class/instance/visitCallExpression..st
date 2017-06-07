@@ -2,15 +2,17 @@ visiting
 visitCallExpression: callExpression
 	| receiver arguments argumentValue expectedType receiverType |
 	receiverType := callExpression receiver type withoutReferences.
-	receiverType isBlockType ifTrue: [ receiverType := receiverType functionType ].
 
-	receiverType isFunctionType ifFalse: [
+	(receiverType isFunctionType or: [ receiverType isBlockType ]) ifFalse: [
 		self halt.
 	].
 
 	"Get the receiver"
 	receiver := callExpression receiver accept: self.
 	receiver := self coerceImplicitly: receiver type: callExpression receiver type to: receiverType at: callExpression.
+	(receiver isFunction and: [ receiverType isBlockType ]) ifTrue: [ 
+		receiverType := receiverType functionType
+	].
 	
 	"Get the arguments"
 	arguments := callExpression arguments collectWithIndex: [:arg :index |
@@ -24,4 +26,7 @@ visitCallExpression: callExpression
 	].
 
 	"Generate the call"
+	receiverType isBlockType ifTrue: [ 
+		self halt.
+	].
 	^ builder call: receiver arguments: arguments

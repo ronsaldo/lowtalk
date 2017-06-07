@@ -8,8 +8,9 @@ generateInterpreterMethod: method
 	functionType isBlockType ifTrue: [ functionType := functionType functionType ].
 
 	ssaValue := SLVMFunction pointerSize: compilationTarget pointerSize functionType: functionType ssaType.
-	ssaValue compilationTarget: compilationTarget; module: ssaModule.
+	ssaValue compilationTarget: compilationTarget.
 	ssaValue makePrivate.
+	ssaModule add: ssaValue.
 	
 	self mapValue: method toSSAValue: ssaValue.
 	self generateFunction: ssaValue value: method.
