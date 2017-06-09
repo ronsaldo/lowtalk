@@ -1,5 +1,5 @@
 message dispatching
-lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode
+lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
 	| precedence slot value valueType |
 	(selector == #class) ifTrue: [ ^ type ].
 	
@@ -19,4 +19,4 @@ lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node:
 		]
 	].
 
-	^ super lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode
+	^ super lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler

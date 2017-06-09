@@ -32,7 +32,8 @@
 		"byteType",
 		"objectSSAValueMap",
 		"valueConstantMap",
-		"objectInstanceVariableMap"
+		"objectInstanceVariableMap",
+		"metaclassVariableNameMap"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

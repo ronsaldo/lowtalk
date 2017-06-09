@@ -18,7 +18,7 @@ checkIfSelectionMessage: message receiver: receiver
 	].
 	self visitInlinedBlock: message arguments first.
 	firstType := self extractInlinedBlockType: message arguments first.
-	firstResultType := firstType isFunctionType
+	firstResultType := (firstType isFunctionType or: [ firstType isBlockType ])
 		ifTrue: [ firstType returnType]
 		ifFalse: [ compiler objectType ].
 	
@@ -35,7 +35,7 @@ checkIfSelectionMessage: message receiver: receiver
 			ifFalse: [ compiler objectType ].
 	].
 	
-	resultType := (firstResultType arithmeticCoerceWith: secondResultType) asValueType.
+	resultType := (firstResultType arithmeticCoerceWith: secondResultType) asValueTypeKeepVoid.
 	resultType ifNil: [ 
 		self flag: 'TODO: Maybe try to convert to object?'.
 		self halt.

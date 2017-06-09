@@ -1,11 +1,14 @@
 {
 	"instance" : {
 		"baseType" : "RonieSalgado 5/4/2017 17:56",
+		"specialMessageTypeForSelector:" : "RonieSalgado 6/8/2017 22:47",
 		"elements:" : "RonieSalgado 5/4/2017 17:56",
 		"isArrayType" : "RonieSalgado 5/4/2017 17:37",
 		"elements" : "RonieSalgado 5/4/2017 17:56",
 		"buildSSAType" : "RonieSalgado 5/4/2017 17:57",
 		"baseType:" : "RonieSalgado 5/4/2017 17:56"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "RonieSalgado 6/8/2017 22:46"
+	}
 }

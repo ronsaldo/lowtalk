@@ -81,6 +81,16 @@ Namespace named: #ObjectModel members: [
         releaseReference #{variable swapValue: value}.
     ].
 
+    Constant named: #getPointersBasicSize value: [<UIntPointer> :object<ObjectHeader pointer> |
+        <cdecl>
+        object value slotCount
+    ].
+
+    Constant named: #getIdentityHash value: [<UIntPointer> :object<ObjectHeader pointer> |
+        <cdecl>
+        object value identityHash
+    ].
+
 "
 newObjectHeaderWithWeakPointers
 newObjectHeaderWithBytes
@@ -115,6 +125,16 @@ newObjectHeaderWithWords
         header value classPointer
     ].
 
+    Constant named: #setIdentityHash value: [<Void> :header<ObjectHeader pointer> :newIdentityHash<UIntPointer> |
+        <cdecl>
+        header value identityHash: (newIdentityHash castTo: UInt16)
+    ].
+
+    Constant named: #truncateIdentityHash value: [<UIntPointer> :rawIdentityHash<UIntPointer> |
+        <cdecl>
+        rawIdentityHash bitAnd: 16rFFFF
+    ].
+
     Compiler objectModel
     	headerType: ObjectModel ObjectHeader;
     	writeBarrier: writeBarrier;
@@ -122,6 +142,8 @@ newObjectHeaderWithWords
         newObjectHeaderWithBytes: newObjectHeaderWithBytes;
         setObjectClassFunction: setObjectClass;
         getObjectClassFunction: getObjectClass;
+        setIdentityHashFunction: setIdentityHash;
+        truncateIdentityHashFunction: truncateIdentityHash;
         yourself
 
 ]

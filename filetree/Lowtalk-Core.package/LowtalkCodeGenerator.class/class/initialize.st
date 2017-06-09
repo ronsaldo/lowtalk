@@ -14,10 +14,19 @@ initialize
 		'uint ~~' ine
 		'uint =' ieq
 		'uint ~=' ine
-		'uint <' ilt
-		'uint <=' ile
-		'uint >' igt
-		'uint >=' ige
+		'uint <' ult
+		'uint <=' ule
+		'uint >' ugt
+		'uint >=' uge
+
+		'pointer ==' ieq
+		'pointer ~~' ine
+		'pointer =' ieq
+		'pointer ~=' ine
+		'pointer <' ult
+		'pointer <=' ule
+		'pointer >' ugt
+		'pointer >=' uge
 		
 		'int +' add
 		'int -' sub

@@ -16,4 +16,4 @@ evaluateNormalMessage: message receiver: receiver receiverType: receiverType inS
 		LowtalkLazyValue new evaluator: self; node: arg
 	].
 
-	^ receiver lowtalkPerform: message selector withArguments: arguments inSuperclass: superClass node: message
+	^ receiver lowtalkPerform: message selector withArguments: arguments inSuperclass: superClass node: message compiler: compiler

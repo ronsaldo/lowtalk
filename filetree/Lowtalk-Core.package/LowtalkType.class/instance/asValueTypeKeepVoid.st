@@ -1,0 +1,3 @@
+accessing
+asValueTypeKeepVoid
+	^ self asValueType

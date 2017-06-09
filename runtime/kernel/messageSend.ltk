@@ -1,0 +1,110 @@
+let ObjectHeader := ObjectModel ObjectHeader.
+let Oop := ObjectHeader pointer.
+
+Structure named: #_ArrayHeader slots: {
+    #header => ObjectHeader.
+    #slots => Oop array.
+}.
+
+Structure named: #_MethodDictionaryHeader slots: {
+    #header => ObjectHeader.
+    #tally => Oop.
+    #array => _ArrayHeader pointer.
+    #values => _ArrayHeader pointer.
+}.
+
+Structure named: #_BehaviorHeader slots: {
+    #header => ObjectHeader.
+    #superclass => _BehaviorHeader pointer.
+    #methodDict => _MethodDictionaryHeader pointer.
+}.
+
+"Message send"
+Constant named: #_MethodDictionary_scanFor value: [ <UIntPointer> :this<_MethodDictionaryHeader pointer> :key<Oop> |
+    <cdecl>
+    <localReturn>
+
+    let finish<UIntPointer> := ObjectModel getPointersBasicSize #{this value array}.
+    finish == 0 ifTrue: [
+        ^ 0
+    ].
+
+    let start<UIntPointer> := (ObjectModel getIdentityHash #{key} \\ finish) + 1.
+    let element<Oop> := nil.
+
+    "Search from (hash mod size) to the end."
+    start to: finish do: [:index<UIntPointer> |
+        ((element := this value array value slots at: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    "Search from 1 to where we started."
+    1 to: start-1 do: [:index<UIntPointer> |
+        ((element := this value array value slots at: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    ^ 0
+].
+
+Constant named: #_MethodDictionary_atOrNil value: [ <Oop> :this<_MethodDictionaryHeader pointer> :key<Oop> |
+    <cdecl>
+    <localReturn>
+
+    let index := _MethodDictionary_scanFor #{this . key}.
+    ^ index ~= 0 ifTrue: [this value values value slots at: index] ifFalse: [nil].
+].
+
+Constant named: #sendLookupSelector value: [ <Oop> :behavior<_BehaviorHeader pointer> :selector<Oop> |
+    <cdecl>
+    <localReturn>
+    let position := behavior.
+    [ position ] whileNotNil: [
+        let methodDict := position value methodDict.
+
+        let method := _MethodDictionary_atOrNil #{methodDict . selector}.
+        method ifNotNil: [ ^ method].
+
+        position := position value superclass.
+    ].
+
+    ^ nil
+].
+
+Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :lookupStart<ObjectModel ObjectHeader pointer> |
+    <smalltalk_supersend>
+    <localReturn>
+    LibC printf #{c'TODO: Super send selector %p lookupStart %p.\n' . (selector reinterpretCastTo: Void pointer) . (lookupStart reinterpretCastTo: Void pointer)}.
+    ^ 0
+].
+
+Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :receiver<ObjectModel ObjectHeader pointer> |
+    <smalltalk_send>
+    <localReturn>
+    let receiverClass := ObjectModel getObjectClass #{receiver} reinterpretCastTo: _BehaviorHeader pointer.
+    LibC printf #{c'Send selector %p receiver %p class %p\n' . (selector reinterpretCastTo: Void pointer). receiver . receiverClass}.
+
+    let method := sendLookupSelector #{receiverClass . selector}.
+    method ifNil: [
+        LibC printf #{c'TODO: Implement sending does not understand\n'}.
+        LibC abort #{}.
+    ].
+
+    LibC printf #{c'Found method %p\n' . method}.
+
+    let methodClass := ObjectModel getObjectClass #{method}.
+    methodClass == (CompiledMethod reinterpretCastTo: Oop) ifTrue: [
+        LibC printf #{c'TODO: dispatch to compiled method\n'}.
+        LibC abort #{}
+    ] ifFalse: [
+        LibC printf #{c'TODO: dispatch to non compiled method\n'}.
+        LibC abort #{}
+    ].
+
+    ^ 0
+].
+
+Compiler objectModel
+    sendTrampolineFunction: sendTrampoline;
+    superSendTrampolineFunction: superSendTrampoline;
+    yourself

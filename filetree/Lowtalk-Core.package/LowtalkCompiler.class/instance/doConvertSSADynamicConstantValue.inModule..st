@@ -5,7 +5,15 @@ doConvertSSADynamicConstantValue: value inModule: module
 	convertedObject ifNil: [ ^ self convertDynamicObjectSSAConstant: convertedObject ].
 	convertedObject isSLVMObject ifTrue: [ ^ convertedObject ].
 	
-	variableName := ((objectInstanceVariableNameMap at: value ifAbsentPut: [ self generateSymbol ]) , '_oiv') asSymbol.
+	variableName := objectInstanceVariableNameMap at: value ifAbsent: [ 
+		metaclassVariableNameMap at: value ifPresent: [:instance | (instance , '_meta') asSymbol] ifAbsent: [ nil ]
+	].
+	variableName ifNil: [ 
+		variableName := self generateSymbol asSymbol.
+		objectInstanceVariableNameMap at: value put: variableName.
+	].
+
+	variableName := (variableName , '_oiv') asSymbol.
 	self assert: convertedObject class == LowtalkObjectInstance.
 	module globalNamed: variableName ifPresent: [ :result |
 		^ SLVMConstant pointer: result castTo: compilationTarget dynamicObjectType

@@ -1,5 +1,5 @@
 evaluating
-lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode
+lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
 	(ValueSelectors includes: selector) ifTrue: [
 		^ self lowtalkValueWithArguments: (arguments collect: #value) types: (arguments collect: #type) compiler: environment compiler at: sendingNode
 	].
@@ -8,4 +8,4 @@ lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node:
 		self halt
 	].
 
-	^ super lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode
+	^ super lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler

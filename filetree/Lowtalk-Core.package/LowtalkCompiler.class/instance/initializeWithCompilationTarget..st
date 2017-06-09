@@ -7,6 +7,7 @@ initializeWithCompilationTarget: aCompilationTarget
 	currentDirectory := FileSystem workingDirectory.
 	pendingObjects := Set new.
 	objectInstanceVariableNameMap := IdentityDictionary new.
+	metaclassVariableNameMap := IdentityDictionary new.
 	objectSSAValueMap := IdentityDictionary new.
 	objectInstanceVariableMap := IdentityDictionary new.
 	gensymCount := 0.

@@ -10,8 +10,8 @@ checkPointerDeReferenceMessage: message receiver: receiver
 		argument type implicitlyConvertedTo: message coercionType at: message arguments first
 	].
 	
-	self assert: (receiverType isPointerType or: [ receiverType isArray ]).
-	elementType := receiverType isPointerType ifTrue: [ receiverType pointed ] ifFalse: [ receiverType elementType ].
+	self assert: (receiverType isPointerType or: [ receiverType isArrayType ]).
+	elementType := receiverType isPointerType ifTrue: [ receiverType pointed ] ifFalse: [ receiverType baseType ].
 	message type: elementType ref.
 
 	

@@ -41,10 +41,11 @@ initialize
 	).
 
 	AddedMethods := Dictionary newFromPairs: #(
-		#castTo: #castTo:receiver:arguments:inSuperclass:node:
+		#castTo: #castTo:receiver:arguments:inSuperclass:node:compiler:
+		#identityHash #identityHash:receiver:arguments:inSuperclass:node:compiler:
 	).
 	
 	OverridenMethods := Dictionary newFromPairs: { 
-		Symbol >> #=> . #createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:
+		Symbol >> #=> . #createSlotNamedOverrideSelector:receiver:arguments:inSuperclass:node:compiler:
 	}.
 	

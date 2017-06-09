@@ -1,0 +1,3 @@
+*Lowtalk-Core
+isLowtalkBObject
+	^ false

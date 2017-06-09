@@ -1,9 +1,10 @@
 {
 	"instance" : {
 		"asLowtalkTypeIn:" : "RonieSalgado 5/25/2017 00:27",
+		"isLowtalkBObject" : "RonieSalgado 6/8/2017 21:29",
 		"lowtalkConvertToObjectAt:" : "RonieSalgado 5/18/2017 21:37",
+		"lowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 6/9/2017 04:10",
 		"lowtalkLiteralTypeWith:" : "RonieSalgado 5/19/2017 16:49",
-		"lowtalkPerform:withArguments:inSuperclass:node:" : "RonieSalgado 5/3/2017 22:55",
 		"lowtalkValueWithArguments:types:compiler:at:" : "RonieSalgado 5/19/2017 17:06",
 		"isLowtalkType" : "RonieSalgado 5/10/2017 02:13"
 	},

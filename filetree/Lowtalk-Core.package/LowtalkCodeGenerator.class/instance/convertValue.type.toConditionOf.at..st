@@ -14,10 +14,12 @@ convertValue: value type: type toConditionOf: selector at: message
 	].
 	conditionType = nil ifTrue: [
 		type isDynamicObjectType ifTrue: [ ^ builder dynObjectIdentityEquals: value with: (builder addDynamicLiteral: nil) ].
+		type isPointerType ifTrue: [ ^ builder ieq: value with: (SLVMConstant type: value type value: 0) ].
 		self halt.
 	].
 	conditionType = 0 ifTrue: [
 		type isDynamicObjectType ifTrue: [ ^ builder dynObjectIdentityNotEquals: value with: (builder addDynamicLiteral: nil) ].
+		type isPointerType ifTrue: [ ^ builder ine: value with: (SLVMConstant type: value type value: 0) ].
 		self halt.
 	].
 

@@ -28,7 +28,9 @@
 		"convertByteStringFunction",
 		"sendTrampolineFunction",
 		"superSendTrampolineFunction",
-		"convertMethodContextMetadataFunction"
+		"convertMethodContextMetadataFunction",
+		"setIdentityHashFunction",
+		"truncateIdentityHashFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

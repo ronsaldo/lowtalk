@@ -7,7 +7,8 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	valueType := receiverType withoutReferences.
 	value := self coerceImplicitly: value type: message receiver type to: valueType at: message.
 	
-	message arguments size = 1 ifTrue: [ 
+	falseResult := nil.
+	(message arguments size = 1 and: [coercionType isNilType not]) ifTrue: [ 
 		message selector = #ifNil: ifTrue: [
 			falseResult := self coerceImplicitly: value type: valueType to: coercionType at: message.
 		] ifFalse: [

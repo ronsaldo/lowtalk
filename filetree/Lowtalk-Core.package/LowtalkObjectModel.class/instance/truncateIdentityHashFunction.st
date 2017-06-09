@@ -1,0 +1,4 @@
+accessing
+truncateIdentityHashFunction
+	<compileTime>
+	^ truncateIdentityHashFunction

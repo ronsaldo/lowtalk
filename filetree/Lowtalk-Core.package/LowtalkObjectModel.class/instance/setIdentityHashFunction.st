@@ -1,0 +1,4 @@
+accessing
+setIdentityHashFunction
+	<compileTime>
+	^ setIdentityHashFunction

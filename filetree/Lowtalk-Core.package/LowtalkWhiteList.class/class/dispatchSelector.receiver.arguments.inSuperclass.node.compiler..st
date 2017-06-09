@@ -1,8 +1,8 @@
 as yet unclassified
-dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass: superClass node: sendingNode 
+dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
 	| method |
 	AddedMethods at: selector ifPresent: [ :override |
-		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode }
+		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode . aCompiler}
 	].
 
 	method := superClass lookupSelector: selector.
@@ -13,7 +13,7 @@ dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass:
 	self checkMethod: method receiver: receiver node: sendingNode.
 	
 	OverridenMethods at: method ifPresent: [ :override |
-		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode }
+		^ self perform: override withArguments: { selector . receiver . arguments . superClass . sendingNode . aCompiler}
 	].
 
 	(method hasPragmaNamed: #lazy) ifTrue: [

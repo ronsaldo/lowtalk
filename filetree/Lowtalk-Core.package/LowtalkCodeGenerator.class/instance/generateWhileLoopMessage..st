@@ -17,6 +17,11 @@ generateWhileLoopMessage: message
 	
 	conditionBlockType := message receiver type withoutReferences.
 	conditionType := conditionBlockType functionType returnType.
+	conditionType isReferenceType ifTrue: [ 
+		condition := self coerceImplicitly: condition type: conditionType to: conditionType withoutReferences at: message.
+		conditionType := conditionType withoutReferences
+	].
+
 	condition := self convertValue: condition type: conditionType toConditionOf: message selector at: message.
 
 	branch := builder branch: condition ifTrue: loopBody ifFalse: loopMerge.

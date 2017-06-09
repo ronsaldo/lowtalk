@@ -1,6 +1,6 @@
 {
 	"instance" : {
-		"checkPointerDeReferenceMessage:receiver:" : "RonieSalgado 5/7/2017 22:42",
+		"checkPointerDeReferenceMessage:receiver:" : "RonieSalgado 6/8/2017 22:47",
 		"extractInlinedBlockType:" : "RonieSalgado 5/9/2017 21:30",
 		"checkAndMessage:receiver:" : "RonieSalgado 6/6/2017 20:14",
 		"visitInlinedBlockArgument:" : "RonieSalgado 6/2/2017 01:02",
@@ -15,7 +15,7 @@
 		"checkNormalMessage:receiver:" : "RonieSalgado 5/25/2017 02:19",
 		"checkCall:argumentTypes:at:" : "RonieSalgado 5/9/2017 21:20",
 		"checkCastToMessage:receiver:" : "RonieSalgado 5/20/2017 20:30",
-		"checkIfSelectionMessage:receiver:" : "RonieSalgado 6/2/2017 00:16",
+		"checkIfSelectionMessage:receiver:" : "RonieSalgado 6/9/2017 04:36",
 		"visitInlinedBlock:cullTypes:from:" : "RonieSalgado 5/9/2017 21:31",
 		"checkWhileLoopMessage:receiver:" : "RonieSalgado 5/25/2017 03:19",
 		"visitAssignmentNode:" : "RonieSalgado 5/7/2017 21:20",

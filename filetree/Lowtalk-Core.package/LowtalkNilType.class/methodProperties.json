@@ -13,7 +13,8 @@
 		"size" : "RonieSalgado 5/8/2017 21:17",
 		"asValueType" : "RonieSalgado 5/25/2017 02:52",
 		"arithmeticCoerceWithInteger:" : "RonieSalgado 5/20/2017 22:58",
-		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/20/2017 21:47"
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/20/2017 21:47",
+		"asValueTypeKeepVoid" : "RonieSalgado 6/9/2017 04:36"
 	},
 	"class" : { }
 }
