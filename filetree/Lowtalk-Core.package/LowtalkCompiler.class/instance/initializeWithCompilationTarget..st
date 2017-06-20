@@ -10,4 +10,5 @@ initializeWithCompilationTarget: aCompilationTarget
 	metaclassVariableNameMap := IdentityDictionary new.
 	objectSSAValueMap := IdentityDictionary new.
 	objectInstanceVariableMap := IdentityDictionary new.
+	unmangledSymbolMap := IdentityDictionary new.
 	gensymCount := 0.

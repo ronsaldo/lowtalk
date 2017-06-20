@@ -33,7 +33,8 @@
 		"objectSSAValueMap",
 		"valueConstantMap",
 		"objectInstanceVariableMap",
-		"metaclassVariableNameMap"
+		"metaclassVariableNameMap",
+		"unmangledSymbolMap"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

@@ -1,6 +1,7 @@
 accessing
 buildSSAVariable
 	ssaValue := SLVMGlobalVariable module: compiler ssaModule name: self mangledName asSymbol valueType: self valueType ssaType storage: SLVMType genericStorage.
+	ssaValue unmangledName: self name.
 
 	self isExternal ifTrue: [
 		ssaValue makeExternal.

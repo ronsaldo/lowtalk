@@ -1,6 +1,7 @@
 accessing
 buildSSAFunction
 	ssaValue := SLVMFunction module: compiler ssaModule name: self mangledName asSymbol functionType: self valueType ssaType.
+	ssaValue unmangledName: self name.
 	self isExternal ifTrue: [
 		ssaValue makeExternal.
 		^ self.
