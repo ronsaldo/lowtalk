@@ -1,10 +1,10 @@
 visiting
 visitAssignmentNode: assignmentNode
 	| value valueType reference referenceType expectedType convertedValue |
-	value := assignmentNode value accept: self.
+	value := self visitNode: assignmentNode value.
 	valueType := assignmentNode value type.
 	
-	reference := assignmentNode reference accept: self.
+	reference := self visitNode: assignmentNode reference.
 	referenceType := assignmentNode reference type.
 	
 	expectedType := referenceType withoutReferences.

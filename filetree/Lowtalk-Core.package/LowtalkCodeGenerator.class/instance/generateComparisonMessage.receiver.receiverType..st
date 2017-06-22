@@ -4,7 +4,7 @@ generateComparisonMessage: message receiver: receiver receiverType: receiverType
 	leftValue := receiver.
 	leftType := receiverType.
 	
-	rightValue := message arguments first accept: self.
+	rightValue := self visitNode: message arguments first.
 	rightType := message arguments first type.
 
 	coercionType := message coercionType.

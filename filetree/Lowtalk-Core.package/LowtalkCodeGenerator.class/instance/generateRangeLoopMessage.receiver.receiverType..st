@@ -8,11 +8,11 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 	startCoercedValue := self coerceImplicitly: startValue type: startType to: coercionType at: message.
 	
 	stop := message arguments first.
-	stopValue := self coerceImplicitly: (stop accept: self) type: stop type to: coercionType at: message.
+	stopValue := self coerceImplicitly: (self visitNode: stop) type: stop type to: coercionType at: message.
 
 	message arguments size = 3 ifTrue: [ 
 		increment := message arguments second.
-		incrementValue := self coerceImplicitly: (increment accept: self) type: increment type to: coercionType at: message.
+		incrementValue := self coerceImplicitly: (self visitNode: increment) type: increment type to: coercionType at: message.
 	] ifFalse: [
 		incrementValue := self coerceImplicitly: 1 type: compiler integerLiteralType to: coercionType at: message.
 	].

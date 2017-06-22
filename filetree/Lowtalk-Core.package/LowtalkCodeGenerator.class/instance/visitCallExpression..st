@@ -8,7 +8,7 @@ visitCallExpression: callExpression
 	].
 
 	"Get the receiver"
-	receiver := callExpression receiver accept: self.
+	receiver := self visitNode: callExpression receiver.
 	receiver := self coerceImplicitly: receiver type: callExpression receiver type to: receiverType at: callExpression.
 	(receiver isFunction and: [ receiverType isBlockType ]) ifTrue: [ 
 		receiverType := receiverType functionType
@@ -16,7 +16,7 @@ visitCallExpression: callExpression
 	
 	"Get the arguments"
 	arguments := callExpression arguments collectWithIndex: [:arg :index |
-		argumentValue := arg accept: self.
+		argumentValue := self visitNode: arg.
 		index <= receiverType arguments size ifTrue: [
 			expectedType := receiverType arguments at: index.
 			self coerceImplicitly: argumentValue type: arg type to: expectedType at: callExpression

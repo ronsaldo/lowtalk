@@ -1,7 +1,7 @@
 visiting
 visitMessageChainNode: chain
 	| receiver receiverType result isSuper |
-	receiver := chain receiver accept: self.
+	receiver := self visitNode: chain receiver.
 	receiverType := chain receiver type.
 	
 	(receiverType isReferenceType and: [ receiverType isStructureType and: [receiver type isPointerType not]]) ifTrue: [ 

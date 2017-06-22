@@ -10,7 +10,9 @@
 		"start",
 		"stop",
 		"line",
-		"column"
+		"column",
+		"endLine",
+		"endColumn"
 	],
 	"name" : "LowtalkASTPosition",
 	"type" : "normal"

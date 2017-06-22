@@ -7,7 +7,7 @@ visitLetExpressionNode: node
 
 	"Check the node value"
 	node initialValue ifNotNil: [
-		initialValue := node initialValue accept: self.
+		initialValue := self visitNode: node initialValue.
 		node valueType ifNil: [ node valueType: node initialValue type asValueType ].
 		node initialValue type implicitlyConvertedTo: node valueType at: node.
 		initialValue := node initialValue type convertValue: initialValue toType: node valueType at: node

@@ -1,14 +1,19 @@
 {
 	"instance" : {
+		"endColumn" : "RonieSalgado 6/20/2017 22:31",
 		"stop" : "RonieSalgado 4/11/2017 19:07",
 		"line" : "RonieSalgado 4/11/2017 19:31",
+		"=" : "RonieSalgado 6/20/2017 22:39",
+		"fetchEndLineAndColumn" : "RonieSalgado 6/20/2017 22:30",
+		"endLine" : "RonieSalgado 6/20/2017 22:31",
 		"fullPrintOn:" : "RonieSalgado 5/7/2017 21:08",
-		"start" : "RonieSalgado 4/11/2017 19:07",
 		"collection:" : "RonieSalgado 4/11/2017 19:09",
 		"printOn:" : "RonieSalgado 5/7/2017 21:08",
+		"start" : "RonieSalgado 4/11/2017 19:07",
 		"start:" : "RonieSalgado 4/11/2017 19:07",
-		"stop:" : "RonieSalgado 4/11/2017 19:07",
 		"collection" : "RonieSalgado 4/11/2017 19:09",
+		"hash" : "RonieSalgado 6/20/2017 22:40",
+		"stop:" : "RonieSalgado 4/11/2017 19:07",
 		"fetchLineAndColumn" : "RonieSalgado 4/11/2017 19:32",
 		"column" : "RonieSalgado 4/11/2017 19:31",
 		"asLowtalkASTPosition" : "RonieSalgado 4/11/2017 19:07"

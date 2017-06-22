@@ -5,7 +5,7 @@ generateArithmeticMessage: message receiver: receiver receiverType: receiverType
 	leftValue := receiver.
 	
 	rightType := message arguments first type.
-	rightValue := message arguments first accept: self.
+	rightValue := self visitNode: message arguments first.
 
 	coercionType := message coercionType.
 	leftValue := self coerceImplicitly: leftValue type: leftType to: coercionType at: message.

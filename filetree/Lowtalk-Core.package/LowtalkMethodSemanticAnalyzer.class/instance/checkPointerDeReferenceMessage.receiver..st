@@ -6,7 +6,7 @@ checkPointerDeReferenceMessage: message receiver: receiver
 		self assert: message arguments size = 1.
 		message coercionType: compiler intPointerType.
 		argument := message arguments first.
-		argument accept: self.
+		self visitNode: argument.
 		argument type implicitlyConvertedTo: message coercionType at: message arguments first
 	].
 	

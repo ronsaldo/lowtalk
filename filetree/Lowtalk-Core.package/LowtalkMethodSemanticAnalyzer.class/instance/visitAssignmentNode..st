@@ -1,8 +1,8 @@
 visiting
 visitAssignmentNode: node
 	| referenceType expectedType |
-	node value accept: self.
-	node reference accept: self.
+	self visitNode: node value.
+	self visitNode: node reference.
 	
 	referenceType := node reference type.
 	referenceType isReferenceType ifFalse: [

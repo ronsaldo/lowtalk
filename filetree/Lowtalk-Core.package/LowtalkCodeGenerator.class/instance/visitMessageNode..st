@@ -8,6 +8,6 @@ visitMessageNode: message
 		]
 	].
 
-	receiver := message receiver accept: self.
+	receiver := self visitNode: message receiver.
 	receiverType := message receiver type.
 	^ self generateMessage: message receiver: receiver receiverType: receiverType inSuperClass: message receiver isSuper

@@ -11,4 +11,6 @@ initializeWithCompilationTarget: aCompilationTarget
 	objectSSAValueMap := IdentityDictionary new.
 	objectInstanceVariableMap := IdentityDictionary new.
 	unmangledSymbolMap := IdentityDictionary new.
+	debugLocationDictionary := Dictionary new.
+	debugSourceFileDictionary := IdentityDictionary new.
 	gensymCount := 0.

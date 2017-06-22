@@ -1,6 +1,6 @@
 visiting
 visitReturnNode: node
-	node value accept: self.
+	self visitNode: node value.
 	node type: node value type.
 	node type implicitlyConvertedTo: method returnType at: node.
 	

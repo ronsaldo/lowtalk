@@ -35,7 +35,7 @@ generateFunction: ssaFunction value: functionValue
 
 	self flag: 'TODO: Initialize the temporary variables with 0 or nil.'.
 	
-	result := node body accept: self.
+	result := self visitNode: node body.
 	
 	allocaBuilder jump: bodyBlock.
 	builder isLastTerminator ifFalse: [

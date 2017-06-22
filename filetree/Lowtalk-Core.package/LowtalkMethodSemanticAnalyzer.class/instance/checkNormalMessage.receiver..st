@@ -9,7 +9,7 @@ checkNormalMessage: message receiver: receiver
 	"Is this an ordinary object message send?"
 	(receiverType isDynamicObjectType or: [receiverType canBeImplicitlyConvertedTo: compiler objectType ]) ifTrue: [
 		message arguments do: [ :arg |
-			arg accept: self.
+			self visitNode: arg.
 			arg type implicitlyConvertedTo: compiler objectType at: message
 		].
 	

@@ -1,7 +1,7 @@
 visiting
 visitReturnNode: node
 	| value valueType |
-	value := node value accept: self.
+	value := self visitNode: node value.
 	valueType := node value type.
 	
 	method returnType isVoidType ifTrue: [

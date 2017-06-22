@@ -1,8 +1,8 @@
 visiting
 visitCallExpression: callExpression
 	| receiverType |
-	callExpression receiver accept: self.
-	callExpression arguments do: [ :arg | arg accept: self ].
+	self visitNode: callExpression receiver.
+	callExpression arguments do: [ :arg | self visitNode: arg ].
 	
 	receiverType := callExpression receiver type withoutReferences.
 	receiverType isBlockType ifTrue: [ receiverType := receiverType functionType ].

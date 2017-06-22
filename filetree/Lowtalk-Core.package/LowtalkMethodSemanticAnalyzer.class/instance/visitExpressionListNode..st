@@ -1,12 +1,12 @@
 visiting
 visitExpressionListNode: list
 	| resultType |
-	list pragmaList do: [ :pragma | pragma accept: self ].
-	list locals do: [ :local | local accept: self ].
+	list pragmaList do: [ :pragma | self visitNode: pragma ].
+	list locals do: [ :local | self visitNode: local ].
 	
 	resultType := compiler objectType.
 	list expressions do: [ :node |
-		node accept: self.
+		self visitNode: node.
 		resultType := node type.
 	].
 

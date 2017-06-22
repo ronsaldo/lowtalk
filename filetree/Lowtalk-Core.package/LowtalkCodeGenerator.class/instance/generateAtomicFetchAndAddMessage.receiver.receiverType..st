@@ -6,7 +6,7 @@ generateAtomicFetchAndAddMessage: message receiver: receiver receiverType: recei
 	variablePointer := self coerceImplicitly: receiver type: receiverType to: receiverType withoutReferences at: message.
 
 	"Convert the value"
-	value := message arguments first accept: self.
+	value := self visitNode: message arguments first.
 	valueType := message type.
 	value := self coerceImplicitly: value type: message arguments first type to: valueType at: message.
 	

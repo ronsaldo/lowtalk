@@ -1,14 +1,14 @@
 special messages
 visitInlinedBlock: node
 	| blockEnvironment argumentTypes actualReturnType functionType |
-	node isBlockNode ifFalse: [ ^ node accept: self ].
+	node isBlockNode ifFalse: [ ^ self visitNode: node ].
 	node inlined: true.
 	
 	blockEnvironment := LowtalkEnvironment parent: environment.
 	node selfType: (self solveTypeExpression: node selfTypeExpression defaultType: compiler voidType).
 	self withEnvironment: blockEnvironment do: [ 
 		argumentTypes := node arguments collect: [ :arg | (self visitInlinedBlockArgument: arg) type ].
-		node body accept: self.
+		self visitNode: node body
 	].
 
 	actualReturnType := node body type.

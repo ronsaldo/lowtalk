@@ -6,7 +6,7 @@ checkComparisonMessage: message receiver: receiver
 	leftType := receiver type withoutReferences.
 	
 	right := message arguments first.
-	right accept: self.
+	self visitNode: right.
 	
 	rightType := message arguments first type withoutReferences.
 	

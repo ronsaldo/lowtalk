@@ -1,6 +1,6 @@
 visiting
 visitMessageChainNode: chain
-	chain receiver accept: self.
+	self visitNode: chain receiver.
 	chain receiver type isStructureType ifTrue: [
 		chain receiver type: chain receiver type ref
 	].

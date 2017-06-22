@@ -14,12 +14,12 @@ checkRangeLoopMessage: message receiver: receiver
 	increment := message arguments size = 3 ifTrue: [ message arguments second ] ifFalse: [ nil ].
 	body := message arguments last.
 	
-	end accept: self.
+	self visitNode: end.
 	coercionType := startType arithmeticCoerceWith: end type.
 	coercionType ifNil: [ ^ self checkNormalMessage: message receiver: receiver ].
 	
 	increment ifNotNil: [
-		increment accept: self.
+		self visitNode: increment.
 		coercionType := coercionType arithmeticCoerceWith: increment type.
 		coercionType ifNil: [ ^ self checkNormalMessage: message receiver: receiver ].
 	].

@@ -24,9 +24,9 @@ analyzeBlock: aBlockNode environment: baseEnvironment parentMethod: parentMethod
 		receiverType: aBlockNode selfType.
 	
 	self withEnvironment: blockEnvironment do: [ 
-		method arguments: (aBlockNode arguments collect: [ :argument | argument accept: self ]).
+		method arguments: (aBlockNode arguments collect: [ :argument | self visitNode: argument]).
 			
-		aBlockNode body accept: self.
+		self visitNode: aBlockNode body
 	].
 	
 	^ method

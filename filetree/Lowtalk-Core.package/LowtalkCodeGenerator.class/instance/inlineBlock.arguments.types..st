@@ -7,4 +7,4 @@ inlineBlock: node arguments: arguments types: argumentTypes
 		binding ssaValue: (self coerceImplicitly: (arguments at: index) type: (argumentTypes at: index) to: binding type at: node).
 	].
 
-	^ node body accept: self
+	^ self visitNode: node body

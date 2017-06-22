@@ -1,6 +1,6 @@
 visiting
 visitCallExpression: expression
-	| receiver receiverType returnType expectedArgumentTypes arguments result |
+	| receiver receiverType returnType expectedArgumentTypes arguments |
 	receiver := self evaluateValue: expression receiver.
 	receiverType := expression receiver type withoutReferences.
 	returnType := compiler objectType.
@@ -14,7 +14,7 @@ visitCallExpression: expression
 	expression setTypeIfNil: returnType.
 
 	arguments := expression arguments collectWithIndex: [ :arg :index |
-		arg type convertValue: (arg accept: self) toType: (expectedArgumentTypes at: index) at: arg 
+		arg type convertValue: (self visitNode: arg ) toType: (expectedArgumentTypes at: index) at: arg 
 	].
 
 	^ receiver lowtalkValueWithArguments: arguments types: expectedArgumentTypes compiler: compiler at: expression.

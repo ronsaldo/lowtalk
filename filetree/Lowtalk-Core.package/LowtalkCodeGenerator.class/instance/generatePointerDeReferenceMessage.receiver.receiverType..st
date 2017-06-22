@@ -10,7 +10,7 @@ generatePointerDeReferenceMessage: message receiver: receiver receiverType: rece
 	message arguments ifNotEmpty: [ 
 		self assert: message arguments size = 1.
 		argument := message arguments first.
-		index := argument accept: self.
+		index := self visitNode: argument.
 		indexType := argument type.
 		index := self coerceImplicitly: index type: indexType to: message coercionType at: message.
 		

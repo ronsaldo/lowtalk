@@ -6,7 +6,7 @@
 		"evaluateValue:" : "RonieSalgado 5/4/2017 21:31",
 		"evaluateMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 5/19/2017 18:32",
 		"visitExpressionListNode:" : "RonieSalgado 5/25/2017 01:37",
-		"visitAssignmentNode:" : "RonieSalgado 5/25/2017 01:38",
+		"visitAssignmentNode:" : "RonieSalgado 6/20/2017 22:23",
 		"visitMessageChainNode:" : "RonieSalgado 5/25/2017 01:37",
 		"visitSymbolLiteralNode:" : "RonieSalgado 5/25/2017 01:37",
 		"removeReferencesOfValue:type:" : "RonieSalgado 5/4/2017 21:34",
@@ -23,13 +23,13 @@
 		"cullInlineBlock:arguments:at:" : "RonieSalgado 5/19/2017 18:18",
 		"evaluateInlineWhileMessage:" : "RonieSalgado 5/25/2017 05:10",
 		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
-		"visitReturnNode:" : "RonieSalgado 5/25/2017 03:50",
-		"visitLetExpressionNode:" : "RonieSalgado 5/25/2017 01:37",
+		"visitReturnNode:" : "RonieSalgado 6/20/2017 22:23",
+		"visitLetExpressionNode:" : "RonieSalgado 6/20/2017 22:23",
 		"visitMessageNode:" : "RonieSalgado 5/25/2017 05:03",
 		"cullInlineBlock:arguments:types:at:" : "RonieSalgado 5/19/2017 18:20",
 		"evaluateNormalMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 6/9/2017 04:11",
 		"visitArrayNode:" : "RonieSalgado 5/25/2017 01:38",
-		"visitCallExpression:" : "RonieSalgado 6/6/2017 19:09"
+		"visitCallExpression:" : "RonieSalgado 6/20/2017 22:23"
 	},
 	"class" : {
 		"evaluateValue:environment:" : "RonieSalgado 5/10/2017 02:08",

@@ -1,7 +1,7 @@
 visiting
 visitReturnNode: node
 	| returnValue |
-	returnValue := node value accept: self.
+	returnValue := self visitNode: node value.
 	LowtalkInterpreterReturnException new
 		value: returnValue;
 		type: node value type;

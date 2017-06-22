@@ -34,7 +34,9 @@
 		"valueConstantMap",
 		"objectInstanceVariableMap",
 		"metaclassVariableNameMap",
-		"unmangledSymbolMap"
+		"unmangledSymbolMap",
+		"debugLocationDictionary",
+		"debugSourceFileDictionary"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"
