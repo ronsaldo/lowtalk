@@ -19,6 +19,11 @@ Structure named: #_BehaviorHeader slots: {
     #methodDict => _MethodDictionaryHeader pointer.
 }.
 
+Structure named: #_CompiledMethod slots: {
+    #header => ObjectHeader.
+    #entryPoint => UIntPointer.
+}.
+
 "Message send"
 Constant named: #_MethodDictionary_scanFor value: [ <UIntPointer> :this<_MethodDictionaryHeader pointer> :key<Oop> |
     <cdecl>
@@ -30,6 +35,7 @@ Constant named: #_MethodDictionary_scanFor value: [ <UIntPointer> :this<_MethodD
     ].
 
     let start<UIntPointer> := (ObjectModel getIdentityHash #{key} \\ finish) + 1.
+    "LibC printf #{c'scanFor key %08X start: %p finish: %p\n' . ObjectModel getIdentityHash #{key} . start . finish}."
     let element<Oop> := nil.
 
     "Search from (hash mod size) to the end."
@@ -81,8 +87,11 @@ Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader
 Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :receiver<ObjectModel ObjectHeader pointer> |
     <smalltalk_send>
     <localReturn>
+    "LibC printf #{c'Send selector [p: %p, ih: %08X, v: %.*s]\n' .
+        (selector reinterpretCastTo: Void pointer) . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}.
+"
     let receiverClass := ObjectModel getObjectClass #{receiver} reinterpretCastTo: _BehaviorHeader pointer.
-    LibC printf #{c'Send selector %p receiver %p class %p\n' . (selector reinterpretCastTo: Void pointer). receiver . receiverClass}.
+    "LibC printf #{c'receiver %p class %p\n' . receiver . receiverClass}."
 
     let method := sendLookupSelector #{receiverClass . selector}.
     method ifNil: [
@@ -90,12 +99,13 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
         LibC abort #{}.
     ].
 
-    LibC printf #{c'Found method %p\n' . method}.
+    "LibC printf #{c'Found method %p\n' . method}."
 
     let methodClass := ObjectModel getObjectClass #{method}.
     methodClass == (CompiledMethod reinterpretCastTo: Oop) ifTrue: [
-        LibC printf #{c'TODO: dispatch to compiled method\n'}.
-        LibC abort #{}
+        let compiledMethod := method reinterpretCastTo: _CompiledMethod pointer.
+        let entryPoint := compiledMethod value entryPoint - 1 reinterpretCastTo: Void pointer.
+        thisContext uncheckedReplaceFunctionWith: entryPoint.
     ] ifFalse: [
         LibC printf #{c'TODO: dispatch to non compiled method\n'}.
         LibC abort #{}

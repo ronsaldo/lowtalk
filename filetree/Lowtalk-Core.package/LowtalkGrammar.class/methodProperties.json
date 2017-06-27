@@ -33,7 +33,7 @@
 		"integerNumber" : "RonieSalgado 3/12/2017 13:56",
 		"blockExpression" : "RonieSalgado 5/4/2017 19:37",
 		"localDeclaration" : "RonieSalgado 5/4/2017 19:40",
-		"unaryExpressionSuffixMessage" : "RonieSalgado 5/7/2017 03:39",
+		"unaryExpressionSuffixMessage" : "RonieSalgado 6/26/2017 19:52",
 		"assignOperator" : "RonieSalgado 3/12/2017 12:53",
 		"binaryMethodHeader" : "RonieSalgado 5/4/2017 20:10",
 		"rbracket" : "RonieSalgado 3/12/2017 13:05",
@@ -43,7 +43,7 @@
 		"binaryExpression" : "RonieSalgado 3/12/2017 12:48",
 		"nilExpression" : "RonieSalgado 3/12/2017 13:20",
 		"literalArrayExpression" : "RonieSalgado 5/23/2017 03:54",
-		"specialLiterals" : "RonieSalgado 3/12/2017 13:18",
+		"specialLiterals" : "RonieSalgado 6/26/2017 19:54",
 		"letExpression" : "RonieSalgado 5/4/2017 19:41",
 		"semicolon" : "RonieSalgado 3/12/2017 12:59",
 		"superExpression" : "RonieSalgado 3/12/2017 13:19",
@@ -57,6 +57,7 @@
 		"statementExpression" : "RonieSalgado 4/11/2017 18:28",
 		"falseExpression" : "RonieSalgado 3/12/2017 13:20",
 		"trueExpression" : "RonieSalgado 3/12/2017 13:20",
+		"thisContextExpression" : "RonieSalgado 6/26/2017 19:54",
 		"blbracket" : "RonieSalgado 3/12/2017 13:23",
 		"literalArrayParent" : "RonieSalgado 5/23/2017 03:57",
 		"expressionList" : "RonieSalgado 3/12/2017 14:50",
@@ -73,9 +74,11 @@
 		"nilKeyword" : "RonieSalgado 3/12/2017 13:20",
 		"literalPunctuation" : "RonieSalgado 5/23/2017 04:01",
 		"identifierExpression" : "RonieSalgado 5/24/2017 00:32",
+		"thisContextKeyword" : "RonieSalgado 6/26/2017 19:53",
 		"identifierInner" : "RonieSalgado 3/12/2017 12:32",
 		"selfExpression" : "RonieSalgado 3/12/2017 13:20",
 		"blockWithoutHeader" : "RonieSalgado 5/24/2017 01:12",
+		"anyIdentifier" : "RonieSalgado 6/26/2017 19:53",
 		"chainExpression" : "RonieSalgado 3/12/2017 13:01",
 		"greaterThan" : "RonieSalgado 3/12/2017 14:45",
 		"chainKeywordMessage" : "RonieSalgado 3/12/2017 13:01",
@@ -103,6 +106,6 @@
 		"pragmaList" : "RonieSalgado 3/12/2017 14:52"
 	},
 	"class" : {
-		"initialize" : "RonieSalgado 5/24/2017 00:32"
+		"initialize" : "RonieSalgado 6/26/2017 19:52"
 	}
 }

@@ -1,12 +1,18 @@
 initialization
 initialize
 	PointerMessages := Dictionary newFromPairs: #(
-		value PointerDeReference
 		at: PointerDeReference
 		basicAt: PointerDeReference
-		value: PointerElementAssignment
+		atOffset: PointerDeReference
+		basicAtOffset: PointerDeReference
+
 		at:put: PointerElementAssignment
 		basicAt:put: PointerElementAssignment
+		atOffset:put: PointerElementAssignment
+		basicAtOffset:put: PointerElementAssignment
+
+		value PointerDeReference
+		value: PointerElementAssignment
 		
 		fetchAndAdd: AtomicFetchAndAdd
 		fetchAndSubtract: AtomicFetchAndAdd

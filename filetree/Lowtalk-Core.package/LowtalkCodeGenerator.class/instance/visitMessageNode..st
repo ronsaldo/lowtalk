@@ -5,6 +5,11 @@ visitMessageNode: message
 	message specialMessageType ifNotNil: [
 		BlockMessages at: message selector ifPresent: [ :specialType |
 			^ self perform: ('generate' , specialType, 'Message:') asSymbol with: message
+		].
+		message receiver isThisContext ifTrue: [ 
+			InlinedThisContextMessages at: message selector ifPresent: [ :specialType |
+				^ self perform: ('generate' , specialType, 'Message:') asSymbol with: message
+			]
 		]
 	].
 

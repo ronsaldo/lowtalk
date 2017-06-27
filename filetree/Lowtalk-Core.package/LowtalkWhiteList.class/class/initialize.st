@@ -16,6 +16,8 @@ initialize
 		
 		bitAnd: bitOr: bitXor:
 		bitInvert bitInvert32
+		bitShift
+		<< >> | &
 		
 		or: and:
 		
@@ -41,6 +43,11 @@ initialize
 	).
 
 	AddedMethods := Dictionary newFromPairs: #(
+		#basicAtOffset: #basicAtOffset:receiver:arguments:inSuperclass:node:compiler:
+		#basicAtOffset:put: #basicAtOffsetPut:receiver:arguments:inSuperclass:node:compiler:
+		#atOffset: #atOffset:receiver:arguments:inSuperclass:node:compiler:
+		#atOffset:put: #atOffsetPut:receiver:arguments:inSuperclass:node:compiler:
+
 		#castTo: #castTo:receiver:arguments:inSuperclass:node:compiler:
 		#identityHash #identityHash:receiver:arguments:inSuperclass:node:compiler:
 	).

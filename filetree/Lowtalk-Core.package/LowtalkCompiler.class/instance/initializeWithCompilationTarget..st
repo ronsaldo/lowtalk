@@ -6,6 +6,7 @@ initializeWithCompilationTarget: aCompilationTarget
 	self createEnvironment.
 	currentDirectory := FileSystem workingDirectory.
 	pendingObjects := Set new.
+	
 	objectInstanceVariableNameMap := IdentityDictionary new.
 	metaclassVariableNameMap := IdentityDictionary new.
 	objectSSAValueMap := IdentityDictionary new.
@@ -13,4 +14,5 @@ initializeWithCompilationTarget: aCompilationTarget
 	unmangledSymbolMap := IdentityDictionary new.
 	debugLocationDictionary := Dictionary new.
 	debugSourceFileDictionary := IdentityDictionary new.
+	capturedCompileTimeVariables := IdentityDictionary new.
 	gensymCount := 0.

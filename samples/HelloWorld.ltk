@@ -24,6 +24,7 @@ Namespace named: #EntryPoint members: [
         ].
         LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
 "
-    LibC printf #{c'Allocated array: %p\n' . arguments reinterpretCastTo: Void pointer }.
+        LibC printf #{c'Allocated array: %p\n' . arguments reinterpretCastTo: Void pointer }.
+        0
     ]
 ]

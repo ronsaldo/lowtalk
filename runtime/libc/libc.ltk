@@ -3,4 +3,5 @@ Compiler
     evaluateFileNamed: 'stddef.ltk';
     evaluateFileNamed: 'stdio.ltk';
     evaluateFileNamed: 'stdlib.ltk';
+    evaluateFileNamed: 'string.ltk';
     yourself

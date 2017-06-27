@@ -3,4 +3,4 @@ named: nameLazyValue type: typeLazyValue
 	<compileTime>
 	<lazy>
 	
-	^ self named: nameLazyValue type: typeLazyValue value: nil
+	^ self named: nameLazyValue type: typeLazyValue value: [typeLazyValue value defaultValue]

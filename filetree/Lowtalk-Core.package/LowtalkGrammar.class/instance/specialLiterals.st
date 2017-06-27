@@ -1,3 +1,3 @@
 expressions
 specialLiterals
-	^ selfExpression / superExpression / trueExpression / falseExpression / nilExpression
+	^ selfExpression / superExpression / trueExpression / falseExpression / nilExpression / thisContextExpression

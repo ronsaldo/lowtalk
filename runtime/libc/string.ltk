@@ -1,0 +1,5 @@
+"Bindings for Stdlib"
+Namespace named: #LibC members: [
+    "Memory management."
+    Constant externalC: #memset type: (Void pointer, Int32, SizeT) -> Void pointer.
+]

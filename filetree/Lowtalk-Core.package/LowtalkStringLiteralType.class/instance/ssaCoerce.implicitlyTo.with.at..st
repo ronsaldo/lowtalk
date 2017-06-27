@@ -9,4 +9,8 @@ ssaCoerce: value implicitlyTo: targetType with: builder at: node
 		].
 	].
 
-	^ false
+	targetType isDynamicObjectType ifTrue: [ 
+		^ builder addDynamicLiteral: value
+	].
+
+	^ super ssaCoerce: value implicitlyTo: targetType with: builder at: node

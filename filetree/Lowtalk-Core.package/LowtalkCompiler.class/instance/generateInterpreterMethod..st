@@ -1,6 +1,6 @@
 as yet unclassified
 generateInterpreterMethod: method
-	| functionType ssaValue |
+	| functionType ssaValue ssaMetadata |
 	objectSSAValueMap at: method ifPresent: [ :oldValue | ^ oldValue ].
 	objectInstanceVariableMap at: method ifPresent: [ :variable | ^ variable ssaValue ].
 
@@ -11,8 +11,9 @@ generateInterpreterMethod: method
 	ssaValue compilationTarget: compilationTarget.
 	ssaValue makePrivate.
 	ssaModule add: ssaValue.
-	
-	self mapValue: method toSSAValue: ssaValue.
+
+	ssaMetadata := ssaValue compiledMethodMetaDataValue.
+	self mapValue: method toSSAValue: ssaMetadata.
 	self generateFunction: ssaValue value: method.
 	
-	^ ssaValue
+	^ ssaMetadata

@@ -1,3 +1,3 @@
 special messages
 specialMessageTypeForMetaSelector: selector
-	^ nil
+	^ LowtalkTypeSharedPool commonTypeSpecialMessages at: selector ifAbsent: [ nil ]

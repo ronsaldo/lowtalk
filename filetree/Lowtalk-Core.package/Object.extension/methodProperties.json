@@ -5,6 +5,7 @@
 		"lowtalkConvertToObjectAt:" : "RonieSalgado 5/18/2017 21:37",
 		"lowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 6/9/2017 04:10",
 		"lowtalkLiteralTypeWith:" : "RonieSalgado 5/19/2017 16:49",
+		"inferLowtalkTypeWith:" : "RonieSalgado 6/26/2017 22:48",
 		"lowtalkValueWithArguments:types:compiler:at:" : "RonieSalgado 5/19/2017 17:06",
 		"isLowtalkType" : "RonieSalgado 5/10/2017 02:13"
 	},

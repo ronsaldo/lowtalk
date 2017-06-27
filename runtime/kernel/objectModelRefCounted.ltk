@@ -1,22 +1,37 @@
 "This is the definition of a reference refCounted object model."
 Namespace named: #ObjectModel members: [
-    UIntPointer size = 4 ifTrue: [
+    Constant named: #OopSize type: UIntPointer value: UIntPointer size.
+
+    OopSize = 4 ifTrue: [
         Constant named: #OopTagMask type: UIntPointer value: 3.
+        Constant named: #OopTagShift type: UIntPointer value: 2.
 
         Constant named: #OopSmallIntegerTagMask type: UIntPointer value: 1.
         Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
+        Constant named: #OopSmallIntegerShift type: UIntPointer value: 1.
 
         Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
         Constant named: #OopPointerTagValue type: UIntPointer value: 0.
+
+        Constant named: #OopSizeShift type: UIntPointer value: 2.
+        Constant named: #OopSizeMask type: UIntPointer value: -4.
+
     ] ifFalse: [
-        Constant named: #OopTagMask type: UIntPointer value: 3.
+        Constant named: #OopTagMask type: UIntPointer value: 7.
+        Constant named: #OopTagShift type: UIntPointer value: 3.
 
         Constant named: #OopSmallIntegerTagMask type: UIntPointer value: 1.
-        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
+        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: OopTagMask.
+        Constant named: #OopSmallIntegerShift type: UIntPointer value: OopTagShift.
 
         Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
         Constant named: #OopPointerTagValue type: UIntPointer value: 0.
+
+        Constant named: #OopSizeShift type: UIntPointer value: 3.
+        Constant named: #OopSizeMask type: UIntPointer value: -8.
     ].
+
+    Constant named: #IdentityHashShift value: 4.
 
     Constant named: #ObjectFormatEmpty value: 0.
     Constant named: #ObjectFormatFixedSize value: 1.
@@ -24,6 +39,7 @@ Namespace named: #ObjectModel members: [
     Constant named: #ObjectFormatVariableSizeWithIVars value: 3.
     Constant named: #ObjectFormatWeakVariableSize value: 4.
     Constant named: #ObjectFormatWeakFixedSize value: 5.
+    Constant named: #ObjectFormatImmediate value: 7.
     Constant named: #ObjectFormatIndexable64 value: 9.
     Constant named: #ObjectFormatIndexable32 value: 10.
     Constant named: #ObjectFormatIndexable16 value: 12.
@@ -46,8 +62,23 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
-        let oop := object castTo: UIntPointer.
+        let oop := object reinterpretCastTo: UIntPointer.
         (oop & OopPointerTagMask) = OopPointerTagValue
+    ].
+
+    Constant named: #isSmallInteger value: [<BooleanBit> :oop<UIntPointer> |
+        <cdecl>
+        (oop & OopSmallIntegerTagMask) = OopSmallIntegerTagValue
+    ].
+
+    Constant named: #decodeSmallInteger value: [<IntPointer> :oop<UIntPointer> |
+        <cdecl>
+        (oop reinterpretCastTo: IntPointer) >> OopSmallIntegerShift
+    ].
+
+    Constant named: #encodeSmallInteger value: [<UIntPointer> :value<IntPointer> |
+        <cdecl>
+        (value << OopSmallIntegerShift | OopSmallIntegerTagMask) reinterpretCastTo: UIntPointer
     ].
 
     "Reference counting"
@@ -93,7 +124,6 @@ Namespace named: #ObjectModel members: [
 
 "
 newObjectHeaderWithWeakPointers
-newObjectHeaderWithBytes
 newObjectHeaderWithWords
 "
 
@@ -109,10 +139,20 @@ newObjectHeaderWithWords
     Constant named: #newObjectHeaderWithBytes value: [<ObjectHeader> :slotCount<UInt32> |
         <cdecl>
         ObjectHeader new
-            slotCount: slotCount;
+            slotCount: (slotCount + OopSize - 1) // OopSize;
             flags: StaticOopFlag;
-            format: (ObjectFormatIndexable8 castTo: UInt8);
+            format: (ObjectFormatIndexable8 + ( (OopSize - slotCount) \\ OopSize) castTo: UInt8);
             yourself
+    ].
+
+    Constant named: #getBytesObjectSize value: [<UIntPointer> :object<ObjectHeader pointer> |
+        <cdecl>
+        (object value slotCount * OopSize) - (object value format - ObjectFormatIndexable8)
+    ].
+
+    Constant named: #getFirstFixedFieldPointer value: [<Void pointer> :object<ObjectHeader pointer> |
+        <cdecl>
+        (object reinterpretCastTo: UIntPointer) + ObjectHeader size reinterpretCastTo: Void pointer
     ].
 
     Constant named: #setObjectClass value: [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
@@ -122,7 +162,14 @@ newObjectHeaderWithWords
 
     Constant named: #getObjectClass value: [<ObjectHeader pointer> :header<ObjectHeader pointer> |
         <cdecl>
-        header value classPointer
+
+        let oopValue := header reinterpretCastTo: UIntPointer.
+        let oopTag := oopValue & OopTagMask.
+        (oopTag ~= 0 or: [header == nil]) ifTrue: [
+            ImmediateClassTable atOffset: oopTag
+        ] ifFalse: [
+            header value classPointer
+        ]
     ].
 
     Constant named: #setIdentityHash value: [<Void> :header<ObjectHeader pointer> :newIdentityHash<UIntPointer> |
@@ -135,15 +182,127 @@ newObjectHeaderWithWords
         rawIdentityHash bitAnd: 16rFFFF
     ].
 
+    Constant named: #createFormatSpec value: [:instanceSpec<UInt32> :instanceSize<UInt32> |
+        <cdecl>
+        (instanceSpec << 16) | instanceSize
+    ].
+
+    Constant named: #createNamedFormatSpec value: [:type :instanceSize<UInt32> |
+        <cdecl>
+        <localReturn>
+        type == #pointers ifTrue: [
+            ^ createFormatSpec #{instanceSize == 0 ifTrue: [ ObjectFormatEmpty ] ifFalse: [ ObjectFormatFixedSize] . instanceSize }
+        ].
+        type == #variablePointers ifTrue: [
+            ^ createFormatSpec #{instanceSize == 0 ifTrue: [ ObjectFormatVariableSizeNoIVars ] ifFalse: [ ObjectFormatVariableSizeWithIVars ] . instanceSize}
+        ].
+        type == #variableWeakPointers ifTrue: [
+            ^ createFormatSpec #{ObjectFormatWeakVariableSize . 0 }
+        ].
+        type == #immediate ifTrue: [
+            ^ createFormatSpec #{ObjectFormatImmediate . 0 }
+        ].
+        type == #words ifTrue: [
+            ^ createFormatSpec #{ObjectFormatIndexable32 . 0 }
+        ].
+        type == #bytes ifTrue: [
+            ^ createFormatSpec #{ObjectFormatIndexable8 . 0 }
+        ].
+
+        Compiler compileError: 'Unsupported object type {1}' format: {type}
+    ].
+
+    Constant named: #basicNewVariable value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :formatOop<UIntPointer> :variableSizeOop<UIntPointer> |
+        <cdecl>
+        <localReturn>
+                isSmallInteger #{formatOop} ifFalse: [
+            ^ nil
+        ].
+
+        isSmallInteger #{variableSizeOop} ifFalse: [
+            ^ nil
+        ].
+
+        let formatSpec := decodeSmallInteger #{formatOop}.
+        let variableSize := decodeSmallInteger #{variableSizeOop}.
+
+        let format := formatSpec >> 16.
+        let fixedSize := formatSpec & 16rFFFF.
+
+        let completeSize := fixedSize + variableSize.
+
+        "TODO: Replace this with a lookup table"
+        let displayedSlotSize<UIntPointer> := 0.
+        format >= ObjectFormatIndexable64 ifTrue: [
+            format >= ObjectFormatIndexable16 ifTrue: [
+                format >= ObjectFormatIndexable8 ifTrue: [
+                    displayedSlotSize := 1
+                ] ifFalse: [
+                    displayedSlotSize := 2
+                ]
+            ] ifFalse: [
+                format >= ObjectFormatIndexable32 ifTrue: [
+                    displayedSlotSize := 4
+                ] ifFalse: [
+                    displayedSlotSize := 8
+                ]
+            ]
+        ] ifFalse: [
+            displayedSlotSize := UIntPointer size
+        ].
+
+        "LibC printf #{c'basicNew format %d fixedSize %d variableSize %d displayedSlotSize %p \n' . format . fixedSize . variableSize . displayedSlotSize}."
+
+        let bodySize := completeSize * displayedSlotSize.
+        let instanceFormat<UInt8> := 0.
+        let slotCount<UIntPointer> := 0.
+        displayedSlotSize < UIntPointer size ifTrue: [
+            slotCount := (bodySize + OopSize - 1) // OopSize.
+            instanceFormat := format castTo: UInt8.
+        ] ifFalse: [
+            slotCount := bodySize // OopSize.
+            instanceFormat := format castTo: UInt8
+        ].
+
+        "LibC printf #{c'slotCount %d instanceFormat: %d\n' . slotCount . instanceFormat}."
+
+        let objectSize := ObjectHeader size + (slotCount * OopSize).
+        let result := LibC malloc #{objectSize} reinterpretCastTo: ObjectHeader pointer.
+        LibC memset #{result . 0 . objectSize}.
+
+        result value
+            classPointer: class;
+            identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
+            slotCount: slotCount;
+            refCount: 0;
+            format: instanceFormat;
+            yourself.
+
+        "LibC printf #{c'result slotCount %d -> %d instanceFormat: %d\n' . slotCount . result value slotCount . result value format}."
+        ^ result
+    ].
+
+    Constant named: #basicNewFixed value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :formatOop<UIntPointer> |
+        <cdecl>
+        <localReturn>
+        ^ basicNewVariable #{class . formatOop . 1}
+    ].
+
+
     Compiler objectModel
     	headerType: ObjectModel ObjectHeader;
     	writeBarrier: writeBarrier;
         newObjectHeaderWithPointers: newObjectHeaderWithPointers;
         newObjectHeaderWithBytes: newObjectHeaderWithBytes;
-        setObjectClassFunction: setObjectClass;
-        getObjectClassFunction: getObjectClass;
         setIdentityHashFunction: setIdentityHash;
         truncateIdentityHashFunction: truncateIdentityHash;
+
+        setObjectClassFunction: [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
+            header value classPointer: classPointer
+        ];
+        getObjectClassFunction: [<ObjectHeader pointer> :header<ObjectHeader pointer> |
+            header value classPointer
+        ];
         yourself
 
 ]

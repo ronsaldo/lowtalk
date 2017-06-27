@@ -50,6 +50,8 @@ initialize
 		'uint bitOr:' bitor
 		'uint ^' bitxor
 		'uint bitXor:' bitxor
+		'uint <<' shiftleft
+		'uint >>' shiftright
 
 		'int &' bitand
 		'int bitAnd:' bitand
@@ -57,6 +59,8 @@ initialize
 		'int bitOr:' bitor
 		'int ^' bitxor
 		'int bitXor:' bitxor
+		'int <<' shiftleft
+		'int >>' shiftrightarithmetic
 		
 		'object ==' dynObjectIdentityEquals
 		'object ~~' dynObjectIdentityNotEquals
@@ -89,3 +93,7 @@ initialize
 		whileNotNil: WhileLoop
 		whileNil: WhileLoop
 	).
+	
+	InlinedThisContextMessages := Dictionary newFromPairs: #(
+		uncheckedReplaceFunctionWith: UncheckedReplaceFunctionWith
+	)

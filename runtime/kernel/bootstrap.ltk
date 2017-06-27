@@ -88,6 +88,8 @@ let bootstrapClassHierarchy := #(
 
 let superClassSlotIndex := 1.
 let methodDictionarySlotIndex := 2.
+let formatSlotIndex := 3.
+
 Compiler objectModel
     superClassSlotIndex: superClassSlotIndex;
     methodDictionarySlotIndex: methodDictionarySlotIndex.
@@ -146,6 +148,8 @@ bootstrapClassHierarchy do: [:classDefinition |
     (Compiler objectModel registerClass: metaClass)
         type: #pointers;
         instanceVariables: metaInstanceVariables.
+    Compiler objectModel
+        setObject: metaClass slot: formatSlotIndex value: (ObjectModel createNamedFormatSpec #{#pointers . metaInstanceSize castTo: UInt32}).
 
     "Create the class"
     let class := Compiler objectModel newObjectWithPointers: metaInstanceSize.
@@ -153,6 +157,8 @@ bootstrapClassHierarchy do: [:classDefinition |
     (Compiler objectModel registerClass: class)
         type: type;
         instanceVariables: instanceVariables.
+    Compiler objectModel
+        setObject: class slot: formatSlotIndex value: (ObjectModel createNamedFormatSpec #{type . instanceSize castTo: UInt32}).
 
     "Link the super classes."
     baseName ifNotNil: [
@@ -298,6 +304,10 @@ let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
         index := MethodDictionary_scanFor #{self . key}
     ].
 
+    (array basicAt: index) ifNil: [
+        tally := tally + 1
+    ].
+
     array basicAt: index put: key.
     values basicAt: index put: value.
 ].
@@ -371,8 +381,31 @@ Compiler objectModel
     yourself.
 
 "Now we can implement the object primitives."
-Behavior methodDict at: #basicNew put: [:self<Behavior> | nil ].
-Behavior methodDict at: #basicNew: put: [:self<Behavior> :size | nil ].
+Behavior methodDict at: #basicNew put: [:self<Behavior> |
+    let result := ObjectModel basicNewFixed #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer}.
+    result reinterpretCastTo: _DynamicObject
+].
 
-Behavior methodDict at: #new put: [:self<Behavior> | self basicNew initialize ].
-Behavior methodDict at: #new: put: [:self<Behavior> :size | (self basicNew: size) initialize ].
+Behavior methodDict at: #basicNew: put: [:self<Behavior> :size |
+    let result := ObjectModel basicNewVariable #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer . size reinterpretCastTo: UIntPointer}.
+    result reinterpretCastTo: _DynamicObject
+].
+
+Behavior methodDict at: #new put: [:self<Behavior> | self basicNew initialize; yourself ].
+Behavior methodDict at: #new: put: [:self<Behavior> :size | (self basicNew: size) initialize; yourself ].
+
+"ProtoObject methodDict at: #yourself put: [:self<ProtoObject> | self ]."
+ProtoObject methodDict at: #initialize put: [:self<ProtoObject> |  self ].
+
+"Register some special classes"
+let oopSize := UIntPointer size.
+
+oopSize = 4 ifTrue: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: UndefinedObject;
+        atOffset: 1 put: SmallInteger.
+] ifFalse: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: UndefinedObject;
+        atOffset: 1 put: SmallInteger.
+].

@@ -6,6 +6,6 @@ checkReinterpretCastToMessage: message receiver: receiver
 	sourceType := receiver type withoutReferences.
 	targetType := self solveTypeExpression: message arguments first.
 	(sourceType canBeReinterpretedTo: targetType) ifFalse: [
-		message semanticError: 'Cannot perform explicit type conversion from {1} to {2}.' format: { sourceType name . targetType name }
+		message semanticError: 'Cannot perform reinterpret type conversion from {1} to {2}.' format: { sourceType name . targetType name }
 	].
 	message type: targetType.

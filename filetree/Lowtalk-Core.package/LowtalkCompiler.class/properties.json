@@ -36,7 +36,9 @@
 		"metaclassVariableNameMap",
 		"unmangledSymbolMap",
 		"debugLocationDictionary",
-		"debugSourceFileDictionary"
+		"debugSourceFileDictionary",
+		"thisContextType",
+		"capturedCompileTimeVariables"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

@@ -2,11 +2,17 @@ initialization
 initialize
 	super initialize.
 	
+	CommonTypeSpecialMessages := Dictionary newFromPairs: #(
+		size TypeSizeQuery
+		alignment TypeSizeQuery
+	).
+	
 	CommonSpecialMessages := Dictionary newFromPairs: #(
 		+ Arithmetic
 		- Arithmetic
 		* Arithmetic
 		/ Arithmetic
+		// Arithmetic
 		\\ Arithmetic
 		
 		negated UnaryArithmeric
@@ -16,6 +22,10 @@ initialize
 		& BinaryBitwise
 		bitAnd: BinaryBitwise
 		bitXor: BinaryBitwise
+
+		bitShift: SignedDirectionBitShift
+		>> BinaryBitwise
+		<< BinaryBitwise
 		
 		bitInvert UnaryLogicalBitwise
 		bitInvert32 UnaryLogicalBitwise

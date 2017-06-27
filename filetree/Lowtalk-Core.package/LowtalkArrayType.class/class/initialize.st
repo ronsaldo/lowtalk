@@ -4,7 +4,11 @@ initialize
 		value PointerDeReference
 		at: PointerDeReference
 		basicAt: PointerDeReference
+		atOffset: PointerDeReference
+		basicAtOffset: PointerDeReference
+		
 		value: PointerElementAssignment
-		at:put: PointerElementAssignment
-		basicAt:put: PointerElementAssignment
+		
+		atOffset:put: PointerElementAssignment
+		basicAtOffset:put: PointerElementAssignment
 	)

@@ -1,3 +1,3 @@
 expressions
 unaryExpressionSuffixMessage
-	^ identifier
+	^ anyIdentifier

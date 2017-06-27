@@ -1,3 +1,3 @@
 accessing
 name
-	^ boxed name , ' block'
+	^ functionType name , ' block'
