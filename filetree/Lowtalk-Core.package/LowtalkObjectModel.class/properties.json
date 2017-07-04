@@ -30,7 +30,9 @@
 		"superSendTrampolineFunction",
 		"convertMethodContextMetadataFunction",
 		"setIdentityHashFunction",
-		"truncateIdentityHashFunction"
+		"truncateIdentityHashFunction",
+		"trueVariable",
+		"falseVariable"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

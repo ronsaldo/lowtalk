@@ -23,6 +23,9 @@ checkIfSelectionMessage: message receiver: receiver
 		ifFalse: [ compiler objectType ].
 	
 	secondResultType := compiler nilType.
+	(message arguments size = 1 and: [ selector == #ifNil: ]) ifTrue: [ 
+		secondResultType := receiverType
+	].
 	message arguments size = 2 ifTrue: [ 
 		secondResultType := compiler objectType.
 		(selector == #ifNil:ifNotNil) ifTrue: [ 

@@ -1,0 +1,4 @@
+accessing
+trueVariable
+	<compileTime>
+	^ trueVariable

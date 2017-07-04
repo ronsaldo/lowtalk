@@ -203,9 +203,13 @@ let classHierarchyShortCirtcuit := [
 
     "Instantiate the special literals."
     Constant
-        named: #nil type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: UndefinedObject);
+        named: #nil type: _DynamicObject value: nil;
         named: #true type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: True);
         named: #false type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: False).
+
+    Compiler objectModel
+        trueVariable: (_GlobalNamespace variableAt: #true);
+        falseVariable: (_GlobalNamespace variableAt: #false).
 
     "Finish this part"
     bootstrapClassHierarchy do: [:classDefinition |
@@ -305,7 +309,11 @@ let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
     ].
 
     (array basicAt: index) ifNil: [
-        tally := tally + 1
+        tally := tally + 1.
+        tally >= (array basicSize * 3 // 4) ifTrue: [
+            MethodDictionary_grow #{self}.
+            index := MethodDictionary_scanFor #{self . key}
+        ]
     ].
 
     array basicAt: index put: key.
