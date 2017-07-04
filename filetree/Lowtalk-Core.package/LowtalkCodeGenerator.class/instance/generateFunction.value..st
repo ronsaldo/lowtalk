@@ -39,7 +39,12 @@ generateFunction: ssaFunction value: functionValue
 	
 	allocaBuilder jump: bodyBlock.
 	builder isLastTerminator ifFalse: [
-		self tryToReturnImplicitly: result type: node body type
+		method hasLocalReturns ifTrue: [ 
+			self tryToReturnImplicitly: selfValue type: selfType
+		] ifFalse: [ 
+			self tryToReturnImplicitly: result type: node body type
+		]
+
 	].
 
 	ssaFunction

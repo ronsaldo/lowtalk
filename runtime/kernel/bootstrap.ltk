@@ -269,7 +269,8 @@ let MethodDictionary_atPutNoCheck := [:self<MethodDictionary> :key :value |
     <selector: #at:putNoCheck:>
     let index := MethodDictionary_scanFor #{self . key}.
     array basicAt: index put: key.
-    value basicAt: index put: value.
+    values basicAt: index put: value.
+    tally := tally + 1.
 ].
 
 let MethodDictionary_grow := [ :self<MethodDictionary> |
@@ -284,6 +285,7 @@ let MethodDictionary_grow := [ :self<MethodDictionary> |
     array := Array basicNew: newSize.
     values := Array basicNew: newSize.
 
+    tally := 0.
     1 to: oldSize do: [:i |
         let key := oldKeys basicAt: i.
         let value := oldValues basicAt: i.
@@ -291,8 +293,6 @@ let MethodDictionary_grow := [ :self<MethodDictionary> |
             MethodDictionary_atPutNoCheck #{self. key. value}.
         ]
     ].
-
-    tally := 0.
 ].
 
 let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
@@ -452,6 +452,14 @@ ProtoObject category: 'accessing' methods: {
 
 :[yourself
     ^ self
+].
+
+}.
+
+ProtoObject category: 'reflective operations' methods: {
+:[doesNotUnderstand: aMessage
+    LibC printf #{c'Bootstrap runtime received an unhandled doesNotUnderstand.\n'}.
+    LibC abort #{}.
 ].
 
 }.

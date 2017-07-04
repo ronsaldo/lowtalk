@@ -209,7 +209,8 @@ newObjectHeaderWithWords
             ^ createFormatSpec #{ObjectFormatIndexable8 . 0 }
         ].
 
-        Compiler compileError: 'Unsupported object type {1}' format: {type}
+        Compiler compileError: 'Unsupported object type {1}' format: {type}.
+        ^ nil
     ].
 
     Constant named: #basicNewVariable value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :formatOop<UIntPointer> :variableSizeOop<UIntPointer> |
