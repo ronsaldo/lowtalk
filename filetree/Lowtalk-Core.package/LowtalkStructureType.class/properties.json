@@ -14,7 +14,9 @@
 		"environment",
 		"slots",
 		"slotsExpression",
-		"compiler"
+		"compiler",
+		"pendingMethods",
+		"methods"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

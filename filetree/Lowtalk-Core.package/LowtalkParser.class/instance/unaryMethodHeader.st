@@ -1,5 +1,9 @@
 accessing
 unaryMethodHeader
-	^ super unaryMethodHeader ==> [ :list |
-		self halt
+	^ super unaryMethodHeader ==> [ :selector |
+		LowtalkASTMethodExpression new
+			position: selector;
+			selector: selector inputValue asSymbol;
+			arguments: #();
+			yourself
 	]

@@ -1,3 +1,4 @@
 visiting
 visitBlockNode: aNode
-	self halt
+	self flag: 'TODO: Implement myself'.
+	^ builder addDynamicLiteral: nil

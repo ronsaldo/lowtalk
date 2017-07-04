@@ -1,7 +1,13 @@
 message dispatching
 lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
-	| precedence slot value valueType |
+	| precedence slot value valueType method |
 	(selector == #class) ifTrue: [ ^ type ].
+	
+	method := type concreteMethodForSelector: selector.
+	method ifNotNil: [
+		^ method lowtalkValueWithArguments: { self } , (arguments collect: #value)
+		types: {self type ref} , (arguments collect: #type) compiler: aCompiler at: sendingNode
+	].
 	
 	precedence := selector precedence.
 	precedence = 1 ifTrue: [ 

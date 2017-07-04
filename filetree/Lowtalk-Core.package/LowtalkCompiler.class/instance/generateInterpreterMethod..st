@@ -4,7 +4,7 @@ generateInterpreterMethod: method
 	objectSSAValueMap at: method ifPresent: [ :oldValue | ^ oldValue ].
 	objectInstanceVariableMap at: method ifPresent: [ :variable | ^ variable ssaValue ].
 
-	functionType := method node type.
+	functionType := method type.
 	functionType isBlockType ifTrue: [ functionType := functionType functionType ].
 
 	ssaValue := SLVMFunction pointerSize: compilationTarget pointerSize functionType: functionType ssaType.

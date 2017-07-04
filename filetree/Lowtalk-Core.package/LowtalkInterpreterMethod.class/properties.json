@@ -13,7 +13,9 @@
 		"returnType",
 		"receiverType",
 		"parentMethod",
-		"hasLocalReturns"
+		"hasLocalReturns",
+		"selector",
+		"type"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

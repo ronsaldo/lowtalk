@@ -1,3 +1,3 @@
-expressions
+accessing
 pragma
-	^ lessThan , chainedMessage , greaterThan
+	^ lessThan , pragmaChainedMessage , greaterThan

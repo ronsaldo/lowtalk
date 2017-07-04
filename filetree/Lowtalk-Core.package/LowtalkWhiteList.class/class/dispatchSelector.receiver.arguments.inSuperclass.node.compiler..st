@@ -7,7 +7,7 @@ dispatchSelector: selector receiver: receiver arguments: arguments inSuperclass:
 
 	method := superClass lookupSelector: selector.
 	method ifNil: [
-		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector }.
+		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector printString}.
 	].
 
 	self checkMethod: method receiver: receiver node: sendingNode.

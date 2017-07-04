@@ -50,13 +50,20 @@ lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes cl
 		result := LowtalkEvaluator evaluate: node body environment: activationEnvironment.
 		resultType := node body type.
 	] ifTrue: [ 
-		[
-			result := LowtalkEvaluator evaluate: node body environment: activationEnvironment.
-			resultType := node body type.
-		] on: LowtalkInterpreterReturnException do: [ :returnExc |
-			result := returnExc value.
-			resultType := returnExc type.
+		receiverType isVoidType ifFalse: [
+			result := receiverValue.
+			resultType := receiverType.
 		].
+
+		node body expressions ifNotEmpty: [ 
+			[
+				result := LowtalkEvaluator evaluate: node body environment: activationEnvironment.
+				resultType := node body type.
+			] on: LowtalkInterpreterReturnException do: [ :returnExc |
+				result := returnExc value.
+				resultType := returnExc type.
+			]
+		]
 	].
 	
-	^ returnType isVoidType ifTrue: [nil] ifFalse: [resultType convertValue: result toType: node returnType at: node]
+	^ returnType isVoidType ifTrue: [nil] ifFalse: [resultType convertValue: result toType: returnType at: node]

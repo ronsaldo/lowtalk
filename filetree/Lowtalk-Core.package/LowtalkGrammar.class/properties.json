@@ -108,7 +108,9 @@
 		"symbolOperatorLiteral",
 		"anyIdentifier",
 		"thisContextExpression",
-		"thisContextKeyword"
+		"thisContextKeyword",
+		"pragmaChainKeywordMessage",
+		"pragmaChainedMessage"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

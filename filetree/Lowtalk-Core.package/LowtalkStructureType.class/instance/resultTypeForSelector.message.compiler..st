@@ -2,6 +2,10 @@ accessing
 resultTypeForSelector: selector message: messageNode compiler: aCompiler
 	| precedence |	
 	precedence := selector precedence.
+	(self concreteMethodForSelector: selector) ifNotNil: [ 
+		self halt
+	].
+	
 	precedence = 1 ifTrue: [
 		self slotNamed: selector ifPresent: [ :slotDescription |
 			^ slotDescription type ref

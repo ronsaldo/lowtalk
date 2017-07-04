@@ -1,3 +1,3 @@
 expressions
 keywordMethodHeaderKeyword
-	^ keyword , identifier
+	^ keyword , identifier , optionalTypeExpression

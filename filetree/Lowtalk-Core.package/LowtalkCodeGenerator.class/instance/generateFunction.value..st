@@ -42,5 +42,9 @@ generateFunction: ssaFunction value: functionValue
 		self tryToReturnImplicitly: result type: node body type
 	].
 
+	ssaFunction
+		addRequiredDynamicLiteral: method selector;
+		addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler).
+	
 	"Create the function context metadata"
 	ssaFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ]

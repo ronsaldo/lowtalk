@@ -312,10 +312,18 @@ let MethodDictionary_atPut := [:self<MethodDictionary> :key :value |
     values basicAt: index put: value.
 ].
 "Behavior methods"
-let Behavior_superclass := [ <Behavior> :self<Behavior> | superclass castTo: Behavior ].
-let Behavior_methodDict := [ <MethodDictionary> :self<Behavior> | methodDict castTo: MethodDictionary ].
+let Behavior_superclass := [ <Behavior> :self<Behavior> |
+    <selector: #superclass>
+    superclass castTo: Behavior
+].
+
+let Behavior_methodDict := [ <MethodDictionary> :self<Behavior> |
+    <selector: #methodDict>
+    methodDict castTo: MethodDictionary
+].
 
 let Behavior_lookupSelector := [ :self<Behavior> :selector |
+    <selector: #lookupSelector:>
     <localReturn>
     let position := self.
     [position == nil] whileFalse: [
@@ -329,16 +337,15 @@ let Behavior_lookupSelector := [ :self<Behavior> :selector |
 
 Compiler objectModel lookupSelectorFunction: Behavior_lookupSelector.
 
-"Allow putting things on the method dictionaries."
+"Install the method to access the methodDictionary in Behavior"
 [ :self<Behavior> |
     MethodDictionary_atPut value: methodDict value: #methodDict value: Behavior_methodDict
 ] value: Behavior.
 
+"Install the method for inserting entries into a method dictionary into MethodDictionary"
 MethodDictionary_atPut value: MethodDictionary methodDict value: #at:put: value: MethodDictionary_atPut.
 
-"Put the bootstrap methods in their method dictionary"
-ProtoObject methodDict at: #yourself put: [:self<ProtoObject> | self].
-
+"Insert the bootstraping methods in their method dictionary"
 Behavior methodDict
     at: #superclass put: Behavior_superclass;
     at: #lookupSelector put: Behavior_lookupSelector.
@@ -380,22 +387,74 @@ Compiler objectModel
     ];
     yourself.
 
-"Now we can implement the object primitives."
-Behavior methodDict at: #basicNew put: [:self<Behavior> |
+"A method for adding methods"
+ClassDescription methodDict at: #category:methods: put: [:self<ClassDescription> :categoryName :methods |
+    <selector: #category:methods:>
+    <localReturn>
+    methods do: [:method |
+        let compiledMethod := method compiledMethodForReceiverType: self.
+        methodDict at: compiledMethod selector put: compiledMethod
+    ]
+].
+
+"Now we can implement the object creation primitives."
+Behavior category: 'instance creation' methods: {
+:[basicNew
     let result := ObjectModel basicNewFixed #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer}.
-    result reinterpretCastTo: _DynamicObject
+    ^ result reinterpretCastTo: _DynamicObject
 ].
 
-Behavior methodDict at: #basicNew: put: [:self<Behavior> :size |
+:[basicNew: size
     let result := ObjectModel basicNewVariable #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer . size reinterpretCastTo: UIntPointer}.
-    result reinterpretCastTo: _DynamicObject
+    ^ result reinterpretCastTo: _DynamicObject
 ].
 
-Behavior methodDict at: #new put: [:self<Behavior> | self basicNew initialize; yourself ].
-Behavior methodDict at: #new: put: [:self<Behavior> :size | (self basicNew: size) initialize; yourself ].
+:[new
+    ^ self basicNew initialize; yourself
+].
 
-"ProtoObject methodDict at: #yourself put: [:self<ProtoObject> | self ]."
-ProtoObject methodDict at: #initialize put: [:self<ProtoObject> |  self ].
+:[new: size
+    ^ (self basicNew: size) initialize; yourself
+].
+
+}.
+
+ProtoObject category: 'initialization' methods: {
+:[initialize
+    "By default do nothing"
+]
+}.
+
+ProtoObject category: 'accessing' methods: {
+:[at: index
+    ^ self basicAt: index
+].
+
+:[at: index put: value
+    ^ self basicAt: index put: value
+].
+
+:[size
+    ^ self basicSize
+].
+
+:[basicAt: index
+    "TODO: Implement myself"
+].
+
+:[basicAt: index put: value
+    "TODO: Implement myself"
+].
+
+:[basicSize
+    "TODO: Implement myself"
+].
+
+:[yourself
+    ^ self
+].
+
+}.
 
 "Register some special classes"
 let oopSize := UIntPointer size.

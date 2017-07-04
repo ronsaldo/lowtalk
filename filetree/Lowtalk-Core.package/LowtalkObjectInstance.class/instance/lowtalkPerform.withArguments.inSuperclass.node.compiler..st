@@ -19,4 +19,4 @@ lowtalkPerform: selector withArguments: arguments inSuperclass: superClass node:
 	].
 
 	^ method lowtalkValueWithArguments: { self } , (arguments collect: #value)
-		types: {self type} , (arguments collect: #type) compiler: nil at: sendingNode
+		types: {self type} , (arguments collect: #type) compiler: aCompiler at: sendingNode
