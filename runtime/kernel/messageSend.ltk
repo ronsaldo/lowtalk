@@ -1,5 +1,6 @@
 let ObjectHeader := ObjectModel ObjectHeader.
 let Oop := ObjectHeader pointer.
+let DNUSelector<_DynamicObject> := #doesNotUnderstand: .
 
 Structure named: #_ArrayHeader slots: {
     #header => ObjectHeader.
@@ -81,6 +82,7 @@ Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader
     <smalltalk_supersend>
     <localReturn>
     LibC printf #{c'TODO: Super send selector %p lookupStart %p.\n' . (selector reinterpretCastTo: Void pointer) . (lookupStart reinterpretCastTo: Void pointer)}.
+    LibC abort #{}.
     ^ 0
 ].
 
@@ -95,6 +97,11 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
 
     let method := sendLookupSelector #{receiverClass . selector}.
     method ifNil: [
+        selector == (DNUSelector reinterpretCastTo: ObjectModel ObjectHeader pointer) ifTrue: [
+            LibC printf #{c'FATAL ERROR: Unhandled #doesNotUnderstand:\n'}.
+            LibC abort #{}.
+        ].
+
         LibC printf #{c'TODO: Implement sending does not understand\n'}.
         LibC abort #{}.
     ].

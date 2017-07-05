@@ -32,7 +32,13 @@
 		"setIdentityHashFunction",
 		"truncateIdentityHashFunction",
 		"trueVariable",
-		"falseVariable"
+		"falseVariable",
+		"smallIntegerTag",
+		"smallIntegerShift",
+		"smallIntegerTagMask",
+		"smallFloatTag",
+		"smallFloatTagMask",
+		"smallFloatShift"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

@@ -1,0 +1,132 @@
+"Magnitude"
+Magnitude category: 'testing' methods: {
+:[< aMagnitude
+    self subclassResponsibility
+].
+
+:[<= aMagnitude
+    self subclassResponsibility
+].
+
+:[= aMagnitude
+    self subclassResponsibility
+].
+
+:[> aMagnitude
+    self subclassResponsibility
+].
+
+:[>= aMagnitude
+    self subclassResponsibility
+].
+
+}.
+
+"Object testing methods"
+Object category: 'testing' methods: {
+:[isFloat
+    ^ false
+].
+
+:[isNumber
+    ^ false
+].
+
+:[isInteger
+    ^ false
+].
+
+}.
+
+"Number"
+Number category: 'testing' methods: {
+:[isNumber
+    ^ true
+].
+
+}.
+
+"Float"
+Float category: 'testing' methods: {
+:[isFloat
+    ^ true
+].
+
+}.
+
+"Integer"
+Integer category: 'testing' methods: {
+:[isInteger
+    ^ true
+].
+
+}.
+
+"SmallInteger"
+SmallInteger category: 'arithmetic' methods: {
+:[+ aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this + other
+    ].
+
+    ^ super aNumber
+].
+
+:[- aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this - other
+    ].
+
+    ^ super aNumber
+].
+
+:[* aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this * other
+    ].
+
+    ^ super aNumber
+].
+
+:[/ aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        let remainder := this \\ other.
+        remainder = 0 ifTrue: [
+            ^ this // other
+        ] ifFalse: [
+            ^ (Fraction numerator: self denominator: aNumber) reduced
+        ].
+    ].
+
+    ^ super aNumber
+].
+
+:[// aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this // other
+    ].
+
+    ^ super aNumber
+].
+
+:[\\ aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this + other
+    ].
+
+    ^ super aNumber
+].
+
+}

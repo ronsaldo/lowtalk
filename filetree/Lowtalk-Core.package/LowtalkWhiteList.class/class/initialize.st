@@ -9,6 +9,10 @@ initialize
 		hash
 		identityHash
 		
+		"Copy"
+		copy
+		copyWith:
+		
 		"Arithmetic"
 		+ - * / % * // \\ sqrt
 		< <= > >=

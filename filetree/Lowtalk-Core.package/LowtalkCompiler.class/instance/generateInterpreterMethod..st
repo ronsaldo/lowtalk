@@ -10,6 +10,9 @@ generateInterpreterMethod: method
 	ssaValue := SLVMFunction pointerSize: compilationTarget pointerSize functionType: functionType ssaType.
 	ssaValue compilationTarget: compilationTarget.
 	ssaValue makePrivate.
+	(method selector isNotNil and: [method methodClass isNotNil]) ifTrue: [ 
+		ssaValue unmangledName: method methodClass name , '>>' , method selector
+	].
 	ssaModule add: ssaValue.
 
 	ssaMetadata := ssaValue compiledMethodMetaDataValue.

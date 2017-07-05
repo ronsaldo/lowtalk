@@ -1,0 +1,4 @@
+accessing
+smallIntegerTag
+	<compileTime>
+	^ smallIntegerTag

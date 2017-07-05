@@ -1,0 +1,4 @@
+accessing
+smallFloatTag
+	<compileTime>
+	^ smallFloatTag

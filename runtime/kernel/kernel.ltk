@@ -2,4 +2,5 @@ Compiler
     evaluateFileNamed: 'objectModel.ltk';
     evaluateFileNamed: 'bootstrap.ltk';
     evaluateFileNamed: 'messageSend.ltk';
+    evaluateFileNamed: 'magnitude.ltk';
     yourself

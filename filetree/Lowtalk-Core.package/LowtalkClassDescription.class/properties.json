@@ -11,7 +11,8 @@
 		"slots",
 		"slotDictionary",
 		"instanceSize",
-		"type"
+		"type",
+		"name"
 	],
 	"name" : "LowtalkClassDescription",
 	"type" : "normal"

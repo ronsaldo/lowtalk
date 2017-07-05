@@ -405,6 +405,19 @@ ClassDescription methodDict at: #category:methods: put: [:self<ClassDescription>
     ]
 ].
 
+"Register some special classes"
+let oopSize := UIntPointer size.
+
+oopSize = 4 ifTrue: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: UndefinedObject;
+        atOffset: 1 put: SmallInteger.
+] ifFalse: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: UndefinedObject;
+        atOffset: 1 put: SmallInteger.
+].
+
 "Now we can implement the object creation primitives."
 Behavior category: 'instance creation' methods: {
 :[basicNew
@@ -447,15 +460,29 @@ ProtoObject category: 'accessing' methods: {
 ].
 
 :[basicAt: index
-    "TODO: Implement myself"
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    let result := ObjectModel uncheckedIndexableBasicAt #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . indexValue}.
+    ^ result reinterpretCastTo: _DynamicObject
 ].
 
 :[basicAt: index put: value
-    "TODO: Implement myself"
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    ObjectModel uncheckedIndexableBasicAtPut #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . indexValue . value reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    ^ value
 ].
 
 :[basicSize
-    "TODO: Implement myself"
+    ^ ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
 ].
 
 :[yourself
@@ -464,23 +491,80 @@ ProtoObject category: 'accessing' methods: {
 
 }.
 
+ProtoObject category: 'errors' methods: {
+:[error: aMessage
+    LibC printf #{c'Fatal error\n'}.
+    LibC abort #{}.
+].
+
+:[errorSubscriptBounds: index
+    self error: 'Index ' , index asString , 'is out of bounds.'
+].
+}.
+
 ProtoObject category: 'reflective operations' methods: {
 :[doesNotUnderstand: aMessage
-    LibC printf #{c'Bootstrap runtime received an unhandled doesNotUnderstand.\n'}.
-    LibC abort #{}.
+    self error: 'Received an unhandled doesNotUnderstand.\n'
 ].
 
 }.
 
-"Register some special classes"
-let oopSize := UIntPointer size.
-
-oopSize = 4 ifTrue: [
-    ObjectModel ImmediateClassTable
-        atOffset: 0 put: UndefinedObject;
-        atOffset: 1 put: SmallInteger.
-] ifFalse: [
-    ObjectModel ImmediateClassTable
-        atOffset: 0 put: UndefinedObject;
-        atOffset: 1 put: SmallInteger.
+Class category: 'accessing' methods: {
+:[name
+    ^ name
 ].
+
+:[name: aName
+    name := aName
+].
+
+:[subclasses
+    ^ subclasses ifNil: [ #() ] ifNotNil: [ subclasses copy ]
+].
+
+:[subclasses: aCollectionOfSubclasses
+    subclasses := aCollectionOfSubclasses
+].
+
+:[addSubclass: aSubClass
+    self subclasses: (self subclasses copyWith: aSubClass)
+].
+
+}.
+
+Metaclass category: 'accessing' methods: {
+:[name
+    ^ thisClass name , ' class'
+].
+
+:[thisClass
+    ^ thisClass
+].
+
+:[thisClass: aClass
+    thisClass := aClass
+].
+
+}.
+
+"Finish the initialization of the class hierarchy"
+let classHierarchyInitializationFinish := [
+    "Finish this part"
+    bootstrapClassHierarchy do: [:classDefinition |
+        let name := classDefinition at: 2.
+        let class := _GlobalNamespace at: name.
+        let metaClass := class class.
+
+        "Set the class name"
+        class name: name.
+
+        "Set the metaClass thisClass"
+        metaClass thisClass: class.
+
+        "Add the class to its super class"
+        class superclass ifNotNil: [:superClass |
+            superClass addSubclass: class
+        ].
+    ]
+].
+classHierarchyInitializationFinish value.

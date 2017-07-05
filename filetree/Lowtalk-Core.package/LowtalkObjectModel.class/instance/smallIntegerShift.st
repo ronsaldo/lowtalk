@@ -1,0 +1,4 @@
+accessing
+smallIntegerShift
+	<compileTime>
+	^ smallIntegerShift

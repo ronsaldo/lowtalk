@@ -3,9 +3,9 @@ binaryMethodHeader
 	^ super binaryMethodHeader ==> [ :list |
 		LowtalkASTMethodExpression new
 			selector: list first inputValue asSymbol;
-			arguments: (LowtalkASTMethodArgument new
+			arguments: {LowtalkASTMethodArgument new
 				position: list second;
 				name: list second inputValue;
-				typeExpression: list third);
+				typeExpression: list third};
 			yourself
 	]

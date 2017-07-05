@@ -1,0 +1,3 @@
+accessing
+smallIntegerShift
+	^ compiler objectModel smallIntegerShift

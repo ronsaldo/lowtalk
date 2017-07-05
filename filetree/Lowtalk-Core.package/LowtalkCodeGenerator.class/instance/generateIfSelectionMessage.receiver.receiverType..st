@@ -51,7 +51,7 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	message arguments size = 2 ifTrue: [ 
 		builder currentBlock: falseBlock.
 		(#ifNil:ifNotNil: = message selector) ifTrue: [ 
-			falseResult := self inlineBlock: message arguments second cull: value types: valueType
+			falseResult := self inlineBlock: message arguments second cull: {value} types: {valueType}
 		] ifFalse: [ 
 			falseResult := self inlineBlock: message arguments second arguments: #() types: #()
 		].
