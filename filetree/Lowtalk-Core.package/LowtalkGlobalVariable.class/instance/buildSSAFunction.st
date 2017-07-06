@@ -2,6 +2,7 @@ accessing
 buildSSAFunction
 	ssaValue := SLVMFunction module: compiler ssaModule name: self mangledName asSymbol functionType: self valueType ssaType.
 	ssaValue unmangledName: self name.
+
 	self isExternal ifTrue: [
 		ssaValue makeExternal.
 		^ self.
@@ -11,6 +12,10 @@ buildSSAFunction
 
 	self value ifNil: [ 
 		self error: 'Non external function without definition'.
+	].
+
+	compiler compilationTarget emittingDebugInformation ifTrue: [
+		ssaValue debugSourceLocation: (compiler convertDebugPosition: value definition node position).
 	].
 
 	compiler mapValue: value toSSAValue: ssaValue.

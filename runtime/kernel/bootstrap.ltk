@@ -239,12 +239,12 @@ classHierarchyShortCirtcuit value.
 let MethodDictionary_scanFor := [<UIntPointer> :self<MethodDictionary> :key |
     <localReturn>
     <selector: #scanFor:>
-    let finish<UIntPointer> := array basicSize.
+    let finish<UIntPointer> := array basicSize castTo: UIntPointer.
     finish == 0 ifTrue: [
         ^ 0
     ].
 
-    let start<UIntPointer> := (key identityHash \\ finish) + 1.
+    let start<UIntPointer> := ((key identityHash castTo: UIntPointer) \\ finish) + 1.
     let element := nil.
 
     "Search from (hash mod size) to the end."

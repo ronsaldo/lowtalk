@@ -14,6 +14,9 @@ generateInterpreterMethod: method
 		ssaValue unmangledName: method methodClass name , '>>' , method selector
 	].
 	ssaModule add: ssaValue.
+	compilationTarget emittingDebugInformation ifTrue: [
+		ssaValue debugSourceLocation: (self convertDebugPosition: method node position).
+	].
 
 	ssaMetadata := ssaValue compiledMethodMetaDataValue.
 	self mapValue: method toSSAValue: ssaMetadata.

@@ -47,9 +47,14 @@ generateFunction: ssaFunction value: functionValue
 
 	].
 
-	ssaFunction
-		addRequiredDynamicLiteral: method selector;
-		addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler).
+	(method selector isNotNil or:
+	[ (method methodClass classBindingWithCompiler: compiler) isNotNil
+	or: [ ssaFunction dynamicLiterals isNotEmpty ]]) ifTrue: [ 
+		ssaFunction
+			addRequiredDynamicLiteral: method selector;
+			addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler).
+
+	].
 	
 	"Create the function context metadata"
 	ssaFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ]

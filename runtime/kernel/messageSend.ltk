@@ -67,6 +67,7 @@ Constant named: #sendLookupSelector value: [ <Oop> :behavior<_BehaviorHeader poi
     <localReturn>
     let position := behavior.
     [ position ] whileNotNil: [
+        "LibC printf #{c'Position %p\n' . position}."
         let methodDict := position value methodDict.
 
         let method := _MethodDictionary_atOrNil #{methodDict . selector}.
@@ -90,8 +91,8 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
     <smalltalk_send>
     <localReturn>
     "LibC printf #{c'Send selector [p: %p, ih: %08X, v: %.*s]\n' .
-        (selector reinterpretCastTo: Void pointer) . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}.
-"
+        (selector reinterpretCastTo: Void pointer) . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}."
+
     let receiverClass := ObjectModel getObjectClass #{receiver} reinterpretCastTo: _BehaviorHeader pointer.
     "LibC printf #{c'receiver %p class %p\n' . receiver . receiverClass}."
 

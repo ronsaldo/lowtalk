@@ -64,6 +64,19 @@ initialize
 		
 		'object ==' dynObjectIdentityEquals
 		'object ~~' dynObjectIdentityNotEquals
+		
+		'float +' fadd
+		'float -' fsub
+		'float *' fmul
+		'float /' fdiv
+		'float \\'frem
+
+		'float =' ofeq
+		'float ~=' ofne
+		'float <' oflt
+		'float <=' ofle
+		'float >' ofgt
+		'float >='ofge
 	).
 	
 	MessageConditionTypes := Dictionary newFromPairs: #(
