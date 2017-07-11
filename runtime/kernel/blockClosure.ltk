@@ -1,0 +1,87 @@
+Namespace named: #ObjectModel members: [
+    Structure named: #ClosureMetadataHeader slots: {
+        #objectHeader => ObjectHeader.
+        #argumentDescriptor => IntPointer.
+    }.
+
+    Structure named: #ClosureHeader slots: {
+        #metadata => ClosureMetadataHeader.
+        #entryPoint => UIntPointer.
+    }.
+
+    Constant named: #instantiateClosure value: [<ObjectHeader pointer> :entryPoint<UIntPointer> :argumentDescriptor<UIntPointer> :dynamicSlotCount<UIntPointer> :size<UIntPointer> |
+        <cdecl>
+        <localReturn>
+
+        LibC printf #{c'Argument descriptor: 0x%08X\n' . argumentDescriptor}.
+        let result := basicNewMixedBytes #{BlockClosure reinterpretCastTo: ObjectHeader pointer . "function"1 + dynamicSlotCount . size - (dynamicSlotCount * UIntPointer size)}.
+        let closure := result reinterpretCastTo: ClosureHeader pointer.
+        closure value metadata argumentDescriptor := encodeSmallInteger #{argumentDescriptor}.
+        closure value entryPoint := entryPoint + 1.
+        ^ result
+    ].
+
+    Compiler objectModel
+        closureHeaderType: ClosureMetadataHeader;
+        closureInstantiateFunction: instantiateClosure.
+].
+
+Object category: 'evaluating' methods: {
+:[value
+    ^ self
+]
+}.
+
+Symbol category: 'evaluating' methods: {
+:[value: anObject
+    ^ anObject perform: self
+]
+}.
+
+BlockClosure category: 'evaluating' methods: {
+:[value
+    argumentDescriptor ~~ 0 ifTrue: [
+        self numArgsError: 0
+    ].
+
+    let function := (entryPoint reinterpretCastTo: UIntPointer) - 1 reinterpretCastTo: ((_DynamicObject) -> _DynamicObject) pointer.
+    ^ function #{self}
+].
+
+:[value: arg1
+    argumentDescriptor ~~ 1 ifTrue: [
+        self numArgsError: 1
+    ].
+
+    let function := (entryPoint reinterpretCastTo: UIntPointer) - 1 reinterpretCastTo: ((_DynamicObject , _DynamicObject) -> _DynamicObject) pointer.
+    ^ function #{self . arg1}
+].
+
+:[value: arg1 value: arg2
+    argumentDescriptor ~~ 2 ifTrue: [
+        self numArgsError: 2
+    ].
+
+    let function := (entryPoint reinterpretCastTo: UIntPointer) - 1 reinterpretCastTo: ((_DynamicObject , _DynamicObject , _DynamicObject) -> _DynamicObject) pointer.
+    ^ function #{self . arg1 . arg2}
+].
+
+:[value: arg1 value: arg2 value: arg3
+    argumentDescriptor ~~ 2 ifTrue: [
+        self numArgsError: 3
+    ].
+
+    let function := (entryPoint reinterpretCastTo: UIntPointer) - 1 reinterpretCastTo: ((_DynamicObject , _DynamicObject , _DynamicObject , _DynamicObject) -> _DynamicObject) pointer.
+    ^ function #{self . arg1 . arg2 . arg3}
+].
+
+:[value: arg1 value: arg2 value: arg3 value: arg4
+    argumentDescriptor ~~ 4 ifTrue: [
+        self numArgsError: 4
+    ].
+
+    let function := (entryPoint reinterpretCastTo: UIntPointer) - 1 reinterpretCastTo: ((_DynamicObject , _DynamicObject , _DynamicObject , _DynamicObject , _DynamicObject) -> _DynamicObject) pointer.
+    ^ function #{self . arg1 . arg2 . arg3 . arg4}
+].
+
+}.

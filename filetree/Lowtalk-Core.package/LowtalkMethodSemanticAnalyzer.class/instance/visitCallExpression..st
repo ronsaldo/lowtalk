@@ -6,6 +6,7 @@ visitCallExpression: callExpression
 	
 	receiverType := callExpression receiver type withoutReferences.
 	receiverType isBlockType ifTrue: [ receiverType := receiverType functionType ].
+	(receiverType isPointerType and: [ receiverType pointed isFunctionType ]) ifTrue: [ receiverType := receiverType pointed ].
 	
 	receiverType isFunctionType ifFalse: [
 		"Implemented by sending valueWithArguments:types:"

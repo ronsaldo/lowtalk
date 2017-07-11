@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithBoolean: another
+	^ self

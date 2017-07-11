@@ -6,6 +6,8 @@ visitBlockArgumentNode: argumentNode
 	variable := LowtalkMethodArgument new
 		valueType: argumentNode type;
 		name: argumentNode name;
+		definitionNode: argumentNode;
+		method: method;
 		isConstant: true.
 	environment setSymbol: variable name value: variable ifPresent: [ 
 		argumentNode semanticError: 'Argument variable name {1} is already in use.' format: { variable name printString }

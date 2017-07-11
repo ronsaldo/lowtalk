@@ -103,7 +103,7 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
             LibC abort #{}.
         ].
 
-        LibC printf #{c'TODO: Implement sending does not understand\n'}.
+        LibC printf #{c'TODO: Implement sending does not understand [%p]%p (#%.*s)\n'. receiverClass . receiver . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}.
         LibC abort #{}.
     ].
 

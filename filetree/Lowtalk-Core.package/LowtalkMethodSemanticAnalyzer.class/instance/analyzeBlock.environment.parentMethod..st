@@ -10,7 +10,8 @@ analyzeBlock: aBlockNode environment: baseEnvironment parentMethod: parentMethod
 	method := LowtalkInterpreterMethod new node: aBlockNode.
 	method
 		type: aBlockNode type;
-		hasLocalReturns: (aBlockNode hasPragmaNamed: #localReturn).
+		hasLocalReturns: (aBlockNode hasPragmaNamed: #localReturn);
+		parentMethod: parentMethod.
 	aBlockNode pragmaAt: #selector: ifPresent: [ :pragma |
 		self withEnvironment: baseEnvironment do: [ 	
 			method selector: (self asEvaluator evaluateValue: pragma arguments first)

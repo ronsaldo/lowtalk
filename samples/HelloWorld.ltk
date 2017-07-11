@@ -23,6 +23,7 @@ Namespace named: #EntryPoint members: [
             arguments at: i put: (ByteString new: 10)
         ].
         LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
+        arguments do: [:arg | LibC printf #{c'argc %d arg %p\n' . argc . arg reinterpretCastTo: Void pointer}].
 
         LibC printf #{c'Allocated array: %p\n' . arguments reinterpretCastTo: Void pointer }.
         0

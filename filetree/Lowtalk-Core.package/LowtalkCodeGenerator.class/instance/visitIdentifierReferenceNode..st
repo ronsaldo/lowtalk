@@ -15,6 +15,13 @@ visitIdentifierReferenceNode: node
 			^ builder getReference: selfValue element: (SLVMConstantValue int: binding description index)
 		].
 	
+		node binding isMethodVariable ifTrue: [ 
+			self assert: node binding method isNotNil.
+			self assert: node binding ssaValue isNotNil.
+			node binding method ~~ method ifTrue: [ 
+				^ self captureInClosure: node binding ssaValue
+			].
+		].
 		^ node binding ssaValue
 	].
 	self halt.

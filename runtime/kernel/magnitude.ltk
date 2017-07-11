@@ -129,4 +129,17 @@ SmallInteger category: 'arithmetic' methods: {
     ^ super aNumber
 ].
 
-}
+}.
+
+SmallInteger category: 'comparison' methods: {
+:[<= aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this <= other
+    ].
+
+    ^ super aNumber
+].
+
+}.

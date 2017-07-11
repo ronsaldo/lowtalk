@@ -1,4 +1,4 @@
-as yet unclassified
+top level entry points
 tryToReturnImplicitly: value type: valueType
 	| returnType |
 	returnType := method returnType.

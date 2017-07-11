@@ -17,6 +17,7 @@ visitLetExpressionNode: node
 	variable := LowtalkMethodLocalVariable new
 		valueType: node valueType;
 		name: node identifier;
+		method: method;
 		isConstant: false.
 	environment setSymbol: variable name value: variable ifPresent: [ 
 		node semanticError: 'Local variable name {1} is already in use in the current scope.' format: { variable name printString }

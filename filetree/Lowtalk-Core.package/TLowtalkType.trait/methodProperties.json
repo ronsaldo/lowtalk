@@ -28,6 +28,7 @@
 		"specialMessageTypeForMetaSelector:" : "RonieSalgado 6/26/2017 22:42",
 		"isFloatType" : "RonieSalgado 5/24/2017 23:15",
 		"arithmeticCoerceWithPointer:" : "RonieSalgado 5/24/2017 23:17",
+		"arithmeticCoerceWithBoolean:" : "RonieSalgado 7/10/2017 23:42",
 		"ref" : "RonieSalgado 5/24/2017 23:28",
 		"classBindingWithCompiler:" : "RonieSalgado 7/3/2017 21:49",
 		"isPrimitiveType" : "RonieSalgado 5/24/2017 23:15",

@@ -1,0 +1,4 @@
+accessing
+closureInstantiateFunction
+	<compileTime>
+	^ closureInstantiateFunction

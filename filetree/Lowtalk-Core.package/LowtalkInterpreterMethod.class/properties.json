@@ -15,7 +15,9 @@
 		"parentMethod",
 		"hasLocalReturns",
 		"selector",
-		"type"
+		"type",
+		"receiverSSAValue",
+		"ssaFunction"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

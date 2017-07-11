@@ -219,6 +219,9 @@ newObjectHeaderWithWords
         type == #bytes ifTrue: [
             ^ createFormatSpec #{ObjectFormatIndexable8 . 0 }
         ].
+        type == #mixedObject ifTrue: [
+            ^ createFormatSpec #{ObjectFormatMixedObject . 0 }
+        ].
 
         Compiler compileError: 'Unsupported object type {1}' format: {type}.
         ^ nil
@@ -270,7 +273,9 @@ newObjectHeaderWithWords
         let slotCount<UIntPointer> := 0.
         displayedSlotSize < UIntPointer size ifTrue: [
             slotCount := (bodySize + OopSize - 1) // OopSize.
-            instanceFormat := format castTo: UInt8.
+
+            let fieldsPerSlot := OopSize // displayedSlotSize.
+            instanceFormat := format + ((fieldsPerSlot - bodySize) \\ fieldsPerSlot) castTo: UInt8.
         ] ifFalse: [
             slotCount := bodySize // OopSize.
             instanceFormat := format castTo: UInt8
@@ -291,6 +296,29 @@ newObjectHeaderWithWords
             yourself.
 
         "LibC printf #{c'result slotCount %d -> %d instanceFormat: %d\n' . slotCount . result value slotCount . result value format}."
+        ^ result
+    ].
+
+    Constant named: #basicNewMixedBytes value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :dynamicObjectCount<UIntPointer> :bytesCount<UIntPointer> |
+        <cdecl>
+        <localReturn>
+
+        let totalSize<UIntPointer> := dynamicObjectCount * OopSize + bytesCount.
+        let slotCount<UIntPointer> := (totalSize + OopSize - 1) // OopSize.
+        let instanceFormat<UInt8> := (ObjectFormatMixedObject + ((OopSize - totalSize) \\ OopSize)) castTo: UInt8.
+
+        let objectSize := ObjectHeader size + (slotCount * OopSize).
+        let result := LibC malloc #{objectSize} reinterpretCastTo: ObjectHeader pointer.
+        LibC memset #{result . 0 . objectSize}.
+
+        result value
+            classPointer: class;
+            identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
+            slotCount: slotCount;
+            refCount: 0;
+            format: instanceFormat;
+            yourself.
+
         ^ result
     ].
 

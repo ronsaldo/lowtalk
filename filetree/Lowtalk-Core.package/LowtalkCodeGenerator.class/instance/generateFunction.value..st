@@ -1,9 +1,11 @@
-as yet unclassified
+top level entry points
 generateFunction: ssaFunction value: functionValue
-	| node result startArgument |
+	| node startArgument |
 	node := functionValue definition node.
 	method := functionValue definition.
 	selfType := method receiverType.
+	method ssaFunction: ssaFunction.
+	currentFunction := ssaFunction.
 	
 	"Create the builders"
 	allocaBuilder := SLVMBuilder on: ssaFunction.
@@ -20,6 +22,7 @@ generateFunction: ssaFunction value: functionValue
 	selfType isVoidType ifFalse: [ 
 		startArgument := 1.
 		selfValue := ssaFunction arguments first.
+		method receiverSSAValue: selfValue.
 	].
 
 	method arguments doWithIndex: [ :arg :index |
@@ -35,26 +38,4 @@ generateFunction: ssaFunction value: functionValue
 
 	self flag: 'TODO: Initialize the temporary variables with 0 or nil.'.
 	
-	result := self visitNode: node body.
-	
-	allocaBuilder jump: bodyBlock.
-	builder isLastTerminator ifFalse: [
-		method hasLocalReturns ifTrue: [ 
-			self tryToReturnImplicitly: selfValue type: selfType
-		] ifFalse: [ 
-			self tryToReturnImplicitly: result type: node body type
-		]
-
-	].
-
-	(method selector isNotNil or:
-	[ (method methodClass classBindingWithCompiler: compiler) isNotNil
-	or: [ ssaFunction dynamicLiterals isNotEmpty ]]) ifTrue: [ 
-		ssaFunction
-			addRequiredDynamicLiteral: method selector;
-			addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler).
-
-	].
-	
-	"Create the function context metadata"
-	ssaFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ]
+	self generateFunctionBody: node body.

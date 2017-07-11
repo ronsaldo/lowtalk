@@ -3,4 +3,6 @@ Compiler
     evaluateFileNamed: 'bootstrap.ltk';
     evaluateFileNamed: 'messageSend.ltk';
     evaluateFileNamed: 'magnitude.ltk';
+    evaluateFileNamed: 'blockClosure.ltk';
+    evaluateFileNamed: 'collections.ltk';
     yourself

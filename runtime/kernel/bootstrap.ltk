@@ -50,7 +50,7 @@ let bootstrapClassHierarchy := #(
                 (Set WeakSet pointers () ())
         (Collection SequenceableCollection pointers () ())
             (SequenceableCollection OrderedCollection pointers (array firstIndex lastIndex) ())
-            (Collection ArrayedCollection pointers () ())
+            (SequenceableCollection ArrayedCollection pointers () ())
                 (ArrayedCollection Array variablePointers () ())
                     (Array WeakArray variableWeakPointers () ())
                 (ArrayedCollection ByteArray bytes () ())
@@ -68,8 +68,7 @@ let bootstrapClassHierarchy := #(
     (Object InstructionStream pointers (sender pc) ())
         (InstructionStream Context variablePointers (stackp method closureOrNil receiver) ())
 
-    (Object BlockClosure variablePointers (outerContext startpc numArgs) ())
-        (BlockClosure FullBlockClosure variablePointers (receiver) ())
+    (Object BlockClosure mixedObject (argumentDescriptor entryPoint) ())
 
     (Object Mutex pointers () ())
     (Object Semaphore pointers () ())
@@ -411,7 +410,9 @@ let oopSize := UIntPointer size.
 oopSize = 4 ifTrue: [
     ObjectModel ImmediateClassTable
         atOffset: 0 put: UndefinedObject;
-        atOffset: 1 put: SmallInteger.
+        atOffset: 1 put: SmallInteger;
+        atOffset: 2 put: Character;
+        atOffset: 3 put: SmallInteger.
 ] ifFalse: [
     ObjectModel ImmediateClassTable
         atOffset: 0 put: UndefinedObject;

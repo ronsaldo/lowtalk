@@ -45,6 +45,7 @@ analyzeMethod: methodNode receiverType: receiverType environment: baseEnvironmen
 	
 	self withEnvironment: methodEnvironment do: [ 
 		arguments do: [ :arg |
+			arg method: method.
 			environment setSymbol: arg name value: arg ifPresent: [ 
 				arg definitionNode semanticError: 'Argument variable name {1} is already in use.' format: { arg name printString }
 			].

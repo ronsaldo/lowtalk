@@ -35,7 +35,8 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 			condition := self emitComparison: #>= left: iterationValue right: stopValue type: coercionType at: message.	
 		] ifFalse: [ 
 			condition := self emitComparison: #<= left: iterationValue right: stopValue type: coercionType at: message.	
-		]
+		].
+		condition := self ensureConditionIsBoolean: condition
 	] ifFalse: [
 		"Check the increment sign"
 		positiveIncrement := self emitComparison: #>= left: incrementValue right: (self coerceImplicitly: 0 type: compiler integerLiteralType to: coercionType at: message) type: coercionType at: message.
@@ -48,11 +49,13 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 		"Positive increment"
 		builder currentBlock: positiveComparisonBlock.
 		positiveComparisonResult := self emitComparison: #<= left: iterationValue right: stopValue type: coercionType at: message.
+		positiveComparisonResult := self ensureConditionIsBoolean: positiveComparisonResult.
 		builder jump: incrementComparisonMerge.
 		
 		"Negative increment"
 		builder currentBlock: negativeComparisonBlock.
 		negativeComparisonResult := self emitComparison: #>= left: iterationValue right: stopValue type: coercionType at: message.
+		negativeComparisonResult := self ensureConditionIsBoolean: negativeComparisonResult.
 		builder jump: negativeComparisonResult.
 		
 		builder currentBlock: incrementComparisonMerge.

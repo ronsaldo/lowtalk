@@ -6,7 +6,9 @@ visitInlinedBlockArgument: argumentNode
 	variable := LowtalkMethodInlineArgument new
 		valueType: argumentNode type;
 		name: argumentNode name;
-		isConstant: true.
+		isConstant: true;
+		method: method.
+		
 	environment setSymbol: variable name value: variable ifPresent: [ 
 		argumentNode semanticError: 'Argument variable name {1} is already in use.' format: { variable name printString }
 	].

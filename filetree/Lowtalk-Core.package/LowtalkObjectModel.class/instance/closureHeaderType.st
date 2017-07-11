@@ -1,0 +1,4 @@
+accessing
+closureHeaderType
+	<compileTime>
+	^ closureHeaderType

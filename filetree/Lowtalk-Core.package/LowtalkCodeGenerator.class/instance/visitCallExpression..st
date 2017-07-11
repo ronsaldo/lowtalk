@@ -3,7 +3,9 @@ visitCallExpression: callExpression
 	| receiver arguments argumentValue expectedType receiverType |
 	receiverType := callExpression receiver type withoutReferences.
 
-	(receiverType isFunctionType or: [ receiverType isBlockType ]) ifFalse: [
+	(receiverType isFunctionType or:
+	[ receiverType isBlockType or:
+	[(receiverType isPointerType and: [ receiverType pointed isFunctionType ])]]) ifFalse: [
 		self halt.
 	].
 
@@ -12,6 +14,9 @@ visitCallExpression: callExpression
 	receiver := self coerceImplicitly: receiver type: callExpression receiver type to: receiverType at: callExpression.
 	(receiver isFunction and: [ receiverType isBlockType ]) ifTrue: [ 
 		receiverType := receiverType functionType
+	].
+	(receiverType isPointerType and: [ receiverType pointed isFunctionType ]) ifTrue: [ 
+		receiverType := receiverType pointed
 	].
 	
 	"Get the arguments"

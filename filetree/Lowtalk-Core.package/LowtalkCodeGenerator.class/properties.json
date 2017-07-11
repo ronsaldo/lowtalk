@@ -18,7 +18,11 @@
 		"bodyBlock",
 		"builder",
 		"selfType",
-		"selfValue"
+		"selfValue",
+		"currentFunction",
+		"parentCodeGenerator",
+		"capturedValueDictionary",
+		"capturedValues"
 	],
 	"name" : "LowtalkCodeGenerator",
 	"type" : "normal"
