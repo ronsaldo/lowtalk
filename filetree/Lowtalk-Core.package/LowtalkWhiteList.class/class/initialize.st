@@ -3,6 +3,13 @@ initialize
 	SelectorsAlwaysAllowed := Set newFrom: #(
 		yourself
 		
+		"Conversions"
+		asArray
+		asSymbol
+		asString
+		asInteger
+		asFloat
+		
 		"Comparisons"
 		= ==
 		~= ~~
@@ -41,6 +48,14 @@ initialize
 		to:by:
 		to:by:do:
 		to:do:
+		
+		collect:
+		select:
+		select:thenDo:
+		select:thenCollect:
+		
+		"String splitting"
+		splitOn:
 		
 		"Sequences operations"
 		,

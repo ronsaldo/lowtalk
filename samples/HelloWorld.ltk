@@ -1,31 +1,29 @@
-"Global named: #Main value: [:arguments |
-    LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
-    0
-].
+Constant named: #Main value: [:arguments |
+    <localReturn>
+    let out :=  FileStream stdout.
+    out nextPutAll: 'Hello World'; lf.
 
+    arguments do: [:arg |
+        out nextPutAll: arg; lf
+    ].
+
+    out nextPutAll: 'Allclasses in the system:'; lf.
+
+    ProtoObject withAllSubclassesDo: [:cls |
+        out nextPutAll: cls name; lf
+    ].
+
+    ^ 0
+].
 
 Namespace named: #EntryPoint members: [
     Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+        <localReturn>
         let arguments := Array new: argc.
         1 to: argc do: [ :i |
             arguments at: i put: (argv at: i) readString
         ].
 
-        (Main value: arguments) asNativeInt32
-    ]
-]
-"
-
-Namespace named: #EntryPoint members: [
-    Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
-        let arguments := Array new: argc.
-        1 to: argc do: [ :i |
-            arguments at: i put: (ByteString new: 10)
-        ].
-        LibC printf #{c'ArgumentCount: %d\n' . arguments size castTo: UInt32 }.
-        arguments do: [:arg | LibC printf #{c'argc %d arg %p\n' . argc . arg reinterpretCastTo: Void pointer}].
-
-        LibC printf #{c'Allocated array: %p\n' . arguments reinterpretCastTo: Void pointer }.
-        0
+        ^ Main #{arguments} castTo: Int32
     ]
 ]

@@ -1,0 +1,90 @@
+Object subclass: #Stream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+Stream subclass: #PositionableStream
+	instanceVariableNames: 'collection position readLimit'
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+PositionableStream subclass: #ReadStream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+PositionableStream subclass: #WriteStream
+	instanceVariableNames: 'writeLimit'
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+WriteStream subclass: #ReadWriteStream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+ReadWriteStream subclass: #FileStream
+	instanceVariableNames: 'rwmode'
+	classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles'
+	package: 'Files-Deprecated'.
+
+FileStream subclass: #StandardFileStream
+	instanceVariableNames: 'handle'
+	classVariableNames: ''
+	package: 'Files-Deprecated'.
+
+Stream category: 'writing' methods: {
+:[nextPutAll: aCollection
+	"Append the elements of aCollection to the sequence of objects accessible
+	by the receiver. Answer aCollection."
+
+	aCollection do: [:v | self nextPut: v].
+	^aCollection
+].
+
+:[lf
+    ^ self nextPut: 10
+].
+
+:[cr
+    ^ self nextPut: 13
+].
+
+}.
+
+StandardFileStream class category: 'construction' methods: {
+:[handle: aHandle
+    ^ self basicNew handle: aHandle
+]
+}.
+
+StandardFileStream category: 'accessing' methods: {
+:[handle
+    ^ handle
+].
+
+:[handle: aHandle
+    handle := aHandle
+].
+
+:[nextPut: aCharacter
+    let file := handle castTo: LibC FILE pointer.
+    let characterValue := aCharacter castTo: Int32.
+    LibC fputc #{characterValue . file }.
+].
+}.
+
+FileStream class category: 'accessing' methods: {
+:[stdout
+    ^ StandardFileStream handle: LibC stdout
+].
+
+:[stdin
+    ^ StandardFileStream handle: LibC stdin
+].
+
+:[stderr
+    ^ StandardFileStream handle: LibC stderr
+].
+
+}.

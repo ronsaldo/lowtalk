@@ -1,0 +1,110 @@
+
+Behavior category: 'primitives' methods: {
+:[registerClassWithObjectModel
+    Compiler ifNil: [
+        ObjectModel registerClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
+    ] ifNotNil: [
+        (Compiler objectModel registerClass: self)
+            type: self formatTypeName;
+            instanceVariables: self instanceVariables.
+    ]
+].
+
+:[formatTypeName
+    ^ ObjectModel getTypeNameFromFormatSpec #{format castTo: UInt32}
+]
+
+}.
+
+ClassDescription category: 'initialization' methods: {
+:[initializeWithInstanceVariableNames: newInstanceVariableNames formatType: formatType
+    instanceVariables := newInstanceVariableNames.
+    format := ObjectModel createNamedFormatSpec #{formatType . superclass instSize + instanceVariables size castTo: UInt32}.
+].
+
+:[initializeWithInstanceVariableNameString: newInstanceVariableNameString formatType: formatType
+    self initializeWithInstanceVariableNames: ((newInstanceVariableNameString splitOn: ' ') select: #isNotEmpty thenCollect: #asSymbol) asArray formatType: formatType
+].
+
+}.
+
+Class category: 'subclass creation' methods: {
+:[subclass: aSubclassSymbol instanceVariableNames: instVarNames classVariableNames: classVarNames package: aPackageSymbol
+	"Added to allow for a simplified subclass creation experience. "
+
+	^ self
+		subclass: aSubclassSymbol
+		instanceVariableNames: instVarNames
+		classVariableNames: classVarNames
+		poolDictionaries: ''
+		package: aPackageSymbol
+].
+
+:[subclass: t instanceVariableNames: f classVariableNames: d poolDictionaries: s package: cat
+	^ self
+		subclass: t
+		uses: {}
+		instanceVariableNames: f
+		classVariableNames: d
+		poolDictionaries: s
+		package: cat
+].
+
+:[subclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+    "Create the meta class"
+    let metaClass := Metaclass new.
+    metaClass
+        superclass: self class;
+        initializeWithInstanceVariableNames: #() formatType: #pointers;
+        methodDict: MethodDictionary new;
+        registerClassWithObjectModel.
+
+    "Create the class"
+    let class := metaClass new.
+    metaClass thisClass: class.
+    class
+        name: aName;
+        superclass: self;
+        initializeWithInstanceVariableNameString: someInstanceVariableNames formatType: #pointers;
+        methodDict: MethodDictionary new;
+        registerClassWithObjectModel.
+
+    "Register the class in the environment"
+    "TODO: Allow using a Namespace"
+    Global named: aName type: _DynamicObject value: class.
+
+    self addSubclass: class.
+
+    ^ class
+].
+
+}.
+
+Behavior category: 'enumerating' methods: {
+:[withAllSubclassesDo: aBlock
+    aBlock value: self.
+    self allSubclassesDo: aBlock
+].
+
+:[allSubclassesDo: aBlock
+	"Evaluate the argument, aBlock, for each of the receiver's subclasses."
+
+	self subclassesDo: [:cl |
+		aBlock value: cl.
+		cl allSubclassesDo: aBlock
+    ]
+].
+
+:[subclassesDo: aBlock
+    self subclasses do: aBlock
+].
+
+}.
+
+Class category: 'enumerating' methods: {
+:[subclassesDo: aBlock
+    subclasses ifNotNil: [
+        subclasses do: aBlock
+    ]
+].
+}

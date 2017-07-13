@@ -1,5 +1,6 @@
 {
 	"instance" : {
+		"namespaceEnvironment" : "RonieSalgado 7/12/2017 22:30",
 		"lookSymbol:ifAbsent:" : "RonieSalgado 5/25/2017 01:48",
 		"receiver" : "RonieSalgado 5/25/2017 00:42",
 		"receiverType" : "RonieSalgado 5/25/2017 00:40",
@@ -7,8 +8,8 @@
 		"lookSymbol:ifAbsentPut:" : "RonieSalgado 5/25/2017 00:43",
 		"receiverType:" : "RonieSalgado 5/25/2017 00:40",
 		"lookSymbol:" : "RonieSalgado 5/25/2017 01:48",
-		"receiverTypeOr:" : "RonieSalgado 5/25/2017 02:47",
 		"receiver:" : "RonieSalgado 5/25/2017 00:42",
+		"receiverTypeOr:" : "RonieSalgado 5/25/2017 02:47",
 		"lookSymbol:ifPresent:" : "RonieSalgado 5/25/2017 01:48"
 	},
 	"class" : { }

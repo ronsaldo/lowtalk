@@ -2,4 +2,8 @@
 Namespace named: #LibC members: [
     "Memory management."
     Constant externalC: #memset type: (Void pointer, Int32, SizeT) -> Void pointer.
+    Constant externalC: #memcpy type: (Void pointer, Void const pointer, SizeT) -> Void pointer.
+
+    Constant externalC: #strlen type: CString -> SizeT.
+    Constant externalC: #strcpy type: (CString, ConstCString) -> CString.
 ]

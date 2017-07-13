@@ -7,7 +7,8 @@
 	"classvars" : [
 		"BlockSpecialMessages",
 		"CommonSpecialMessages",
-		"CommonTypeSpecialMessages"
+		"CommonTypeSpecialMessages",
+		"DynamicObjectSpecialMessages"
 	],
 	"instvars" : [ ],
 	"name" : "LowtalkTypeSharedPool",

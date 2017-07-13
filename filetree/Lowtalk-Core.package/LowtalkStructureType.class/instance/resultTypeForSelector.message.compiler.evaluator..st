@@ -1,5 +1,5 @@
 accessing
-resultTypeForSelector: selector message: messageNode compiler: aCompiler
+resultTypeForSelector: selector message: messageNode compiler: aCompiler evaluator: evaluator
 	| precedence |	
 	precedence := selector precedence.
 	(self concreteMethodForSelector: selector) ifNotNil: [ 
@@ -17,4 +17,4 @@ resultTypeForSelector: selector message: messageNode compiler: aCompiler
 		]
 	].
 
-	^ super resultTypeForSelector: selector message: messageNode compiler: aCompiler
+	^ super resultTypeForSelector: selector message: messageNode compiler: aCompiler evaluator: evaluator

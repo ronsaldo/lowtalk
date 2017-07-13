@@ -1,0 +1,4 @@
+accessing
+pointerToObjectFunction
+	<compileTime>
+	^ pointerToObjectFunction

@@ -40,7 +40,9 @@
 		"smallFloatTagMask",
 		"smallFloatShift",
 		"closureInstantiateFunction",
-		"closureHeaderType"
+		"closureHeaderType",
+		"pointerToObjectFunction",
+		"objectToPointerFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

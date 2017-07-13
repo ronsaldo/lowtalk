@@ -1,4 +1,5 @@
 Compiler
     evaluateFileNamed: 'libc/libc.ltk';
     evaluateFileNamed: 'kernel/kernel.ltk';
+    evaluateFileNamed: 'collections/collections.ltk';
     yourself

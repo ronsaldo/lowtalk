@@ -4,9 +4,7 @@
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [
-		"DynamicObjectSpecialMessages"
-	],
+	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "LowtalkDynamicObjectType",
 	"type" : "normal"

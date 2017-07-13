@@ -5,4 +5,8 @@ ssaConvert: value explicitlyTo: targetType with: builder at: node
 	targetType isFloatType ifTrue: [ ^ builder dynamicObjectToFloatCast: value target: targetType ssaType ].
 	targetType isSpecificDynamicObjectType ifTrue: [ ^ value ].
 	
+	targetType isPointerType ifTrue: [
+		^ builder dynamicObjectToPointerCast: value target: targetType ssaType typeObject: (builder addDynamicLiteral: targetType)
+	].
+	
 	^ super ssaConvert: value explicitlyTo: targetType with: builder at: node

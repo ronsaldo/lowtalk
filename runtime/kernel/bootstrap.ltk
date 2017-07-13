@@ -74,7 +74,7 @@ let bootstrapClassHierarchy := #(
     (Object Semaphore pointers () ())
 
     "FFI"
-   (Object ExternalAddress bytes () (wordSize))
+   (Object ExternalAddress bytes () ())
     (Object ExternalObject pointers (handle) ())
         (ExternalObject ExternalFunction pointers (flags argTypes) ())
         (ExternalObject ExternalLibrary pointers (name) ())
@@ -176,6 +176,7 @@ bootstrapClassHierarchy do: [:classDefinition |
 "Method dictionary definition."
 let methodDictionarySize := classInstanceSizeDictionary at: #MethodDictionary.
 let MethodDictionary_initialize := [ :self<MethodDictionary> |
+    <selector: #initialize>
     tally := 0.
     array := #().
     values := #().
@@ -358,6 +359,7 @@ Behavior methodDict
     at: #lookupSelector put: Behavior_lookupSelector.
 
 MethodDictionary methodDict
+    at: #initialize put: MethodDictionary_initialize;
     at: #atOrNil: put: MethodDictionary_atOrNil;
     at: #at:putNoCheck: put: MethodDictionary_atPutNoCheck;
     at: #grow put: MethodDictionary_grow.
@@ -441,6 +443,17 @@ Behavior category: 'instance creation' methods: {
 
 }.
 
+Behavior category: 'format specification' methods: {
+:[instSize
+    ^ format bitAnd: 16rffff
+].
+
+:[instSpec
+    ^ format >> 16 bitAnd: 16r1f
+].
+
+}.
+
 ProtoObject category: 'initialization' methods: {
 :[initialize
     "By default do nothing"
@@ -510,6 +523,44 @@ ProtoObject category: 'reflective operations' methods: {
 
 }.
 
+"More accessing methods, to finish the class hierarchy bootstrapping process"
+Behavior category: 'accessing' methods: {
+:[superclass: aSuperclass
+    superclass := aSuperclass
+].
+
+:[format
+    ^ format
+].
+
+:[format: aFormat
+    format := aFormat
+].
+
+:[layout
+    ^ layout
+].
+
+:[layout: aLayout
+    layout := aLayout
+].
+
+:[methodDict: aMethodDictionary
+    methodDict := aMethodDictionary
+].
+
+}.
+
+ClassDescription category: 'accessing' methods: {
+:[instanceVariables
+    ^ instanceVariables
+].
+
+:[basicSetInstanceVariables: anArray
+    instanceVariables := anArray
+].
+}.
+
 Class category: 'accessing' methods: {
 :[name
     ^ name
@@ -555,6 +606,13 @@ let classHierarchyInitializationFinish := [
         let name := classDefinition at: 2.
         let class := _GlobalNamespace at: name.
         let metaClass := class class.
+
+        "Set the instance variables value"
+        let instanceVariables := classDefinition at: 4.
+        let metaInstanceVariables := classDefinition at: 5.
+
+        class basicSetInstanceVariables: instanceVariables.
+        metaClass basicSetInstanceVariables: metaInstanceVariables.
 
         "Set the class name"
         class name: name.

@@ -11,7 +11,8 @@
 		"canBeReinterpretedTo:" : "RonieSalgado 6/27/2017 00:51",
 		"isSpecificDynamicObjectType" : "RonieSalgado 5/6/2017 23:23",
 		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/25/2017 03:23",
-		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:57"
+		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:57",
+		"specialMessageTypeForSelector:" : "RonieSalgado 7/12/2017 19:58"
 	},
 	"class" : { }
 }

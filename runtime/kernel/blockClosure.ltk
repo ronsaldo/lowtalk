@@ -9,12 +9,15 @@ Namespace named: #ObjectModel members: [
         #entryPoint => UIntPointer.
     }.
 
+    let closureFixedFields := BlockClosure instanceVariables size castTo: UInt32.
+    Compiler staticAssert: (ClosureHeader size - ObjectHeader size) = (closureFixedFields * UIntPointer size).
+
     Constant named: #instantiateClosure value: [<ObjectHeader pointer> :entryPoint<UIntPointer> :argumentDescriptor<UIntPointer> :dynamicSlotCount<UIntPointer> :size<UIntPointer> |
         <cdecl>
         <localReturn>
 
-        LibC printf #{c'Argument descriptor: 0x%08X\n' . argumentDescriptor}.
-        let result := basicNewMixedBytes #{BlockClosure reinterpretCastTo: ObjectHeader pointer . "function"1 + dynamicSlotCount . size - (dynamicSlotCount * UIntPointer size)}.
+        "LibC printf #{c'Argument descriptor: 0x%08X\n' . argumentDescriptor}."
+        let result := basicNewMixedBytes #{BlockClosure reinterpretCastTo: ObjectHeader pointer . closureFixedFields + dynamicSlotCount. size - (dynamicSlotCount * UIntPointer size)}.
         let closure := result reinterpretCastTo: ClosureHeader pointer.
         closure value metadata argumentDescriptor := encodeSmallInteger #{argumentDescriptor}.
         closure value entryPoint := entryPoint + 1.

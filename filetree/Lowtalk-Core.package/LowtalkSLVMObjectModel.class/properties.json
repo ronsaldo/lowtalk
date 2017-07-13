@@ -10,7 +10,9 @@
 		"messageSendTrampoline",
 		"messageSuperSendTrampoline",
 		"contextMetaDataHeaderSize",
-		"closureInstantiateFunction"
+		"closureInstantiateFunction",
+		"pointerToObjectFunction",
+		"objectToPointerFunction"
 	],
 	"name" : "LowtalkSLVMObjectModel",
 	"type" : "normal"

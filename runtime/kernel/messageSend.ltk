@@ -82,7 +82,7 @@ Constant named: #sendLookupSelector value: [ <Oop> :behavior<_BehaviorHeader poi
 Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :lookupStart<ObjectModel ObjectHeader pointer> |
     <smalltalk_supersend>
     <localReturn>
-    LibC printf #{c'TODO: Super send selector %p lookupStart %p.\n' . (selector reinterpretCastTo: Void pointer) . (lookupStart reinterpretCastTo: Void pointer)}.
+    LibC fprintf #{LibC stderr. c'TODO: Super send selector %p lookupStart %p.\n' . (selector reinterpretCastTo: Void pointer) . (lookupStart reinterpretCastTo: Void pointer)}.
     LibC abort #{}.
     ^ 0
 ].
@@ -99,11 +99,11 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
     let method := sendLookupSelector #{receiverClass . selector}.
     method ifNil: [
         selector == (DNUSelector reinterpretCastTo: ObjectModel ObjectHeader pointer) ifTrue: [
-            LibC printf #{c'FATAL ERROR: Unhandled #doesNotUnderstand:\n'}.
+            LibC fprintf #{LibC stderr. c'FATAL ERROR: Unhandled #doesNotUnderstand:\n'}.
             LibC abort #{}.
         ].
 
-        LibC printf #{c'TODO: Implement sending does not understand [%p]%p (#%.*s)\n'. receiverClass . receiver . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}.
+        LibC fprintf #{LibC stderr. c'TODO: Implement sending does not understand [%p]%p (#%.*s)\n'. receiverClass . receiver . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}.
         LibC abort #{}.
     ].
 
@@ -115,7 +115,7 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
         let entryPoint := compiledMethod value entryPoint - 1 reinterpretCastTo: Void pointer.
         thisContext uncheckedReplaceFunctionWith: entryPoint.
     ] ifFalse: [
-        LibC printf #{c'TODO: dispatch to non compiled method\n'}.
+        LibC fprintf #{LibC stderr. c'TODO: dispatch to non compiled method\n'}.
         LibC abort #{}
     ].
 

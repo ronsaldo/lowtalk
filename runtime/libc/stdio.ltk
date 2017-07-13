@@ -1,4 +1,27 @@
 "Bindings for Stdio"
 Namespace named: #LibC members: [
-    Constant externalC: #printf type: (ConstCString -> Int32) cvariadic.
+    Structure named: #FILE slots: {}.
+
+    "Standard streams"
+    Constant externalC: #stdout type: FILE pointer.
+    Constant externalC: #stdin type: FILE pointer.
+    Constant externalC: #stderr type: FILE pointer.
+
+    "Files"
+    Constant externalC: #fopen type: ConstCString , ConstCString -> FILE pointer.
+    Constant externalC: #fclose type: FILE pointer -> CInt.
+
+    Constant externalC: #fwrite type: Void const pointer , SizeT , SizeT , FILE pointer -> SizeT.
+    Constant externalC: #fread type: Void const pointer , SizeT , SizeT , FILE pointer -> SizeT.
+
+    Constant externalC: #fgetc type: FILE pointer -> CInt.
+    Constant externalC: #fputc type: CInt , FILE pointer -> SizeT.
+
+    Constant externalC: #fseek type: FILE pointer , CLong , CInt-> CInt.
+    Constant externalC: #ftell type: FILE pointer -> CLong.
+
+    "Printing"
+    Constant externalC: #printf type: (ConstCString -> CInt) cvariadic.
+
+    Constant externalC: #fprintf type: ((FILE pointer , ConstCString) -> CInt) cvariadic.
 ]

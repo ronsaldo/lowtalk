@@ -1,0 +1,61 @@
+ExternalAddress class category: 'construction' methods: {
+:[new
+    ^ self basicNew: UIntPointer size
+].
+
+:[new: aSize
+    (aSize ~= UIntPointer size) ifTrue: [
+        self shouldNotImplement
+    ].
+    ^ self basicNew: aSize
+].
+
+:[null
+    ^ self new
+].
+
+}.
+
+ExternalAddress category: 'data conversion' methods: {
+:[readString
+    let pointer := (self firstFixedFieldPointerOfType: LibC CString pointer) value.
+    let size := LibC strlen #{pointer}.
+
+    let result := ByteString basicNew: size.
+    LibC memcpy #{result firstFixedFieldPointerOfType: Void pointer . pointer . size}.
+    ^ result
+].
+
+}.
+
+Namespace named: #ObjectModel members: [
+    Constant named: #pointerToObjectConversion value: [<ObjectHeader pointer> :pointer<Void pointer> :type<ObjectHeader pointer> |
+        <localReturn>
+        pointer ifNil: [ ^ nil ].
+        let result := basicNewBytes #{ExternalAddress reinterpretCastTo: ObjectHeader pointer . UIntPointer size}.
+
+        "Store the pointer"
+        let destPointer := getFirstFixedFieldPointer #{result} reinterpretCastTo: Void pointer pointer.
+        destPointer value := pointer.
+        ^ result
+    ].
+
+    Constant named: #objectToPointerConversion value: [<Void pointer> :object<ObjectHeader pointer> :type<ObjectHeader pointer> |
+        <localReturn>
+        object ifNil: [ ^ nil ].
+
+        let class := ObjectModel getObjectClass #{object}.
+        class ~~ (ExternalAddress reinterpretCastTo: ObjectHeader pointer) ifTrue: [
+            LibC fprintf #{LibC stderr . c'FATAL Error: trying to convert a non-pointer object into a pointer.\n'}.
+            LibC abort #{}.
+        ].
+
+        let pointerPointer := getFirstFixedFieldPointer #{object} reinterpretCastTo: Void pointer pointer.
+        ^ pointerPointer value
+    ].
+
+    Compiler objectModel
+        pointerToObjectFunction: pointerToObjectConversion;
+        objectToPointerFunction: objectToPointerConversion;
+        yourself.
+].

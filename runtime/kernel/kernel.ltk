@@ -5,4 +5,9 @@ Compiler
     evaluateFileNamed: 'magnitude.ltk';
     evaluateFileNamed: 'blockClosure.ltk';
     evaluateFileNamed: 'collections.ltk';
+    evaluateFileNamed: 'class.ltk';
+
+    evaluateFileNamed: 'ffi.ltk';
+    evaluateFileNamed: 'streams.ltk';
+    evaluateFileNamed: 'object.ltk';
     yourself

@@ -227,6 +227,46 @@ newObjectHeaderWithWords
         ^ nil
     ].
 
+    Constant named: #getTypeNameFromFormatSpec value: [:formatSpec<UInt32> |
+        <localReturn>
+        let format := formatSpec >> 16.
+        (format = ObjectFormatEmpty or: [format = ObjectFormatFixedSize]) ifTrue: [
+            ^ #pointers
+        ].
+        (format = ObjectFormatVariableSizeNoIVars or: [format = ObjectFormatVariableSizeNoIVars]) ifTrue: [
+            ^ #variablePointers
+        ].
+        format = ObjectFormatVariableSizeNoIVars  ifTrue: [
+            ^ #variablePointers
+        ].
+
+        format = ObjectFormatWeakVariableSize  ifTrue: [
+            ^ #variableWeakPointers
+        ].
+
+        format = ObjectFormatImmediate  ifTrue: [
+            ^ #immediate
+        ].
+
+        format = ObjectFormatIndexable32  ifTrue: [
+            ^ #words
+        ].
+
+        format = ObjectFormatIndexable16  ifTrue: [
+            ^ #shorts
+        ].
+
+        format = ObjectFormatIndexable8  ifTrue: [
+            ^ #bytes
+        ].
+
+        format = ObjectFormatMixedObject  ifTrue: [
+            ^ #mixedObject
+        ].
+
+        ^ nil
+    ].
+
     Constant named: #basicNewVariable value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :formatOop<UIntPointer> :variableSizeOop<UIntPointer> |
         <cdecl>
         <localReturn>
@@ -299,6 +339,28 @@ newObjectHeaderWithWords
         ^ result
     ].
 
+    Constant named: #basicNewBytes value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :bytesCount<UIntPointer> |
+        <cdecl>
+        <localReturn>
+
+        let slotCount<UIntPointer> := (bytesCount + OopSize - 1) // OopSize.
+        let instanceFormat<UInt8> := (ObjectFormatIndexable8 + ((OopSize - bytesCount) \\ OopSize)) castTo: UInt8.
+
+        let objectSize := ObjectHeader size + (slotCount * OopSize).
+        let result := LibC malloc #{objectSize} reinterpretCastTo: ObjectHeader pointer.
+        LibC memset #{result . 0 . objectSize}.
+
+        result value
+            classPointer: class;
+            identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
+            slotCount: slotCount;
+            refCount: 0;
+            format: instanceFormat;
+            yourself.
+
+        ^ result
+    ].
+
     Constant named: #basicNewMixedBytes value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :dynamicObjectCount<UIntPointer> :bytesCount<UIntPointer> |
         <cdecl>
         <localReturn>
@@ -364,17 +426,17 @@ newObjectHeaderWithWords
             ^ firstSlot at: index
         ].
 
-        format > ObjectFormatIndexable8 ifTrue: [
+        format >= ObjectFormatIndexable8 ifTrue: [
             let bytes := firstSlot reinterpretCastTo: UInt8 pointer.
             ^ encodeSmallInteger #{bytes at: index} reinterpretCastTo: ObjectHeader pointer
         ].
 
-        format > ObjectFormatIndexable16 ifTrue: [
+        format >= ObjectFormatIndexable16 ifTrue: [
             let shorts := firstSlot reinterpretCastTo: UInt16 pointer.
             ^ encodeSmallInteger #{shorts at: index} reinterpretCastTo: ObjectHeader pointer
         ].
 
-        format > ObjectFormatIndexable32 ifTrue: [
+        format >= ObjectFormatIndexable32 ifTrue: [
             let words := firstSlot reinterpretCastTo: UInt32 pointer.
             ^ encodeSmallInteger #{words at: index} reinterpretCastTo: ObjectHeader pointer
         ].
@@ -393,17 +455,17 @@ newObjectHeaderWithWords
             ^ nil
         ].
 
-        format > ObjectFormatIndexable8 ifTrue: [
+        format >= ObjectFormatIndexable8 ifTrue: [
             let bytes := firstSlot reinterpretCastTo: UInt8 pointer.
             (bytes at: index) := decodeSmallInteger #{value reinterpretCastTo: UIntPointer} castTo: UInt8
         ].
 
-        format > ObjectFormatIndexable16 ifTrue: [
+        format >= ObjectFormatIndexable16 ifTrue: [
             let shorts := firstSlot reinterpretCastTo: UInt16 pointer.
             (shorts at: index) := decodeSmallInteger #{value reinterpretCastTo: UIntPointer} castTo: Int16
         ].
 
-        format > ObjectFormatIndexable32 ifTrue: [
+        format >= ObjectFormatIndexable32 ifTrue: [
             let words := firstSlot reinterpretCastTo: UInt32 pointer.
             (words at: index) := decodeSmallInteger #{value reinterpretCastTo: UIntPointer} castTo: Int32
         ].
@@ -411,6 +473,9 @@ newObjectHeaderWithWords
         "format = ObjectFormatIndexable64"
         "let qwords := firstSlot reinterpretCastTo: UInt64 pointer.
         (qwords at: index) := decodeSmallInteger #{value reinterpretCastTo: UIntPointer}."
+    ].
+
+    Constant named: #registerClass value: [<Void> :object<ObjectHeader pointer> |
     ].
 
     Compiler objectModel

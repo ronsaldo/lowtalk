@@ -71,3 +71,8 @@ initialize
 		whileNotNil: WhileLoop
 		whileNil: WhileLoop
 	).
+
+	DynamicObjectSpecialMessages := Dictionary newFromPairs: #(
+		firstFixedFieldPointer 			FirstSlotPointer
+		firstFixedFieldPointerOfType:  FirstSlotPointer
+	)

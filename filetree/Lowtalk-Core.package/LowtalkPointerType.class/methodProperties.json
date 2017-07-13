@@ -9,10 +9,10 @@
 		"pointed" : "RonieSalgado 5/4/2017 17:33",
 		"buildSSAType" : "RonieSalgado 5/4/2017 17:58",
 		"canBeReinterpretedTo:" : "RonieSalgado 6/27/2017 00:51",
-		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/7/2017 21:14",
+		"canBeImplicitlyConvertedTo:" : "RonieSalgado 7/12/2017 17:55",
 		"size" : "RonieSalgado 5/4/2017 17:34",
 		"restrict" : "RonieSalgado 5/7/2017 17:04",
-		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 5/7/2017 21:15",
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 7/12/2017 18:04",
 		"convertValue:toSSAConstantWith:" : "RonieSalgado 5/31/2017 22:57",
 		"defaultValue" : "RonieSalgado 5/18/2017 20:38",
 		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 5/7/2017 16:33",
@@ -21,7 +21,7 @@
 		"hash" : "RonieSalgado 5/8/2017 20:51",
 		"=" : "RonieSalgado 5/8/2017 20:51",
 		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:58",
-		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 5/20/2017 21:21"
+		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 7/12/2017 23:06"
 	},
 	"class" : {
 		"initialize" : "RonieSalgado 6/27/2017 00:14"
