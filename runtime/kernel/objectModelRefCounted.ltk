@@ -25,8 +25,8 @@ Namespace named: #ObjectModel members: [
         Constant named: #OopTagMask type: UIntPointer value: 7.
         Constant named: #OopTagShift type: UIntPointer value: 3.
 
-        Constant named: #OopSmallIntegerTagMask type: UIntPointer value: 1.
-        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: OopTagMask.
+        Constant named: #OopSmallIntegerTagMask type: UIntPointer value: OopTagMask.
+        Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
         Constant named: #OopSmallIntegerShift type: UIntPointer value: OopTagShift.
 
         Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
@@ -89,7 +89,7 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #encodeSmallInteger value: [<UIntPointer> :value<IntPointer> |
         <cdecl>
-        (value << OopSmallIntegerShift | OopSmallIntegerTagMask) reinterpretCastTo: UIntPointer
+        ((value << OopSmallIntegerShift) | OopSmallIntegerTagValue) reinterpretCastTo: UIntPointer
     ].
 
     "Reference counting"
@@ -150,7 +150,7 @@ newObjectHeaderWithWords
     Constant named: #newObjectHeaderWithBytes value: [<ObjectHeader> :slotCount<UInt32> |
         <cdecl>
         ObjectHeader new
-            slotCount: (slotCount + OopSize - 1) // OopSize;
+            slotCount: ((slotCount + OopSize - 1) // OopSize castTo: UInt32);
             flags: StaticOopFlag;
             format: (ObjectFormatIndexable8 + ( (OopSize - slotCount) \\ OopSize) castTo: UInt8);
             yourself
@@ -270,7 +270,7 @@ newObjectHeaderWithWords
     Constant named: #basicNewVariable value: [<ObjectHeader pointer> :class<ObjectHeader pointer> :formatOop<UIntPointer> :variableSizeOop<UIntPointer> |
         <cdecl>
         <localReturn>
-                isSmallInteger #{formatOop} ifFalse: [
+        isSmallInteger #{formatOop} ifFalse: [
             ^ nil
         ].
 
@@ -330,7 +330,7 @@ newObjectHeaderWithWords
         result value
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
-            slotCount: slotCount;
+            slotCount: (slotCount castTo: UInt32);
             refCount: 0;
             format: instanceFormat;
             yourself.
@@ -353,7 +353,7 @@ newObjectHeaderWithWords
         result value
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
-            slotCount: slotCount;
+            slotCount: (slotCount castTo: UInt32);
             refCount: 0;
             format: instanceFormat;
             yourself.
@@ -376,7 +376,7 @@ newObjectHeaderWithWords
         result value
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
-            slotCount: slotCount;
+            slotCount: (slotCount castTo: UInt32);
             refCount: 0;
             format: instanceFormat;
             yourself.

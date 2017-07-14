@@ -16,7 +16,7 @@ Namespace named: #ObjectModel members: [
         <cdecl>
         <localReturn>
 
-        "LibC printf #{c'Argument descriptor: 0x%08X\n' . argumentDescriptor}."
+        "LibC printf #{c'Argument descriptor: %p\n' . argumentDescriptor}."
         let result := basicNewMixedBytes #{BlockClosure reinterpretCastTo: ObjectHeader pointer . closureFixedFields + dynamicSlotCount. size - (dynamicSlotCount * UIntPointer size)}.
         let closure := result reinterpretCastTo: ClosureHeader pointer.
         closure value metadata argumentDescriptor := encodeSmallInteger #{argumentDescriptor}.

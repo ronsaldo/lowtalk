@@ -90,8 +90,10 @@ Constant named: #superSendTrampoline value: [ :selector<ObjectModel ObjectHeader
 Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader pointer> :receiver<ObjectModel ObjectHeader pointer> |
     <smalltalk_send>
     <localReturn>
+    "LibC printf #{c'Send %p selector [p: %p]\n' . receiver . selector}."
+
     "LibC printf #{c'Send selector [p: %p, ih: %08X, v: %.*s]\n' .
-        (selector reinterpretCastTo: Void pointer) . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}."
+        selector . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}."
 
     let receiverClass := ObjectModel getObjectClass #{receiver} reinterpretCastTo: _BehaviorHeader pointer.
     "LibC printf #{c'receiver %p class %p\n' . receiver . receiverClass}."
