@@ -1,6 +1,6 @@
 "stddef.h bindings"
 Namespace named: #LibC members: [
     "CTypes"
-    Constant named: #SizeT value: UIntPointer.
+    Constant named: #SizeT value: CULong.
     Constant named: #PtrdiffT value: IntPointer.
 ]

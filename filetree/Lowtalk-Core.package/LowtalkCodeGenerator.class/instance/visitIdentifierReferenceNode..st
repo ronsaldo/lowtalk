@@ -24,5 +24,8 @@ visitIdentifierReferenceNode: node
 		].
 		^ node binding ssaValue
 	].
+	binding isNamespace ifTrue: [ 
+		node type isCompileTimeType ifTrue: [ ^ binding ].
+	].
 	self halt.
 	

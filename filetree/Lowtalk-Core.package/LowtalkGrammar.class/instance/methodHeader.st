@@ -1,3 +1,3 @@
-expressions
+accessing
 methodHeader
-	^ optionalTypeExpression, (unaryMethodHeader / binaryMethodHeader / keywordMethodHeader)
+	^ (unaryMethodHeader / binaryMethodHeader / keywordMethodHeader) , methodHeaderReturnType optional

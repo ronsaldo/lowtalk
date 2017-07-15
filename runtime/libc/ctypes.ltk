@@ -14,9 +14,14 @@ Namespace named: #LibC members: [
     Constant named: #CLongLong value: Int64.
     Constant named: #CULongLong value: UInt64.
 
-    "TODO: Select the correct long type according to the target platform."
-    Constant named: #CLong value: IntPointer.
-    Constant named: #CULong value: UIntPointer.
+    "Select the correct long type according to the target platform."
+    Compiler operatingSystemName = #win32 ifTrue: [
+        Constant named: #CLong value: Int32.
+        Constant named: #CULong value: UInt32.
+    ] ifFalse: [
+        Constant named: #CLong value: IntPointer.
+        Constant named: #CULong value: UIntPointer.
+    ].
 
     Constant named: #CFloat value: Float32.
     Constant named: #CDouble value: Float64.

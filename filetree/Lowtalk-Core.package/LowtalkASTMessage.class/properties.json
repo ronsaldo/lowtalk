@@ -10,6 +10,7 @@
 		"receiver",
 		"arguments",
 		"compileTimeValue",
+		"compileTimeMessageLookup",
 		"specialMessageType",
 		"coercionType",
 		"isCascaded"

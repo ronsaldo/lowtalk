@@ -1,11 +1,38 @@
 "Bindings for Stdio"
 Namespace named: #LibC members: [
-    Structure named: #FILE slots: {}.
-
     "Standard streams"
-    Constant externalC: #stdout type: FILE pointer.
-    Constant externalC: #stdin type: FILE pointer.
-    Constant externalC: #stderr type: FILE pointer.
+    Compiler operatingSystemName = #win32 ifTrue: [
+        Structure named: #FILE slots: {
+            #_ptr => (CChar pointer).
+            #_cnt => CInt.
+            #_base => (CChar pointer).
+            #_flag => CInt.
+            #_file => CInt.
+            #_charbuf => CInt.
+            #_bufsiz => CInt.
+            #_tmpfname => (CChar pointer).
+        }.
+
+        Constant externalC: #__iob_func type: Void -> FILE pointer.
+
+        self category: 'accessing' methods: {
+        :[stdin -> FILE pointer.
+            ^ (__iob_func #{} atOffset: 0) address
+        ].
+        :[stdout -> FILE pointer.
+            ^ (__iob_func #{} atOffset: 1) address
+        ].
+        :[stderr -> FILE pointer.
+            ^ (__iob_func #{} atOffset: 2) address
+        ].
+        }.
+    ] ifFalse: [
+        Structure named: #FILE slots: {}.
+
+        Global externalC: #stdout type: FILE pointer.
+        Global externalC: #stdin type: FILE pointer.
+        Global externalC: #stderr type: FILE pointer.
+    ].
 
     "Files"
     Constant externalC: #fopen type: ConstCString , ConstCString -> FILE pointer.

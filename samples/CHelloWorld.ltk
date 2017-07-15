@@ -5,5 +5,9 @@ Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString poin
     ].
 
     LibC printf #{c'Hello World\n'}.
+    LibC printf #{c'stdin %p stdout %p stderr %p\n'. LibC stdin . LibC stdout . LibC stderr}.
+
+    LibC fprintf #{LibC stdout . c'stdout test\n' }.
+    LibC fprintf #{LibC stderr . c'stderr test\n' }.
     0
 ]

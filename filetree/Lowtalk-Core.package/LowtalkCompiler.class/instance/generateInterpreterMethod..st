@@ -9,9 +9,19 @@ generateInterpreterMethod: method
 
 	ssaValue := SLVMFunction pointerSize: compilationTarget pointerSize functionType: functionType ssaType.
 	ssaValue compilationTarget: compilationTarget.
-	ssaValue makePrivate.
-	(method selector isNotNil and: [method methodClass isNotNil]) ifTrue: [ 
-		ssaValue unmangledName: method methodClass name , '>>' , method selector
+	method publicSymbol ifNotNil: [ 
+		ssaValue name: method publicSymbol;
+			makeExternal.
+	] ifNil: [
+		ssaValue makePrivate.
+	].
+	
+	method unmangledName ifNotNil: [ 
+		ssaValue unmangledName: method unmangledName
+	] ifNil: [ 
+		(method selector isNotNil and: [method methodClass isNotNil]) ifTrue: [ 
+			ssaValue unmangledName: method methodClass name , '>>' , method selector printString
+		]
 	].
 	ssaModule add: ssaValue.
 	compilationTarget emittingDebugInformation ifTrue: [

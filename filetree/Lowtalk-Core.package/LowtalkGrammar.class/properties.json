@@ -110,7 +110,9 @@
 		"thisContextExpression",
 		"thisContextKeyword",
 		"pragmaChainKeywordMessage",
-		"pragmaChainedMessage"
+		"pragmaChainedMessage",
+		"methodHeaderReturnType",
+		"arrow"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

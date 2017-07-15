@@ -1,4 +1,6 @@
 initialization
 initialize
 	super initialize.
-	compileTimeOnly := false
+	compileTimeOnly := false.
+	pendingMethods := Dictionary new.
+	methods := Dictionary new.

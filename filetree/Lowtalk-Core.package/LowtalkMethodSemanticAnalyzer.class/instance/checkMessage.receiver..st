@@ -8,6 +8,7 @@ checkMessage: message receiver: receiver
 	].
 
 	message compileTimeValue ifNotNil: [ ^ self ].
+	message compileTimeMessageLookup ifNotNil: [ ^ self checkMessageWithCompileTimeLookup: message receiver: receiver ].
 
 	receiverValueType := receiver type withoutReferences.
 	receiverValueType isCompileTimeType ifTrue: [
