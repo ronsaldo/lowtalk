@@ -1,0 +1,28 @@
+Constant named: #recursiveLeaf value: [
+    <localReturn>
+    let currentContext := thisContext.
+    [currentContext] whileNotNil: [
+        LibC printf #{c'currentContext: %p\n' . currentContext}.
+        currentContext := currentContext sender
+    ].
+
+    ^ 0
+].
+
+Constant named: #recursive value: [:remainingCount |
+    <localReturn>
+    remainingCount == 1 ifTrue: [
+        recursiveLeaf #{}.
+    ] ifFalse: [
+        recursive #{remainingCount - 1}.
+    ].
+
+    ^ 0
+].
+
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+    <cdecl>
+    recursive #{10}.
+    ^ 0
+]

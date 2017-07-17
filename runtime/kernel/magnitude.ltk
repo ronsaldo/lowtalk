@@ -62,6 +62,17 @@ Integer category: 'testing' methods: {
 
 }.
 
+Integer category: 'bit manipulation' methods: {
+:[& aNumber
+    ^ self bitAnd: aNumber
+].
+
+:[| aNumber
+    ^ self bitOr: aNumber
+].
+
+}.
+
 "SmallInteger"
 SmallInteger category: 'arithmetic' methods: {
 :[+ aNumber
@@ -137,6 +148,29 @@ SmallInteger category: 'comparison' methods: {
         let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
         let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
         ^ this <= other
+    ].
+
+    ^ super aNumber
+].
+
+}.
+
+SmallInteger category: 'bit manipulation' methods: {
+:[bitAnd: aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this & other
+    ].
+
+    ^ super aNumber
+].
+
+:[bitOr: aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this | other
     ].
 
     ^ super aNumber

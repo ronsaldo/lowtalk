@@ -43,7 +43,7 @@ Symbol category: 'evaluating' methods: {
 
 BlockClosure category: 'evaluating' methods: {
 :[value
-    argumentDescriptor ~~ 0 ifTrue: [
+    argumentDescriptor ~~ 1 ifTrue: [
         self numArgsError: 0
     ].
 
@@ -52,7 +52,7 @@ BlockClosure category: 'evaluating' methods: {
 ].
 
 :[value: arg1
-    argumentDescriptor ~~ 1 ifTrue: [
+    argumentDescriptor ~~ 2 ifTrue: [
         self numArgsError: 1
     ].
 
@@ -61,7 +61,7 @@ BlockClosure category: 'evaluating' methods: {
 ].
 
 :[value: arg1 value: arg2
-    argumentDescriptor ~~ 2 ifTrue: [
+    argumentDescriptor ~~ 3 ifTrue: [
         self numArgsError: 2
     ].
 
@@ -70,7 +70,7 @@ BlockClosure category: 'evaluating' methods: {
 ].
 
 :[value: arg1 value: arg2 value: arg3
-    argumentDescriptor ~~ 2 ifTrue: [
+    argumentDescriptor ~~ 4 ifTrue: [
         self numArgsError: 3
     ].
 
@@ -79,7 +79,7 @@ BlockClosure category: 'evaluating' methods: {
 ].
 
 :[value: arg1 value: arg2 value: arg3 value: arg4
-    argumentDescriptor ~~ 4 ifTrue: [
+    argumentDescriptor ~~ 5 ifTrue: [
         self numArgsError: 4
     ].
 

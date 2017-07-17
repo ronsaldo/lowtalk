@@ -1,0 +1,4 @@
+accessing
+nonLocalReturnFunction
+	<compileTime>
+	^ nonLocalReturnFunction

@@ -1,0 +1,122 @@
+let ContextStackMetadataElementCount<IntPointer> := 4.
+
+let ContextCompiledMethodPointerOffset<IntPointer> := -1 * UIntPointer size castTo: IntPointer.
+let ContextMarriedContextPointerOffset<IntPointer> := -2 * UIntPointer size castTo: IntPointer.
+let ContextArgumentDescriptorOffset<IntPointer> := -3 * UIntPointer size castTo: IntPointer.
+let ContextStackDescriptorOffset<IntPointer> := -4 * UIntPointer size castTo: IntPointer.
+
+Namespace named: #ObjectModel members: [
+
+Structure named: #ContextHeader slots: {
+    #objectHeader => ObjectHeader.
+    #sender => UIntPointer.
+    #pc => UIntPointer.
+    #stackp => UIntPointer.
+    #method => UIntPointer.
+    #closureOrNil => UIntPointer.
+    #argumentDescriptor => UIntPointer.
+    #stackFrameDescriptor => UIntPointer.
+}.
+
+let contextFixedFields := InstructionStream instanceVariables size + Context instanceVariables size castTo: UInt32.
+Compiler staticAssert: (ContextHeader size - ObjectHeader size) = (contextFixedFields * UIntPointer size).
+
+Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<UInt8 pointer> |
+    <localReturn>
+    let marriedContextPointer := (framePointer atOffset: ContextMarriedContextPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
+    marriedContextPointer value ifNotNil: [
+        ^ marriedContextPointer value
+    ].
+
+    "Compute the other pointers"
+    let methodPointer := (framePointer atOffset: ContextCompiledMethodPointerOffset) address reinterpretCastTo: UIntPointer pointer.
+    let argumentDescriptorPointer := (framePointer atOffset: ContextArgumentDescriptorOffset) address reinterpretCastTo: UIntPointer pointer.
+    let stackDescriptorPointer := (framePointer atOffset: ContextStackDescriptorOffset) address reinterpretCastTo: UIntPointer pointer.
+
+    let argumentDescriptor := argumentDescriptorPointer value.
+    let stackDescriptor := stackDescriptorPointer value.
+
+    LibC printf #{c'Marry thisContext: %p, argumentDesc %p, stack frame descriptor %p\n' . framePointer . argumentDescriptor . stackDescriptor}.
+    LibC printf #{c'Compiled method %p\n' . methodPointer value}.
+
+    "Decode the argument descriptor"
+    let oopArgumentCount := argumentDescriptor & 16rff.
+    let nativeArgumentsSize := (argumentDescriptor >> 8) & 16r00ffffff.
+
+    "Decode the stack descriptor"
+    let localFrameSize := stackDescriptor >> 16.
+    let dynamicLocalCount := stackDescriptor & 4095.
+
+    LibC printf #{c'Oop argument count: %d native arguments size: %d\n' . oopArgumentCount . nativeArgumentsSize}.
+    LibC printf #{c'Local frame size: %d dynobject count: %d\n' . localFrameSize . dynamicLocalCount}.
+
+    let oopCount := contextFixedFields + oopArgumentCount + dynamicLocalCount.
+    let nativeSize := nativeArgumentsSize + localFrameSize - (dynamicLocalCount * UIntPointer size).
+
+    LibC printf #{c'Oop count: %d Native size: %d\n' . oopCount . nativeSize}.
+
+    "Instantiate the context object"
+    let contextObject := basicNewMixedBytes #{Context reinterpretCastTo: ObjectHeader pointer . oopCount . nativeSize}.
+    let context := contextObject reinterpretCastTo: ContextHeader pointer.
+
+    "Store the context in the stack"
+    marriedContextPointer value := context.
+    context value sender: (framePointer reinterpretCastTo: UIntPointer) + 1.
+
+    "Store the descriptors in the context."
+    context value
+        argumentDescriptor: encodeSmallInteger #{argumentDescriptor};
+        stackFrameDescriptor: encodeSmallInteger #{stackDescriptor};
+        method: methodPointer value.
+
+    "TODO: Copy the arguments into the context"
+
+    ^ context
+].
+
+Constant named: #widowThisContext value: [:framePointer<Void pointer> |
+    <localReturn>
+    let marriedContextPointer := (framePointer atOffset: ContextCompiledMethodPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
+    let marriedContext := marriedContextPointer value.
+
+    marriedContext ifNil: [ ^ nil ].
+
+    LibC printf #{c'TODO: Widow thisContext.\n'}.
+    LibC abort #{}.
+    ^ nil
+].
+
+Constant named: #nonLocalReturn value: [:targetContext<ObjectHeader pointer> :returnValue<Void pointer> |
+    <localReturn>
+    LibC printf #{c'TODO: non-local return.\n'}.
+    LibC abort #{}.
+    ^ nil
+].
+
+Compiler objectModel
+    marryThisContextFunction: marryThisContext;
+    widowThisContextFunction: widowThisContext;
+    nonLocalReturnFunction: nonLocalReturn;
+    yourself.
+].
+
+Context category: 'accessing' methods: {
+:[sender
+    let senderValue := sender reinterpretCastTo: UIntPointer.
+    ObjectModel isSmallInteger #{senderValue} ifFalse: [
+        ^ sender
+    ].
+
+    "Function without a calling convention that mandates the presence of a
+    context require a special handling."
+    argumentDescriptor & (1<<29) ~~ 0 ifTrue: [
+        "TODO: Support smalltalk -> cdecl .... cdecl -> smalltalk traversal"
+        ^ nil
+    ].
+
+    let framePointer := senderValue - 1 reinterpretCastTo: UInt8 pointer pointer.
+    let parentFramePointer := framePointer value.
+    LibC printf #{c'Parent frame pointer: %p\n' . parentFramePointer}.
+    ^ ObjectModel marryThisContext #{parentFramePointer} reinterpretCastTo: _DynamicObject.
+].
+}.

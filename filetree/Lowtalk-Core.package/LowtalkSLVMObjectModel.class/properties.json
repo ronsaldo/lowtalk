@@ -12,7 +12,10 @@
 		"contextMetaDataHeaderSize",
 		"closureInstantiateFunction",
 		"pointerToObjectFunction",
-		"objectToPointerFunction"
+		"objectToPointerFunction",
+		"marryThisContextFunction",
+		"widowThisContextFunction",
+		"nonLocalReturnFunction"
 	],
 	"name" : "LowtalkSLVMObjectModel",
 	"type" : "normal"

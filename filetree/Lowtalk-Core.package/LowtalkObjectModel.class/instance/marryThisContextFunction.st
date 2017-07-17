@@ -1,0 +1,4 @@
+accessing
+marryThisContextFunction
+	<compileTime>
+	^ marryThisContextFunction

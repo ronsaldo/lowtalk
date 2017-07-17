@@ -1,0 +1,4 @@
+accessing
+widowThisContextFunction
+	<compileTime>
+	^ widowThisContextFunction

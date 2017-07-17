@@ -7,6 +7,7 @@ Compiler
     evaluateFileNamed: 'collections.ltk';
     evaluateFileNamed: 'class.ltk';
 
+    evaluateFileNamed: 'context.ltk';
     evaluateFileNamed: 'ffi.ltk';
     evaluateFileNamed: 'streams.ltk';
     evaluateFileNamed: 'object.ltk';

@@ -42,7 +42,10 @@
 		"closureInstantiateFunction",
 		"closureHeaderType",
 		"pointerToObjectFunction",
-		"objectToPointerFunction"
+		"objectToPointerFunction",
+		"marryThisContextFunction",
+		"widowThisContextFunction",
+		"nonLocalReturnFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

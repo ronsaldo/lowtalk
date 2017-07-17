@@ -66,7 +66,7 @@ let bootstrapClassHierarchy := #(
 
     (Object Message pointers (selector args lookupClass) ())
     (Object InstructionStream pointers (sender pc) ())
-        (InstructionStream Context variablePointers (stackp method closureOrNil receiver) ())
+        (InstructionStream Context mixedObject (stackp method closureOrNil argumentDescriptor stackFrameDescriptor) ())
 
     (Object BlockClosure mixedObject (argumentDescriptor entryPoint) ())
 
