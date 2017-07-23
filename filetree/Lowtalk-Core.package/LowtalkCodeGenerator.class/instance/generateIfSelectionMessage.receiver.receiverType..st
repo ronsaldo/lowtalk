@@ -76,11 +76,11 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	"Merge the result"	
 	trueResult ifNotNil: [ 
 		result := builder phi: coercionType ssaType name: #ifResult.
-		result addValue: trueResult from: trueBlock.
+		trueResult type isVoidType ifFalse: [ result addValue: trueResult from: trueBlock ].
 		message arguments = 1 ifTrue: [
-			result addValue: falseResult from: selectionBlock.
-		] ifFalse: [ 
-			result addValue: falseResult from: falseBlock.
+			falseResult type isVoidType ifFalse: [ result addValue: falseResult from: selectionBlock ]
+		] ifFalse: [
+			falseResult type isVoidType ifFalse: [ result addValue: falseResult from: falseBlock ]
 		].
 		^ result
 	] ifNil: [

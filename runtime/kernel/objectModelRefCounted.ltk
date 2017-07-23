@@ -42,6 +42,17 @@ Namespace named: #ObjectModel members: [
             yourself.
     ].
 
+    Constant named: #OopCharacterTagMask type: UIntPointer value: OopTagMask.
+    Constant named: #OopCharacterTagValue type: UIntPointer value: 2.
+    Constant named: #OopCharacterShift type: UIntPointer value: OopTagShift.
+
+    Compiler objectModel
+        characterTagMask: OopCharacterTagMask;
+        characterTag: OopCharacterTagValue;
+        characterShift: OopCharacterShift.
+
+    Constant named: #isReferenceCounted value: true.
+
     Constant named: #IdentityHashShift value: 4.
 
     Constant named: #ObjectFormatEmpty value: 0.
@@ -90,6 +101,21 @@ Namespace named: #ObjectModel members: [
     Constant named: #encodeSmallInteger value: [<UIntPointer> :value<IntPointer> |
         <cdecl>
         ((value << OopSmallIntegerShift) | OopSmallIntegerTagValue) reinterpretCastTo: UIntPointer
+    ].
+
+    Constant named: #isCharacter value: [<BooleanBit> :oop<UIntPointer> |
+        <cdecl>
+        (oop & OopCharacterTagMask) = OopCharacterTagValue
+    ].
+
+    Constant named: #decodeCharacter value: [<UIntPointer> :oop<UIntPointer> |
+        <cdecl>
+        (oop reinterpretCastTo: IntPointer) >> OopCharacterShift
+    ].
+
+    Constant named: #encodeCharacter value: [<UIntPointer> :value<UIntPointer> |
+        <cdecl>
+        (value << OopCharacterShift) | OopCharacterTagValue
     ].
 
     "Reference counting"
@@ -354,7 +380,7 @@ newObjectHeaderWithWords
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
             slotCount: (slotCount castTo: UInt32);
-            refCount: 0;
+            refCount: 1;
             format: instanceFormat;
             yourself.
 
@@ -376,8 +402,8 @@ newObjectHeaderWithWords
         result value
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
-            slotCount: (slotCount castTo: UInt32);
-            refCount: 0;
+            slotCount: ((slotCount << 16) | dynamicObjectCount castTo: UInt32);
+            refCount: 1;
             format: instanceFormat;
             yourself.
 

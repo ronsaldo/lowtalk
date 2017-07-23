@@ -107,4 +107,11 @@ Class category: 'enumerating' methods: {
         subclasses do: aBlock
     ]
 ].
+}.
+
+"Class binding"
+Behavior category: 'accessing' methods: {
+:[binding
+    ^ Association key: nil value: self
+]
 }

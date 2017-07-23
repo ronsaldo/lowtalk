@@ -112,7 +112,8 @@
 		"pragmaChainKeywordMessage",
 		"pragmaChainedMessage",
 		"methodHeaderReturnType",
-		"arrow"
+		"arrow",
+		"character"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

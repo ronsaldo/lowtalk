@@ -12,7 +12,8 @@
 		"slotDictionary",
 		"instanceSize",
 		"type",
-		"name"
+		"name",
+		"classBinding"
 	],
 	"name" : "LowtalkClassDescription",
 	"type" : "normal"

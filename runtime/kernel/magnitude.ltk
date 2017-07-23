@@ -1,11 +1,37 @@
 "Magnitude"
+Magnitude category: 'comparing' methods: {
+:[max: aMagnitude
+	"Answer the receiver or the argument, whichever has the greater
+	magnitude."
+
+	self > aMagnitude
+		ifTrue: [^self]
+		ifFalse: [^aMagnitude]
+].
+
+:[min: aMagnitude
+	"Answer the receiver or the argument, whichever has the lesser
+	magnitude."
+
+	self < aMagnitude
+		ifTrue: [^self]
+		ifFalse: [^aMagnitude]
+].
+
+:[min: aMin max: aMax
+
+	^ (self min: aMin) max: aMax
+].
+
+}.
+
 Magnitude category: 'testing' methods: {
 :[< aMagnitude
     self subclassResponsibility
 ].
 
 :[<= aMagnitude
-    self subclassResponsibility
+    ^ (self > aMagnitude) not
 ].
 
 :[= aMagnitude
@@ -13,11 +39,11 @@ Magnitude category: 'testing' methods: {
 ].
 
 :[> aMagnitude
-    self subclassResponsibility
+    ^ aMagnitude < self
 ].
 
 :[>= aMagnitude
-    self subclassResponsibility
+    ^ aMagnitude <= self
 ].
 
 }.
@@ -36,6 +62,58 @@ Object category: 'testing' methods: {
     ^ false
 ].
 
+:[isCharacter
+    ^ false
+].
+
+}.
+
+"Character"
+Character class category: 'construction' methods: {
+:[value: aCodePoint
+    ^ (ObjectModel encodeCharacter #{aCodePoint castTo: UInt32}) reinterpretCastTo: _DynamicObject
+]
+}.
+
+Character category: 'converting' methods: {
+:[asInteger
+    ^ (ObjectModel decodeCharacter #{self reinterpretCastTo: UIntPointer})
+]
+}.
+
+Character category: 'converting' methods: {
+:[asUppercase
+    ($a <= self and: [$z <= self]) ifTrue: [
+        ^ Character value: (self asInteger castTo: UInt32) - ($a castTo: UInt32) + ($A castTo: UInt32)
+    ].
+
+    ^ self
+]
+}.
+
+Character category: 'testing' methods: {
+:[< other
+    ^ (self reinterpretCastTo: UIntPointer) < (other reinterpretCastTo: UIntPointer)
+].
+
+:[= other
+    ^ self == other
+].
+
+:[> other
+    ^ (self reinterpretCastTo: UIntPointer) > (other reinterpretCastTo: UIntPointer)
+].
+
+:[isCharacter
+    ^ true
+].
+
+:[isVowel
+	"Answer whether the receiver is one of the vowels, AEIOU, in upper or
+	lower case."
+
+	^'AEIOU' includes: self asUppercase
+]
 }.
 
 "Number"
@@ -55,6 +133,12 @@ Float category: 'testing' methods: {
 }.
 
 "Integer"
+Integer category: 'converting' methods: {
+:[asInteger
+    ^ self
+]
+}.
+
 Integer category: 'testing' methods: {
 :[isInteger
     ^ true
@@ -82,7 +166,7 @@ SmallInteger category: 'arithmetic' methods: {
         ^ this + other
     ].
 
-    ^ super aNumber
+    ^ super + aNumber
 ].
 
 :[- aNumber
@@ -92,7 +176,7 @@ SmallInteger category: 'arithmetic' methods: {
         ^ this - other
     ].
 
-    ^ super aNumber
+    ^ super - aNumber
 ].
 
 :[* aNumber
@@ -102,7 +186,7 @@ SmallInteger category: 'arithmetic' methods: {
         ^ this * other
     ].
 
-    ^ super aNumber
+    ^ super * aNumber
 ].
 
 :[/ aNumber
@@ -117,7 +201,7 @@ SmallInteger category: 'arithmetic' methods: {
         ].
     ].
 
-    ^ super aNumber
+    ^ super / aNumber
 ].
 
 :[// aNumber
@@ -127,22 +211,40 @@ SmallInteger category: 'arithmetic' methods: {
         ^ this // other
     ].
 
-    ^ super aNumber
+    ^ super // aNumber
 ].
 
 :[\\ aNumber
     ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
         let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
         let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
-        ^ this + other
+        ^ this \\ other
     ].
 
-    ^ super aNumber
+    ^ super \\ aNumber
 ].
 
 }.
 
 SmallInteger category: 'comparison' methods: {
+:[= aNumber
+    ^ self == aNumber
+].
+
+:[~ aNumber
+    ^ self ~~ aNumber
+].
+
+:[< aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this < other
+    ].
+
+    ^ super < aNumber
+].
+
 :[<= aNumber
     ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
         let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
@@ -150,7 +252,27 @@ SmallInteger category: 'comparison' methods: {
         ^ this <= other
     ].
 
-    ^ super aNumber
+    ^ super <= aNumber
+].
+
+:[> aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this > other
+    ].
+
+    ^ super > aNumber
+].
+
+:[>= aNumber
+    ObjectModel isSmallInteger #{aNumber reinterpretCastTo: UIntPointer} ifTrue: [
+        let this := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+        let other := ObjectModel decodeSmallInteger #{aNumber reinterpretCastTo: UIntPointer}.
+        ^ this >= other
+    ].
+
+    ^ super >= aNumber
 ].
 
 }.
@@ -163,7 +285,7 @@ SmallInteger category: 'bit manipulation' methods: {
         ^ this & other
     ].
 
-    ^ super aNumber
+    ^ super bitAnd: aNumber
 ].
 
 :[bitOr: aNumber
@@ -173,7 +295,7 @@ SmallInteger category: 'bit manipulation' methods: {
         ^ this | other
     ].
 
-    ^ super aNumber
+    ^ super bitOr: aNumber
 ].
 
 }.

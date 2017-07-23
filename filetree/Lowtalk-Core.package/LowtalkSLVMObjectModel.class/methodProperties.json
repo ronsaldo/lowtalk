@@ -13,6 +13,7 @@
 		"messageSuperSendTrampoline" : "RonieSalgado 6/1/2017 17:50",
 		"contextMetaDataHeaderSize" : "RonieSalgado 6/1/2017 21:07",
 		"falseValue" : "RonieSalgado 7/4/2017 04:17",
+		"characterTag" : "RonieSalgado 7/22/2017 19:31",
 		"messageSendTrampoline" : "RonieSalgado 6/1/2017 17:50",
 		"marryThisContextFunction" : "RonieSalgado 7/16/2017 23:40",
 		"convertConstantValue:inModule:" : "RonieSalgado 6/1/2017 20:37",
@@ -21,6 +22,7 @@
 		"smallIntegerShift" : "RonieSalgado 7/4/2017 17:49",
 		"stackLimitTrampoline" : "RonieSalgado 6/1/2017 15:28",
 		"pointerToObjectFunction" : "RonieSalgado 7/12/2017 18:05",
+		"characterShift" : "RonieSalgado 7/22/2017 19:31",
 		"compiler:" : "RonieSalgado 5/31/2017 22:10",
 		"closureHeaderType" : "RonieSalgado 7/11/2017 02:47"
 	},

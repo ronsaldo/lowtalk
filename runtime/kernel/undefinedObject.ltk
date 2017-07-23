@@ -1,0 +1,24 @@
+ProtoObject category: 'testing' methods: {
+:[isNil
+    ^ false
+].
+
+}.
+
+Object category: 'testing' methods: {
+:[isNotNil
+    ^ true
+].
+
+}.
+
+UndefinedObject category: 'testing' methods: {
+:[isNil
+    ^ true
+].
+
+:[isNotNil
+    ^ false
+].
+
+}

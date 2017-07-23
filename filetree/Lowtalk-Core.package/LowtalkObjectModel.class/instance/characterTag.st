@@ -1,0 +1,4 @@
+accessing
+characterTag
+	<compileTime>
+	^ characterTag

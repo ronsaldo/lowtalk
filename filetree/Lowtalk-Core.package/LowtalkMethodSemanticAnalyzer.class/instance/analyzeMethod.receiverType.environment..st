@@ -42,7 +42,12 @@ analyzeMethod: methodNode receiverType: receiverType environment: baseEnvironmen
 		receiverType: receiverType;
 		arguments: arguments;
 		selector: methodNode selector.
-	
+	methodNode pragmaAt: #primitive: ifPresent: [ :pragma |
+		self withEnvironment: baseEnvironment do: [ 	
+			method primitive: (self asEvaluator evaluateValue: pragma arguments first)
+		]
+	].
+
 	self withEnvironment: methodEnvironment do: [ 
 		arguments do: [ :arg |
 			arg method: method.

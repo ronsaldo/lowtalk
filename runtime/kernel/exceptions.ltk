@@ -1,0 +1,229 @@
+"Exception handling support. This code is take from Pharo"
+
+Exception category: 'accessing' methods: {
+:[defaultAction
+	"The default action taken if the exception is signaled."
+
+	self subclassResponsibility
+].
+
+:[description
+	"Return a textual description of the exception."
+
+	^ String streamContents: [ :stream | | mt |
+		stream << self class name.
+		(mt := self messageText) isEmptyOrNil
+			ifFalse: [ stream << ': ' << mt ] ]
+].
+
+:[messageText
+	"Return an exception's message text."
+
+	^ messageText ifNil: [ '' ]
+].
+
+:[receiver
+	^ self signalerContext receiver
+].
+
+:[signaler
+	"Return the object that is the subject involving me.
+	This is set automatically to my #receiver during #signal
+	but could be overwritten when I am signaled"
+
+	^ signaler
+].
+
+:[signaler: anObject
+	"Set the object that is the subject involving me.
+	This is set automatically to my #receiver during #signal
+	but could be overwritten when I am signaled"
+
+	signaler := anObject
+].
+
+:[signalerContext
+	"Find the first sender of signal(:), the first context which is neither for an instance method nor for a class side method of Exception (or subclass).
+	This will make sure that the same context is found for both, `Error signal` and `Error new signal`"
+
+	^ signalContext findContextSuchThat: [ :context |
+		(context receiver == self
+		or: [ context receiver == self class ]) not ]
+].
+
+:[tag
+	"Return an exception's tag value."
+
+	^ tag
+		ifNil: [ self messageText ]
+		ifNotNil: [ tag ]
+].
+
+:[tag: t
+	"This message is not specified in the ANSI protocol, but that looks like an oversight because #tag is specified, and the spec states that the signaler may store the tag value."
+
+	tag := t
+].
+
+}.
+
+Exception category: 'signaling' methods: {
+:[messageText: signalerText
+	"Set an exception's message text."
+
+	messageText := signalerText
+].
+
+:[signal
+	"Ask ContextHandlers in the sender chain to handle this signal.  The default is to execute and return my defaultAction."
+
+	signalContext := thisContext contextTag.
+	signaler ifNil: [ signaler := self receiver ].
+	^ signalContext nextHandlerContext handleSignal: self
+].
+
+:[signal: signalerText
+	"Signal the occurrence of an exceptional condition with a specified textual description."
+
+	self messageText: signalerText.
+	^ self signal
+].
+
+:[signalIn: context
+	"Ask ContextHandlers in the sender chain starting at the given context to handle this signal.
+	The default is to execute and return my defaultAction."
+
+	signalContext := context.
+	signaler ifNil: [ signaler := self receiver ].
+	^ signalContext nextHandlerContext handleSignal: self
+].
+
+}.
+
+Context category: 'private-exception' methods: {
+:[findNextHandlerContext
+    "Return the next handler marked context, returning nil if there is none.  Search starts with self and proceeds up to nil."
+
+    | context |
+    context := self findNextHandlerOrSignalingContext.
+    context isNil
+        ifTrue: [ ^ nil ].
+    context isHandlerContext
+        ifTrue: [ ^ context ].	"If it isn't a handler context, it must be a signaling context.
+    When we reach a signaling context we must skip over any handlers
+    that might be on the stack between the signaling context and the handler
+    context for that signal."
+    ^ context exception privHandlerContext nextHandlerContext
+].
+
+:[findNextHandlerOrSignalingContext
+	"Return the next handler/signaling marked context, answering nil if there is none.
+	Search starts with self and proceeds up to nil."
+
+	<primitive: 197>
+	| context |
+	context := self.
+	[
+	context isHandlerOrSignalingContext
+		ifTrue: [ ^ context ].
+	(context := context sender) == nil ] whileFalse.
+	^ nil
+].
+
+:[isHandlerOrSignalingContext
+	"Both BlockClosure>>on:do: (handler) and Context>>evaluateSignal: (signaling)
+	are marked with primitive 199."
+	^method primitive = 199
+].
+
+:[isHandlerContext
+	"is this context for #on:do:?"
+	^self isHandlerOrSignalingContext and: [ self selector == #on:do: ]
+].
+
+:[nextHandlerContext
+
+	^ self sender findNextHandlerContext
+].
+
+}.
+
+Exception category: 'printing' methods: {
+:[printOn: stream
+	stream nextPutAll: self description
+]
+}.
+
+UndefinedObject category: 'bottom context' methods: {
+:[canHandleSignal: exception
+	"When no more handler (on:do:) context left in sender chain this gets called"
+
+	^ false
+].
+
+:[handleSignal: exception
+	"When no more handler (on:do:) context left in sender chain this gets called.  Return from signal with default action."
+
+	^ exception resumeUnchecked: exception defaultAction
+]
+}.
+
+"Errors"
+Error category: 'exception description' methods: {
+:[defaultAction
+	"No one has handled this error, but now give them a chance to decide how to debug it.  If none handle this either then open debugger (see UnhandedError-defaultAction)"
+
+	UnhandledError signalForException: self
+]
+
+}.
+
+UnhandledError class category: 'signalling' methods: {
+:[signalForException: anError
+	^ self new
+		exception: anError;
+		signal
+]
+}.
+
+UnhandledError category: 'accessing' methods: {
+:[exception
+
+	^ exception
+].
+:[exception: anError
+
+	exception := anError
+].
+
+}.
+
+UnhandledError category: 'exception description' methods: {
+:[defaultAction
+    LibC fprintf #{LibC stderr . c'Unhandled Error\n'}.
+    LibC abort #{}.
+]
+}.
+
+"Some basic errors."
+ProtoObject category: 'errors' methods: {
+:[error: aString
+    ^ Error new signal: aString
+].
+
+:[errorSubscriptBounds: index
+	"Create an error notification that an improper integer was used as an index."
+
+	SubscriptOutOfBounds signalFor: index
+].
+}.
+
+ProtoObject category: 'reflective operations' methods: {
+:[doesNotUnderstand: aMessage
+	^ MessageNotUnderstood new
+		message: aMessage;
+		receiver: self;
+		signal
+].
+
+}.

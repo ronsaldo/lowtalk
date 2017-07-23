@@ -1,3 +1,48 @@
+Object category: 'accessing' methods: {
+:[species
+    ^ ObjectModel getObjectClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer} reinterpretCastTo: _DynamicObject
+]
+}.
+
+Object category: 'comparing' methods: {
+:[= anObject
+	"Answer whether the receiver and the argument represent the same
+	object. If = is redefined in any subclass, consider also redefining the
+	message hash."
+
+	^self == anObject
+].
+
+:[~= anObject
+	"Answer whether the receiver and the argument do not represent the
+	same object."
+
+	^self = anObject == false
+].
+
+:[hash
+	"Answer a SmallInteger whose value is related to the receiver's identity.
+	May be overridden, and should be overridden in any classes that define = "
+
+	^ self identityHash
+].
+
+}.
+
 Object category: 'copying' methods: {
+
+}.
+
+Object category: 'printing' methods: {
+:[printOn: aStream
+    "Append to the argument, aStream, a sequence of characters that
+    identifies the receiver."
+
+    | title |
+    title := self class name.
+    aStream
+        nextPutAll: (title first isVowel ifTrue: ['an '] ifFalse: ['a ']);
+        nextPutAll: title
+].
 
 }.

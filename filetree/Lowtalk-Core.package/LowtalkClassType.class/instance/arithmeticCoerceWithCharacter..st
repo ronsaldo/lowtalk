@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithCharacter: anInteger
+	^ LowtalkDynamicObjectType target: compilationTarget

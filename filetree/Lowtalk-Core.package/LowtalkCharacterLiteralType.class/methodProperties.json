@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 7/22/2017 19:43",
+		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 7/22/2017 19:44",
+		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 7/22/2017 19:44",
+		"canBeExplicitlyConvertedTo:" : "RonieSalgado 7/22/2017 21:08",
+		"arithmeticCoerceWithCharacter:" : "RonieSalgado 7/22/2017 20:59",
+		"name" : "RonieSalgado 7/22/2017 19:39",
+		"asValueType" : "RonieSalgado 7/22/2017 19:42",
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 7/22/2017 20:58"
+	},
+	"class" : { }
+}

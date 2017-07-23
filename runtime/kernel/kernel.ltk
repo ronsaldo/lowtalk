@@ -2,13 +2,21 @@ Compiler
     evaluateFileNamed: 'objectModel.ltk';
     evaluateFileNamed: 'bootstrap.ltk';
     evaluateFileNamed: 'messageSend.ltk';
+    evaluateFileNamed: 'undefinedObject.ltk';
     evaluateFileNamed: 'magnitude.ltk';
+    evaluateFileNamed: 'boolean.ltk';
     evaluateFileNamed: 'blockClosure.ltk';
     evaluateFileNamed: 'collections.ltk';
     evaluateFileNamed: 'class.ltk';
+    evaluateFileNamed: 'association.ltk';
+
+    evaluateFileNamed: 'moreKernelClasses.ltk';
 
     evaluateFileNamed: 'context.ltk';
+    evaluateFileNamed: 'exceptions.ltk';
+
     evaluateFileNamed: 'ffi.ltk';
     evaluateFileNamed: 'streams.ltk';
     evaluateFileNamed: 'object.ltk';
+    evaluateFileNamed: 'string.ltk';
     yourself

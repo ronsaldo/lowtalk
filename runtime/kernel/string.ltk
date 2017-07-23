@@ -1,0 +1,126 @@
+"String"
+String class category: 'instance creation' methods: {
+:[empty
+	"A canonicalized empty String instance."
+	^ ''
+].
+
+:[new: sizeRequested
+	"Answer an instance of this class with the number of indexable
+	variables specified by the argument, sizeRequested."
+
+	self == String
+		ifTrue:[^ByteString new: sizeRequested]
+		ifFalse:[^self basicNew: sizeRequested].
+]
+}.
+
+String category: 'testing' methods: {
+:[isString
+    ^ true
+]
+}.
+
+
+"Symbol"
+Symbol category: 'testing' methods: {
+:[isSymbol
+    ^ true
+]
+}.
+
+"ByteString"
+ByteString category: 'accessing' methods: {
+:[size
+    ^ ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
+].
+
+:[at: index
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    let data := self firstFixedFieldPointerOfType: UInt8 pointer.
+    ^ ObjectModel encodeCharacter #{data at: indexValue} reinterpretCastTo: _DynamicObject
+].
+
+:[at: index put: value
+    let valueOop := value reinterpretCastTo: UIntPointer.
+    ObjectModel isCharacter #{valueOop} ifFalse: [
+        ^ self errorImproperStore
+    ].
+
+    let decodedValue := ObjectModel decodeCharacter #{valueOop}.
+    decodedValue > 16rff ifTrue: [
+        "Convert to WideString"
+        self becomeForward: (WideString from: self).
+        ^ self at: index put: value.
+    ].
+
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        ^ self errorSubscriptBounds: index
+    ].
+
+    let data := self firstFixedFieldPointerOfType: UInt8 pointer.
+    data at: indexValue put: (decodedValue castTo: UInt8).
+    ^ value
+].
+}.
+
+ByteString category: 'testing' methods: {
+:[isByteString
+    ^ true
+]
+}.
+
+"Byte symbol"
+ByteSymbol category: 'accessing' methods: {
+:[size
+    ^ ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
+].
+
+:[at: index
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    let data := self firstFixedFieldPointerOfType: UInt8 pointer.
+    ^ ObjectModel encodeCharacter #{data at: indexValue} reinterpretCastTo: _DynamicObject
+].
+
+:[at: index put: value
+    let valueOop := value reinterpretCastTo: UIntPointer.
+    ObjectModel isCharacter #{valueOop} ifFalse: [
+        ^ self errorImproperStore
+    ].
+
+    let decodedValue := ObjectModel decodeCharacter #{valueOop}.
+    decodedValue > 16rff ifTrue: [
+        "Convert to WideString"
+        self becomeForward: (WideString from: self).
+        ^ self at: index put: value.
+    ].
+
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getBytesObjectSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        ^ self errorSubscriptBounds: index
+    ].
+
+    let data := self firstFixedFieldPointerOfType: UInt8 pointer.
+    data at: indexValue put: (decodedValue castTo: UInt8).
+    ^ value
+].
+}.
+
+ByteSymbol category: 'testing' methods: {
+:[isByteString
+    ^ true
+]
+}.

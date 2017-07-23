@@ -46,8 +46,7 @@ Namespace named: #ObjectModel members: [
 
         let class := ObjectModel getObjectClass #{object}.
         class ~~ (ExternalAddress reinterpretCastTo: ObjectHeader pointer) ifTrue: [
-            LibC fprintf #{LibC stderr . c'FATAL Error: trying to convert a non-pointer object into a pointer.\n'}.
-            LibC abort #{}.
+            InvalidObjectToPointerCast new signal
         ].
 
         let pointerPointer := getFirstFixedFieldPointer #{object} reinterpretCastTo: Void pointer pointer.

@@ -19,7 +19,8 @@
 		"receiverSSAValue",
 		"ssaFunction",
 		"publicSymbol",
-		"unmangledName"
+		"unmangledName",
+		"primitive"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

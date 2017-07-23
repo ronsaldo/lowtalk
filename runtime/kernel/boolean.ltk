@@ -1,0 +1,17 @@
+Boolean category: 'logical operations' methods: {
+:[not
+    self subclassResponsibility
+]
+}.
+
+True category: 'logical operations' methods: {
+:[not
+    ^ false
+]
+}.
+
+False category: 'logical operations' methods: {
+:[not
+    ^ true
+]
+}.

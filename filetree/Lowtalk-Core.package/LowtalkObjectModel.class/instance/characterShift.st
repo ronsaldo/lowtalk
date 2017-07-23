@@ -1,0 +1,4 @@
+accessing
+characterShift
+	<compileTime>
+	^ characterShift

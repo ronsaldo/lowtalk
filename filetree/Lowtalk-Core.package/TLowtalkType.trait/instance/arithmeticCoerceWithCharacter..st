@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithCharacter: otherType
+	^ nil

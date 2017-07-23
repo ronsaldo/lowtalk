@@ -16,6 +16,7 @@ generateInterpreterMethod: method
 		ssaValue makePrivate.
 	].
 	
+	method primitive ifNotNil: [ ssaValue primitive: method ].
 	method unmangledName ifNotNil: [ 
 		ssaValue unmangledName: method unmangledName
 	] ifNil: [ 

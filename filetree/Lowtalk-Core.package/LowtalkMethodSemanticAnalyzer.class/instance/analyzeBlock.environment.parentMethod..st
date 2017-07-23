@@ -17,6 +17,11 @@ analyzeBlock: aBlockNode environment: baseEnvironment parentMethod: parentMethod
 			method selector: (self asEvaluator evaluateValue: pragma arguments first)
 		]
 	].
+	aBlockNode pragmaAt: #primitive: ifPresent: [ :pragma |
+		self withEnvironment: baseEnvironment do: [ 	
+			method primitive: (self asEvaluator evaluateValue: pragma arguments first)
+		]
+	].
 	
 	topEnvironment := baseEnvironment.
 	aBlockNode selfType isVoidType ifFalse: [

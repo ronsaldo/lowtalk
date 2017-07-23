@@ -1,3 +1,3 @@
 visiting
 visitBooleanLiteralNode: node
-	^ nil
+	^ node value

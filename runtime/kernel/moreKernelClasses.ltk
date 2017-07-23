@@ -1,0 +1,66 @@
+"Exception classes"
+Object subclass: #Exception
+	instanceVariableNames: 'messageText tag signaler signalContext handlerContext outerContext'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Exception subclass: #Error
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Exception subclass: #UnhandledError
+	instanceVariableNames: 'exception'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Error subclass: #MessageNotUnderstood
+	instanceVariableNames: 'message receiver reachedDefaultHandler'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Error subclass: #SubscriptOutOfBounds
+	instanceVariableNames: 'subscript lowerBound upperBound'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Error subclass: #InvalidObjectToPointerCast
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+"Stream classes. Used for printing"
+Object subclass: #Stream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+Stream subclass: #PositionableStream
+	instanceVariableNames: 'collection position readLimit'
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+PositionableStream subclass: #ReadStream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+PositionableStream subclass: #WriteStream
+	instanceVariableNames: 'writeLimit'
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+WriteStream subclass: #ReadWriteStream
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Collections-Streams'.
+
+ReadWriteStream subclass: #FileStream
+	instanceVariableNames: 'rwmode'
+	classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles'
+	package: 'Files-Deprecated'.
+
+FileStream subclass: #StandardFileStream
+	instanceVariableNames: 'handle'
+	classVariableNames: ''
+	package: 'Files-Deprecated'.

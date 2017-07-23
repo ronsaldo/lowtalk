@@ -62,7 +62,7 @@ let bootstrapClassHierarchy := #(
                         (Symbol WideSymbol words () ())
 
     "Context"
-    (Array CompiledMethod variablePointers (entryPoint) ())
+    (Array CompiledMethod variablePointers (entryPoint primitive argumentsDescriptor) ())
 
     (Object Message pointers (selector args lookupClass) ())
     (Object InstructionStream pointers (sender pc) ())
@@ -366,7 +366,11 @@ MethodDictionary methodDict
 
 CompiledMethod methodDict
     at: #entryPoint put: [:self<CompiledMethod> | entryPoint];
-    at: #entryPoint: put: [:self<CompiledMethod> :newEntryPoint | entryPoint := newEntryPoint. self].
+    at: #entryPoint: put: [:self<CompiledMethod> :newEntryPoint | entryPoint := newEntryPoint. self];
+    at: #primitive put: [:self<CompiledMethod> | primitive];
+    at: #primitive: put: [:self<CompiledMethod> :newPrimitive | primitive := newPrimitive. self];
+    at: #argumentsDescriptor put: [:self<CompiledMethod> | argumentsDescriptor];
+    at: #argumentsDescriptor: put: [:self<CompiledMethod> :newArgumentsDescriptor | argumentsDescriptor := newArgumentsDescriptor. self].
 
 "Some functions related to the object model."
 Compiler objectModel
@@ -390,7 +394,11 @@ Compiler objectModel
     ];
     convertMethodContextMetadataFunction: [:entryPoint :literals |
         let result := CompiledMethod basicNew: literals size.
-        result entryPoint: entryPoint.
+        entryPoint ifNotNil: [
+            result entryPoint: entryPoint;
+                primitive: entryPoint primitive;
+                argumentsDescriptor: entryPoint argumentsDescriptor.
+        ].
         1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
         result
     ];
@@ -418,7 +426,9 @@ oopSize = 4 ifTrue: [
 ] ifFalse: [
     ObjectModel ImmediateClassTable
         atOffset: 0 put: UndefinedObject;
-        atOffset: 1 put: SmallInteger.
+        atOffset: 1 put: SmallInteger;
+        atOffset: 2 put: Character;
+        atOffset: 4 put: SmallFloat.
 ].
 
 "Now we can implement the object creation primitives."
@@ -469,6 +479,10 @@ ProtoObject category: 'accessing' methods: {
     ^ self basicAt: index put: value
 ].
 
+:[class
+    ^ ObjectModel getObjectClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer} reinterpretCastTo: _DynamicObject
+].
+
 :[size
     ^ self basicSize
 ].
@@ -501,24 +515,6 @@ ProtoObject category: 'accessing' methods: {
 
 :[yourself
     ^ self
-].
-
-}.
-
-ProtoObject category: 'errors' methods: {
-:[error: aMessage
-    LibC printf #{c'Fatal error\n'}.
-    LibC abort #{}.
-].
-
-:[errorSubscriptBounds: index
-    self error: 'Index ' , index asString , 'is out of bounds.'
-].
-}.
-
-ProtoObject category: 'reflective operations' methods: {
-:[doesNotUnderstand: aMessage
-    self error: 'Received an unhandled doesNotUnderstand.\n'
 ].
 
 }.

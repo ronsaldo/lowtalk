@@ -1,39 +1,18 @@
-Object subclass: #Stream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
-
-Stream subclass: #PositionableStream
-	instanceVariableNames: 'collection position readLimit'
-	classVariableNames: ''
-	package: 'Collections-Streams'.
-
-PositionableStream subclass: #ReadStream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
-
-PositionableStream subclass: #WriteStream
-	instanceVariableNames: 'writeLimit'
-	classVariableNames: ''
-	package: 'Collections-Streams'.
-
-WriteStream subclass: #ReadWriteStream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
-
-ReadWriteStream subclass: #FileStream
-	instanceVariableNames: 'rwmode'
-	classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles'
-	package: 'Files-Deprecated'.
-
-FileStream subclass: #StandardFileStream
-	instanceVariableNames: 'handle'
-	classVariableNames: ''
-	package: 'Files-Deprecated'.
-
 Stream category: 'writing' methods: {
+:[<< anObject
+	"A more readable, shorter alternative to #nextPutAll: that also
+	accepts non-Collection arguments"
+
+ 	anObject putOn: self
+].
+
+:[nextPut: anObject
+	"Insert the argument, anObject, as the next object accessible by the
+	receiver. Answer anObject."
+
+	self subclassResponsibility
+].
+
 :[nextPutAll: aCollection
 	"Append the elements of aCollection to the sequence of objects accessible
 	by the receiver. Answer aCollection."
@@ -50,6 +29,15 @@ Stream category: 'writing' methods: {
     ^ self nextPut: 13
 ].
 
+:[print: anObject
+	anObject printOn: self
+].
+}.
+
+Stream category: 'testing' methods: {
+:[isBinary
+	^false
+]
 }.
 
 StandardFileStream class category: 'construction' methods: {
@@ -69,9 +57,24 @@ StandardFileStream category: 'accessing' methods: {
 
 :[nextPut: aCharacter
     let file := handle castTo: LibC FILE pointer.
-    let characterValue := aCharacter castTo: Int32.
+    let characterValue := aCharacter asInteger castTo: Int32.
     LibC fputc #{characterValue . file }.
 ].
+
+:[nextPutAll: aCollection
+	self isBinary ifTrue: [
+		self halt
+	] ifFalse: [
+		(aCollection isString and: [aCollection isByteString]) ifTrue: [
+			let file := handle castTo: LibC FILE pointer.
+			LibC fwrite #{ aCollection firstFixedFieldPointerOfType: UInt8 pointer . aCollection size castTo: LibC SizeT . 1 . file }.
+		].
+		^ self
+	].
+
+	^ super nextPutAll: aCollection
+].
+
 }.
 
 FileStream class category: 'accessing' methods: {
@@ -87,4 +90,132 @@ FileStream class category: 'accessing' methods: {
     ^ StandardFileStream handle: LibC stderr
 ].
 
+}.
+
+Object category: 'streaming' methods: {
+:[putOn: aStream
+	aStream nextPut: self
+]
+}.
+
+"
+Positionable
+"
+
+PositionableStream class category: 'instance creation' methods: {
+:[on: aCollection
+	"Answer an instance of me, streaming over the elements of aCollection."
+
+	^self basicNew on: aCollection
+].
+
+:[on: aCollection from: firstIndex to: lastIndex
+	"Answer an instance of me on a copy of the argument, aCollection,
+	determined by the indices firstIndex and lastIndex. Position the instance
+	at the beginning of the collection."
+
+	^self basicNew
+		on: aCollection
+		from: firstIndex
+		to: lastIndex
+]
+}.
+
+PositionableStream category: 'initialization' methods: {
+:[on: aCollection
+
+	collection := aCollection.
+	readLimit := aCollection size.
+	position := 0.
+	self reset
+]
+}.
+
+PositionableStream category: 'posititioning' methods: {
+:[reset
+	"Set the receiver's position to the beginning of the sequence of objects."
+
+	position := 0
+]
+}.
+
+WriteStream category: 'accessing' methods: {
+:[contents
+
+	readLimit := readLimit max: position.
+	^collection copyFrom: 1 to: position
+].
+
+:[nextPut: anObject
+	"TODO: Implement a fast route for arrays and strings."
+
+	position >= writeLimit
+		ifTrue: [^ self pastEndPut: anObject]
+		ifFalse:
+			[position := position + 1.
+			^collection at: position put: anObject]
+].
+}.
+
+WriteStream category: 'initialization' methods: {
+:[on: aCollection
+
+	super on: aCollection.
+	readLimit := 0.
+	writeLimit := aCollection size
+]
+}.
+
+"
+Collection streaming
+"
+SequenceableCollection class category: 'accessing' methods: {
+:[streamSpecies
+	"I return the class that is used for streaming. If override consider overriding #new:streamContents:"
+	^ self
+].
+
+}.
+
+Symbol class category: 'accessing' methods: {
+:[streamSpecies
+	^ String
+].
+
+}.
+
+SequenceableCollection class category: 'stream creation' methods: {
+:[streamContents: blockWithArg
+
+	^ self new: 100 streamContents: blockWithArg
+].
+
+:[new: newSize streamContents: blockWithArg
+	| stream |
+	stream := WriteStream on: (self streamSpecies new: newSize).
+	blockWithArg value: stream.
+	^ stream contents
+].
+
+}.
+
+SequenceableCollection category: 'streaming' methods: {
+:[putOn: aStream
+	self do: [:each | aStream nextPut: each]
+]
+}.
+
+String category: 'streaming' methods: {
+:[putOn: aStream
+	aStream nextPutAll: self
+]
+}.
+
+UnhandledError category: 'exception description' methods: {
+:[defaultAction
+    FileStream stderr
+		nextPutAll: 'Unhandled error'; lf;
+		print: exception; lf.
+    LibC abort #{}.
+]
 }.

@@ -15,6 +15,7 @@ createEnvironment
 	nilType := (compilerEnvironment lookSymbol: #_Nil) value.
 	objectType := (compilerEnvironment lookSymbol: #_DynamicObject) value.
 	booleanLiteralType := (compilerEnvironment lookSymbol: #_BooleanLiteral) value.
+	characterLiteralType := (compilerEnvironment lookSymbol: #_CharacterLiteral) value.
 	integerLiteralType := (compilerEnvironment lookSymbol: #_IntegerLiteral) value.
 	floatLiteralType := (compilerEnvironment lookSymbol: #_FloatLiteral) value.
 	rationalLiteralType := (compilerEnvironment lookSymbol: #_RationalLiteral) value.

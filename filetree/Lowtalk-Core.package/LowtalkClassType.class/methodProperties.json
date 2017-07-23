@@ -1,13 +1,15 @@
 {
 	"instance" : {
-		"classObject:" : "RonieSalgado 5/25/2017 00:22",
-		"slotNamed:ifAbsent:" : "RonieSalgado 5/25/2017 00:49",
-		"slotNamed:ifPresent:" : "RonieSalgado 5/25/2017 00:49",
-		"classObject" : "RonieSalgado 5/25/2017 00:22",
-		"isValueConforming:" : "RonieSalgado 5/25/2017 01:26",
-		"getClassDescription" : "RonieSalgado 5/25/2017 00:49",
 		"isClassType" : "RonieSalgado 5/25/2017 00:22",
-		"name" : "RonieSalgado 7/4/2017 18:42"
+		"isValueConforming:" : "RonieSalgado 5/25/2017 01:26",
+		"slotNamed:ifPresent:" : "RonieSalgado 5/25/2017 00:49",
+		"name" : "RonieSalgado 7/4/2017 18:42",
+		"getClassDescription" : "RonieSalgado 5/25/2017 00:49",
+		"classBindingWithCompiler:" : "RonieSalgado 7/22/2017 22:19",
+		"slotNamed:ifAbsent:" : "RonieSalgado 5/25/2017 00:49",
+		"classObject:" : "RonieSalgado 5/25/2017 00:22",
+		"classObject" : "RonieSalgado 5/25/2017 00:22",
+		"arithmeticCoerceWithCharacter:" : "RonieSalgado 7/22/2017 21:03"
 	},
 	"class" : { }
 }

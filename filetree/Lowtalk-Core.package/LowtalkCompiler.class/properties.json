@@ -38,7 +38,8 @@
 		"debugLocationDictionary",
 		"debugSourceFileDictionary",
 		"thisContextType",
-		"capturedCompileTimeVariables"
+		"capturedCompileTimeVariables",
+		"characterLiteralType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"
