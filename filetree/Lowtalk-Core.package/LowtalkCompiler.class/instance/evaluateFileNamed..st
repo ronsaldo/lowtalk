@@ -1,18 +1,8 @@
 compiling
 evaluateFileNamed: aFileName
 	<compileTime>
-	| ast fileEnvironment result fileReference oldDirectory contents |
-	fileReference := currentDirectory resolve: aFileName asFileReference.
-	oldDirectory := currentDirectory.
-	currentDirectory := fileReference parent.
-
-	[ 
-		contents := fileReference contents asLowtalkCollectionWithContext.
-		contents name: fileReference fullName.
-
-		ast := LowtalkParser parse: contents.
-		self convertParseFailure: ast collection: contents.
-		fileEnvironment := LowtalkLocalEnvironment parent: globalEnvironment.
-		result := LowtalkEvaluator evaluateValue: ast environment: fileEnvironment.
-		^ result
-	] ensure: [  currentDirectory := oldDirectory ]
+	| evaluationTime |
+	"self log: 'Evaluating {1}' format: {aFileName}."
+	evaluationTime := [ self doEvaluateFileNamed: aFileName ] timeToRun..
+	self log: '{1} evaluation time: {2} ms' format: {aFileName . evaluationTime asMilliSeconds asString}.
+	

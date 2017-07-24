@@ -1,11 +1,22 @@
 initialization
 initialize
-	ClassPrimitiveSelectors := Set newFrom: #(basicNew basicNew:).
-	ObjectPrimitiveSelectors := Set newFrom: #(
-		basicAt: basicAt:put: basicSize
-		identityHash class
-		== ~~
-		castTo: reinterpretCastTo:
+	ClassPrimitiveSelectors := Dictionary newFromPairs: #(
+		basicNew classPrimitive_basicNew
+		basicNew: classPrimitive_basicNew:
+	).
+	
+	ObjectPrimitiveSelectors := Dictionary newFromPairs: #(
+		basicAt: primitive_basicAt:
+		basicAt:put: primitive_basicAt:put:
+		basicSize primitive_basicSize
+		
+		identityHash primitive_identityHash
+		class primitive_class
+		== primitive_identityEquals:
+		~~ primitive_identityNotEquals:
+		castTo: primitive_castTo:
+		reinterpretCastTo: primitive_reinterpretCastTo:
+		yourself primitive_yourself
 		).
 	NewObjectForType := Dictionary newFromPairs: #(
 		pointers newObjectWithPointers:

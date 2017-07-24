@@ -1,6 +1,7 @@
 module construction
 buildModule
 	| toProcess elementsToCompile |
+	self log: 'Building module'.
 	ssaModule := SLVMModule new compilationTarget: compilationTarget.
 	elementsToCompile := Set new.
 	

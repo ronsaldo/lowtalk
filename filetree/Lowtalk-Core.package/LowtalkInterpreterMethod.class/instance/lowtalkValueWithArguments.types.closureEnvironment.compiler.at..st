@@ -1,6 +1,6 @@
 evaluating
 lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes closureEnvironment: closureEnvironment compiler: aLowtalkCompiler at: aNode
-	| activationEnvironment argumentDefinition convertedArgument argumentVariable result resultType actualArguments actualArgumentTypes receiverValue receiverValueType receiverActivationEnvironment |
+	| activationEnvironment argumentDefinition convertedArgument argumentVariable result resultType actualArguments actualArgumentTypes receiverValue receiverValueType receiverActivationEnvironment compiler |
 	
 	"Process the receiver"
 	actualArguments := evaluationArguments.
@@ -54,6 +54,8 @@ lowtalkValueWithArguments: evaluationArguments types: evaluationArgumentTypes cl
 			result := receiverValue.
 			resultType := receiverType.
 		].
+	
+		resultType ifNil: [ resultType := aLowtalkCompiler objectType ].
 
 		node body expressions ifNotEmpty: [ 
 			[

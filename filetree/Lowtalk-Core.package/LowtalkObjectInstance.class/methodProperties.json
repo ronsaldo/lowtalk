@@ -3,24 +3,27 @@
 		"header" : "RonieSalgado 5/21/2017 19:36",
 		"classBinding" : "RonieSalgado 7/22/2017 22:20",
 		"primitive_basicAt:" : "RonieSalgado 6/1/2017 20:06",
+		"doLowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 7/24/2017 02:24",
 		"ssaValueType" : "RonieSalgado 5/31/2017 22:45",
 		"behavior" : "RonieSalgado 5/25/2017 04:32",
 		"primitive_basicSize" : "RonieSalgado 5/25/2017 04:10",
 		"type" : "RonieSalgado 5/25/2017 05:18",
-		"lowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 7/4/2017 02:36",
+		"lowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 7/24/2017 02:31",
 		"isRegisteredClass" : "RonieSalgado 5/25/2017 03:58",
 		"classPrimitive_basicNew" : "RonieSalgado 5/25/2017 04:08",
 		"slots:" : "RonieSalgado 5/21/2017 19:36",
 		"pointerForSlotDescription:" : "RonieSalgado 5/25/2017 01:31",
 		"slotType" : "RonieSalgado 5/31/2017 23:10",
 		"classPrimitive_basicNew:" : "RonieSalgado 6/1/2017 20:09",
+		"primitive_identityNotEquals:" : "RonieSalgado 7/24/2017 02:22",
 		"getClassDescription" : "RonieSalgado 6/1/2017 20:04",
-		"slotsType" : "RonieSalgado 5/31/2017 23:10",
+		"primitive_identityEquals:" : "RonieSalgado 7/24/2017 02:22",
 		"isObjectInstance" : "RonieSalgado 5/25/2017 01:09",
+		"slotsType" : "RonieSalgado 5/31/2017 23:10",
 		"ssaSlotsType" : "RonieSalgado 5/31/2017 23:10",
-		"toSSAPointerConstantWith:" : "RonieSalgado 5/31/2017 22:58",
 		"primitive_castTo:" : "RonieSalgado 5/25/2017 05:17",
-		"lowtalkPerform:primitivePrefix:withArguments:inSuperclass:node:" : "RonieSalgado 5/25/2017 03:58",
+		"toSSAPointerConstantWith:" : "RonieSalgado 5/31/2017 22:58",
+		"primitive_yourself" : "RonieSalgado 7/24/2017 02:22",
 		"slots" : "RonieSalgado 5/21/2017 19:36",
 		"asLowtalkObjectInstanceWith:" : "RonieSalgado 5/31/2017 21:46",
 		"compiler" : "RonieSalgado 5/21/2017 19:36",
@@ -33,6 +36,6 @@
 		"headerPointer" : "RonieSalgado 5/25/2017 04:04"
 	},
 	"class" : {
-		"initialize" : "RonieSalgado 6/1/2017 20:10"
+		"initialize" : "RonieSalgado 7/24/2017 02:23"
 	}
 }
