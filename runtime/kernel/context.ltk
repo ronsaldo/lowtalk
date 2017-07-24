@@ -113,10 +113,33 @@ Constant named: #widowThisContext value: [:framePointer<Void pointer> |
     ^ nil
 ].
 
-Constant named: #nonLocalReturn value: [:targetContext<ObjectHeader pointer> :returnValue<Void pointer> |
+Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader pointer> :returnValue<Void pointer> |
     <localReturn>
-    <cdecl>
-    LibC printf #{c'TODO: non-local return.\n'}.
+
+    "LibC printf #{c'Non-local return target %p value %p\n' . targetContext . returnValue}."
+
+    let target := targetContext value sender.
+    isSmallInteger #{target} ifFalse: [
+        BlockCannotReturn new signal: 'Cannot perform non local return.'.
+    ].
+
+    let targetFramePointer := target - 1 reinterpretCastTo: UIntPointer.
+    let currentFramePointer := thisContext uncheckedFramePointer reinterpretCastTo: UIntPointer.
+    targetFramePointer <= currentFramePointer ifTrue: [
+        BlockCannotReturn new signal: 'Cannot perform non local return to lower context'.
+    ].
+
+    "TODO: Unwind the context"
+    "LibC printf #{c'Non-local return to %p from %p\n' . targetFramePointer . currentFramePointer}."
+
+    "Return from here"
+    let targetMethod := targetContext value method reinterpretCastTo: _CompiledMethod pointer.
+    let targetMethodExitPoint := targetMethod value exitPoint - 1 reinterpretCastTo: Void pointer.
+
+    "LibC printf #{c'Target exit point %p\n' . targetMethodExitPoint}."
+    thisContext uncheckedReturnFromFrame: (targetFramePointer reinterpretCastTo: Void pointer) value: returnValue exitPoint: targetMethodExitPoint.
+
+    "This should be unreachable"
     LibC abort #{}.
     ^ nil
 ].

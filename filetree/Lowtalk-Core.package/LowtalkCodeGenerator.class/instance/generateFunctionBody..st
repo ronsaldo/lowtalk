@@ -3,7 +3,13 @@ generateFunctionBody: body
 	| result |
 	result := self visitNode: body.
 	
-	allocaBuilder jump: bodyBlock.
+	initializationBlock ifNotNil: [ 
+		allocaBuilder jump: initializationBlock.
+		initializationBuilder jump: bodyBlock
+	] ifNil: [ 
+		allocaBuilder jump: bodyBlock.
+	].
+	
 	builder isLastTerminator ifFalse: [
 		method hasLocalReturns ifTrue: [ 
 			self tryToReturnImplicitly: selfValue type: selfType

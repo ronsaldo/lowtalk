@@ -18,6 +18,7 @@
 		"arithmeticCoerceWithInteger:" : "RonieSalgado 5/20/2017 22:58",
 		"arithmeticCoerceWithIntegerLiteral:" : "RonieSalgado 5/20/2017 22:58",
 		"arithmeticCoerceWithBoolean:" : "RonieSalgado 7/10/2017 23:42",
+		"arithmeticCoerceWithBooleanLiteral:" : "RonieSalgado 7/23/2017 17:00",
 		"arithmeticCoerceWithSymbolLiteral:" : "RonieSalgado 7/12/2017 22:18"
 	},
 	"class" : { }

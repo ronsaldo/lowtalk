@@ -109,4 +109,6 @@ initialize
 	
 	InlinedThisContextMessages := Dictionary newFromPairs: #(
 		uncheckedReplaceFunctionWith: UncheckedReplaceFunctionWith
+		uncheckedFramePointer UncheckedFramePointer
+		uncheckedReturnFromFrame:value:exitPoint: UncheckedReturnFromFrameValue
 	)

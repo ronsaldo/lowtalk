@@ -22,7 +22,11 @@
 		"currentFunction",
 		"parentCodeGenerator",
 		"capturedValueDictionary",
-		"capturedValues"
+		"capturedValues",
+		"currentReturnContext",
+		"initializationBuilder",
+		"initializationBlock",
+		"currentNonLocalReturnMethod"
 	],
 	"name" : "LowtalkCodeGenerator",
 	"type" : "normal"

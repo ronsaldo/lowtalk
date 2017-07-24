@@ -2,7 +2,8 @@
 	"instance" : {
 		"isBooleanLiteralType" : "RonieSalgado 5/24/2017 02:22",
 		"name" : "RonieSalgado 5/24/2017 02:24",
-		"asValueType" : "RonieSalgado 7/22/2017 16:12"
+		"asValueType" : "RonieSalgado 7/22/2017 16:12",
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 7/23/2017 17:00"
 	},
 	"class" : { }
 }

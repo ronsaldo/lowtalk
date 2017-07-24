@@ -1,0 +1,3 @@
+coercions
+arithmeticCoerceWithBooleanLiteral: otherType
+	^ otherType

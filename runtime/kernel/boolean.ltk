@@ -15,3 +15,15 @@ False category: 'logical operations' methods: {
     ^ true
 ]
 }.
+
+True category: 'printing' methods: {
+:[printOn: aStream
+    aStream nextPutAll: 'true'
+]
+}.
+
+False category: 'printing' methods: {
+:[printOn: aStream
+    aStream nextPutAll: 'false'
+]
+}.

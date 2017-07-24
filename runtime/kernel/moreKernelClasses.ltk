@@ -29,6 +29,21 @@ Error subclass: #InvalidObjectToPointerCast
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
 
+Error subclass: #CannotReturn
+	instanceVariableNames: 'result'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+CannotReturn subclass: #BlockCannotReturn
+	instanceVariableNames: 'home'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+CannotReturn subclass: #ContextCannotReturn
+	instanceVariableNames: 'target'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
 "Stream classes. Used for printing"
 Object subclass: #Stream
 	instanceVariableNames: ''

@@ -1,0 +1,17 @@
+Constant named: #hasElement value: [:collection :element |
+    <localReturn>
+    collection do: [:el |
+        el = element ifTrue: [ ^ true ]
+    ].
+
+    ^ false
+].
+
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+    <cdecl>
+
+    let result := hasElement #{ #(1 2 3 4 5) . 3}.
+    FileStream stdout nextPutAll: 'Has element '; print: result; lf.
+    ^ 0
+]

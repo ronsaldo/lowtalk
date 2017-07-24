@@ -2,7 +2,7 @@ trampoline names
 convertConstantValue: value inModule: module
 	value isSLVMObject ifTrue: [
 		self assert: (value type isPointerType or: [value type isDynamicObjectType]).
-		value isFunction ifTrue: [
+		(value isFunction or: [value isFunctionExitPoint]) ifTrue: [
 			^ SLVMConstant pointer:
 				(SLVMConstant add: (SLVMConstant pointer: value castTo: compiler uintPointerType ssaType) with:
 				(SLVMConstant type: compiler uintPointerType ssaType value: 1))

@@ -1,0 +1,6 @@
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+    <cdecl>
+    Error new signal: 'An error'.
+    ^ 0
+]

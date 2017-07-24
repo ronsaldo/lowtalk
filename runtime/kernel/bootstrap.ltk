@@ -62,7 +62,7 @@ let bootstrapClassHierarchy := #(
                         (Symbol WideSymbol words () ())
 
     "Context"
-    (Array CompiledMethod variablePointers (entryPoint primitive argumentsDescriptor) ())
+    (Array CompiledMethod variablePointers (entryPoint exitPoint primitive argumentsDescriptor) ())
 
     (Object Message pointers (selector args lookupClass) ())
     (Object InstructionStream pointers (sender pc) ())
@@ -367,6 +367,8 @@ MethodDictionary methodDict
 CompiledMethod methodDict
     at: #entryPoint put: [:self<CompiledMethod> | entryPoint];
     at: #entryPoint: put: [:self<CompiledMethod> :newEntryPoint | entryPoint := newEntryPoint. self];
+    at: #exitPoint put: [:self<CompiledMethod> | exitPoint];
+    at: #exitPoint: put: [:self<CompiledMethod> :newExitPoint | exitPoint := newExitPoint. self];
     at: #primitive put: [:self<CompiledMethod> | primitive];
     at: #primitive: put: [:self<CompiledMethod> :newPrimitive | primitive := newPrimitive. self];
     at: #argumentsDescriptor put: [:self<CompiledMethod> | argumentsDescriptor];
@@ -396,6 +398,7 @@ Compiler objectModel
         let result := CompiledMethod basicNew: literals size.
         entryPoint ifNotNil: [
             result entryPoint: entryPoint;
+                exitPoint: entryPoint exitPoint;
                 primitive: entryPoint primitive;
                 argumentsDescriptor: entryPoint argumentsDescriptor.
         ].
