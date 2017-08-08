@@ -9,7 +9,8 @@
 		"evaluator",
 		"node",
 		"value",
-		"evaluated"
+		"evaluated",
+		"type"
 	],
 	"name" : "LowtalkLazyValue",
 	"type" : "normal"

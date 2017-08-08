@@ -1,6 +1,6 @@
 visiting
 visitMessageNode: message
-	(message receiver isBlockNode and: [ BlockMessages includes: message selector ]) ifFalse: [ 
+	(message receiver isBlockNode and: [ BlockMessages includesKey: message selector ]) ifFalse: [ 
 		self visitNode: message receiver.
 	].
 	

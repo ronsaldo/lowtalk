@@ -6,7 +6,16 @@ visitIdentifierReferenceNode: identifier
 	].
 
 	self flag: 'Remove this hack interpreting inlined closures in a proper way'.
-	identifier binding ifNil: [ identifier binding: result ].
+	identifier binding ifNil: [
+		identifier binding: result.
+		
+		(result isMethodVariable and: [result isMethodReceiverSlot not]) ifTrue: [
+			result method ~~ method ifTrue: [ 
+				self captureMethodVariable: result
+			]
+		].
+	].
+
 	self assert: identifier binding class ~~ LowtalkSlotPointer.
 	identifier type: result type.
 	^ result

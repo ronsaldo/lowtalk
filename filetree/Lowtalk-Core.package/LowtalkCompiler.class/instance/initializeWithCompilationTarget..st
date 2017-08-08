@@ -4,6 +4,7 @@ initializeWithCompilationTarget: aCompilationTarget
 	objectModel := LowtalkObjectModel new compiler: self.
 	compilationTarget objectModel: (LowtalkSLVMObjectModel new compiler: self).
 	self createEnvironment.
+	self gatherLazySelectors.
 	currentDirectory := FileSystem workingDirectory.
 	pendingObjects := Set new.
 	

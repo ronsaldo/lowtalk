@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "LowtalkBObject",
 	"category" : "Lowtalk-Core-FrontEnd",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -39,7 +39,8 @@
 		"debugSourceFileDictionary",
 		"thisContextType",
 		"capturedCompileTimeVariables",
-		"characterLiteralType"
+		"characterLiteralType",
+		"lazySelectors"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

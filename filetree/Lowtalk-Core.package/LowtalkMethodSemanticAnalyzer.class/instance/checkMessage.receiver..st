@@ -1,6 +1,9 @@
 visiting
 checkMessage: message receiver: receiver
 	| receiverValueType |
+	(compiler isLazySelector: message selector) ifTrue: [ 
+		method markLazySelectorPresence
+	].
 	
 	(receiver isBlockNode and: [ (BlockMessages includesKey: message selector) and: [self isMessageACandidateForInlining: message receiver: receiver]]) ifTrue: [ 
 		self flag: 'TODO: Support more block special messages'.

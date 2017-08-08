@@ -17,7 +17,7 @@ generateSetSlotMessage: message receiver: receiver receiverType: receiverType
 	"Get the slot pointer"
 	slot := structureType slotNamed: message selector allButLast.
 	
-	"Conver the slot value"
+	"Convert the slot value"
 	newValue := self visitNode: message arguments first.
 	newValueType := message arguments first type.
 	newValue := self coerceImplicitly: newValue type: newValueType to: slot type at: message.

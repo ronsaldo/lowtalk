@@ -1,3 +1,3 @@
 accessing
 type
-	^ node type withoutReferences
+	^ type ifNil: [type := node type withoutReferences]

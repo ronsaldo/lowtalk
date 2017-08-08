@@ -1,3 +1,3 @@
-as yet unclassified
+slot accessing
 pointerForSlotDescription: desc
 	^ slots at: desc index + 1

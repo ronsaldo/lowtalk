@@ -20,7 +20,11 @@
 		"ssaFunction",
 		"publicSymbol",
 		"unmangledName",
-		"primitive"
+		"primitive",
+		"hasLazySelector",
+		"bytecodeMethods",
+		"capturedVariable",
+		"outerClosureVariables"
 	],
 	"name" : "LowtalkInterpreterMethod",
 	"type" : "normal"

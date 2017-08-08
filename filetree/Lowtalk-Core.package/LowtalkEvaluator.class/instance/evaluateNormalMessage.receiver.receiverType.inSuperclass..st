@@ -1,6 +1,6 @@
 as yet unclassified
 evaluateNormalMessage: message receiver: receiver receiverType: receiverType inSuperclass: superClass
-	| arguments |
+	| arguments argumentTypes |
  
 	receiverType isCompileTimeType ifTrue: [
 		receiver isNamespace ifTrue: [ 
@@ -12,8 +12,21 @@ evaluateNormalMessage: message receiver: receiver receiverType: receiverType inS
 		].
 	].
 
-	arguments := message arguments collect: [ :arg |
-		LowtalkLazyValue new evaluator: self; node: arg
-	].
+	(self compiler isLazySelector: message selector) ifTrue: [ 
+		arguments := message arguments collect: [ :arg |
+			LowtalkLazyValue new evaluator: self; node: arg
+		].
 
-	^ receiver lowtalkPerform: message selector withArguments: arguments inSuperclass: superClass node: message compiler: compiler
+		^ receiver lowtalkPerform: message selector withLazyArguments: arguments inSuperclass: superClass node: message compiler: compiler
+	] ifFalse: [ 
+		arguments := message arguments collect: [ :arg | self visitNode: arg].
+		argumentTypes := message arguments collect: [ :arg | arg type withoutReferences ].
+
+		message arguments doWithIndex: [ :arg :index |
+			| argType |
+			argType := argumentTypes at: index.
+			arguments at: index put:  (arg type convertValue: (arguments at: index) toType: argType at: arg)
+		].
+
+		^ receiver lowtalkPerform: message selector withArguments: arguments types: argumentTypes inSuperclass: superClass node: message compiler: compiler
+	].

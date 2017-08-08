@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkBObject",
+	"category" : "Lowtalk-Core-Interpreter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"CullSelectors",
+		"ValueSelectors"
+	],
+	"instvars" : [
+		"closure",
+		"definition"
+	],
+	"name" : "LowtalkCompiledMethodBlockClosure",
+	"type" : "normal"
+}
