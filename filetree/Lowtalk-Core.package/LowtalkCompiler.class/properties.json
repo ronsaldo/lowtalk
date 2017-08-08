@@ -40,7 +40,8 @@
 		"thisContextType",
 		"capturedCompileTimeVariables",
 		"characterLiteralType",
-		"lazySelectors"
+		"lazySelectors",
+		"profilingInterpreter"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

@@ -1,3 +1,3 @@
 accessing
 name
-	^ name ifNil: [ name := classObject lowtalkPerform: #name withArguments: #() types: #() inSuperclass: false node: nil compiler: self ]
+	^ name ifNil: [ name := classObject lowtalkPerform: #name withArguments: #() types: #() inSuperclass: false node: nil compiler: compiler ]

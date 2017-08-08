@@ -1,3 +1,4 @@
 as yet unclassified
 generateReinterpretCastToMessage: message receiverType: receiverType inSuperclass: inSuperclass
-	self halt
+	"For now do nothing"
+	

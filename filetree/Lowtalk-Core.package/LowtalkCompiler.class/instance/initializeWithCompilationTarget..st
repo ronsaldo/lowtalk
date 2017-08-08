@@ -1,6 +1,7 @@
 initialization
 initializeWithCompilationTarget: aCompilationTarget
 	compilationTarget := aCompilationTarget.
+	profilingInterpreter := false.
 	objectModel := LowtalkObjectModel new compiler: self.
 	compilationTarget objectModel: (LowtalkSLVMObjectModel new compiler: self).
 	self createEnvironment.

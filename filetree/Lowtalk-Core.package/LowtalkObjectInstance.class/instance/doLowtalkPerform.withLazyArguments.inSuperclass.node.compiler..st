@@ -1,5 +1,5 @@
 message dispatching
-doLowtalkPerform: selector withArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
+doLowtalkPerform: selector withLazyArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
 	| method |
 	(self isRegisteredClass and: [ClassPrimitiveSelectors includesKey: selector]) ifTrue: [
 		^ self perform: (ClassPrimitiveSelectors at: selector) withArguments: (arguments collect: #value)

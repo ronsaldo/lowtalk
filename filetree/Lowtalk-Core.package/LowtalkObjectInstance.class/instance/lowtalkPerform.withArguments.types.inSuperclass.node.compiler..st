@@ -1,22 +1,15 @@
 message dispatching
 lowtalkPerform: selector withArguments: arguments types: argumentTypes inSuperclass: superClass node: sendingNode compiler: aCompiler
-	| method |
-	(self isRegisteredClass and: [ClassPrimitiveSelectors includesKey: selector]) ifTrue: [
-		^ self perform: (ClassPrimitiveSelectors at: selector) withArguments: arguments
-	].
-	ObjectPrimitiveSelectors at: selector ifPresent: [ :implementation |
-		(#(castTo: reinterpretCastTo:) includes: selector) ifTrue: [
-			^ self perform: implementation withArguments: (LowtalkLazyValue zipValues: arguments types: argumentTypes node: aCompiler)
+	| time result |
+	^ aCompiler profilingInterpreter ifFalse: [ 
+		self doLowtalkPerform: selector withArguments: arguments types: argumentTypes inSuperclass: superClass node: sendingNode compiler: aCompiler
+	] ifTrue: [ 
+		time := [
+			result := self doLowtalkPerform: selector withArguments: arguments types: argumentTypes inSuperclass: superClass node: sendingNode compiler: aCompiler
+		] timeToRun asMilliSeconds.
+
+		time > 0 ifTrue: [ 
+			FileStream stdout nextPutAll: ('{1} timeToRun ms {2}' format: { selector printString . time asString }); lf.
 		].
-
-		^ self perform: implementation withArguments: arguments
-	].
-
-	method := compiler objectModel lookupSelectorFunction value: self behavior value: selector.
-	method ifNil: [
-		self flag: 'TODO: Send doesNotUnderstand:'.
-		sendingNode semanticError: 'Unsupported selector {1} ' format: { selector printString }
-	].
-
-	^ method lowtalkValueWithArguments: { self } , arguments
-		types: {self type} , argumentTypes compiler: aCompiler at: sendingNode
+		result
+	]

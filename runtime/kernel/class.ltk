@@ -43,7 +43,7 @@ Class category: 'subclass creation' methods: {
 :[subclass: t instanceVariableNames: f classVariableNames: d poolDictionaries: s package: cat
 	^ self
 		subclass: t
-		uses: {}
+		uses: #()
 		instanceVariableNames: f
 		classVariableNames: d
 		poolDictionaries: s

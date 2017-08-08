@@ -2,19 +2,19 @@
 	"instance" : {
 		"header" : "RonieSalgado 5/21/2017 19:36",
 		"classBinding" : "RonieSalgado 7/22/2017 22:20",
-		"doLowtalkPerform:withArguments:inSuperclass:node:compiler:" : "RonieSalgado 7/24/2017 02:24",
 		"primitive_basicAt:" : "RonieSalgado 6/1/2017 20:06",
 		"ssaValueType" : "RonieSalgado 5/31/2017 22:45",
 		"behavior" : "RonieSalgado 5/25/2017 04:32",
 		"primitive_basicSize" : "RonieSalgado 5/25/2017 04:10",
 		"type" : "RonieSalgado 5/25/2017 05:18",
 		"isRegisteredClass" : "RonieSalgado 5/25/2017 03:58",
+		"doLowtalkPerform:withLazyArguments:inSuperclass:node:compiler:" : "RonieSalgado 8/8/2017 04:07",
 		"classPrimitive_basicNew" : "RonieSalgado 5/25/2017 04:08",
 		"slots:" : "RonieSalgado 5/21/2017 19:36",
 		"pointerForSlotDescription:" : "RonieSalgado 5/25/2017 01:31",
 		"slotType" : "RonieSalgado 5/31/2017 23:10",
 		"classPrimitive_basicNew:" : "RonieSalgado 6/1/2017 20:09",
-		"lowtalkPerform:withArguments:types:inSuperclass:node:compiler:" : "RonieSalgado 7/24/2017 21:10",
+		"lowtalkPerform:withArguments:types:inSuperclass:node:compiler:" : "RonieSalgado 8/8/2017 04:13",
 		"primitive_identityNotEquals:" : "RonieSalgado 7/24/2017 02:22",
 		"getClassDescription" : "RonieSalgado 6/1/2017 20:04",
 		"primitive_identityEquals:" : "RonieSalgado 7/24/2017 02:22",
@@ -30,11 +30,12 @@
 		"primitive_basicAt:put:" : "RonieSalgado 6/1/2017 20:07",
 		"asLowtalkTypeIn:" : "RonieSalgado 5/25/2017 00:28",
 		"lowtalkLiteralTypeWith:" : "RonieSalgado 5/21/2017 19:38",
+		"doLowtalkPerform:withArguments:types:inSuperclass:node:compiler:" : "RonieSalgado 8/8/2017 04:07",
 		"header:" : "RonieSalgado 5/21/2017 19:36",
 		"primitive_class" : "RonieSalgado 6/8/2017 20:54",
 		"compiler:" : "RonieSalgado 5/21/2017 19:36",
 		"headerPointer" : "RonieSalgado 5/25/2017 04:04",
-		"lowtalkPerform:withLazyArguments:inSuperclass:node:compiler:" : "RonieSalgado 7/24/2017 20:43"
+		"lowtalkPerform:withLazyArguments:inSuperclass:node:compiler:" : "RonieSalgado 8/8/2017 04:13"
 	},
 	"class" : {
 		"initialize" : "RonieSalgado 7/24/2017 02:23"
