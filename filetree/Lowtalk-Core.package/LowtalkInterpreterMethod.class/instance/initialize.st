@@ -5,5 +5,5 @@ initialize
 	temporaries := OrderedCollection new.
 	hasLazySelector := false.
 	bytecodeMethods := IdentityDictionary new.
-	capturedVariable := Set new.
-	outerClosureVariables := Set new.
+	capturedVariable := SLVMOrderedInsertionSet new.
+	outerClosureVariables := SLVMOrderedInsertionSet new.

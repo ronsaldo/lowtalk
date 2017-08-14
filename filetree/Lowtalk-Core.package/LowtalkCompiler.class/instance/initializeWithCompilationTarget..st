@@ -7,7 +7,7 @@ initializeWithCompilationTarget: aCompilationTarget
 	self createEnvironment.
 	self gatherLazySelectors.
 	currentDirectory := FileSystem workingDirectory.
-	pendingObjects := Set new.
+	pendingObjects := SLVMOrderedInsertionSet new.
 	
 	objectInstanceVariableNameMap := IdentityDictionary new.
 	metaclassVariableNameMap := IdentityDictionary new.
