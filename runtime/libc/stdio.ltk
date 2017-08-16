@@ -28,10 +28,29 @@ Namespace named: #LibC members: [
         }.
     ] ifFalse: [
         Structure named: #FILE slots: {}.
-
-        Global externalC: #stdout type: FILE pointer.
-        Global externalC: #stdin type: FILE pointer.
-        Global externalC: #stderr type: FILE pointer.
+        
+        Compiler operatingSystemName = #osx ifTrue: [
+            Global externalC: #__stdoutp type: FILE pointer.
+            Global externalC: #__stdinp type: FILE pointer.
+            Global externalC: #__stderrp type: FILE pointer.        
+            
+            self category: 'accessing' methods: {
+            :[stdin -> FILE pointer.
+                ^ __stdinp
+            ].
+            :[stdout -> FILE pointer.
+                ^ __stdoutp
+            ].
+            :[stderr -> FILE pointer.
+                ^ __stderrp
+            ].
+            }.
+        
+        ] ifFalse: [
+            Global externalC: #stdout type: FILE pointer.
+            Global externalC: #stdin type: FILE pointer.
+            Global externalC: #stderr type: FILE pointer.        
+        ]
     ].
 
     "Files"
