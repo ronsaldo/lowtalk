@@ -5,6 +5,7 @@
 		"convertValue:toType:at:" : "RonieSalgado 5/25/2017 01:49",
 		"irCoerceImplicitlyTo:with:at:" : "RonieSalgado 7/24/2017 05:49",
 		"buildSSAType" : "RonieSalgado 5/18/2017 20:30",
+		"isAnyDynamicObjectType" : "RonieSalgado 8/17/2017 21:23",
 		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 6/2/2017 00:08",
 		"canBeImplicitlyConvertedTo:" : "RonieSalgado 5/24/2017 02:19",
 		"asDefaultReturnTypeWith:" : "RonieSalgado 7/4/2017 02:47",

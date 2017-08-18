@@ -26,6 +26,8 @@ doConvertSSADynamicConstantValue: value inModule: module
 
 	valueType := convertedObject ssaValueType.
 	variable := SLVMGlobalVariable module: module name: variableName valueType: valueType storage: SLVMType genericStorage.
+	variable customSection: #'.oop'.
+		
 	(variableName beginsWith: '__ltgs') ifTrue: [
 		variable makePrivate.
 		variable propertyAt: #omitDebugInformation put: true

@@ -16,6 +16,9 @@ convertCapturedCompileTimeVariable: compileTimeVariable
 	variable makePrivate;
 		shouldBePromotedToConstant: true;
 		propertyAt: #omitDebugInformation put: true.
+	valueType isAnyDynamicObjectType ifTrue: [
+		variable customSection: #'.oopRef'
+	].
 
 	capturedCompileTimeVariables at: compileTimeVariable put: variable.
 	

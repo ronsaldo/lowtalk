@@ -1,19 +1,20 @@
 module construction
 buildModule
-	| toProcess |
+	| toProcess objectToFinish |
 	self log: 'Building module'.
 	ssaModule := SLVMModule new compilationTarget: compilationTarget.
+	objectToFinish := SLVMOrderedInsertionSet new.
 	
 	[ pendingObjects isNotEmpty ] whileTrue: [
 		toProcess := pendingObjects asArray.
 		pendingObjects removeAll.
+		objectToFinish addAll: toProcess.
 		
-		toProcess do: [ :object |
-			object prepareToCompile
-		].
-		toProcess do: #finishCompiling.
+		toProcess do: #prepareToCompile.
+		toProcess do: #compileElement.
 	].
 
+	objectToFinish do: #finishCompiling.
 	self assert: pendingObjects isEmpty.
 	
 	

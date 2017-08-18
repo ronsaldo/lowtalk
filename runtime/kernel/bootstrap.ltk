@@ -405,6 +405,8 @@ Compiler objectModel
         1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
         result
     ];
+    globalVariableClass: GlobalVariable;
+    classVariableClass: ClassVariable;
     yourself.
 
 "A method for adding methods"

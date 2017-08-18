@@ -48,7 +48,10 @@
 		"objectToPointerFunction",
 		"marryThisContextFunction",
 		"widowThisContextFunction",
-		"nonLocalReturnFunction"
+		"nonLocalReturnFunction",
+		"objectVariableHeaderCreationFunction",
+		"globalVariableClass",
+		"classVariableClass"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

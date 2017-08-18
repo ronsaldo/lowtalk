@@ -1,0 +1,4 @@
+accessing
+classVariableClass
+	<compileTime>
+	^ classVariableClass

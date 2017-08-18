@@ -82,6 +82,11 @@ Namespace named: #ObjectModel members: [
         #slotCount => UInt32.
     }.
 
+    Structure named: #ObjectVariableHeader slots: {
+        #objectHeader => ObjectHeader.
+        #name => _DynamicObject.
+    }.
+    
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
         let oop := object reinterpretCastTo: UIntPointer.
@@ -517,6 +522,16 @@ newObjectHeaderWithWords
         ];
         getObjectClassFunction: [<ObjectHeader pointer> :header<ObjectHeader pointer> |
             header value classPointer
+        ];
+        
+        objectVariableHeaderCreationFunction: [<ObjectVariableHeader> :variableClass<ObjectHeader pointer> :name |
+            ObjectVariableHeader new
+                objectHeader: (newObjectHeaderWithPointers #{2}
+                    classPointer: variableClass;
+                    yourself
+                );
+                name: name;
+                yourself
         ];
         yourself
 

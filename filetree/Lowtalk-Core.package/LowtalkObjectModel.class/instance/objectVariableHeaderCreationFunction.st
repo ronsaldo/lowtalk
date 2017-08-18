@@ -1,0 +1,4 @@
+accessing
+objectVariableHeaderCreationFunction
+	<compileTime>
+	^ objectVariableHeaderCreationFunction

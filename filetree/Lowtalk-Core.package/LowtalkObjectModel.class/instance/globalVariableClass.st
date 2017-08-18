@@ -1,0 +1,4 @@
+accessing
+globalVariableClass
+	<compileTime>
+	^ globalVariableClass

@@ -1,5 +1,6 @@
 {
 	"instance" : {
+		"convertValue:toSSAConstantWith:" : "RonieSalgado 8/17/2017 22:13",
 		"validName" : "RonieSalgado 5/10/2017 02:29",
 		"fields:" : "RonieSalgado 5/4/2017 17:47",
 		"slotsExpression:" : "RonieSalgado 5/10/2017 02:26",
@@ -27,8 +28,8 @@
 		"compiler:" : "RonieSalgado 5/10/2017 02:26",
 		"buildSlots" : "RonieSalgado 5/10/2017 02:31",
 		"canBeImplicitlyConvertedTo:" : "RonieSalgado 7/24/2017 21:33",
-		"specialMessageTypeForSelector:" : "RonieSalgado 5/21/2017 18:54",
 		"fieldNames:" : "RonieSalgado 5/10/2017 02:35",
+		"specialMessageTypeForSelector:" : "RonieSalgado 5/21/2017 18:54",
 		"alignment" : "RonieSalgado 6/26/2017 23:23",
 		"slotNamed:" : "RonieSalgado 5/10/2017 02:27",
 		"category:methods:" : "RonieSalgado 7/15/2017 05:35",
