@@ -19,4 +19,7 @@ Compiler
     evaluateFileNamed: 'streams.ltk';
     evaluateFileNamed: 'object.ltk';
     evaluateFileNamed: 'string.ltk';
+    
+    evaluateFileNamed: 'namespace.ltk';
+    evaluateFileNamed: 'compiledMethod.ltk';
     yourself

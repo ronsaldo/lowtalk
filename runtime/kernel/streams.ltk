@@ -21,6 +21,10 @@ Stream category: 'writing' methods: {
 	^aCollection
 ].
 
+:[tab
+    ^ self nextPut: 9
+].
+
 :[lf
     ^ self nextPut: 10
 ].

@@ -1,0 +1,4 @@
+accessing
+namespaceCreationFunction
+	<compileTime>
+	^ namespaceCreationFunction

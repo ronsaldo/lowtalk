@@ -3,7 +3,7 @@ Object subclass: #Exception
 	instanceVariableNames: 'messageText tag signaler signalContext handlerContext outerContext'
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
-
+	
 Exception subclass: #Error
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -43,7 +43,13 @@ CannotReturn subclass: #ContextCannotReturn
 	instanceVariableNames: 'target'
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
-	
+
+"More reflection"	
+Object subclass: #NamespaceClass
+	instanceVariableNames: 'name variables methodDict'
+	classVariableNames: ''
+	package: 'Kernel-Reflection'.
+
 "Stream classes. Used for printing"
 Object subclass: #Stream
 	instanceVariableNames: ''

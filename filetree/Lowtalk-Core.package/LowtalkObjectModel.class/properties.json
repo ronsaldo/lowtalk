@@ -51,7 +51,9 @@
 		"nonLocalReturnFunction",
 		"objectVariableHeaderCreationFunction",
 		"globalVariableClass",
-		"classVariableClass"
+		"classVariableClass",
+		"namespaceCreationFunction",
+		"createGlobalVariableAssociationFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

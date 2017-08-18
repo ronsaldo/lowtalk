@@ -32,7 +32,8 @@ createEnvironment
 	globalEnvironment
 		compiler: self;
 		"setCompileTimeVariable: compilerEnvironment name value: compilerEnvironment;"
-		setCompileTimeVariable: globalEnvironment name value: globalEnvironment.
+		setSymbol: globalEnvironment name value: globalEnvironment
+		"setCompileTimeVariable: globalEnvironment name value: globalEnvironment".
 		
 	compilerEnvironment
 		setCompileTimeVariable: globalEnvironment name value: globalEnvironment.

@@ -25,7 +25,7 @@ evaluateNormalMessage: message receiver: receiver receiverType: receiverType inS
 		message arguments doWithIndex: [ :arg :index |
 			| argType |
 			argType := argumentTypes at: index.
-			arguments at: index put:  (arg type convertValue: (arguments at: index) toType: argType at: arg)
+			arguments at: index put: (arg type convertValue: (arguments at: index) toType: argType at: arg)
 		].
 
 		^ receiver lowtalkPerform: message selector withArguments: arguments types: argumentTypes inSuperclass: superClass node: message compiler: compiler

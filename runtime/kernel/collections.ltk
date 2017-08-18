@@ -1,3 +1,8 @@
+"
+	Basic collections methods used by the kernel. Many of these methods are
+	taken from Pharo.
+"
+
 Collection category: 'testing' methods: {
 :[isEmptyOrNil
 	"Answer whether the receiver contains any elements, or is nil.  Useful in numerous situations where one wishes the same reaction to an empty collection or to nil"
@@ -160,4 +165,240 @@ SequenceableCollection category: 'accessing ordinals' methods: {
     ^ self at: 1
 ].
 
+}.
+
+HashedCollection category: 'initialization' methods: {
+:[initialize: n
+	"Initialize array to an array size of n"
+	array := Array new: n.
+	tally := 0
+].
+}.
+
+MethodDictionary category: 'initialization' methods: {
+:[initialize: n
+	"Initialize array to an array size of n"
+	array := Array new: n.
+	tally := 0.
+    values := Array new: n.
+].
+}.
+
+HashedCollection class category: 'instance creation' methods: {
+:[new
+	^ self basicNew
+		initialize: 5;
+		yourself
+].
+
+:[new: nElements
+	"Create a Set large enough to hold nElements without growing"
+	^ self basicNew initialize: (self sizeFor: nElements)
+].
+
+:[sizeFor: nElements
+	"Large enough size to hold nElements with some slop (see fullCheck)"
+	
+	nElements < 4 ifTrue: [ ^5 ].
+	^ nElements * 4 // 3
+	"^ HashTableSizes atLeast: nElements +1 * 4 // 3"
+].
+
+}.
+
+HashedCollection category: 'private' methods: {
+:[atNewIndex: index put: anObject
+	array at: index put: anObject.
+	tally := tally + 1.
+	self fullCheck
+].
+
+:[findElementOrNil: anObject
+	"Answer the index of a first slot containing either a nil (indicating an empty slot) or an element that matches the given object. Answer the index of that slot or zero. Fail if neither a match nor an empty slot is found."
+
+	| index |
+
+	index := self scanFor: anObject.
+	index > 0 ifTrue: [^index].
+
+	"Bad scene.  Neither have we found a matching element
+	nor even an empty slot.  No hashed set is ever supposed to get
+	completely full."
+	self error: 'There is no free space in this set!'.
+].
+
+:[fullCheck
+	"Keep array at least 1/4 free for decent hash behavior"
+	array size - tally < (array size // 4 max: 1)
+		ifTrue: [self grow]
+].
+
+:[grow
+	"Grow the elements array and reinsert the old elements"
+
+	| oldElements |
+	oldElements := array.
+	array := Array new: ("HashTableSizes atLeast: "oldElements size * 2).
+	tally := 0.
+	oldElements
+		do:
+			[ :each | 
+			each == nil
+				ifFalse: [ self noCheckAdd: each ] ]
+].
+
+:[noCheckAdd: anObject
+
+    self subclassResponsibility
+].
+
+:[scanFor: anObject
+	"Scan the key array for the first slot containing either a nil (indicating an empty slot) or an element that matches anObject. Answer the index of that slot or raise an error if no slot is found. This method will be overridden in various subclasses that have different interpretations for matching elements."
+	
+	self subclassResponsibility
+].
+
+}.
+
+Dictionary category: 'adding' methods: {
+:[add: anAssociation
+	| index element |
+	index := self findElementOrNil: anAssociation key.
+	element := array at: index.
+	element == nil
+		ifTrue: [self atNewIndex: index put: anAssociation]
+		ifFalse: [element value: anAssociation value].
+	^ anAssociation
+].
+}.
+
+Dictionary category: 'accessing' methods: {
+:[at: key 
+	"Answer the value associated with the key."
+
+	^ self at: key ifAbsent: [self errorKeyNotFound: key]
+].
+
+:[at: key ifAbsent: aBlock 
+	"Answer the value associated with the key or, if key isn't found,
+	answer the result of evaluating aBlock."
+
+	^((array at: (self findElementOrNil: key)) 
+			ifNil: [aBlock] 
+			ifNotNil: [:assoc | assoc]) value.
+].
+
+:[at: key put: anObject 
+	"Set the value at key to be anObject.  If key is not found, create a
+	new entry for key and set is value to anObject. Answer anObject."
+
+	| index assoc |
+	index := self findElementOrNil: key.
+	assoc := array at: index.
+	assoc
+		ifNil: [self atNewIndex: index put: (Association key: key value: anObject)]
+		ifNotNil: [assoc value: anObject].
+	^ anObject
+].
+
+}.
+
+Dictionary category: 'private' methods: {
+:[noCheckAdd: anObject
+	"Must be defined separately for Dictionary because (self findElementOrNil:) expects a key, not an association."
+
+	array at: (self findElementOrNil: anObject key) put: anObject.
+	tally := tally + 1
+].
+
+:[scanFor: anObject
+	"Scan the key array for the first slot containing either a nil (indicating an empty slot) or an element that matches anObject. Answer the index of that slot or zero if no slot is found. This method will be overridden in various subclasses that have different interpretations for matching elements."
+	| element start finish |
+	finish := array size.
+	start := (anObject hash \\ finish) + 1.
+
+	"Search from (hash mod size) to the end."
+	start to: finish do:
+		[:index | ((element := array at: index) == nil or: [element key = anObject])
+			ifTrue: [^ index ]].
+
+	"Search from 1 to where we started."
+	1 to: start-1 do:
+		[:index | ((element := array at: index) == nil or: [element key = anObject])
+			ifTrue: [^ index ]].
+
+	^ 0  "No match AND no empty slot"
+].
+}.
+
+Dictionary category: 'enumerating' methods: {
+:[associationsDo: aBlock 
+	"Evaluate aBlock for each of the receiver's elements (key/value 
+	associations)."
+
+	tally = 0 ifTrue: [^ self].
+	array do:
+		[:each |
+		each ifNotNil: [aBlock value: each]]
+].
+
+:[do: aBlock
+
+	^self valuesDo: aBlock
+].
+
+:[keysDo: aBlock 
+	"Evaluate aBlock for each of the receiver's keys."
+
+	self associationsDo: [:association | aBlock value: association key]
+].
+
+:[keysAndValuesDo: aBlock
+	^self associationsDo:[:assoc|
+		aBlock value: assoc key value: assoc value].
+].
+
+:[valuesDo: aBlock 
+	"Evaluate aBlock for each of the receiver's values.  Implemented with == checks
+	merely for the sake of maximum efficiency"
+
+	tally = 0 ifTrue: [ ^self ].
+	1 to: array size do:
+		[ :eachIndex | 
+			| eachAssociation |
+			eachAssociation := array at: eachIndex.
+			nil == eachAssociation ifFalse: [ aBlock value: eachAssociation value ]
+		]
+].
+
+}.
+
+IdentityDictionary category: 'private' methods: {
+:[keyAtValue: value ifAbsent: exceptionBlock
+	"Answer the key that is the external name for the argument, value. If 
+	there is none, answer the result of evaluating exceptionBlock."
+ 
+	self associationsDo: 
+		[:association | value == association value ifTrue: [^ association key]].
+	^ exceptionBlock value
+].
+
+:[scanFor: anObject
+	"Scan the key array for the first slot containing either a nil (indicating an empty slot) or an element that matches anObject. Answer the index of that slot or zero if no slot is found. This method will be overridden in various subclasses that have different interpretations for matching elements."
+	| finish start element |
+	finish := array size.
+	start := (anObject identityHash \\ finish) + 1.
+
+	"Search from (hash mod size) to the end."
+	start to: finish do:
+		[:index | ((element := array at: index) == nil or: [element key == anObject])
+			ifTrue: [^ index ]].
+
+	"Search from 1 to where we started."
+	1 to: start-1 do:
+		[:index | ((element := array at: index) == nil or: [element key == anObject])
+			ifTrue: [^ index ]].
+
+	^ 0  "No match AND no empty slot"
+].
 }

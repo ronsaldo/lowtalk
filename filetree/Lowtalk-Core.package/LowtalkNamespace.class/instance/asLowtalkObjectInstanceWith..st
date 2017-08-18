@@ -1,4 +1,3 @@
 converting
 asLowtalkObjectInstanceWith: aCompiler
-	self flag: 'Try to do something better'.
-	^ nil
+	^ self ssaValue headerReferenceOfType: aCompiler objectType

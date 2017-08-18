@@ -31,6 +31,7 @@ initialize
 		<< >> | &
 		
 		or: and:
+		min: max:
 		
 		"Collection accessors"
 		basicSize size

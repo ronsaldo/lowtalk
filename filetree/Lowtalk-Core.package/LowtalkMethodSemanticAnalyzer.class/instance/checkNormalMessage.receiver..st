@@ -5,7 +5,7 @@ checkNormalMessage: message receiver: receiver
 	message specialMessageType: nil.
 	
 	receiverType := receiver type withoutReferences.
-		
+	
 	"Is this an ordinary object message send?"
 	(receiverType isDynamicObjectType or: [receiverType canBeImplicitlyConvertedTo: compiler objectType ]) ifTrue: [
 		message arguments do: [ :arg |

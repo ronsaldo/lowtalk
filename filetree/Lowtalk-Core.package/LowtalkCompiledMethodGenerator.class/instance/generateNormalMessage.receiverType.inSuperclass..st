@@ -1,6 +1,8 @@
 visiting
 generateNormalMessage: message receiverType: receiverType inSuperclass: inSuperclass
-	self coerceImplicitlyFrom: receiverType to: compiler objectType at: message.
+	| actualReceiverType |
+	actualReceiverType := receiverType.
+	self coerceImplicitlyFrom: actualReceiverType to: compiler objectType at: message.
 
 	irBuilder pushLiteral: message selector.
 	

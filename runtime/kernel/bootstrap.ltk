@@ -563,6 +563,14 @@ ClassDescription category: 'accessing' methods: {
 }.
 
 Class category: 'accessing' methods: {
+:[environment
+    ^ environment
+].
+
+:[environment: anEnvironment
+    environment := anEnvironment
+].
+
 :[name
     ^ name
 ].
@@ -615,6 +623,9 @@ let classHierarchyInitializationFinish := [
         class basicSetInstanceVariables: instanceVariables.
         metaClass basicSetInstanceVariables: metaInstanceVariables.
 
+        "Set the environment"
+        class environment: _GlobalNamespace.
+        
         "Set the class name"
         class name: name.
 

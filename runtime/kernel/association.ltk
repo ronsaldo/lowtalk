@@ -48,3 +48,8 @@ Object category: 'associating' methods:{
 	^Association key: self value: anObject
 ]
 }.
+
+Compiler objectModel
+	createGlobalVariableAssociationFunction: [:key :value |
+		GlobalVariable key: key value: value
+	].

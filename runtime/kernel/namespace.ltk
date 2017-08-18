@@ -1,0 +1,44 @@
+
+NamespaceClass category: 'accessing' methods: {
+:[name
+    ^ name
+].
+
+:[methodDict
+    ^ methodDict
+].
+
+:[variables
+    ^ variables
+].
+
+:[key
+    ^ name
+].
+
+}.
+
+NamespaceClass category: 'construction' methods: {
+:[name: aName variables: aCollectionWithVariables methods: aCollectionWithMethods
+    name := aName.
+    
+    variables := IdentityDictionary new: aCollectionWithVariables size.
+    aCollectionWithVariables do: [:var | variables add: var].
+    
+    methodDict := MethodDictionary new: aCollectionWithMethods size.
+].
+
+}.
+
+NamespaceClass category: 'printing' methods: {
+:[printOn: aStream
+    aStream nextPutAll: 'Namespace '; nextPutAll: name
+]
+}.
+
+Compiler objectModel
+    namespaceCreationFunction: [:name :variables :methods |
+        NamespaceClass new
+            name: name variables: variables methods: methods;
+            yourself
+    ]

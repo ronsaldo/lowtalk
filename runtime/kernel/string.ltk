@@ -77,6 +77,13 @@ ByteString category: 'testing' methods: {
 ]
 }.
 
+"Symbols"
+Symbol category: 'printing' methods: {
+:[printOn: aStream
+    aStream nextPut: $#; nextPutAll: self
+]
+}.
+
 "Byte symbol"
 ByteSymbol category: 'accessing' methods: {
 :[size

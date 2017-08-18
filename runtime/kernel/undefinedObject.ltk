@@ -12,6 +12,14 @@ Object category: 'testing' methods: {
 
 }.
 
+UndefinedObject category: 'printing' methods: {
+:[printOn: aStream
+	"Refer to the comment in Object|printOn:." 
+
+	aStream nextPutAll: 'nil'
+].
+}.
+
 UndefinedObject category: 'testing' methods: {
 :[isNil
     ^ true

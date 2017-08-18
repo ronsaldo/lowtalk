@@ -70,7 +70,8 @@ Class category: 'subclass creation' methods: {
         registerClassWithObjectModel.
 
     "Register the class in the environment"
-    "TODO: Allow using a Namespace"
+    "TODO: Allow using any namespace"
+    class environment: _GlobalNamespace.
     Global named: aName type: _DynamicObject value: class.
 
     self addSubclass: class.
@@ -109,9 +110,24 @@ Class category: 'enumerating' methods: {
 ].
 }.
 
+Class category: 'printig' methods: {
+:[printOn: aStream
+    aStream nextPutAll: name
+]
+}.
+
 "Class binding"
 Behavior category: 'accessing' methods: {
 :[binding
     ^ Association key: nil value: self
+]
+}.
+
+Class category: 'accessing' methods: {
+:[binding
+    "Answer a binding for the receiver, sharing if possible"
+    | binding |
+    binding := self environment associationAt: self name ifAbsent: [Association key: nil value: self].
+    ^ binding value == self ifTrue: [binding] ifFalse: [Association key: nil value: self]
 ]
 }

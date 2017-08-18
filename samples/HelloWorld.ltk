@@ -7,7 +7,13 @@ Constant named: #Main value: [:arguments |
         out nextPutAll: arg; lf
     ].
 
-    out print: _GlobalNamespace; lf.
+    out nextPutAll: 'Global namespace:'; lf.
+    let namespace<_DynamicObject> := _GlobalNamespace.
+    out print: namespace; lf.
+    namespace variables keysAndValuesDo: [:name :var |
+        out tab; print: name; tab; print: var; lf.
+    ].
+    
     out nextPutAll: 'Allclasses in the system:'; lf.
 
     ProtoObject withAllSubclassesDo: [:cls |

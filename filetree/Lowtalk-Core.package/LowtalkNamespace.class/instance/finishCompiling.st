@@ -1,3 +1,3 @@
 compilation
 finishCompiling
-	"Nothing required"
+	self namespaceObject
