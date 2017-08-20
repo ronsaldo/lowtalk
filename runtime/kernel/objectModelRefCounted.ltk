@@ -1,5 +1,7 @@
 "This is the definition of a reference refCounted object model."
 Namespace named: #ObjectModel members: [
+    Constant named: #DebugReferenceCounting type: BooleanBit value: true.
+
     Constant named: #OopSize type: UIntPointer value: UIntPointer size.
 
     OopSize = 4 ifTrue: [
@@ -86,7 +88,7 @@ Namespace named: #ObjectModel members: [
         #objectHeader => ObjectHeader.
         #name => _DynamicObject.
     }.
-    
+
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
         let oop := object reinterpretCastTo: UIntPointer.
@@ -124,31 +126,86 @@ Namespace named: #ObjectModel members: [
     ].
 
     "Reference counting"
-    Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
-        <cdecl>
-        isNonImmediateObject #{object} ifTrue: [
-            let oldCount := object value refCount address fetchAndAdd: 1.
-            (oldCount = 0 and: [(object value flags & StaticOopFlag) = 0]) ifTrue: [
-                LibC fprintf #{LibC stderr . c'Increasing Reference to destroyed object %p\n' . object}.
-                LibC abort #{}.
+    DebugReferenceCounting ifTrue: [
+        Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            isNonImmediateObject #{object} ifTrue: [
+                let oldCount := object value refCount address fetchAndAdd: 1.
+                (oldCount = 0 and: [(object value flags & StaticOopFlag) = 0]) ifTrue: [
+                    LibC fprintf #{LibC stderr . c'Increasing Reference to destroyed object %p\n' . object}.
+                    LibC abort #{}.
+                ]
             ]
-        ]
+        ].
+
+        Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            isNonImmediateObject #{object} ifTrue: [
+                let oldCount := object value refCount address fetchAndAdd: -1.
+                oldCount <= 1 ifTrue: [
+                    destroyObjectWithCount #{object . oldCount}
+                ].
+            ]
+        ].
+
+        Constant named: #finalizeAndDestroyObject value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            finalizeObject #{object}.
+
+            "Do not free the object memory in the debug mode"
+        ].
+
+        Constant named: #destroyObjectWithCount value: [<Void> :object<ObjectHeader pointer> :refCount<IntPointer> |
+            <cdecl>
+            (object value flags & StaticOopFlag) ~= 0 ifFalse: [
+                refCount <= 0 ifTrue: [
+                    LibC fprintf #{LibC stderr . c'Releasing destroyed object %p\n' . object}.
+                    LibC abort #{}.
+                ].
+
+                finalizeAndDestroyObject #{object}
+            ]
+        ].
+
+    ] ifFalse: [
+        Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            isNonImmediateObject #{object} ifTrue: [
+                object value refCount address fetchAndAdd: 1.
+            ]
+        ].
+
+        Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            isNonImmediateObject #{object} ifTrue: [
+                let oldCount := object value refCount address fetchAndAdd: -1.
+                oldCount <= 1 ifTrue: [
+                    destroyObject #{object}
+                ].
+            ]
+        ].
+
+        Constant named: #finalizeAndDestroyObject value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            "Finalize the object"
+            finalizeObject #{object}.
+
+            "Free the object"
+            LibC free #{object}
+        ].
+
+        Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
+            <cdecl>
+            (object value flags & StaticOopFlag) ~= 0 ifFalse: [
+                finalizeAndDestroyObject #{object}.
+            ]
+        ].
     ].
 
-    Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
-        <cdecl>
-        isNonImmediateObject #{object} ifTrue: [
-            let oldCount := object value refCount address fetchAndAdd: -1.
-            oldCount <= 1 ifTrue: [
-                destroyObjectWithCount #{object . oldCount}
-            ].
-        ]
-    ].
-
-    Constant named: #finalizeAndDestroyObject value: [<Void> :object<ObjectHeader pointer> |
+    Constant named: #finalizeObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
         "TODO: Call the object finalizer"
-        
+
         "Release the references of the objects"
         let format := object value format.
         let oopSlotCount<UInt32> := 0.
@@ -160,35 +217,14 @@ Namespace named: #ObjectModel members: [
             ]
         ].
 
-        LibC printf #{c'destroyObject %p with format %d and %d slots\n' . object . format . oopSlotCount}.
-        
+        "LibC printf #{c'destroyObject %p with format %d and %d slots\n' . object . format . oopSlotCount}."
+
         let slots := (object atOffset: 1) address reinterpretCastTo: ObjectHeader pointer pointer.
         1 to: oopSlotCount do: [:i |
             let slot := slots at: i.
-            LibC printf #{c'slot %p\n' . slot}.
+            "LibC printf #{c'slot %p\n' . slot}."
             releaseReference #{slot}.
         ].
-        
-        "LibC free #{object}"
-    ].
-    
-    Constant named: #destroyObjectWithCount value: [<Void> :object<ObjectHeader pointer> :refCount<IntPointer> |
-        <cdecl>
-        (object value flags & StaticOopFlag) ~= 0 ifFalse: [
-            refCount <= 0 ifTrue: [
-                LibC fprintf #{LibC stderr . c'Releasing destroyed object %p\n' . object}.
-                LibC abort #{}.
-            ].
-            
-            finalizeAndDestroyObject #{object}
-        ]
-    ].
-    
-    Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
-        <cdecl>
-        (object value flags & StaticOopFlag) ~= 0 ifFalse: [
-            finalizeAndDestroyObject #{object}.
-        ]
     ].
 
     Constant named: #writeBarrier value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |
@@ -201,7 +237,7 @@ Namespace named: #ObjectModel members: [
         <cdecl>
         releaseReference #{variable swapValue: value}.
     ].
-    
+
     Constant named: #getPointersBasicSize value: [<UIntPointer> :object<ObjectHeader pointer> |
         <cdecl>
         object value slotCount
@@ -576,7 +612,7 @@ newObjectHeaderWithWords
         getObjectClassFunction: [<ObjectHeader pointer> :header<ObjectHeader pointer> |
             header value classPointer
         ];
-        
+
         objectVariableHeaderCreationFunction: [<ObjectVariableHeader> :variableClass<ObjectHeader pointer> :name |
             ObjectVariableHeader new
                 objectHeader: (newObjectHeaderWithPointers #{2}
