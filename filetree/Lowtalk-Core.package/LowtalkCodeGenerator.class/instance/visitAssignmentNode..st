@@ -10,7 +10,7 @@ visitAssignmentNode: assignmentNode
 	expectedType := referenceType withoutReferences.
 	convertedValue := self coerceImplicitly: value type: valueType to: expectedType at:  assignmentNode.
 	
-	builder store: convertedValue in: reference.
+	self store: convertedValue in: reference.
 
 	^ reference
 	

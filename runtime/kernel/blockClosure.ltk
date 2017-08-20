@@ -21,6 +21,7 @@ Namespace named: #ObjectModel members: [
         let closure := result reinterpretCastTo: ClosureHeader pointer.
         closure value metadata argumentDescriptor := encodeSmallInteger #{argumentDescriptor}.
         closure value entryPoint := entryPoint + 1.
+        "LibC printf #{c'Created closure %p\n' . result}."
         ^ result
     ].
 

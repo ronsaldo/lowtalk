@@ -74,7 +74,7 @@ Namespace named: #ObjectModel members: [
     "The object header"
     Structure named: #ObjectHeader slots: {
         #classPointer => ObjectHeader pointer.
-        #refCount => UIntPointer.
+        #refCount => IntPointer.
 
         #identityHash => UInt16.
         #flags => UInt8.
@@ -90,7 +90,7 @@ Namespace named: #ObjectModel members: [
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
         let oop := object reinterpretCastTo: UIntPointer.
-        (oop & OopPointerTagMask) = OopPointerTagValue
+        (oop & OopPointerTagMask) = OopPointerTagValue and: [object ~~ nil]
     ].
 
     Constant named: #isSmallInteger value: [<BooleanBit> :oop<UIntPointer> |
@@ -127,33 +127,81 @@ Namespace named: #ObjectModel members: [
     Constant named: #increaseReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
         isNonImmediateObject #{object} ifTrue: [
-            object value refCount address fetchAndAdd: 1
+            let oldCount := object value refCount address fetchAndAdd: 1.
+            (oldCount = 0 and: [(object value flags & StaticOopFlag) = 0]) ifTrue: [
+                LibC fprintf #{LibC stderr . c'Increasing Reference to destroyed object %p\n' . object}.
+                LibC abort #{}.
+            ]
         ]
     ].
 
     Constant named: #releaseReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
         isNonImmediateObject #{object} ifTrue: [
-            (object value refCount address fetchAndAdd: -1) = 0 ifTrue: [
-                destroyObject #{object}
-            ]
+            let oldCount := object value refCount address fetchAndAdd: -1.
+            oldCount <= 1 ifTrue: [
+                destroyObjectWithCount #{object . oldCount}
+            ].
         ]
     ].
 
+    Constant named: #finalizeAndDestroyObject value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        "TODO: Call the object finalizer"
+        
+        "Release the references of the objects"
+        let format := object value format.
+        let oopSlotCount<UInt32> := 0.
+        format <= ObjectFormatVariableSizeWithIVars ifTrue: [
+            oopSlotCount := object value slotCount.
+        ] ifFalse: [
+            format >= ObjectFormatMixedObject ifTrue: [
+                oopSlotCount := object value slotCount & 16rFFFF.
+            ]
+        ].
+
+        LibC printf #{c'destroyObject %p with format %d and %d slots\n' . object . format . oopSlotCount}.
+        
+        let slots := (object atOffset: 1) address reinterpretCastTo: ObjectHeader pointer pointer.
+        1 to: oopSlotCount do: [:i |
+            let slot := slots at: i.
+            LibC printf #{c'slot %p\n' . slot}.
+            releaseReference #{slot}.
+        ].
+        
+        "LibC free #{object}"
+    ].
+    
+    Constant named: #destroyObjectWithCount value: [<Void> :object<ObjectHeader pointer> :refCount<IntPointer> |
+        <cdecl>
+        (object value flags & StaticOopFlag) ~= 0 ifFalse: [
+            refCount <= 0 ifTrue: [
+                LibC fprintf #{LibC stderr . c'Releasing destroyed object %p\n' . object}.
+                LibC abort #{}.
+            ].
+            
+            finalizeAndDestroyObject #{object}
+        ]
+    ].
+    
     Constant named: #destroyObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
         (object value flags & StaticOopFlag) ~= 0 ifFalse: [
-            "TODO: Call the object finalizer"
-            LibC free #{object}
+            finalizeAndDestroyObject #{object}.
         ]
     ].
 
-    Constant named: #writeBarrier value: [<Void> :variable<ObjectHeader pointer pointer> :value<ObjectHeader pointer> |
+    Constant named: #writeBarrier value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |
         <cdecl>
         increaseReference #{value}.
         releaseReference #{variable swapValue: value}.
     ].
 
+    Constant named: #writeBarrierNoIncrement value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |
+        <cdecl>
+        releaseReference #{variable swapValue: value}.
+    ].
+    
     Constant named: #getPointersBasicSize value: [<UIntPointer> :object<ObjectHeader pointer> |
         <cdecl>
         object value slotCount
@@ -362,7 +410,7 @@ newObjectHeaderWithWords
             classPointer: class;
             identityHash: ((result reinterpretCastTo: UIntPointer) >> IdentityHashShift castTo: UInt16);
             slotCount: (slotCount castTo: UInt32);
-            refCount: 0;
+            refCount: 1;
             format: instanceFormat;
             yourself.
 
@@ -454,7 +502,9 @@ newObjectHeaderWithWords
         let format := object value format.
         let firstSlot := (object at: 2) address reinterpretCastTo: ObjectHeader pointer pointer.
         format < ObjectFormatIndexable64 ifTrue: [
-            ^ firstSlot at: index
+            let result := firstSlot at: index.
+            increaseReference #{result}.
+            ^ result
         ].
 
         format >= ObjectFormatIndexable8 ifTrue: [
@@ -482,7 +532,7 @@ newObjectHeaderWithWords
         let format := object value format.
         let firstSlot := (object at: 2) address reinterpretCastTo: ObjectHeader pointer pointer.
         format < ObjectFormatIndexable64 ifTrue: [
-            (firstSlot at: index) := value.
+            writeBarrier #{value . (firstSlot at: index) address}.
             ^ nil
         ].
 
@@ -511,7 +561,10 @@ newObjectHeaderWithWords
 
     Compiler objectModel
     	headerType: ObjectModel ObjectHeader;
-    	writeBarrier: writeBarrier;
+    	writeBarrier: (ObjectModel associationAt: #writeBarrier);
+    	writeBarrierNoIncrement: (ObjectModel associationAt: #writeBarrierNoIncrement);
+        increaseReference: (ObjectModel associationAt: #increaseReference);
+        releaseReference: (ObjectModel associationAt: #releaseReference);
         newObjectHeaderWithPointers: newObjectHeaderWithPointers;
         newObjectHeaderWithBytes: newObjectHeaderWithBytes;
         setIdentityHashFunction: setIdentityHash;

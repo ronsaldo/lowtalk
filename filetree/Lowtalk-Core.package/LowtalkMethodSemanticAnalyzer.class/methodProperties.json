@@ -1,6 +1,6 @@
 {
 	"instance" : {
-		"checkPointerDeReferenceMessage:receiver:" : "RonieSalgado 6/20/2017 22:24",
+		"checkPointerDeReferenceMessage:receiver:" : "RonieSalgado 8/20/2017 16:07",
 		"extractInlinedBlockType:" : "RonieSalgado 5/9/2017 21:30",
 		"checkAndMessage:receiver:" : "RonieSalgado 6/6/2017 20:14",
 		"visitInlinedBlockArgument:" : "RonieSalgado 8/7/2017 20:00",
@@ -67,7 +67,7 @@
 		"visitIntegerLiteralNode:" : "RonieSalgado 5/6/2017 22:59",
 		"visitSelfNode:" : "RonieSalgado 5/25/2017 04:18",
 		"visitInlinedBlock:" : "RonieSalgado 6/20/2017 22:26",
-		"checkPointerElementAssignmentMessage:receiver:" : "RonieSalgado 7/22/2017 16:10",
+		"checkPointerElementAssignmentMessage:receiver:" : "RonieSalgado 8/20/2017 16:08",
 		"checkFirstSlotPointerMessage:receiver:" : "RonieSalgado 7/12/2017 20:09"
 	},
 	"class" : {

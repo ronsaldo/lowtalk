@@ -11,7 +11,7 @@ generateSetSlotMessage: message receiver: receiver receiverType: receiverType
 	referenceType isReferenceType ifFalse: [
 		self assert: referenceType isStructureType.
 		structurePointer := allocaBuilder alloca: structureType ssaType.
-		builder store: receiver in: structurePointer
+		self store: receiver in: structurePointer
 	].
 	
 	"Get the slot pointer"
@@ -24,7 +24,7 @@ generateSetSlotMessage: message receiver: receiver receiverType: receiverType
 
 	"Set the slot value"	
 	slotPointer := builder getReference: structurePointer element: (builder constInt: slot index).
-	builder store: newValue in: slotPointer.
+	self store: newValue in: slotPointer.
 	
 	"Return the slot pointer"
 	^ slotPointer

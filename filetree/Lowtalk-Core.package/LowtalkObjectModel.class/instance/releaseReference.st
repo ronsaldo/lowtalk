@@ -1,0 +1,4 @@
+accessing
+releaseReference
+	<compileTime>
+	^ releaseReference

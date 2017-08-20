@@ -11,6 +11,7 @@ generateClosure: node parentCodeGenerator: aParentCodeGenerator
 	
 	currentFunction := ssaFunction := SLVMClosureDefinition module: compiler ssaModule functionType: functionType ssaType.
 	ssaFunction makePrivate.
+	ssaFunction gcStrategy: #lowtalk.
 	method definition ssaFunction: ssaFunction.
 	
 	"Create the builders"

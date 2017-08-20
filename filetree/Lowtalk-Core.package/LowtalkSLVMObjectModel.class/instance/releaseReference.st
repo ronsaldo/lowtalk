@@ -1,0 +1,3 @@
+accessing
+releaseReference
+	^ compiler ssaReleaseReference

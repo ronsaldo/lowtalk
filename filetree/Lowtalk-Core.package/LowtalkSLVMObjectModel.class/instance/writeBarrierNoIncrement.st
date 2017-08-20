@@ -1,0 +1,3 @@
+accessing
+writeBarrierNoIncrement
+	^ compiler ssaWriteBarrierNoIncrement

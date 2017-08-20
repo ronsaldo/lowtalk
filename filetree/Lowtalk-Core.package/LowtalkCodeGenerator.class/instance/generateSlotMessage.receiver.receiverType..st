@@ -10,7 +10,7 @@ generateSlotMessage: message receiver: receiver receiverType: receiverType
 	referenceType isReferenceType ifFalse: [
 		self assert: referenceType isStructureType.
 		structurePointer := allocaBuilder alloca: structureType ssaType.
-		builder store: receiver in: structurePointer
+		self store: receiver in: structurePointer
 	].
 	
 	slot := structureType slotNamed: message selector.

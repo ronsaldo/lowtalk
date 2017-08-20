@@ -18,7 +18,7 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 	].
 
 	loopVariable := allocaBuilder alloca: coercionType ssaType.
-	builder store: startCoercedValue in: loopVariable.
+	self store: startCoercedValue in: loopVariable.
 	
 	"The loop blocks"
 	loopHeader := builder newBasicBlock: #toDoCondition.
@@ -73,7 +73,7 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 	
 	"Increment"
 	builder isLastTerminator ifFalse: [
-		builder store: (self emitArithmetic: #+ left: iterationValue right: incrementValue type: coercionType at: message) in: loopVariable.
+		self store: (self emitArithmetic: #+ left: iterationValue right: incrementValue type: coercionType at: message) in: loopVariable.
 		builder jump: loopHeader
 	].
 

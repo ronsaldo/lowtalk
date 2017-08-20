@@ -9,6 +9,8 @@ generateInterpreterMethod: method
 
 	ssaValue := SLVMFunction pointerSize: compilationTarget pointerSize functionType: functionType ssaType.
 	ssaValue compilationTarget: compilationTarget.
+	ssaValue gcStrategy: #lowtalk.
+	
 	method publicSymbol ifNotNil: [ 
 		ssaValue name: method publicSymbol;
 			makeExternal.

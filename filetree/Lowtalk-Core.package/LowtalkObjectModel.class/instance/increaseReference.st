@@ -1,0 +1,4 @@
+accessing
+increaseReference
+	<compileTime>
+	^ increaseReference

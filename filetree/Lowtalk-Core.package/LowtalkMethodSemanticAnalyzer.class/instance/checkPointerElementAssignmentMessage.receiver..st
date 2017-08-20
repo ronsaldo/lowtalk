@@ -14,6 +14,10 @@ checkPointerElementAssignmentMessage: message receiver: receiver
 	index type implicitlyConvertedTo: message coercionType at: index.
 	
 	self assert: (receiverType isPointerType or: [ receiverType isArrayType ]).
-	elementType := receiverType isPointerType ifTrue: [ receiverType pointed ] ifFalse: [ receiverType baseType ].
+	elementType := receiverType isPointerType ifTrue: [ receiverType pointed ] ifFalse: [ receiverType baseType ].	
+	elementType isVoidType ifTrue: [
+		message semanticError: 'Cannot assign element through pointer to void..'
+	].
+
 	value type implicitlyConvertedTo: message coercionType at: elementType.
 	message type: elementType ref.

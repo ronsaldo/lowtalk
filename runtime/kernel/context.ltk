@@ -28,8 +28,11 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
     <localReturn>
     <cdecl>
     let marriedContextPointer := (framePointer atOffset: ContextMarriedContextPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
-    marriedContextPointer value ifNotNil: [
-        ^ marriedContextPointer value
+    let previousContext := marriedContextPointer value.
+    previousContext ifNotNil: [
+        LibC printf #{c'Previous context %p\n' . previousContext}.
+        ObjectModel increaseReference #{previousContext reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+        ^ previousContext
     ].
 
     "Compute the other pointers"
@@ -62,9 +65,11 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
     "Instantiate the context object"
     let contextObject := basicNewMixedBytes #{Context reinterpretCastTo: ObjectHeader pointer . oopCount . nativeSize}.
     let context := contextObject reinterpretCastTo: ContextHeader pointer.
+    "LibC printf #{c'Allocated context %p\n' . context}."
 
     "Store the context in the stack"
     marriedContextPointer value := context.
+    "LibC printf #{c'Stored context %p at %p\n' . marriedContextPointer value . marriedContextPointer}."
     context value sender: (framePointer reinterpretCastTo: UIntPointer) + 1.
 
     "Store the descriptors in the context."
@@ -78,7 +83,7 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
     let oopDataStart := (dataStart atOffset: contextFixedFields) address.
     let nativeDataStart := (dataStart atOffset: oopCount) address reinterpretCastTo: UInt8 pointer .
 
-    "Get argumnet data pointers"
+    "Get the argument data pointers"
     let argumentsOopStart := (framePointer atOffset: argumentsStartOffset) address reinterpretCastTo: UInt32 pointer.
     let argumentsNativeStart := (argumentsOopStart atOffset: oopArgumentCount) address reinterpretCastTo: UInt8 pointer.
 
@@ -86,6 +91,7 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
     ObjectModel isReferenceCounted ifTrue: [
         1 to: oopArgumentCount do: [:i |
             let argument := argumentsOopStart at: i.
+            ObjectModel increaseReference #{argument reinterpretCastTo: ObjectModel ObjectHeader pointer}.
             oopDataStart at: i put: argument
         ].
         nil
@@ -96,21 +102,37 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
 
     LibC memcpy #{nativeDataStart . argumentsNativeStart . nativeArgumentsSize}.
 
+    ObjectModel increaseReference #{context reinterpretCastTo: ObjectModel ObjectHeader pointer}.
     ^ context
 ].
 
-Constant named: #widowThisContext value: [:framePointer<Void pointer> |
+Constant named: #widowThisContext value: [<Void> :framePointer<UInt8 pointer> |
     <localReturn>
     <cdecl>
     let marriedContextPointer := (framePointer atOffset: ContextMarriedContextPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
     let marriedContext := marriedContextPointer value.
 
     marriedContext ifNil: [ ^ nil ].
+    "LibC printf #{c'Old married context %p at %p\n' . marriedContext . marriedContextPointer}."
     marriedContext value sender: 0.
 
     "TODO: Copy the temporaries into the context, etc"
 
+    "Release the context reference"
+    ObjectModel releaseReference #{marriedContext reinterpretCastTo: ObjectModel ObjectHeader pointer}.
     ^ nil
+].
+
+Constant named: #nonLocalReturnCannotReturnError value: [<Void> |
+    <localReturn>
+    <inline: #never>
+    BlockCannotReturn new signal: 'Cannot perform non local return.'.
+].
+
+Constant named: #nonLocalReturnCannotReturnToLower value: [<Void> |
+    <localReturn>
+    <inline: #never>
+    BlockCannotReturn new signal: 'Cannot perform non local return to lower context'.
 ].
 
 Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader pointer> :returnValue<Void pointer> |
@@ -120,13 +142,13 @@ Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader poin
 
     let target := targetContext value sender.
     isSmallInteger #{target} ifFalse: [
-        BlockCannotReturn new signal: 'Cannot perform non local return.'.
+        nonLocalReturnCannotReturnError #{}
     ].
 
     let targetFramePointer := target - 1 reinterpretCastTo: UIntPointer.
     let currentFramePointer := thisContext uncheckedFramePointer reinterpretCastTo: UIntPointer.
     targetFramePointer <= currentFramePointer ifTrue: [
-        BlockCannotReturn new signal: 'Cannot perform non local return to lower context'.
+        nonLocalReturnCannotReturnToLower #{}
     ].
 
     "TODO: Unwind the context"

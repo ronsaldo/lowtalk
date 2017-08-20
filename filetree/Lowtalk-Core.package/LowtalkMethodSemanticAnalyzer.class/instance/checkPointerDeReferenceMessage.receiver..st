@@ -12,6 +12,10 @@ checkPointerDeReferenceMessage: message receiver: receiver
 	
 	self assert: (receiverType isPointerType or: [ receiverType isArrayType ]).
 	elementType := receiverType isPointerType ifTrue: [ receiverType pointed ] ifFalse: [ receiverType baseType ].
+	elementType isVoidType ifTrue: [
+		message semanticError: 'Cannot de-reference pointer to void.'
+	].
+
 	message type: elementType ref.
 
 	

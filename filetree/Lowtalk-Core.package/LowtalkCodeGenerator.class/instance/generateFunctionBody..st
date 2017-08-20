@@ -29,4 +29,4 @@ generateFunctionBody: body
 	].
 	
 	"Create the function context metadata"
-	currentFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ]
+	currentFunction dynamicLiterals do: [ :literal | compiler convertDynamicObjectSSAConstant: literal value ].

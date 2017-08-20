@@ -1,0 +1,3 @@
+accessing
+increaseReference
+	^ compiler ssaIncreaseReference

@@ -27,5 +27,5 @@ generatePointerElementAssignmentMessage: message receiver: receiver receiverType
 	value := self visitNode: valueNode.
 	value := self coerceImplicitly: value type: valueNode type to: elementType at: valueNode.
 
-	builder store: value in: elementPointer.
+	self store: value in: elementPointer.
 	^ elementPointer

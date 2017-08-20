@@ -10,7 +10,7 @@ generateStructureNewMessage: message receiver: receiver receiverType: receiverTy
 	
 	structureType fields doWithIndex: [ :field :index |
 		slotPointer := builder getReference: structureVariable element: (builder constInt: index - 1).
-		builder store: (field defaultSSAValueWith: builder) in: slotPointer
+		self store: (field defaultSSAValueWith: builder) in: slotPointer
 	].
 
 	^ message type isReferenceType ifTrue: [ structureVariable ] ifFalse: [ builder load: structureVariable ]
