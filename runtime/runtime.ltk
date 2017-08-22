@@ -1,5 +1,16 @@
 Compiler
-    evaluateFileNamed: 'libc/libc.ltk';
+    evaluateFileNamed: 'libc/libc.ltk'.
+    
+(#(unix linux bsd osx) includes: Compiler operatingSystemName) ifTrue: [
+    Compiler 
+        evaluateFileNamed: 'unix/unix.ltk'
+].
+(#(win32) includes: Compiler operatingSystemName) ifTrue: [
+    Compiler 
+        evaluateFileNamed: 'win32/win32.ltk'
+].
+
+Compiler
     evaluateFileNamed: 'kernel/kernel.ltk';
     evaluateFileNamed: 'collections/collections.ltk';
     yourself

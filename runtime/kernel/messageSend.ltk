@@ -30,6 +30,8 @@ Structure named: #_CompiledMethod slots: {
     #header => ObjectHeader.
     #entryPoint => UIntPointer.
     #exitPoint => UIntPointer.
+    #primitive => UIntPointer.
+    #argumentsDescriptor => UIntPointer.
 }.
 
 "Message send"

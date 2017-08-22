@@ -1,11 +1,14 @@
 let ContextStackMetadataElementCount<IntPointer> := 4.
 
+let SignedPointerSize<IntPointer> := UIntPointer size castTo: IntPointer.
 let ContextCompiledMethodPointerOffset<IntPointer> := -1 * UIntPointer size castTo: IntPointer.
 let ContextMarriedContextPointerOffset<IntPointer> := -2 * UIntPointer size castTo: IntPointer.
 let ContextArgumentDescriptorOffset<IntPointer> := -3 * UIntPointer size castTo: IntPointer.
 let ContextStackDescriptorOffset<IntPointer> := -4 * UIntPointer size castTo: IntPointer.
 
 let contextFixedFields := InstructionStream instanceVariables size + Context instanceVariables size castTo: UInt32.
+
+let EnsurePrimitiveNumber<UIntPointer> := ObjectModel encodeSmallInteger #{198}.
 
 Namespace named: #ObjectModel members: [
 
@@ -135,6 +138,44 @@ Constant named: #nonLocalReturnCannotReturnToLower value: [<Void> |
     BlockCannotReturn new signal: 'Cannot perform non local return to lower context'.
 ].
 
+Constant named: #cleanFrameForUnwinding value: [<Void> :framePointer<UIntPointer> |
+    "LibC printf #{c'Clean frame for unwinding %p\n' . framePointer}."
+
+    let compiledMethodPointer := (framePointer + ContextCompiledMethodPointerOffset) reinterpretCastTo: _CompiledMethod pointer pointer.
+    let compiledMethod := compiledMethodPointer value.
+    let primitive := compiledMethod value primitive.
+
+    let argumentDescriptorPointer := (framePointer + ContextArgumentDescriptorOffset) reinterpretCastTo: UIntPointer pointer.
+    let argumentDescriptor := argumentDescriptorPointer value.
+
+    let stackDescriptorPointer := (framePointer + ContextStackDescriptorOffset) reinterpretCastTo: UIntPointer pointer.
+    let stackDescriptor := stackDescriptorPointer value.
+
+    "LibC printf #{c'Compiled method %p primitive: %p argument descriptor: %p stack descriptor: %p\n' . compiledMethod . primitive . argumentDescriptor . stackDescriptor}."
+    
+    let registersToPreserve := (stackDescriptor >> 12) & 15.
+    let oopLocals := stackDescriptor & 4095.
+
+    "LibC printf #{c'Registers %p ooplocals %p \n' . registersToPreserve . oopLocals}."
+    
+    primitive == EnsurePrimitiveNumber ifTrue: [
+        "ensure:/ifCurtailed:"
+        LibC printf #{c'TODO: Process #ensure:/#ifCurtailed:\n'}.
+    ].
+    
+    widowThisContext #{framePointer reinterpretCastTo: UInt8 pointer}.
+    
+    let localsBase := framePointer - ((ContextStackMetadataElementCount + registersToPreserve) * SignedPointerSize).
+    1 to: oopLocals do: [:i |
+        let localPointer := localsBase - (i*SignedPointerSize) reinterpretCastTo: ObjectHeader pointer pointer.
+        let localValue := localPointer value.
+        "LibC printf #{c'Local %p at %p: %p\n' . i .localPointer . localValue}."
+        
+        releaseReference #{localValue}.
+        localPointer value := nil.
+    ].
+].
+
 Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader pointer> :returnValue<Void pointer> |
     <localReturn>
 
@@ -151,7 +192,14 @@ Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader poin
         nonLocalReturnCannotReturnToLower #{}
     ].
 
-    "TODO: Unwind the context"
+    "Unwind the context"
+    "LibC printf #{c'Start context %p\n' . currentFramePointer}."
+    let unwindPosition := (currentFramePointer reinterpretCastTo: UIntPointer pointer) value.
+    [ unwindPosition ~~ targetFramePointer ] whileTrue: [
+        cleanFrameForUnwinding #{unwindPosition}.
+        unwindPosition := (unwindPosition reinterpretCastTo: UIntPointer pointer) value
+    ].
+    
     "LibC printf #{c'Non-local return to %p from %p\n' . targetFramePointer . currentFramePointer}."
 
     "Return from here"

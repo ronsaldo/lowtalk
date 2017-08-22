@@ -202,6 +202,12 @@ Namespace named: #ObjectModel members: [
         ].
     ].
 
+    Constant named: #releaseSlotReference value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        "LibC printf #{c'slot %p\n' . object}."
+        releaseReference #{object}.
+    ].
+    
     Constant named: #finalizeObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
         "TODO: Call the object finalizer"
@@ -222,8 +228,8 @@ Namespace named: #ObjectModel members: [
         let slots := (object atOffset: 1) address reinterpretCastTo: ObjectHeader pointer pointer.
         1 to: oopSlotCount do: [:i |
             let slot := slots at: i.
+            releaseSlotReference #{slot}.
             "LibC printf #{c'slot %p\n' . slot}."
-            releaseReference #{slot}.
         ].
     ].
 

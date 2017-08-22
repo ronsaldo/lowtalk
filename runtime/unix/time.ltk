@@ -1,0 +1,10 @@
+Namespace named: #Unix members: [
+    "TODO: Define this with the proper types."
+    Structure named: #timeval slots: {
+    }.
+
+    Structure named: #timespec slots: {
+    }.
+    
+    Constant externalC: #gettimeofday type: (timeval pointer , Void pointer) -> LibC CInt.
+]

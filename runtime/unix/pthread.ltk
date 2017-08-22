@@ -1,0 +1,85 @@
+Namespace named: #Unix members: [
+    Constant named: #pthread_t value: UIntPointer.
+    Constant named: #pthread_key_t value: UIntPointer.
+    
+    Compiler operatingSystemName = #osx ifTrue: [
+        UIntPointer size = 4 ifTrue: [
+            Constant named: #pthread_attr_t value: (UIntPointer array: 10). "sizeof(pthread_attr_t) = 40"
+            Constant named: #pthread_mutex_t value: (UIntPointer array: 11). "sizeof(pthread_mutex_t) = 44"
+            Constant named: #pthread_mutexattr_t value: (UIntPointer array: 3). "sizeof(pthread_mutexattr_t) = 12"
+            Constant named: #pthread_cond_t value: (UIntPointer array: 7). "sizeof(pthread_cond_t) = 28"
+            Constant named: #pthread_condattr_t value: (UIntPointer array: 2). "sizeof(pthread_condattr_t) = 8"
+            Constant named: #pthread_rwlock_t value: (UIntPointer array: 32). "sizeof(pthread_rwlock_t) = 128"
+            Constant named: #pthread_rwlockattr_t value: (UIntPointer array: 4). "sizeof(pthread_rwlockattr_t) = 16"
+        ] ifFalse: [
+            Constant named: #pthread_attr_t value: (UIntPointer array: 8). "sizeof(pthread_attr_t) = 64"
+            Constant named: #pthread_mutex_t value: (UIntPointer array: 8). "sizeof(pthread_mutex_t) = 64"
+            Constant named: #pthread_mutexattr_t value: (UIntPointer array: 2). "sizeof(pthread_mutexattr_t) = 16"
+            Constant named: #pthread_cond_t value: (UIntPointer array: 6). "sizeof(pthread_cond_t) = 48"
+            Constant named: #pthread_condattr_t value: (UIntPointer array: 2). "sizeof(pthread_condattr_t) = 16"
+            Constant named: #pthread_rwlock_t value: (UIntPointer array: 25). "sizeof(pthread_rwlock_t) = 200"
+            Constant named: #pthread_rwlockattr_t value: (UIntPointer array: 3). "sizeof(pthread_rwlockattr_t) = 24"
+        ]
+    ].
+    
+    Constant named: #pthread_start_routine_t value: Void pointer -> Void pointer.
+    
+    "Posix threads"
+    Constant externalC: #pthread_create type: (pthread_t pointer , pthread_attr_t const pointer , pthread_start_routine_t pointer , Void pointer) -> LibC CInt.
+    Constant externalC: #pthread_cancel type: (pthread_t) -> LibC CInt.
+    Constant externalC: #pthread_equal type: (pthread_t , pthread_t) -> LibC CInt.
+    Constant externalC: #pthread_exit type: (Void pointer) -> Void.
+    Constant externalC: #pthread_join type: (pthread_t , Void pointer pointer) -> LibC CInt.
+    Constant externalC: #pthread_kill type: (pthread_t , LibC CInt) -> LibC CInt.
+    "TODO: pthread_once"
+    Constant externalC: #pthread_self type: (Void) -> pthread_t.
+    
+    "Attribute object"
+    Constant externalC: #pthread_attr_init type: (pthread_attr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_attr_destroy type: (pthread_attr_t pointer) -> LibC CInt.
+    
+    "Mutex"
+    Constant externalC: #pthread_mutexattr_init type: (pthread_mutexattr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutexattr_destroy type: (pthread_mutexattr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutexattr_settype type: (pthread_mutexattr_t pointer, LibC CInt) -> LibC CInt.
+    Constant externalC: #pthread_mutexattr_gettype type: (pthread_mutexattr_t pointer, LibC CInt pointer) -> LibC CInt.
+
+    Constant externalC: #pthread_mutex_init type: (pthread_mutex_t pointer , pthread_mutexattr_t const pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutex_destroy type: (pthread_mutex_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutex_lock type: (pthread_mutex_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutex_trylock type: (pthread_mutex_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_mutex_unlock type: (pthread_mutex_t pointer) -> LibC CInt.
+
+    "Condition Variable"
+    Constant externalC: #pthread_condattr_init type: (pthread_condattr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_condattr_destroy type: (pthread_condattr_t pointer) -> LibC CInt.
+
+    Constant externalC: #pthread_cond_init type: (pthread_cond_t pointer , pthread_condattr_t const pointer) -> LibC CInt.
+    Constant externalC: #pthread_cond_destroy type: (pthread_cond_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_cond_signal type: (pthread_cond_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_cond_broadcast type: (pthread_cond_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_cond_wait type: (pthread_cond_t pointer, pthread_mutex_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_cond_timewait type: (pthread_cond_t pointer, pthread_mutex_t pointer, timespec pointer) -> LibC CInt.
+    
+    "Read/Write lock"
+    Constant externalC: #pthread_rwlockattr_init type: (pthread_rwlockattr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlockattr_destroy type: (pthread_rwlockattr_t pointer) -> LibC CInt.
+    
+    Constant externalC: #pthread_rwlock_init type: (pthread_rwlock_t pointer, pthread_rwlockattr_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlock_destroy type: (pthread_rwlock_t pointer) -> LibC CInt.
+
+    Constant externalC: #pthread_rwlock_rdlock type: (pthread_rwlock_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlock_tryrdlock type: (pthread_rwlock_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlock_wrlock type: (pthread_rwlock_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlock_trwrlock type: (pthread_rwlock_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_rwlock_unlock type: (pthread_rwlock_t pointer) -> LibC CInt.
+    
+    "Thread local storage"
+    Constant named: #pthread_key_destructor_function_t value: (Void pointer) -> Void.
+    
+    Constant externalC: #pthread_key_create type: (pthread_key_t pointer , pthread_key_destructor_function_t pointer) -> LibC CInt.
+    Constant externalC: #pthread_key_delete type: (pthread_key_t) -> LibC CInt.
+    Constant externalC: #pthread_getspecific type: (pthread_key_t) -> Void pointer.
+    Constant externalC: #pthread_setspecific type: (pthread_key_t , Void pointer) -> LibC CInt.
+    
+]
