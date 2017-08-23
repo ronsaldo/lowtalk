@@ -1,0 +1,9 @@
+(#(unix linux bsd osx) includes: Compiler operatingSystemName) ifTrue: [
+    Compiler 
+        evaluateFileNamed: 'unix/threads.ltk'
+] ifFalse: [
+    (#(win32) includes: Compiler operatingSystemName) ifTrue: [
+        Compiler 
+            evaluateFileNamed: 'win32/threads.ltk'
+    ].
+]

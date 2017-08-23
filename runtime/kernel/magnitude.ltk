@@ -299,3 +299,20 @@ SmallInteger category: 'bit manipulation' methods: {
 ].
 
 }.
+
+SmallInteger category: 'printing' methods: {
+:[printOn: aStream
+	let buffer<LibC CChar array:64>.
+	
+	let value := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
+	LibC sprintf #{buffer. '%ld' . value}.
+	let size := LibC strlen #{ buffer }.
+	
+	1 to: size do: [:i |
+		let char := ObjectModel encodeCharacter #{buffer at: i}.
+		aStream nextPut: (char reinterpretCastTo: _DynamicObject)
+	]
+	
+].
+
+}.

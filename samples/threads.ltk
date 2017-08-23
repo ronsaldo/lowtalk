@@ -1,0 +1,19 @@
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+    <cdecl>
+
+    let out := FileStream stdout.
+    out << 'Starting thread'; lf.
+    
+    let thread := [
+        1 to: 100 do: [:i |
+            out print: i; lf
+        ]
+    ] runInThread.
+    
+    out << 'Wait for join'; lf.
+    thread join.
+    out << 'Finished'; lf.
+    
+    ^ 0
+]

@@ -44,58 +44,6 @@ Stream category: 'testing' methods: {
 ]
 }.
 
-StandardFileStream class category: 'construction' methods: {
-:[handle: aHandle
-    ^ self basicNew handle: aHandle
-]
-}.
-
-StandardFileStream category: 'accessing' methods: {
-:[handle
-    ^ handle
-].
-
-:[handle: aHandle
-    handle := aHandle
-].
-
-:[nextPut: aCharacter
-    let file := handle castTo: LibC FILE pointer.
-    let characterValue := aCharacter asInteger castTo: Int32.
-    LibC fputc #{characterValue . file }.
-].
-
-:[nextPutAll: aCollection
-	self isBinary ifTrue: [
-		self halt
-	] ifFalse: [
-		(aCollection isString and: [aCollection isByteString]) ifTrue: [
-			let file := handle castTo: LibC FILE pointer.
-			LibC fwrite #{ aCollection firstFixedFieldPointerOfType: UInt8 pointer . aCollection size castTo: LibC SizeT . 1 . file }.
-		].
-		^ self
-	].
-
-	^ super nextPutAll: aCollection
-].
-
-}.
-
-FileStream class category: 'accessing' methods: {
-:[stdout
-    ^ StandardFileStream handle: LibC stdout
-].
-
-:[stdin
-    ^ StandardFileStream handle: LibC stdin
-].
-
-:[stderr
-    ^ StandardFileStream handle: LibC stderr
-].
-
-}.
-
 Object category: 'streaming' methods: {
 :[putOn: aStream
 	aStream nextPut: self
@@ -222,4 +170,62 @@ UnhandledError category: 'exception description' methods: {
 		print: exception; lf.
     LibC abort #{}.
 ]
+}.
+
+"Standard IO streams implementation"
+FileStream subclass: #StandardFileStream
+	instanceVariableNames: 'handle'
+	classVariableNames: ''
+	package: 'Files-Deprecated'.
+	
+StandardFileStream class category: 'construction' methods: {
+:[handle: aHandle
+    ^ self basicNew handle: aHandle
+]
+}.
+
+StandardFileStream category: 'accessing' methods: {
+:[handle
+    ^ handle
+].
+
+:[handle: aHandle
+    handle := aHandle
+].
+
+:[nextPut: aCharacter
+    let file := handle castTo: LibC FILE pointer.
+    let characterValue := aCharacter asInteger castTo: Int32.
+    LibC fputc #{characterValue . file }.
+].
+
+:[nextPutAll: aCollection
+	self isBinary ifTrue: [
+		self halt
+	] ifFalse: [
+		(aCollection isString and: [aCollection isByteString]) ifTrue: [
+			let file := handle castTo: LibC FILE pointer.
+			LibC fwrite #{ aCollection firstFixedFieldPointerOfType: UInt8 pointer . aCollection size castTo: LibC SizeT . 1 . file }.
+		].
+		^ self
+	].
+
+	^ super nextPutAll: aCollection
+].
+
+}.
+
+FileStream class category: 'accessing' methods: {
+:[stdout
+    ^ StandardFileStream handle: LibC stdout
+].
+
+:[stdin
+    ^ StandardFileStream handle: LibC stdin
+].
+
+:[stderr
+    ^ StandardFileStream handle: LibC stderr
+].
+
 }.

@@ -68,6 +68,7 @@ Namespace named: #LibC members: [
 
     "Printing"
     Constant externalC: #printf type: (ConstCString -> CInt) cvariadic.
-
+    
+    Constant externalC: #sprintf type: ((CChar pointer , ConstCString) -> CInt) cvariadic.
     Constant externalC: #fprintf type: ((FILE pointer , ConstCString) -> CInt) cvariadic.
 ]

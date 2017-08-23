@@ -1,0 +1,101 @@
+Object subclass: #Thread
+    instanceVariableNames: 'handle entryPoint result'
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+    
+"Normal non-recursive mutex"    
+Object variableByteSubclass: #UniqueLock
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+
+"Recursive mutex"
+UniqueLock variableByteSubclass: #Mutex
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+
+Object variableByteSubclass: #Semaphore
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+
+Object variableByteSubclass: #ConditionVariable
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+    
+Namespace named: #ObjectModel members: [
+
+    Constant named: #threadEntryPoint value: [<Void pointer> :threadObject<Void pointer> |
+        <localReturn>
+        <cdecl>
+        
+        "Execute the entry point"
+        let threadDynObject := threadObject reinterpretCastTo: _DynamicObject.
+        threadDynObject executeEntryPoint.
+        ^ nil
+    ]
+].
+
+Thread class category: 'construction' methods: {
+:[entryPoint: anEntryPoint
+    ^ self new entryPoint: anEntryPoint 
+]
+}.
+
+Thread category: 'accessing' methods: {
+:[entryPoint
+    ^ entryPoint
+].
+
+:[entryPoint: anEntryPoint
+    entryPoint := anEntryPoint
+].
+
+:[result
+    ^ result
+].
+
+:[result: aResult
+    result := aResult
+].
+}.
+
+Thread category: 'scheduling' methods: {
+:[run
+    handle ifNotNil: [
+        self error: 'Cannot re-run a thread that has not finished.'
+    ].
+    
+    handle := ByteArray new: Unix pthread_t size.
+    let threadObject := self reinterpretCastTo: ObjectModel ObjectHeader pointer.
+    ObjectModel increaseReference #{threadObject}.
+    Unix pthread_create #{handle firstFixedFieldPointerOfType: Unix pthread_t pointer . nil . ObjectModel threadEntryPoint address. threadObject }.
+].
+
+:[join
+    handle ifNil: [
+        self error: 'Joining a destroyed thread.'
+    ].
+    
+    let handlePointer := handle firstFixedFieldPointerOfType: Unix pthread_t pointer.
+    let ignoredResult<Void pointer>.
+    Unix pthread_join #{handlePointer value . ignoredResult address}.
+    
+    ^ result
+].
+
+}.
+
+Thread category: 'private' methods: {
+:[executeEntryPoint
+    result := entryPoint value
+]
+}.
+
+BlockClosure category: 'threads' methods: {
+:[runInThread
+    ^ (Thread entryPoint: self) run; yourself
+]
+}.

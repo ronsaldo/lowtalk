@@ -22,4 +22,7 @@ Compiler
     
     evaluateFileNamed: 'namespace.ltk';
     evaluateFileNamed: 'compiledMethod.ltk';
+
+    evaluateFileNamed: 'threads.ltk';
+    
     yourself

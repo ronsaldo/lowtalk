@@ -51,6 +51,39 @@ Class category: 'subclass creation' methods: {
 ].
 
 :[subclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+    ^ self subclass: aName formatType: #pointers uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+].
+
+:[variableByteSubclass: aSubclassSymbol instanceVariableNames: instVarNames classVariableNames: classVarNames package: aPackageSymbol
+	"Added to allow for a simplified subclass creation experience. "
+
+	^ self
+		subclass: aSubclassSymbol
+		instanceVariableNames: instVarNames
+		classVariableNames: classVarNames
+		poolDictionaries: ''
+		package: aPackageSymbol
+].
+
+:[variableByteSubclass: t instanceVariableNames: f classVariableNames: d poolDictionaries: s package: cat
+	^ self
+		subclass: t
+		uses: #()
+		instanceVariableNames: f
+		classVariableNames: d
+		poolDictionaries: s
+		package: cat
+].
+
+:[variableByteSubclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+    ^ self subclass: aName formatType: #pointers uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+].
+
+:[variableByteSubclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+    ^ self subclass: aName formatType: #bytes uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
+].
+
+:[subclass: aName formatType: formatType uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
     "Create the meta class"
     let metaClass := Metaclass new.
     metaClass
@@ -65,7 +98,7 @@ Class category: 'subclass creation' methods: {
     class
         name: aName;
         superclass: self;
-        initializeWithInstanceVariableNameString: someInstanceVariableNames formatType: #pointers;
+        initializeWithInstanceVariableNameString: someInstanceVariableNames formatType: formatType;
         methodDict: MethodDictionary new;
         registerClassWithObjectModel.
 

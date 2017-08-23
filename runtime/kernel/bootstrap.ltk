@@ -70,9 +70,6 @@ let bootstrapClassHierarchy := #(
 
     (Object BlockClosure mixedObject (argumentDescriptor entryPoint) ())
 
-    (Object Mutex pointers () ())
-    (Object Semaphore pointers () ())
-
     "FFI"
    (Object ExternalAddress bytes () ())
     (Object ExternalObject pointers (handle) ())

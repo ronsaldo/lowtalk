@@ -80,8 +80,3 @@ ReadWriteStream subclass: #FileStream
 	instanceVariableNames: 'rwmode'
 	classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles'
 	package: 'Files-Deprecated'.
-
-FileStream subclass: #StandardFileStream
-	instanceVariableNames: 'handle'
-	classVariableNames: ''
-	package: 'Files-Deprecated'.
