@@ -1,19 +1,33 @@
-Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+Constant named: #Main value: [<Int32> |
     <localReturn>
-    <cdecl>
 
     let out := FileStream stdout.
     out << 'Starting thread'; lf.
     
-    let thread := [
-        1 to: 100 do: [:i |
-            out print: i; lf
-        ]
-    ] runInThread.
+    let lock := UniqueLock new.
     
-    out << 'Wait for join'; lf.
-    thread join.
+    let threads := (1 to: 10) collect: [:i |
+        [
+            1 to: 100 do: [:j |
+                lock critical: [
+                    out print: i; space; print: j; lf
+                ]
+            ]
+        ] runInThread
+    ].
+    
+    lock critical: [
+        out << 'Waiting for threads to finish join'; lf.
+    ].
+    threads do: [:thread | thread join].
     out << 'Finished'; lf.
     
     ^ 0
+].
+
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+    <cdecl>
+
+    ^ Main #{}
 ]

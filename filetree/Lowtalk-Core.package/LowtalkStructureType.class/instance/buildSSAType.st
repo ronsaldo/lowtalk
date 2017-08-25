@@ -1,9 +1,9 @@
 accessing
 buildSSAType
 	self slots.
-	ssaType := SLVMStructureType new.
+	ssaType := self ssaTypeClass new.
 	ssaType name: self validName;
-		kind: SLVMStructureType genericKind;
+		kind: self ssaTypeClass genericKind;
 		types: (fields collect: #ssaType);
 		names: self validFieldNames.
 	^ ssaType

@@ -15,7 +15,7 @@
 		"evaluateInlineBlock:arguments:types:at:" : "RonieSalgado 6/6/2017 20:14",
 		"visitNilLiteralNode:" : "RonieSalgado 5/25/2017 01:37",
 		"visitBlockNode:" : "RonieSalgado 5/24/2017 02:50",
-		"setCompileTimeValue:in:" : "RonieSalgado 5/7/2017 19:19",
+		"setCompileTimeValue:in:" : "RonieSalgado 5/25/2017 01:40",
 		"visitBooleanLiteralNode:" : "RonieSalgado 5/25/2017 01:37",
 		"inferType:" : "RonieSalgado 5/4/2017 23:16",
 		"visitFloatLiteralNode:" : "RonieSalgado 5/25/2017 01:37",
@@ -26,12 +26,12 @@
 		"evaluateInlineWhileMessage:" : "RonieSalgado 5/25/2017 05:10",
 		"asEvaluator" : "RonieSalgado 5/7/2017 19:30",
 		"visitReturnNode:" : "RonieSalgado 6/20/2017 22:23",
-		"visitLetExpressionNode:" : "RonieSalgado 6/20/2017 22:23",
+		"visitLetExpressionNode:" : "RonieSalgado 8/25/2017 00:27",
 		"visitMessageNode:" : "RonieSalgado 5/25/2017 05:03",
 		"cullInlineBlock:arguments:types:at:" : "RonieSalgado 5/19/2017 18:20",
 		"evaluateNormalMessage:receiver:receiverType:inSuperclass:" : "RonieSalgado 8/18/2017 17:58",
 		"visitArrayNode:" : "RonieSalgado 5/25/2017 01:38",
-		"visitCallExpression:" : "RonieSalgado 6/20/2017 22:23"
+		"visitCallExpression:" : "RonieSalgado 8/22/2017 22:46"
 	},
 	"class" : {
 		"evaluateValue:environment:" : "RonieSalgado 5/10/2017 02:08",

@@ -29,6 +29,10 @@ Stream category: 'writing' methods: {
     ^ self nextPut: 10
 ].
 
+:[space
+	^ self nextPut: 32
+].
+
 :[cr
     ^ self nextPut: 13
 ].

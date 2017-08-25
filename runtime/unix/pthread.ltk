@@ -19,7 +19,12 @@ Namespace named: #Unix members: [
             Constant named: #pthread_condattr_t value: (UIntPointer array: 2). "sizeof(pthread_condattr_t) = 16"
             Constant named: #pthread_rwlock_t value: (UIntPointer array: 25). "sizeof(pthread_rwlock_t) = 200"
             Constant named: #pthread_rwlockattr_t value: (UIntPointer array: 3). "sizeof(pthread_rwlockattr_t) = 24"
-        ]
+        ].
+        
+        Constant named: #PTHREAD_MUTEX_NORMAL type: LibC CInt value: 0.
+        Constant named: #PTHREAD_MUTEX_ERRORCHECK type: LibC CInt value: 1.
+        Constant named: #PTHREAD_MUTEX_RECURSIVE type: LibC CInt value: 2.
+        Constant named: #PTHREAD_MUTEX_DEFAULT type: LibC CInt value: 0.
     ].
     
     Constant named: #pthread_start_routine_t value: Void pointer -> Void pointer.

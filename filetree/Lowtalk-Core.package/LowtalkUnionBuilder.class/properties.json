@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkStructureBuilder",
+	"category" : "Lowtalk-Core-FrontEnd",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LowtalkUnionBuilder",
+	"type" : "normal"
+}

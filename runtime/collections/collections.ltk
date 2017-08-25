@@ -1,3 +1,4 @@
 Compiler
     evaluateFileNamed: 'streams/streams.ltk';
+    evaluateFileNamed: 'interval.ltk';
     yourself

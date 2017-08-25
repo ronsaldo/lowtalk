@@ -24,5 +24,5 @@ Compiler
     evaluateFileNamed: 'compiledMethod.ltk';
 
     evaluateFileNamed: 'threads.ltk';
-    
+    evaluateFileNamed: 'point.ltk';
     yourself

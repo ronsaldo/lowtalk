@@ -1,0 +1,3 @@
+building
+typeClass
+	^ LowtalkUnionType

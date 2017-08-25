@@ -2,7 +2,7 @@ building
 new
 	<compileTime>
 	| structure |
-	structure := LowtalkStructureType target: compiler compilationTarget.
+	structure := self typeClass target: compiler compilationTarget.
 	structure
 		compiler: compiler.
 

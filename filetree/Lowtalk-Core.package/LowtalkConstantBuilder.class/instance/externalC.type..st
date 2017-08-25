@@ -3,7 +3,4 @@ externalC: nameLazyValue type: typeLazyValue
 	<compileTime>
 	<lazy>
 	
-	| result |
-	result := self external: nameLazyValue type: typeLazyValue.
-	result isVisibleInC: true.
-	^ result
+	^ self external: nameLazyValue C: nameLazyValue type: typeLazyValue

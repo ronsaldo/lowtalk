@@ -55,6 +55,8 @@ initialize
 		select:thenDo:
 		select:thenCollect:
 		
+		includes:
+		
 		"String splitting"
 		splitOn:
 		

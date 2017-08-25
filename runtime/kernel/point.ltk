@@ -1,0 +1,29 @@
+Number category: 'converting' methods: {
+:[@ y
+    ^ Point x: self y: y
+]
+}.
+
+Point class category: 'instance creation' methods: {
+:[x: xInteger y: yInteger 
+	"Answer an instance of me with coordinates xInteger and yInteger."
+
+	^ self basicNew setX: xInteger setY: yInteger
+]
+}.
+
+Point category: 'accessing' methods: {
+:[x
+    ^ x
+].
+:[y
+    ^ x
+].
+}.
+
+Point category: 'private' methods: {
+:[setX: xValue setY: yValue 
+	x := xValue.
+	y := yValue
+]
+}.

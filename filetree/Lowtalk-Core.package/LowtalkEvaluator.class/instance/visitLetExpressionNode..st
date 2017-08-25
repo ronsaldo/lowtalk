@@ -11,8 +11,9 @@ visitLetExpressionNode: node
 		node valueType ifNil: [ node valueType: node initialValue type asValueType ].
 		node initialValue type implicitlyConvertedTo: node valueType at: node.
 		initialValue := node initialValue type convertValue: initialValue toType: node valueType at: node
-	] ifNil: [ 
-		self halt.
+	] ifNil: [
+		node valueType ifNil: [ node valueType: compiler objectType ].
+		initialValue := node valueType defaultValue
 	].
 
 	variable := LowtalkCompileTimeLocalVariable new

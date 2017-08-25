@@ -14,7 +14,9 @@ visitCallExpression: expression
 	expression setTypeIfNil: returnType.
 
 	arguments := expression arguments collectWithIndex: [ :arg :index |
-		arg type convertValue: (self visitNode: arg ) toType: (expectedArgumentTypes at: index) at: arg 
+		|argumentValue|
+		argumentValue := self visitNode: arg.
+		arg type convertValue: argumentValue toType: (expectedArgumentTypes at: index) at: arg 
 	].
 
 	^ receiver lowtalkValueWithArguments: arguments types: expectedArgumentTypes compiler: compiler at: expression.

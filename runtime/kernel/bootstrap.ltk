@@ -36,7 +36,7 @@ let bootstrapClassHierarchy := #(
                     (LiteralVariable ClassVariable pointers () ())
                     (LiteralVariable GlobalVariable pointers () ())
                     (LiteralVariable WorkspaceVariable pointers () ())
-    (Object Point pointers () ())
+    (Object Point pointers (x y) ())
 
     "Collections"
     (Object Collection pointers () ())
@@ -469,7 +469,11 @@ Behavior category: 'format specification' methods: {
 ProtoObject category: 'initialization' methods: {
 :[initialize
     "By default do nothing"
-]
+].
+
+:[finalize
+    "By default do nothing"
+].
 }.
 
 ProtoObject category: 'accessing' methods: {

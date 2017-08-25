@@ -1,5 +1,46 @@
 "Exception handling support. This code is take from Pharo"
 
+BlockClosure category: 'exceptions' methods: {
+:[ensure: aBlock
+	"Evaluate a termination block after evaluating the receiver, regardless of
+	 whether the receiver's evaluation completes.  N.B.  This method is *not*
+	 implemented as a primitive.  Primitive 198 always fails.  The VM uses prim
+	 198 in a context's method as the mark for an ensure:/ifCurtailed: activation."
+
+	 <primitive: 198>
+	| complete returnValue |
+	returnValue := self value.
+	complete ifNil:[
+		complete := true.
+		aBlock value.
+	].
+	^ returnValue
+].
+
+:[ifCurtailed: aBlock
+	"Evaluate the receiver with an abnormal termination action.
+	 Evaluate aBlock only if execution is unwound during execution
+	 of the receiver.  If execution of the receiver finishes normally do
+	 not evaluate aBlock.  N.B.  This method is *not* implemented as a
+	 primitive.  Primitive 198 always fails.  The VM uses prim 198 in a
+	 context's method as the mark for an ensure:/ifCurtailed: activation."
+	 <primitive: 198>
+	| complete result |
+	result := self value.
+	complete := true.
+	^result
+].
+
+:[on: exception do: handlerAction
+	"Evaluate the receiver in the scope of an exception handler.
+	The following primitive is just a marker used to find the error handling context. 
+	See MethodContext>>#isHandlerOrSignalingContext. "
+	<primitive: 199>  
+	^ self value
+].
+
+}.
+
 Exception category: 'accessing' methods: {
 :[defaultAction
 	"The default action taken if the exception is signaled."
@@ -227,3 +268,19 @@ ProtoObject category: 'reflective operations' methods: {
 ].
 
 }.
+
+Object category: 'asserting' methods: {
+:[assert: aBlock
+	"Throw an assertion error if aBlock does not evaluates to true.
+	We check for true explicitly to make the assertion fail for non booleans"
+	
+	aBlock value == true ifFalse: [AssertionFailure signal: 'Assertion failed']
+].
+
+:[assert: aBlock description: aStringOrBlock
+	"Throw an assertion error if aBlock does not evaluates to true."
+	
+	aBlock value 
+		ifFalse: [ AssertionFailure signal: aStringOrBlock value ]
+].
+}

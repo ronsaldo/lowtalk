@@ -6,6 +6,8 @@ createEnvironment
 		compiler: self;
 		setCompileTimeVariable: #Compiler value: self;
 		setCompileTimeVariable: #Structure value: (LowtalkStructureBuilder new compiler: self);
+		setCompileTimeVariable: #Union value: (LowtalkUnionBuilder new compiler: self);
+		setCompileTimeVariable: #PackedStructure value: (LowtalkPackedStructureBuilder new compiler: self);
 		setCompileTimeVariable: #Namespace value: (LowtalkNamespaceBuilder new compiler: self);
 		setCompileTimeVariable: #Global value: (globalBuilder := LowtalkGlobalBuilder new compiler: self);
 		setCompileTimeVariable: #Constant value: (LowtalkConstantBuilder new compiler: self).

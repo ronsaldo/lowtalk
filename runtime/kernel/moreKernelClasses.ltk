@@ -14,6 +14,36 @@ Exception subclass: #UnhandledError
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
 
+Error subclass: #ArithmeticError
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
+ArithmeticError subclass: #DomainError
+	instanceVariableNames: 'from to'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
+ArithmeticError subclass: #FloatingPointException
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
+ArithmeticError subclass: #NaNException
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
+ArithmeticError subclass: #ZeroDivide
+	instanceVariableNames: 'dividend'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
+Error subclass: #AssertionFailure
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
 Error subclass: #MessageNotUnderstood
 	instanceVariableNames: 'message receiver reachedDefaultHandler'
 	classVariableNames: ''

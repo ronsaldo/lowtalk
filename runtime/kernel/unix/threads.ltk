@@ -15,16 +15,19 @@ UniqueLock variableByteSubclass: #Mutex
     classVariableNames: ''
     package: 'Kernel-Thread'.
 
+Object variableByteSubclass: #ConditionVariable
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Kernel-Thread'.
+
 Object variableByteSubclass: #Semaphore
     instanceVariableNames: ''
     classVariableNames: ''
     package: 'Kernel-Thread'.
 
-Object variableByteSubclass: #ConditionVariable
-    instanceVariableNames: ''
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
-    
+let MutexByteSize := Unix pthread_mutex_t size.
+let ConditionVariableByteSize := Unix pthread_cond_t size.
+
 Namespace named: #ObjectModel members: [
 
     Constant named: #threadEntryPoint value: [<Void pointer> :threadObject<Void pointer> |
@@ -98,4 +101,178 @@ BlockClosure category: 'threads' methods: {
 :[runInThread
     ^ (Thread entryPoint: self) run; yourself
 ]
+}.
+
+"UniqueLock and Mutex"
+Object category: 'testing' methods: {
+:[isPThreadMutex
+    ^ false
+]
+}.
+
+UniqueLock category: 'testing' methods: {
+:[isPThreadMutex
+    ^ true
+]
+}.
+
+UniqueLock class category: 'construction' methods: {
+:[new
+    ^ self new: MutexByteSize
+]
+}.
+
+UniqueLock category: 'initialization' methods: {
+:[initialize
+    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    Unix pthread_mutex_init #{this . nil}
+].
+
+:[finalize
+    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    Unix pthread_mutex_destroy #{this}.
+].
+}.
+
+UniqueLock category: 'mutual exclusion' methods: {
+:[critical: aBlock
+    self lock.
+    aBlock ensure: [self unlock]
+].
+
+:[lock
+    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    Unix pthread_mutex_lock #{this}.
+].
+
+:[unlock
+    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    
+    Unix pthread_mutex_unlock #{this}.
+].
+
+}.
+
+"Recursive Mutex"
+Mutex category: 'initialization' methods: {
+:[initialize
+    "Create the attribute"
+    let attr<Unix pthread_mutexattr_t>.
+    Unix pthread_mutexattr_init #{attr address}.
+    Unix pthread_mutexattr_settype #{attr address . Unix PTHREAD_MUTEX_RECURSIVE}.
+    
+    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    Unix pthread_mutex_init #{this . attr address}.
+    
+    Unix pthread_mutexattr_destroy #{attr address}.
+].
+
+}.
+
+"Condition variable"
+ConditionVariable class category: 'construction' methods: {
+:[new
+    ^ self new: ConditionVariableByteSize
+]
+}.
+
+ConditionVariable category: 'initialization' methods: {
+:[initialize
+    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
+    Unix pthread_cond_init #{this . nil}.
+].
+
+:[finalize
+    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
+    Unix pthread_cond_destroy #{this}.
+].
+}.
+
+ConditionVariable category: 'condition variable' methods: {
+:[wait: anUniqueLockOrMutex
+    anUniqueLockOrMutex isPThreadMutex ifFalse: [
+        self error: 'Expected an UniqueLock or a Mutex'
+    ].
+    
+    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
+    let mutex := anUniqueLockOrMutex firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+].
+
+:[wait: anUniqueLockOrMutex until: targetTimePoint
+    self notYetImplemented
+].
+
+:[wait: anUniqueLockOrMutex for: aDuration
+    self notYetImplemented
+].
+
+:[signal
+    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
+    Unix pthread_cond_signal #{this}
+].
+
+:[signalAll
+    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
+    Unix pthread_cond_broadcast #{this}
+].
+
+}.
+
+"Semaphore"
+let SemaphoreInternalData := Structure slots: {
+    #mutex => Unix pthread_mutex_t.
+    #condition => Unix pthread_cond_t.
+    #signalCount => UInt32
+}.
+
+let SemaphoreInternalDataByteSize := SemaphoreInternalData size.
+Semaphore class category: 'construction' methods: {
+:[new
+    ^ self new: SemaphoreInternalDataByteSize
+].
+
+:[forMutualExclusion
+    ^ self new signal
+].
+}.
+
+Semaphore category: 'initialization' methods: {
+:[initialize
+    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
+    Unix pthread_mutex_init #{this value mutex address . nil}.
+    Unix pthread_cond_init #{this value condition address . nil}.
+].
+
+:[finalize
+    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
+    Unix pthread_mutex_destroy #{this value mutex address}.
+    Unix pthread_cond_destroy #{this value condition address}.
+].
+}.
+
+Semaphore category: 'communication' methods: {
+:[consumeAllSignals
+    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
+    this value signalCount := 0.
+].
+
+:[signal
+    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
+    Unix pthread_mutex_lock #{this value mutex address}.
+    this value signalCount := this value signalCount + 1.
+    "TODO: Check whether signal can be used instead of broadcast."
+    Unix pthread_cond_broadcast #{this value condition address}.
+    Unix pthread_mutex_unlock #{this value mutex address}.
+].
+
+:[wait
+    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
+    Unix pthread_mutex_lock #{this value mutex address}.
+    [this value signalCount == 0] whileTrue: [
+        Unix pthread_cond_wait #{this value condition address . this value mutex address}
+    ].
+    
+    this value signalCount := this value signalCount - 1.
+    Unix pthread_mutex_unlock #{this value mutex address}.
+].
 }.

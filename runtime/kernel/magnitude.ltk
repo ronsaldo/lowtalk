@@ -46,6 +46,9 @@ Magnitude category: 'testing' methods: {
     ^ aMagnitude <= self
 ].
 
+:[isZero
+	^self = 0
+].
 }.
 
 "Object testing methods"
@@ -130,6 +133,9 @@ Float category: 'testing' methods: {
     ^ true
 ].
 
+":[isZero
+	^self = 0.0
+]."
 }.
 
 "Integer"

@@ -58,7 +58,7 @@ Class category: 'subclass creation' methods: {
 	"Added to allow for a simplified subclass creation experience. "
 
 	^ self
-		subclass: aSubclassSymbol
+		variableByteSubclass: aSubclassSymbol
 		instanceVariableNames: instVarNames
 		classVariableNames: classVarNames
 		poolDictionaries: ''
@@ -67,16 +67,12 @@ Class category: 'subclass creation' methods: {
 
 :[variableByteSubclass: t instanceVariableNames: f classVariableNames: d poolDictionaries: s package: cat
 	^ self
-		subclass: t
+		variableByteSubclass: t
 		uses: #()
 		instanceVariableNames: f
 		classVariableNames: d
 		poolDictionaries: s
 		package: cat
-].
-
-:[variableByteSubclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
-    ^ self subclass: aName formatType: #pointers uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory
 ].
 
 :[variableByteSubclass: aName uses: aTraitCompositionOrArray instanceVariableNames: someInstanceVariableNames classVariableNames: someClassVariableNames poolDictionaries: someSharedPoolNames package: aCategory

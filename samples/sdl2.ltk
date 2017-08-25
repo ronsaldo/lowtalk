@@ -1,0 +1,129 @@
+let quitting := false.
+let window<SDL2 SDL_Window pointer>.
+let renderer<SDL2 SDL_Renderer pointer>.
+
+Object subclass: #MainClass
+	instanceVariableNames: 'x y vx vy'
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+    
+MainClass category: 'application' methods: {
+:[initialize
+    x := 0.
+    y := 0.
+    vx := 0.
+    vy := 0.
+].
+
+:[onKeyDown: key
+    key = SDL2 SDLK_ESCAPE ifTrue: [
+        quitting := true.
+        ^ self
+    ].
+    key = SDL2 SDLK_a ifTrue: [
+        vx := -1.
+        ^ self
+    ].
+    key = SDL2 SDLK_d ifTrue: [
+        vx := 1.
+        ^ self
+    ].
+    key = SDL2 SDLK_w ifTrue: [
+        vy := 1.
+        ^ self
+    ].
+    key = SDL2 SDLK_s ifTrue: [
+        vy := -1.
+        ^ self
+    ].
+
+    FileStream stdout << 'onKeyDown '; print: key; lf.
+    
+].
+
+:[onKeyUp: key
+    key = SDL2 SDLK_a ifTrue: [
+        vx < 0 ifTrue: [vx := 0].
+        ^ self
+    ].
+    key = SDL2 SDLK_d ifTrue: [
+        vx > 0 ifTrue: [vx := 0].
+        ^ self
+    ].
+    key = SDL2 SDLK_w ifTrue: [
+        vy > 0 ifTrue: [vy := 0].
+        ^ self
+    ].
+    key = SDL2 SDLK_s ifTrue: [
+        vy < 0 ifTrue: [vy := 0].
+        ^ self
+    ].
+
+    FileStream stdout << 'onKeyUp '; print: key; lf
+].
+
+:[processEvents
+    let event<SDL2 SDL_Event>.
+    [SDL2 SDL_PollEvent #{event address}] whileTrue: [
+        event type = SDL2 SDL_KEYDOWN ifTrue: [
+            self onKeyDown: event key keysym sym
+        ].
+        event type = SDL2 SDL_KEYUP ifTrue: [
+            self onKeyUp: event key keysym sym
+        ].
+        event type = SDL2 SDL_QUIT ifTrue: [
+            quitting := true
+        ].
+    ]
+].
+
+:[update
+    x := x + vx.
+    y := y + vy.
+].
+
+:[render
+    SDL2 SDL_SetRenderDrawColor #{renderer . 0 . 0 . 255 . 255}.
+    SDL2 SDL_RenderClear #{renderer}.
+    
+    let rect<SDL2 SDL_Rect>.
+    rect
+        x: (x castTo: Int32) + (640/2);
+        y: (480/2) - (y castTo: Int32);
+        w: 32;
+        h: 32.
+    SDL2 SDL_SetRenderDrawColor #{renderer . 255 . 0 . 0 . 255}.
+    SDL2 SDL_RenderFillRect #{renderer . rect address}.
+    
+    SDL2 SDL_RenderPresent #{renderer}.
+].
+
+:[main
+    SDL2 SDL_Init #{SDL2 SDL_INIT_VIDEO}.
+    window := SDL2 SDL_CreateWindow #{c'Lowtalk SDL2 Demo' .
+        SDL2 SDL_WINDOWPOS_CENTERED . SDL2 SDL_WINDOWPOS_CENTERED.
+        640 . 480 . SDL2 SDL_WINDOW_SHOWN | SDL2 SDL_WINDOW_RESIZABLE}.
+        
+    renderer := SDL2 SDL_CreateRenderer #{window . 0 . 0}.
+
+    [quitting] whileFalse: [
+        self processEvents;
+            update;
+            render.
+        
+        SDL2 SDL_Delay #{10}
+    ].
+
+    SDL2 SDL_DestroyRenderer #{renderer}.
+    SDL2 SDL_DestroyWindow #{window}.
+    SDL2 SDL_Quit #{}.
+
+    ^ 0
+]
+}.
+
+
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    let application := MainClass new.
+    ^ application main castTo: Int32
+]

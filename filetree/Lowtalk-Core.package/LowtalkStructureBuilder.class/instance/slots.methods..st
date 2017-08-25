@@ -4,7 +4,7 @@ slots: slotsLazyValue methods: methods
 	<lazy>
 	| structure |
 	
-	structure := LowtalkStructureType target: compiler compilationTarget.
+	structure := self typeClass target: compiler compilationTarget.
 	structure
 		compiler: compiler;
 		slots: slotsLazyValue;

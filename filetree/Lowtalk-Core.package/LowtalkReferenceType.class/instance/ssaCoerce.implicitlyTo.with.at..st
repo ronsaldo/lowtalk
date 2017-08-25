@@ -9,4 +9,8 @@ ssaCoerce: value implicitlyTo: targetType with: builder at: node
 		^ referenced ssaCoerce: (builder load: value) implicitlyTo: targetType with: builder at: node
 	].
 
+	(referenced isArrayType and: [ targetType isPointerType and: [ referenced baseType = targetType pointed ] ]) ifTrue: [
+		^ builder getReference: value element: (builder constInt: 0)
+	].
+
 	^ super ssaCoerce: value implicitlyTo: targetType with: builder at: node

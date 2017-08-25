@@ -1,0 +1,266 @@
+Compiler evaluateFileNamed: 'keysym.ltk'.
+
+Namespace named: #SDL2 members: [
+
+    "SDL.h"
+    Constant named: #SDL_INIT_TIMER          type: UInt32 value: 16r00000001.
+    Constant named: #SDL_INIT_AUDIO          type: UInt32 value: 16r00000010.
+    Constant named: #SDL_INIT_VIDEO          type: UInt32 value: 16r00000020.
+    Constant named: #SDL_INIT_JOYSTICK       type: UInt32 value: 16r00000200.
+    Constant named: #SDL_INIT_HAPTIC         type: UInt32 value: 16r00001000.
+    Constant named: #SDL_INIT_GAMECONTROLLER type: UInt32 value: 16r00002000.
+    Constant named: #SDL_INIT_EVENTS         type: UInt32 value: 16r00004000.
+    Constant named: #SDL_INIT_NOPARACHUTE    type: UInt32 value: 16r00100000.
+    
+    Constant named: #SDL_INIT_EVERYTHING type: UInt32 value:
+                SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS |
+                SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER.
+                
+    Constant externalC: #SDL_Init type: (UInt32) -> Int32.
+    Constant externalC: #SDL_InitSubSystem type: (UInt32) -> Int32.
+    
+    Constant externalC: #SDL_WasInit type: (UInt32) -> UInt32.
+    Constant externalC: #SDL_Quit type: (Void) -> Void.
+
+    "SDL_video.h"
+    Structure named: #SDL_Window slots: {}.
+    
+    Constant named: #SDL_WINDOW_FULLSCREEN type: UInt32 value: 16r00000001.
+    Constant named: #SDL_WINDOW_OPENGL type: UInt32 value: 16r00000002.
+    Constant named: #SDL_WINDOW_SHOWN type: UInt32 value: 16r00000004.
+    Constant named: #SDL_WINDOW_HIDDEN type: UInt32 value: 16r00000008.
+    Constant named: #SDL_WINDOW_BORDERLESS type: UInt32 value: 16r00000010.
+    Constant named: #SDL_WINDOW_RESIZABLE type: UInt32 value: 16r00000020.
+    Constant named: #SDL_WINDOW_MINIMIZED type: UInt32 value: 16r00000040.
+    Constant named: #SDL_WINDOW_MAXIMIZED type: UInt32 value: 16r00000080.
+    Constant named: #SDL_WINDOW_INPUT_GRABBED type: UInt32 value: 16r00000100.
+    Constant named: #SDL_WINDOW_INPUT_FOCUS type: UInt32 value: 16r00000200.
+    Constant named: #SDL_WINDOW_MOUSE_FOCUS type: UInt32 value: 16r00000400.
+    Constant named: #SDL_WINDOW_FULLSCREEN_DESKTOP type: UInt32 value: ( SDL_WINDOW_FULLSCREEN | 16r00001000 ).
+    Constant named: #SDL_WINDOW_FOREIGN type: UInt32 value: 16r00000800.
+    Constant named: #SDL_WINDOW_ALLOW_HIGHDPI type: UInt32 value: 16r00002000.
+    Constant named: #SDL_WINDOW_MOUSE_CAPTURE type: UInt32 value: 16r00004000.
+
+    Constant named: #SDL_WINDOWPOS_UNDEFINED_MASK type: Int32 value: 16r1FFF0000.
+    "#define SDL_WINDOWPOS_UNDEFINED_DISPLAY(X)  (SDL_WINDOWPOS_UNDEFINED_MASK|(X))"
+    Constant named: #SDL_WINDOWPOS_UNDEFINED type: Int32 value: SDL_WINDOWPOS_UNDEFINED_MASK.
+
+    Constant named: #SDL_WINDOWPOS_CENTERED_MASK type: Int32 value: 16r2FFF0000.
+    "#define SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X))"
+    Constant named: #SDL_WINDOWPOS_CENTERED type: Int32 value: SDL_WINDOWPOS_CENTERED_MASK.
+
+    Constant externalC: #SDL_CreateWindow type: (LibC ConstCString , Int32 , Int32 , Int32 , Int32 , UInt32) -> SDL_Window pointer.
+    Constant externalC: #SDL_DestroyWindow type: (SDL_Window pointer) -> Void.
+    
+    "Timer"
+    Constant externalC: #SDL_GetTicks type: Void -> UInt32.
+    Constant externalC: #SDL_Delay type: UInt32 -> Void.
+    
+    "Event"
+    Constant named: #SDL_FIRSTEVENT type: UInt32 value: 0.
+    Constant named: #SDL_QUIT type: UInt32 value: 16r100.
+    
+    Constant named: #SDL_APP_TERMINATING type: UInt32 value: 16r101.
+    Constant named: #SDL_APP_LOWMEMORY type: UInt32 value: 16r102.
+    Constant named: #SDL_APP_WILLENTERBACKGROUND type: UInt32 value: 16r103.
+    Constant named: #SDL_APP_DIDENTERBACKGROUND type: UInt32 value: 16r104.
+    Constant named: #SDL_APP_WILLENTERFOREGROUND type: UInt32 value: 16r105.
+    Constant named: #SDL_APP_DIDENTERFOREGROUND type: UInt32 value: 16r106.
+    
+    Constant named: #SDL_WINDOWEVENT type: UInt32 value: 16r200.
+    Constant named: #SDL_SYSWMEVENT type: UInt32 value: 16r201.
+    
+    Constant named: #SDL_KEYDOWN type: UInt32 value: 16r300.
+    Constant named: #SDL_KEYUP type: UInt32 value: 16r301.
+    Constant named: #SDL_TEXTEDITING type: UInt32 value: 16r302.
+    Constant named: #SDL_TEXTINPUT type: UInt32 value: 16r303.
+    Constant named: #SDL_KEYMAPCHANGED type: UInt32 value: 16r304.
+
+    Constant named: #SDL_MOUSEMOTION type: UInt32 value: 16r400.
+    Constant named: #SDL_MOUSEBUTTONDOWN type: UInt32 value: 16r401.
+    Constant named: #SDL_MOUSEBUTTONUP type: UInt32 value: 16r402.
+    Constant named: #SDL_MOUSEWHEEL type: UInt32 value: 16r403.
+
+    Constant named: #SDL_JOYAXISMOTION type: UInt32 value: 16r600.
+    Constant named: #SDL_JOYBALLMOTION type: UInt32 value: 16r601.
+    Constant named: #SDL_JOYHATMOTION type: UInt32 value: 16r602.
+    Constant named: #SDL_JOYBUTTONDOWN type: UInt32 value: 16r603.
+    Constant named: #SDL_JOYBUTTONUP type: UInt32 value: 16r604.
+    Constant named: #SDL_JOYDEVICEADDED type: UInt32 value: 16r605.
+    Constant named: #SDL_JOYDEVICEREMOVED type: UInt32 value: 16r606.
+
+    Constant named: #SDL_CONTROLLERAXISMOTION type: UInt32 value: 16r650.
+    Constant named: #SDL_CONTROLLERBUTTONDOWN type: UInt32 value: 16r651.
+    Constant named: #SDL_CONTROLLERBUTTONUP type: UInt32 value: 16r652.
+    Constant named: #SDL_CONTROLLERDEVICEADDED type: UInt32 value: 16r653.
+    Constant named: #SDL_CONTROLLERDEVICEREMOVED type: UInt32 value: 16r654.
+    Constant named: #SDL_CONTROLLERDEVICEREMAPPED type: UInt32 value: 16r655.
+
+    Constant named: #SDL_FINGERDOWN type: UInt32 value: 16r700.
+    Constant named: #SDL_FINGERUP type: UInt32 value: 16r701.
+    Constant named: #SDL_FINGERMOTION type: UInt32 value: 16r702.
+
+    Constant named: #SDL_DOLLARGESTURE type: UInt32 value: 16r800.
+    Constant named: #SDL_DOLLARRECORD type: UInt32 value: 16r801.
+    Constant named: #SDL_MULTIGESTURE type: UInt32 value: 16r802.
+
+    Constant named: #SDL_CLIPBOARDUPDATE type: UInt32 value: 16r900.
+
+    Constant named: #SDL_DROPFILE type: UInt32 value: 16r1000.
+
+    Constant named: #SDL_AUDIODEVICEADDED type: UInt32 value: 16r1100.
+    Constant named: #SDL_AUDIODEVICEREMOVED type: UInt32 value: 16r1101.
+
+    Constant named: #SDL_RENDER_TARGETS_RESET type: UInt32 value: 16r2000.
+    Constant named: #SDL_RENDER_DEVICE_RESET type: UInt32 value: 16r2001.
+
+    Constant named: #SDL_USEREVENT type: UInt32 value: 16r8000.
+    Constant named: #SDL_LASTEVENT type: UInt32 value: 16rffff.
+
+    Structure named: #SDL_CommonEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+    }.
+    
+    Structure named: #SDL_WindowEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #event => UInt8.
+        #padding1 => UInt8.
+        #padding2 => UInt8.
+        #padding3 => UInt8.
+        #data1 => Int32.
+        #data2 => Int32.
+    }.
+
+    Structure named: #SDL_Keysym slots: {
+        #scancode => UInt32.
+        #sym => Int32.
+        #mod => UInt16.
+        #unused => UInt32.
+    }.
+    
+    Structure named: #SDL_KeyboardEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #state => UInt8.
+        #repeat => UInt8.
+        #padding2 => UInt8.
+        #padding3 => UInt8.
+        #keysym => SDL_Keysym.
+    }.
+    
+    Constant named: #SDL_TEXTEDITINGEVENT_TEXT_SIZE type: UInt32 value: 32.
+    
+    Structure named: #SDL_TextEditingEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #text => (UInt8 array: SDL_TEXTEDITINGEVENT_TEXT_SIZE).
+        #start => Int32.
+        #length => Int32.
+    }.
+    
+    Constant named: #SDL_TEXTINPUTEVENT_TEXT_SIZE type: UInt32 value: 32.
+    
+    Structure named: #SDL_TextInputEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #text => (UInt8 array: SDL_TEXTINPUTEVENT_TEXT_SIZE).
+    }.
+    
+    Structure named: #SDL_MouseMotionEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #which => UInt32.
+        #state => UInt32.
+        #x => Int32.
+        #y => Int32.
+        #xrel => Int32.
+        #yrel => Int32.
+    }.
+    
+    Structure named: #SDL_MouseButtonEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #which => UInt32.
+        #button => UInt8.
+        #state => UInt8.
+        #clicks => UInt8.
+        #padding1 => UInt8.
+        #x => Int32.
+        #y => Int32.
+    }.
+    
+    Structure named: #SDL_MouseWheelEvent slots: {
+        #type => UInt32.
+        #timestamp => UInt32.
+        #windowID => UInt32.
+        #which => UInt32.
+        #x => Int32.
+        #y => Int32.
+        #direction => UInt32.
+    }.
+    
+    Union named: #SDL_Event slots: {
+        #type => UInt32.
+        #common => SDL_CommonEvent.
+        #window => SDL_WindowEvent.
+        #key => SDL_KeyboardEvent.
+        #padding => (UInt8 array: 56).
+    }.
+    
+    Constant externalC: #SDL_PollEvent type: (SDL_Event pointer) -> BooleanBit.
+    
+    "Rect"
+    Structure named: #SDL_Point slots: {
+        #x => Int32.
+        #y => Int32
+    }.
+
+    Structure named: #SDL_Rect slots: {
+        #x => Int32.
+        #y => Int32.
+        #w => Int32.
+        #h => Int32.
+    }.
+    
+    "Renderer"
+    Constant named: #SDL_RENDERER_SOFTWARE value: 16r00000001.
+    Constant named: #SDL_RENDERER_ACCELERATED value: 16r00000002.
+    Constant named: #SDL_RENDERER_PRESENTVSYNC value: 16r00000004.
+    Constant named: #SDL_RENDERER_TARGETTEXTURE value: 16r00000008.
+
+    Structure named: #SDL_Renderer slots: {}.
+    Structure named: #SDL_Texture slots: {}.
+    
+    Constant externalC: #SDL_CreateRenderer type: (SDL_Window pointer, Int32 , UInt32) -> SDL_Renderer pointer.
+    Constant externalC: #SDL_CreateTexture type: (SDL_Renderer pointer, UInt32 "format", Int32 "access", Int32 "w", Int32 "h") -> SDL_Texture pointer.
+    
+    Constant externalC: #SDL_SetRenderDrawColor type: (SDL_Renderer pointer, UInt8, UInt8, UInt8, UInt8) -> Int32.
+    Constant externalC: #SDL_GetRenderDrawColor type: (SDL_Renderer pointer, UInt8 pointer, UInt8 pointer, UInt8 pointer, UInt8 pointer) -> Int32.
+    
+    Constant externalC: #SDL_RenderClear type: (SDL_Renderer pointer) -> Int32.
+    
+    Constant externalC: #SDL_RenderDrawPoint type: (SDL_Renderer pointer, Int32, Int32) -> Int32.
+    Constant externalC: #SDL_RenderDrawPoints type: (SDL_Renderer pointer, SDL_Point const pointer, Int32) -> Int32.
+    
+    Constant externalC: #SDL_RenderDrawLine type: (SDL_Renderer pointer, Int32, Int32, Int32, Int32) -> Int32.
+    Constant externalC: #SDL_RenderDrawLines type: (SDL_Renderer pointer, SDL_Point const pointer, Int32) -> Int32.
+    
+    Constant externalC: #SDL_RenderDrawRect type: (SDL_Renderer pointer, SDL_Rect const pointer) -> Int32.
+    Constant externalC: #SDL_RenderDrawRects type: (SDL_Renderer pointer, SDL_Rect const pointer, Int32) -> Int32.
+
+    Constant externalC: #SDL_RenderFillRect type: (SDL_Renderer pointer, SDL_Rect const pointer) -> Int32.
+    Constant externalC: #SDL_RenderFillRects type: (SDL_Renderer pointer, SDL_Rect const pointer, Int32) -> Int32.
+    
+    Constant externalC: #SDL_RenderPresent type: (SDL_Renderer pointer) -> Void.
+    
+    Constant externalC: #SDL_DestroyTexture type: (SDL_Texture pointer) -> Void.
+    Constant externalC: #SDL_DestroyRenderer type: (SDL_Renderer pointer) -> Void.
+].

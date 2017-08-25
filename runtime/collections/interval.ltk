@@ -1,0 +1,118 @@
+SequenceableCollection subclass: #Interval
+	instanceVariableNames: 'start stop step'
+	classVariableNames: ''
+	package: 'Collections-Sequenceable'.
+    
+Number category: 'interval' methods: {
+:[to: stop
+	"Answer an Interval from the receiver up to the argument, stop, 
+	incrementing by 1."
+
+	^Interval from: self to: stop by: 1
+].
+
+:[to: stop by: step
+	"Answer an Interval from the receiver up to the argument, stop, 
+	incrementing by step."
+
+	^Interval from: self to: stop by: step
+].
+}.
+
+Interval class category: 'instance creation' methods: {
+:[from: startInteger to: stopInteger 
+	"Answer an instance of me, starting at startNumber, ending at 
+	stopNumber, and with an interval increment of 1."
+
+	^self new
+		setFrom: startInteger
+		to: stopInteger
+		by: 1
+].
+
+:[from: startInteger to: stopInteger by: stepInteger 
+	"Answer an instance of me, starting at startNumber, ending at 
+	stopNumber, and with an interval increment of stepNumber."
+
+	^self new
+		setFrom: startInteger
+		to: stopInteger
+		by: stepInteger
+]
+}.
+
+Interval category: 'private' methods: {
+:[setFrom: startInteger to: stopInteger by: stepInteger
+
+	start := startInteger.
+	stop := stopInteger.
+	step := stepInteger.
+	step isZero ifTrue: [ ^ DomainError signal: 'Zero size steps not allowed' ]
+].
+
+:[species
+
+	^Array
+]
+}.
+
+Interval category: 'accessing' methods: {
+:[at: anInteger
+	"Answer the anInteger'th element."
+
+	(anInteger between: 1 and: self size)
+		ifTrue: [ ^ start + (step * (anInteger - 1)) ]
+		ifFalse: [ self errorSubscriptBounds: anInteger ]
+].
+
+:[at: anInteger put: anObject 
+	"Storing into an Interval is not allowed."
+
+	self error: 'you can not store into an interval'
+].
+
+:[size
+	"Answer how many elements the receiver contains."
+
+	step < 0
+		ifTrue: [start < stop
+				ifTrue: [^ 0]
+				ifFalse: [^ stop - start // step + 1]]
+		ifFalse: [stop < start
+				ifTrue: [^ 0]
+				ifFalse: [^ stop - start // step + 1]]
+].
+
+}.
+
+Interval category: 'enumerating' methods: {
+:[collect: aBlock
+	| nextValue result |
+	result := self species new: self size.
+	nextValue := start.
+	1 to: result size do: [:i |
+		result at: i put: (aBlock value: nextValue).
+		"FileStream stdout print: nextValue; lf."
+		nextValue := nextValue + step].
+		
+	^ result
+].
+:[do: aBlock
+	"Evaluate aBlock for each value of the interval.
+	Implementation note: instead of repeatedly incrementing the value
+		aValue := aValue + step.
+	until stop is reached,
+	We prefer to recompute value from start
+		aValue := start + (index * step).
+	This is better for floating points accuracy, while not degrading Integer and Fraction speed too much.
+	Moreover, this is consistent with methods #at: and #size"
+
+	| aValue index size |
+	index := 0.
+	size := self size.
+	[index < size]
+		whileTrue: [aValue := start + (index * step).
+			index := index + 1.
+			aBlock value: aValue]
+].
+}

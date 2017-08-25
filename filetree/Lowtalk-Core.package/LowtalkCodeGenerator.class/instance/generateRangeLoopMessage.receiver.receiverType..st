@@ -69,10 +69,12 @@ generateRangeLoopMessage: message receiver: receiver receiverType: receiverType
 	
 	"Emit the body"
 	builder currentBlock: loopBody.
+	iterationValue := builder load: loopVariable.
 	self inlineBlock: message arguments last arguments:  {iterationValue} types: { coercionType }.
 	
 	"Increment"
 	builder isLastTerminator ifFalse: [
+		iterationValue := builder load: loopVariable.
 		self store: (self emitArithmetic: #+ left: iterationValue right: incrementValue type: coercionType at: message) in: loopVariable.
 		builder jump: loopHeader
 	].

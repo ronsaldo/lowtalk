@@ -131,6 +131,7 @@ Namespace named: #ObjectModel members: [
             <cdecl>
             isNonImmediateObject #{object} ifTrue: [
                 let oldCount := object value refCount address fetchAndAdd: 1.
+                "LibC printf #{c'Increase ref %p: %d\n' . object . oldCount}."
                 (oldCount = 0 and: [(object value flags & StaticOopFlag) = 0]) ifTrue: [
                     LibC fprintf #{LibC stderr . c'Increasing Reference to destroyed object %p\n' . object}.
                     LibC abort #{}.
@@ -142,6 +143,7 @@ Namespace named: #ObjectModel members: [
             <cdecl>
             isNonImmediateObject #{object} ifTrue: [
                 let oldCount := object value refCount address fetchAndAdd: -1.
+                "LibC printf #{c'Release ref %p: %d\n' . object . oldCount}."
                 oldCount <= 1 ifTrue: [
                     destroyObjectWithCount #{object . oldCount}
                 ].
