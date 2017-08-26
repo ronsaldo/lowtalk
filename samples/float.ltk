@@ -3,7 +3,7 @@ Constant named: #testFloat value: [<Void> |
     <localReturn>
     let a<Float32> := 1.0.
     let b<Float32> := 2.0.
-    LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f\n' . a + b . a - b . a*b . a/b . b sqrt}.
+    LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f negated %f\n' . a + b . a - b . a*b . a/b . b sqrt . a negated}.
     ^ nil
 ].
 
@@ -11,15 +11,25 @@ Constant named: #testDouble value: [<Void> |
     <localReturn>
     let a<Float64> := 1.0.
     let b<Float64> := 2.0.
-    LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f\n' . a + b . a - b . a*b . a/b . b sqrt}.
+    LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f negated %f\n' . a + b . a - b . a*b . a/b . b sqrt . a negated}.
     ^ nil
 ].
 
 Constant named: #testFloatObject value: [<Void> |
     <localReturn>
+    |a b|
+    a := 1.0.
+    b := 2.0.
+    FileStream stdout nextPutAll: 'float:';
+        nextPutAll: ' + '; print: a + b;
+        nextPutAll: ' - '; print: a - b;
+        nextPutAll: ' * '; print: a * b;
+        nextPutAll: ' / '; print: a / b;
+        nextPutAll: ' sqrt(b) '; print: b sqrt;
+        nextPutAll: ' negated '; print: a negated;
+        lf.
     ^ nil
 ].
-
 
 Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
     <localReturn>

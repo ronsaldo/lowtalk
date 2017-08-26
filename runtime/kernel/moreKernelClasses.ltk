@@ -54,11 +54,23 @@ Error subclass: #SubscriptOutOfBounds
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
 
-Error subclass: #InvalidObjectToPointerCast
+Error subclass: #InvalidObjectToNativeCast
 	instanceVariableNames: ''
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
-
+InvalidObjectToNativeCast subclass: #InvalidObjectToPointerCast
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+InvalidObjectToNativeCast subclass: #InvalidObjectToFloatCast
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+InvalidObjectToNativeCast subclass: #InvalidObjectToIntegerCast
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+	
 Error subclass: #CannotReturn
 	instanceVariableNames: 'result'
 	classVariableNames: ''

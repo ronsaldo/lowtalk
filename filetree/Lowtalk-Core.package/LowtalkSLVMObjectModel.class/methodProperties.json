@@ -1,5 +1,6 @@
 {
 	"instance" : {
+		"objectToFloatFunction" : "RonieSalgado 8/26/2017 16:53",
 		"createFunctionContextMetaData:" : "RonieSalgado 6/26/2017 17:50",
 		"objectHeaderSize" : "RonieSalgado 6/8/2017 22:29",
 		"objectToPointerFunction" : "RonieSalgado 7/12/2017 19:48",
@@ -20,8 +21,9 @@
 		"isReferenceCounted" : "RonieSalgado 8/21/2017 00:37",
 		"characterTag" : "RonieSalgado 7/22/2017 19:31",
 		"messageSendTrampoline" : "RonieSalgado 6/1/2017 17:50",
-		"writeBarrier" : "RonieSalgado 8/20/2017 01:38",
+		"floatToObjectFunction" : "RonieSalgado 8/26/2017 16:46",
 		"marryThisContextFunction" : "RonieSalgado 7/16/2017 23:40",
+		"writeBarrier" : "RonieSalgado 8/20/2017 01:38",
 		"convertConstantValue:inModule:" : "RonieSalgado 7/23/2017 20:56",
 		"smallFloatTag" : "RonieSalgado 7/4/2017 17:49",
 		"compiler" : "RonieSalgado 5/31/2017 22:10",

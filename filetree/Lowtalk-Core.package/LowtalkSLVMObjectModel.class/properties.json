@@ -15,7 +15,9 @@
 		"objectToPointerFunction",
 		"marryThisContextFunction",
 		"widowThisContextFunction",
-		"nonLocalReturnFunction"
+		"nonLocalReturnFunction",
+		"floatToObjectFunction",
+		"objectToFloatFunction"
 	],
 	"name" : "LowtalkSLVMObjectModel",
 	"type" : "normal"

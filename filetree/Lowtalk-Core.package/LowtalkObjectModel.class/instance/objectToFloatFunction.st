@@ -1,0 +1,4 @@
+accessing
+objectToFloatFunction
+	<compileTime>
+	^ objectToFloatFunction

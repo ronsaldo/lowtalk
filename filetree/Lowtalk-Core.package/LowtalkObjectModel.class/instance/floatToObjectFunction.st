@@ -1,0 +1,4 @@
+accessing
+floatToObjectFunction
+	<compileTime>
+	^ floatToObjectFunction

@@ -56,7 +56,10 @@
 		"globalVariableClass",
 		"classVariableClass",
 		"namespaceCreationFunction",
-		"createGlobalVariableAssociationFunction"
+		"createGlobalVariableAssociationFunction",
+		"convertBoxedFloat64Function",
+		"floatToObjectFunction",
+		"objectToFloatFunction"
 	],
 	"name" : "LowtalkObjectModel",
 	"type" : "normal"

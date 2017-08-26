@@ -22,7 +22,7 @@ let bootstrapClassHierarchy := #(
         (Magnitude Character immediate () ())
         (Magnitude Number pointers () ())
             (Number Float pointers () ())
-                (Float BoxedFloat64 words () ())
+                (Float BoxedFloat64 bytes () ())
                 (Float SmallFloat immediate () ())
             (Number Fraction pointers () ())
             (Number Integer pointers () ())
@@ -400,6 +400,11 @@ Compiler objectModel
                 argumentsDescriptor: entryPoint argumentsDescriptor.
         ].
         1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
+        result
+    ];
+    convertBoxedFloat64Function: [:data |
+        let result := BoxedFloat64 basicNew: 8.
+        1 to: 8 do: [:i | result basicAt: i put: (data at:i) ].
         result
     ];
     globalVariableClass: GlobalVariable;

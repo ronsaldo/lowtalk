@@ -31,6 +31,10 @@ Namespace named: #ObjectModel members: [
         Constant named: #OopSmallIntegerTagValue type: UIntPointer value: 1.
         Constant named: #OopSmallIntegerShift type: UIntPointer value: OopTagShift.
 
+        Constant named: #OopSmallFloatTagMask type: UIntPointer value: OopTagMask.
+        Constant named: #OopSmallFloatTagValue type: UIntPointer value: 4.
+        Constant named: #OopSmallFloatShift type: UIntPointer value: OopTagShift.
+
         Constant named: #OopPointerTagMask type: UIntPointer value: OopTagMask.
         Constant named: #OopPointerTagValue type: UIntPointer value: 0.
 
@@ -110,6 +114,39 @@ Namespace named: #ObjectModel members: [
         ((value << OopSmallIntegerShift) | OopSmallIntegerTagValue) reinterpretCastTo: UIntPointer
     ].
 
+    OopSize = 4 ifTrue: [
+        Constant named: #isSmallFloat value: [<BooleanBit> :oop<UIntPointer> |
+            <cdecl>
+            false
+        ].
+
+        Constant named: #decodeSmallFloat value: [<Float64> :oop<UIntPointer> |
+            <cdecl>
+            0.0
+        ].
+        
+        Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
+            <cdecl>
+            0
+        ].
+    ] ifFalse: [
+        "TODO: Implement this case"
+        Constant named: #isSmallFloat value: [<BooleanBit> :oop<UIntPointer> |
+            <cdecl>
+            (oop & OopSmallFloatTagMask) = OopSmallFloatTagValue
+        ].
+        
+        Constant named: #decodeSmallFloat value: [<Float64> :oop<UIntPointer> |
+            <cdecl>
+            0.0
+        ].
+        
+        Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
+            <cdecl>
+            0
+        ].
+    ].
+    
     Constant named: #isCharacter value: [<BooleanBit> :oop<UIntPointer> |
         <cdecl>
         (oop & OopCharacterTagMask) = OopCharacterTagValue
