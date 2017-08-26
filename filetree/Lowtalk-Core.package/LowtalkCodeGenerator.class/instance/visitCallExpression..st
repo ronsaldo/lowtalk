@@ -26,7 +26,7 @@ visitCallExpression: callExpression
 			expectedType := receiverType arguments at: index.
 			self coerceImplicitly: argumentValue type: arg type to: expectedType at: callExpression
 		] ifFalse: [
-			self coerceVariadicArgument: argumentValue type: arg type at: callExpression
+			self coerceVariadicArgument: argumentValue type: arg type at: arg
 		]
 	].
 

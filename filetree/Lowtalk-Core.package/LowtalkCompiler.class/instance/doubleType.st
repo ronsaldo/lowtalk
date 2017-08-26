@@ -1,0 +1,3 @@
+types
+doubleType
+	^ doubleType

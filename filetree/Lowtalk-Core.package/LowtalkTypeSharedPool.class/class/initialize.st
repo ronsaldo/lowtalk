@@ -15,7 +15,8 @@ initialize
 		// Arithmetic
 		\\ Arithmetic
 		
-		negated UnaryArithmeric
+		negated UnaryArithmetic
+		sqrt UnaryArithmetic
 
 		| BinaryBitwise
 		bitOr: BinaryBitwise
@@ -43,6 +44,7 @@ initialize
 		
 		and: And
 		or: Or
+		not Not
 
 		ifTrue: IfSelection
 		ifFalse: IfSelection

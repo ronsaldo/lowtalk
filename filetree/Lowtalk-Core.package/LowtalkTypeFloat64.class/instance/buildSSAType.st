@@ -1,3 +1,3 @@
 accessing
 buildSSAType
-	^ SLVMType doubleType
+	^ compilationTarget double

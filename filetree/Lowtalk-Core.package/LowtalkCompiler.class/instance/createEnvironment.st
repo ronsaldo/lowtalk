@@ -27,6 +27,7 @@ createEnvironment
 	intPointerType := (compilerEnvironment lookSymbol: #IntPointer) value.
 	booleanType := (compilerEnvironment lookSymbol: #BooleanBit) value.
 	byteType := (compilerEnvironment lookSymbol: #UInt8) value.
+	doubleType := (compilerEnvironment lookSymbol: #Float64) value.
 	thisContextType  := (compilerEnvironment lookSymbol: #_ThisContext) value.
 	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
 

@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "LowtalkPrimitiveType",
+	"super" : "LowtalkNumberType",
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],

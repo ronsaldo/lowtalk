@@ -41,7 +41,8 @@
 		"capturedCompileTimeVariables",
 		"characterLiteralType",
 		"lazySelectors",
-		"profilingInterpreter"
+		"profilingInterpreter",
+		"doubleType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"
