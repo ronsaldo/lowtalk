@@ -193,6 +193,19 @@ Number category: 'testing' methods: {
     ^ true
 ].
 
+:[isInfinite
+
+	^ false
+].
+
+:[isNaN
+	^ false
+].
+
+:[isZero
+	^self = 0
+].
+
 }.
 
 "Float"
@@ -207,10 +220,21 @@ Float category: 'testing' methods: {
 }.
 
 "Integer"
+Number category: 'converting' methods: {
+:[asInteger
+    ^ self truncated
+]
+}.
+
 Integer category: 'converting' methods: {
 :[asInteger
     ^ self
-]
+].
+
+:[truncated
+	"Nothing required"
+].
+
 }.
 
 Integer category: 'testing' methods: {
@@ -387,6 +411,25 @@ SmallInteger category: 'printing' methods: {
 		aStream nextPut: (char reinterpretCastTo: _DynamicObject)
 	]
 	
+].
+
+}.
+
+"Float conversion"
+Number category: 'converting' methods: {
+:[asFloat
+	self subclassResponsibility
+].
+}.
+
+Float category: 'converting' methods: {
+:[asFloat
+	^ self
+].
+
+:[truncated
+	let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+	^ this castTo: IntPointer
 ].
 
 }.

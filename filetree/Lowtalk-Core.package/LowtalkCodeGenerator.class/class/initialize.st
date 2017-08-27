@@ -71,12 +71,12 @@ initialize
 		'float /' fdiv
 		'float \\'frem
 
-		'float =' ofeq
-		'float ~=' ofne
-		'float <' oflt
-		'float <=' ofle
-		'float >' ofgt
-		'float >='ofge
+		'float =' ufeq
+		'float ~=' ufne
+		'float <' uflt
+		'float <=' ufle
+		'float >' ufgt
+		'float >=' ufge
 	).
 	
 	MessageConditionTypes := Dictionary newFromPairs: #(

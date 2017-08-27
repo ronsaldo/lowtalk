@@ -9,10 +9,10 @@ Object subclass: #MainClass
     
 MainClass category: 'application' methods: {
 :[initialize
-    x := 0.
-    y := 0.
-    vx := 0.
-    vy := 0.
+    x := 0.0.
+    y := 0.0.
+    vx := 0.0.
+    vy := 0.0.
 ].
 
 :[onKeyDown: key
@@ -21,19 +21,19 @@ MainClass category: 'application' methods: {
         ^ self
     ].
     key = SDL2 SDLK_a ifTrue: [
-        vx := -1.
+        vx := -1.0.
         ^ self
     ].
     key = SDL2 SDLK_d ifTrue: [
-        vx := 1.
+        vx := 1.0.
         ^ self
     ].
     key = SDL2 SDLK_w ifTrue: [
-        vy := 1.
+        vy := 1.0.
         ^ self
     ].
     key = SDL2 SDLK_s ifTrue: [
-        vy := -1.
+        vy := -1.0.
         ^ self
     ].
 
@@ -43,19 +43,19 @@ MainClass category: 'application' methods: {
 
 :[onKeyUp: key
     key = SDL2 SDLK_a ifTrue: [
-        vx < 0 ifTrue: [vx := 0].
+        vx < 0.0 ifTrue: [vx := 0.0].
         ^ self
     ].
     key = SDL2 SDLK_d ifTrue: [
-        vx > 0 ifTrue: [vx := 0].
+        vx > 0.0 ifTrue: [vx := 0.0].
         ^ self
     ].
     key = SDL2 SDLK_w ifTrue: [
-        vy > 0 ifTrue: [vy := 0].
+        vy > 0.0 ifTrue: [vy := 0.0].
         ^ self
     ].
     key = SDL2 SDLK_s ifTrue: [
-        vy < 0 ifTrue: [vy := 0].
+        vy < 0.0 ifTrue: [vy := 0].
         ^ self
     ].
 
@@ -88,8 +88,8 @@ MainClass category: 'application' methods: {
     
     let rect<SDL2 SDL_Rect>.
     rect
-        x: (x castTo: Int32) + (640/2);
-        y: (480/2) - (y castTo: Int32);
+        x: (x asInteger castTo: Int32) + (640/2);
+        y: (480/2) - (y asInteger castTo: Int32);
         w: 32;
         h: 32.
     SDL2 SDL_SetRenderDrawColor #{renderer . 255 . 0 . 0 . 255}.
