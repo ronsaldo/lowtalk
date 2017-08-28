@@ -20,6 +20,7 @@
 		"irCoerceImplicitlyTo:with:at:" : "RonieSalgado 7/24/2017 05:50",
 		"arithmeticCoerceWithBoolean:" : "RonieSalgado 7/10/2017 23:42",
 		"arithmeticCoerceWithBooleanLiteral:" : "RonieSalgado 7/23/2017 17:00",
+		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 8/28/2017 19:23",
 		"arithmeticCoerceWithSymbolLiteral:" : "RonieSalgado 7/12/2017 22:18"
 	},
 	"class" : { }

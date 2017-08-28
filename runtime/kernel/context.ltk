@@ -31,6 +31,8 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
     <localReturn>
     <cdecl>
     let marriedContextPointer := (framePointer atOffset: ContextMarriedContextPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
+    "LibC printf #{c'fp %p marryThisContext %p\n' . framePointer . marriedContextPointer}."
+
     let previousContext := marriedContextPointer value.
     previousContext ifNotNil: [
         LibC printf #{c'Previous context %p\n' . previousContext}.
@@ -82,12 +84,12 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
         method: methodPointer value.
 
     "Get pointers to the beginning of the data"
-    let dataStart := ObjectModel getFirstFixedFieldPointer #{contextObject} reinterpretCastTo: UInt32 pointer.
+    let dataStart := ObjectModel getFirstFixedFieldPointer #{contextObject} reinterpretCastTo: UIntPointer pointer.
     let oopDataStart := (dataStart atOffset: contextFixedFields) address.
     let nativeDataStart := (dataStart atOffset: oopCount) address reinterpretCastTo: UInt8 pointer .
 
     "Get the argument data pointers"
-    let argumentsOopStart := (framePointer atOffset: argumentsStartOffset) address reinterpretCastTo: UInt32 pointer.
+    let argumentsOopStart := (framePointer atOffset: argumentsStartOffset) address reinterpretCastTo: UIntPointer pointer.
     let argumentsNativeStart := (argumentsOopStart atOffset: oopArgumentCount) address reinterpretCastTo: UInt8 pointer.
 
     "Copy the arguments"
@@ -113,6 +115,8 @@ Constant named: #widowThisContext value: [<Void> :framePointer<UInt8 pointer> |
     <localReturn>
     <cdecl>
     let marriedContextPointer := (framePointer atOffset: ContextMarriedContextPointerOffset) address reinterpretCastTo: ContextHeader pointer pointer.
+    "LibC printf #{c'fp %p marriedContextPointer %p\n' . framePointer . marriedContextPointer}."
+
     let marriedContext := marriedContextPointer value.
 
     marriedContext ifNil: [ ^ nil ].

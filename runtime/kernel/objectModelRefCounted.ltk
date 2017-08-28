@@ -260,6 +260,7 @@ Namespace named: #ObjectModel members: [
         <cdecl>
         <localReturn>
         "Call the object finalizer"
+        "LibC printf #{c'invokeObjectFinalize [%p]%p\n' . object value classPointer . object}."
         invokeObjectFinalize #{object}.
 
         "Decrease the finalized count again to remove the artificial reference.
@@ -279,15 +280,21 @@ Namespace named: #ObjectModel members: [
                 oopSlotCount := object value slotCount & 16rFFFF.
             ]
         ].
+        oopSlotCount > 16rFFFF ifTrue: [
+            (nil castTo: UIntPointer pointer) value := 0.
+            nil
+        ].
 
-        "LibC printf #{c'destroyObject %p with format %d and %d slots\n' . object . format . oopSlotCount}."
+        "LibC printf #{c'destroyObject [%p]%p with format %d and %p slots\n' . object value classPointer . object . format . oopSlotCount}."
 
         let slots := (object atOffset: 1) address reinterpretCastTo: ObjectHeader pointer pointer.
         1 to: oopSlotCount do: [:i |
             let slot := slots at: i.
+            "LibC printf #{c'slot %d:%d [%p]%p\n' . i . oopSlotCount . (slots at: i) address. slot}."
             releaseSlotReference #{slot}.
-            "LibC printf #{c'slot %p\n' . slot}."
         ].
+        "LibC printf #{c'destroyObject [%p]%p done.\n' . object value classPointer . object}."
+
     ].
 
     Constant named: #writeBarrier value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |

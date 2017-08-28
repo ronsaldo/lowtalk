@@ -28,12 +28,11 @@ generateFunction: ssaFunction value: functionValue
 	method arguments doWithIndex: [ :arg :index |
 		| ssaArgument |
 		ssaArgument := ssaFunction arguments at: index + startArgument.
-		ssaArgument name: arg name.
-		arg ssaValue: ssaArgument.
+		self setupArgument: arg withValue: ssaArgument.
 	].
 
 	method temporaries do: [ :temp |
-		temp ssaValue: (allocaBuilder alloca: temp valueType ssaType name: temp name).
+		self allocateTemporary: temp
 	].
 
 	self flag: 'TODO: Initialize the temporary variables with 0 or nil.'.
