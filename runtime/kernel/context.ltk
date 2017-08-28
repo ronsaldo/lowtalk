@@ -152,25 +152,25 @@ Constant named: #cleanFrameForUnwinding value: [<Void> :framePointer<UIntPointer
     let stackDescriptor := stackDescriptorPointer value.
 
     "LibC printf #{c'Compiled method %p primitive: %p argument descriptor: %p stack descriptor: %p\n' . compiledMethod . primitive . argumentDescriptor . stackDescriptor}."
-    
+
     let registersToPreserve := (stackDescriptor >> 12) & 15.
     let oopLocals := stackDescriptor & 4095.
 
     "LibC printf #{c'Registers %p ooplocals %p \n' . registersToPreserve . oopLocals}."
-    
+
     primitive == EnsurePrimitiveNumber ifTrue: [
         "ensure:/ifCurtailed:"
         LibC printf #{c'TODO: Process #ensure:/#ifCurtailed:\n'}.
     ].
-    
+
     widowThisContext #{framePointer reinterpretCastTo: UInt8 pointer}.
-    
+
     let localsBase := framePointer - ((ContextStackMetadataElementCount + registersToPreserve) * SignedPointerSize).
     1 to: oopLocals do: [:i |
         let localPointer := localsBase - (i*SignedPointerSize) reinterpretCastTo: ObjectHeader pointer pointer.
         let localValue := localPointer value.
-        "LibC printf #{c'Local %p at %p: %p\n' . i .localPointer . localValue}."
-        
+        "LibC printf #{c'Frame %p Local %p at %p: %p\n' . framePointer . i .localPointer . localValue}."
+
         releaseReference #{localValue}.
         localPointer value := nil.
     ].
@@ -199,12 +199,15 @@ Constant named: #nonLocalReturn value: [<Void> :targetContext<ContextHeader poin
         cleanFrameForUnwinding #{unwindPosition}.
         unwindPosition := (unwindPosition reinterpretCastTo: UIntPointer pointer) value
     ].
-    
-    "LibC printf #{c'Non-local return to %p from %p\n' . targetFramePointer . currentFramePointer}."
 
     "Return from here"
     let targetMethod := targetContext value method reinterpretCastTo: _CompiledMethod pointer.
     let targetMethodExitPoint := targetMethod value exitPoint - 1 reinterpretCastTo: Void pointer.
+
+    "Clean the target method. This can destroy the target context."
+    cleanFrameForUnwinding #{unwindPosition}.
+
+    "LibC printf #{c'Non-local return to %p from %p\n' . targetFramePointer . currentFramePointer}."
 
     "LibC printf #{c'Target exit point %p\n' . targetMethodExitPoint}."
     thisContext uncheckedReturnFromFrame: (targetFramePointer reinterpretCastTo: Void pointer) value: returnValue exitPoint: targetMethodExitPoint.

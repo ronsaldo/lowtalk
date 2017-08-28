@@ -1,6 +1,6 @@
 "This is the definition of a reference refCounted object model."
 Namespace named: #ObjectModel members: [
-    Constant named: #DebugReferenceCounting type: BooleanBit value: true.
+    Constant named: #DebugReferenceCounting type: BooleanBit value: false.
 
     Constant named: #OopSize type: UIntPointer value: UIntPointer size.
 
@@ -124,7 +124,7 @@ Namespace named: #ObjectModel members: [
             <cdecl>
             0.0
         ].
-        
+
         Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
             <cdecl>
             0
@@ -135,18 +135,18 @@ Namespace named: #ObjectModel members: [
             <cdecl>
             (oop & OopSmallFloatTagMask) = OopSmallFloatTagValue
         ].
-        
+
         Constant named: #decodeSmallFloat value: [<Float64> :oop<UIntPointer> |
             <cdecl>
             0.0
         ].
-        
+
         Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
             <cdecl>
             0
         ].
     ].
-    
+
     Constant named: #isCharacter value: [<BooleanBit> :oop<UIntPointer> |
         <cdecl>
         (oop & OopCharacterTagMask) = OopCharacterTagValue
@@ -243,13 +243,31 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #releaseSlotReference value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
+        <localReturn>
         "LibC printf #{c'slot %p\n' . object}."
         releaseReference #{object}.
     ].
-    
+
+    Constant named: #invokeObjectFinalize value: [<Void> :object<ObjectHeader pointer> |
+        <cdecl>
+        <localReturn>
+        object value refCount := 1.
+        let dynObject := object reinterpretCastTo: _DynamicObject.
+        dynObject finalize.
+    ].
+
     Constant named: #finalizeObject value: [<Void> :object<ObjectHeader pointer> |
         <cdecl>
-        "TODO: Call the object finalizer"
+        <localReturn>
+        "Call the object finalizer"
+        invokeObjectFinalize #{object}.
+
+        "Decrease the finalized count again to remove the artificial reference.
+        If the new count is greater than 1, then we have a zombie that is still alive ;)."
+        let finalizedCount := object value refCount address fetchAndAdd: -1.
+        finalizedCount > 1 ifTrue: [
+            ^ nil
+        ].
 
         "Release the references of the objects"
         let format := object value format.

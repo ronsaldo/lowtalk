@@ -2,8 +2,8 @@ Object subclass: #Thread
     instanceVariableNames: 'handle entryPoint result'
     classVariableNames: ''
     package: 'Kernel-Thread'.
-    
-"Normal non-recursive mutex"    
+
+"Normal non-recursive mutex"
 Object variableByteSubclass: #UniqueLock
     instanceVariableNames: ''
     classVariableNames: ''
@@ -33,17 +33,19 @@ Namespace named: #ObjectModel members: [
     Constant named: #threadEntryPoint value: [<Void pointer> :threadObject<Void pointer> |
         <localReturn>
         <cdecl>
-        
+
         "Execute the entry point"
         let threadDynObject := threadObject reinterpretCastTo: _DynamicObject.
         threadDynObject executeEntryPoint.
+
+        releaseReference #{threadObject reinterpretCastTo: ObjectHeader pointer}.
         ^ nil
     ]
 ].
 
 Thread class category: 'construction' methods: {
 :[entryPoint: anEntryPoint
-    ^ self new entryPoint: anEntryPoint 
+    ^ self new entryPoint: anEntryPoint
 ]
 }.
 
@@ -70,7 +72,7 @@ Thread category: 'scheduling' methods: {
     handle ifNotNil: [
         self error: 'Cannot re-run a thread that has not finished.'
     ].
-    
+
     handle := ByteArray new: Unix pthread_t size.
     let threadObject := self reinterpretCastTo: ObjectModel ObjectHeader pointer.
     ObjectModel increaseReference #{threadObject}.
@@ -81,11 +83,11 @@ Thread category: 'scheduling' methods: {
     handle ifNil: [
         self error: 'Joining a destroyed thread.'
     ].
-    
+
     let handlePointer := handle firstFixedFieldPointerOfType: Unix pthread_t pointer.
     let ignoredResult<Void pointer>.
     Unix pthread_join #{handlePointer value . ignoredResult address}.
-    
+
     ^ result
 ].
 
@@ -147,7 +149,7 @@ UniqueLock category: 'mutual exclusion' methods: {
 
 :[unlock
     let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-    
+
     Unix pthread_mutex_unlock #{this}.
 ].
 
@@ -160,10 +162,10 @@ Mutex category: 'initialization' methods: {
     let attr<Unix pthread_mutexattr_t>.
     Unix pthread_mutexattr_init #{attr address}.
     Unix pthread_mutexattr_settype #{attr address . Unix PTHREAD_MUTEX_RECURSIVE}.
-    
+
     let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
     Unix pthread_mutex_init #{this . attr address}.
-    
+
     Unix pthread_mutexattr_destroy #{attr address}.
 ].
 
@@ -193,7 +195,7 @@ ConditionVariable category: 'condition variable' methods: {
     anUniqueLockOrMutex isPThreadMutex ifFalse: [
         self error: 'Expected an UniqueLock or a Mutex'
     ].
-    
+
     let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
     let mutex := anUniqueLockOrMutex firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
 ].
@@ -271,7 +273,7 @@ Semaphore category: 'communication' methods: {
     [this value signalCount == 0] whileTrue: [
         Unix pthread_cond_wait #{this value condition address . this value mutex address}
     ].
-    
+
     this value signalCount := this value signalCount - 1.
     Unix pthread_mutex_unlock #{this value mutex address}.
 ].
