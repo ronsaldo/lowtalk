@@ -8,7 +8,8 @@
 		"BinaryOperationMap",
 		"BlockMessages",
 		"InlinedThisContextMessages",
-		"MessageConditionTypes"
+		"MessageConditionTypes",
+		"PerformSelectors"
 	],
 	"instvars" : [
 		"compiler",

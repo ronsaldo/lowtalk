@@ -2,6 +2,25 @@ initialization
 initialize
 	super initialize.
 	
+	PerformSelectors := Set newFrom: #(
+		#perform:
+		#perform:with:
+		#perform:with:with:
+		#perform:with:with:with:
+		#perform:with:with:with:with:
+		#perform:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:with:with:with:with:
+		#perform:with:with:with:with:with:with:with:with:with:with:with:with:with:with:with:
+	).
+	
 	BinaryOperationMap := Dictionary newFromPairs: #(
 		'uint +' add
 		'uint -' sub

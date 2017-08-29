@@ -46,3 +46,126 @@ Object category: 'printing' methods: {
 ].
 
 }.
+
+"The perform methods are implemented in the compiler, except for #perform:withArguments:"
+Object category: 'message performing' methods: {
+:[perform: aSymbol withArguments: anArray
+    let argCount := anArray size castTo: IntPointer.
+    (argCount < 0 or: [argCount > 15]) ifTrue: [
+        self error: 'Cannot perform message with argument count of ' , anArray size printString
+    ].
+
+    "Binary search."
+    argCount <= 7 ifTrue: [
+        argCount <= 3 ifTrue: [
+            argCount <= 1 ifTrue: [
+                argCount <= 0 ifTrue: [
+                    ^ self perform: aSymbol
+                ] ifFalse: [ "> 0"
+                    ^ self perform: aSymbol with: (anArray at: 1)
+                ].
+            ] ifFalse: [ "> 1"
+                argCount <= 2 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2)
+                ] ifFalse: [ "> 2"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3)
+                ].
+            ].
+        ] ifFalse: [ "> 3"
+            argCount <= 5 ifTrue: [
+                argCount <= 4 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4)
+                ] ifFalse: [ "> 4"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5)
+                ].
+            ] ifFalse: [ "> 5"
+                argCount <= 6 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6)
+                ] ifFalse: [ "> 6"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7)
+                ].
+            ].
+        ].
+    ] ifFalse: [ "> 7"
+        argCount <= 11 ifTrue: [
+            argCount <= 9 ifTrue: [
+                argCount <= 8 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8)
+                ] ifFalse: [ "> 8"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9)
+                ].
+            ] ifFalse: [ "> 9"
+                argCount <= 10 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10)
+                ] ifFalse: [ "> 10"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10) with: (anArray at: 11)
+                ].
+            ].
+        ] ifFalse: [ "> 11"
+            argCount <= 13 ifTrue: [
+                argCount <= 12 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10) with: (anArray at: 11) with: (anArray at: 12)
+                ] ifFalse: [ "> 12"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10) with: (anArray at: 11) with: (anArray at: 12) with: (anArray at: 13)
+                ].
+            ] ifFalse: [ "> 13"
+                argCount <= 14 ifTrue: [
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10) with: (anArray at: 11) with: (anArray at: 12) with: (anArray at: 13) with: (anArray at: 14)
+                ] ifFalse: [ "> 14"
+                    ^ self perform: aSymbol with: (anArray at: 1) with: (anArray at: 2) with: (anArray at: 3) with: (anArray at: 4) with: (anArray at: 5) with: (anArray at: 6) with: (anArray at: 7) with: (anArray at: 8) with: (anArray at: 9) with: (anArray at: 10) with: (anArray at: 11) with: (anArray at: 12) with: (anArray at: 13) with: (anArray at: 14) with: (anArray at: 15)
+                ].
+            ].
+        ].
+    ].
+].
+
+:[perform: aSymbol
+	^ self perform: aSymbol
+].
+:[perform: aSymbol with: arg1
+	^ self perform: aSymbol with: arg1
+].
+:[perform: aSymbol with: arg1 with: arg2
+	^ self perform: aSymbol with: arg1 with: arg2
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13 with: arg14
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13 with: arg14
+].
+:[perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13 with: arg14 with: arg15
+	^ self perform: aSymbol with: arg1 with: arg2 with: arg3 with: arg4 with: arg5 with: arg6 with: arg7 with: arg8 with: arg9 with: arg10 with: arg11 with: arg12 with: arg13 with: arg14 with: arg15
+].
+
+}.

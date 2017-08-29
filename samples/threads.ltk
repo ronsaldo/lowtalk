@@ -3,9 +3,9 @@ Constant named: #Main value: [<Int32> |
 
     let out := FileStream stdout.
     out << 'Starting thread'; lf.
-    
+
     let lock := UniqueLock new.
-    
+
     let threads := (1 to: 10) collect: [:i |
         [
             1 to: 100 do: [:j |
@@ -15,13 +15,13 @@ Constant named: #Main value: [<Int32> |
             ]
         ] runInThread
     ].
-    
+
     lock critical: [
         out << 'Waiting for threads to finish join'; lf.
     ].
-    threads do: [:thread | thread join].
+    threads do: #join.
     out << 'Finished'; lf.
-    
+
     ^ 0
 ].
 

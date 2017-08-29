@@ -6,6 +6,11 @@ generateNormalMessage: message receiver: receiver receiverType: receiverType inS
 		self coerceImplicitly: (self visitNode: arg) type: arg type to: compiler objectType at: message
 	].
 
-	instruction := builder send: (builder addDynamicLiteral: message selector) returnType: message type ssaType receiver: receiverValue arguments: arguments.
+	((PerformSelectors includes: message selector) and: [arguments first type isDynamicObjectType]) ifTrue: [
+		instruction := builder send: arguments first returnType: message type ssaType receiver: receiverValue arguments: arguments allButFirst.
+	] ifFalse: [ 
+		instruction := builder send: (builder addDynamicLiteral: message selector) returnType: message type ssaType receiver: receiverValue arguments: arguments.
+	].
+
 	inSuperClass ifTrue: [ instruction setSuperSend ].
 	^ instruction
