@@ -1,6 +1,6 @@
 messages
 generateIfSelectionMessage: message receiver: receiver receiverType: receiverType
-	| value condition valueType trueBlock mergeBlock falseBlock branch trueResult falseResult coercionType selectionBlock result |
+	| value condition valueType trueBlock mergeBlock falseBlock branch trueResult falseResult coercionType selectionBlock result jumpFromTrue jumpFromFalse |
 	coercionType := message type.
 	
 	value := receiver.
@@ -20,7 +20,11 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 	"Create the basic blocks that are required"
 	trueBlock := builder newBasicBlock: #ifConditionTrue.
 	mergeBlock := builder newBasicBlock: #ifMerge.
-	falseBlock := message arguments size = 2 ifTrue: [ builder newBasicBlock: #ifConditionFalse ] ifFalse: [ mergeBlock ].
+	jumpFromFalse := false.
+	falseBlock := message arguments size = 2 ifTrue: [ builder newBasicBlock: #ifConditionFalse ] ifFalse: [
+			jumpFromFalse := true.
+			mergeBlock
+	].
 	
 	"Perform the branch"
 	branch := builder branch: condition ifTrue: trueBlock ifFalse: falseBlock.
@@ -35,6 +39,7 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 		trueResult := self inlineBlock: message arguments first arguments: #() types: #()
 	].
 
+	jumpFromTrue := false.
 	builder isLastTerminator ifTrue: [ 
 		trueResult := nil.
 		trueBlock := nil.
@@ -44,7 +49,8 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 		].
 
 		trueBlock := builder currentBlock.
-		builder jump: mergeBlock
+		builder jump: mergeBlock.
+		jumpFromTrue := true.
 	].
 
 	"Generate the false block"
@@ -61,12 +67,26 @@ generateIfSelectionMessage: message receiver: receiver receiverType: receiverTyp
 		].
 
 		falseBlock := builder currentBlock.
-		builder isLastTerminator ifFalse: [ builder jump: mergeBlock ].
+		builder isLastTerminator ifFalse: [
+			builder jump: mergeBlock.
+			jumpFromFalse := true.
+		].
 	].
 	
 	mergeBlock predecessors ifEmpty: [
+		builder currentBlock: mergeBlock.
+		builder unreachable.
 		^ branch addUnreachableSuccessors.
-	] ifNotEmpty: [ 
+	] ifNotEmpty: [
+		mergeBlock predecessors size = 1 ifTrue: [
+			jumpFromTrue ifTrue: [
+				branch mergeBlock: trueBlock.
+			] ifFalse: [
+				self assert: jumpFromFalse.
+				branch mergeBlock: falseBlock.
+			]
+		].
+	
 		builder currentBlock: mergeBlock.
 	].
 

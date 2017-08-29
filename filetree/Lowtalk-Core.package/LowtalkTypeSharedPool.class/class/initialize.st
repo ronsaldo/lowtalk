@@ -27,6 +27,8 @@ initialize
 		bitShift: SignedDirectionBitShift
 		>> BinaryBitwise
 		<< BinaryBitwise
+		bitRotateLeft: BinaryBitwise
+		bitRotateRight: BinaryBitwise
 		
 		bitInvert UnaryLogicalBitwise
 		bitInvert32 UnaryLogicalBitwise

@@ -41,6 +41,10 @@ Namespace named: #ObjectModel members: [
         Constant named: #OopSizeShift type: UIntPointer value: 3.
         Constant named: #OopSizeMask type: UIntPointer value: -8.
 
+        Constant named: #SmallFloatExponentOffset type: UIntPointer value: 896. "1023 - 127"
+        Constant named: #SmallFloatExponentMin type: UIntPointer value: SmallFloatExponentOffset. "1023 - 127"
+        Constant named: #SmallFloatExponentMax type: UIntPointer value: 1151. "1023 + 128"
+
         Compiler objectModel
             smallIntegerTagMask: OopSmallIntegerTagMask;
             smallIntegerTag: OopSmallIntegerTagValue;
@@ -95,70 +99,101 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #isNonImmediateObject value: [<BooleanBit> :object<ObjectHeader pointer> |
         <cdecl>
+        <inline: #always>
         let oop := object reinterpretCastTo: UIntPointer.
         (oop & OopPointerTagMask) = OopPointerTagValue and: [object ~~ nil]
     ].
 
     Constant named: #isSmallInteger value: [<BooleanBit> :oop<UIntPointer> |
         <cdecl>
+        <inline: #always>
         (oop & OopSmallIntegerTagMask) = OopSmallIntegerTagValue
     ].
 
     Constant named: #decodeSmallInteger value: [<IntPointer> :oop<UIntPointer> |
         <cdecl>
+        <inline: #always>
         (oop reinterpretCastTo: IntPointer) >> OopSmallIntegerShift
     ].
 
     Constant named: #encodeSmallInteger value: [<UIntPointer> :value<IntPointer> |
         <cdecl>
+        <inline: #always>
         ((value << OopSmallIntegerShift) | OopSmallIntegerTagValue) reinterpretCastTo: UIntPointer
     ].
 
     OopSize = 4 ifTrue: [
         Constant named: #isSmallFloat value: [<BooleanBit> :oop<UIntPointer> |
             <cdecl>
+            <inline: #always>
             false
         ].
 
         Constant named: #decodeSmallFloat value: [<Float64> :oop<UIntPointer> |
             <cdecl>
+            <inline: #always>
             0.0
         ].
 
         Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
             <cdecl>
+            <inline: #always>
             0
+        ].
+
+        Constant named: #canBeSmallFloat value: [<BooleanBit> :value<Float64> |
+            <cdecl>
+            <inline: #always>
+            false
         ].
     ] ifFalse: [
         "TODO: Implement this case"
         Constant named: #isSmallFloat value: [<BooleanBit> :oop<UIntPointer> |
             <cdecl>
+            <inline: #always>
             (oop & OopSmallFloatTagMask) = OopSmallFloatTagValue
         ].
 
         Constant named: #decodeSmallFloat value: [<Float64> :oop<UIntPointer> |
             <cdecl>
-            0.0
+            <inline: #always>
+            let decoded := (oop >> OopSmallFloatShift) + (SmallFloatExponentOffset << 53) bitRotateRight: 1.
+            let result := decoded reinterpretCastTo: Float64.
+            result
+        ].
+
+        Constant named: #canBeSmallFloat value: [<BooleanBit> :value<Float64> |
+            <cdecl>
+            <inline: #always>
+            let bits := value reinterpretCastTo: UInt64.
+            let exponent := (bits >> 52) & 16r7ff.
+            SmallFloatExponentMin <= exponent and: [exponent <= SmallFloatExponentMax]
         ].
 
         Constant named: #encodeSmallFloat value: [<UIntPointer> :value<Float64> |
             <cdecl>
-            0
+            <inline: #always>
+            let bits := value reinterpretCastTo: UInt64.
+            let encoded := ((bits bitRotateLeft: 1) - (SmallFloatExponentOffset << 53) << OopSmallFloatShift) | OopSmallFloatTagValue.
+            encoded
         ].
     ].
 
     Constant named: #isCharacter value: [<BooleanBit> :oop<UIntPointer> |
         <cdecl>
+        <inline: #always>
         (oop & OopCharacterTagMask) = OopCharacterTagValue
     ].
 
     Constant named: #decodeCharacter value: [<UIntPointer> :oop<UIntPointer> |
         <cdecl>
+        <inline: #always>
         (oop reinterpretCastTo: IntPointer) >> OopCharacterShift
     ].
 
     Constant named: #encodeCharacter value: [<UIntPointer> :value<UIntPointer> |
         <cdecl>
+        <inline: #always>
         (value << OopCharacterShift) | OopCharacterTagValue
     ].
 
@@ -299,22 +334,26 @@ Namespace named: #ObjectModel members: [
 
     Constant named: #writeBarrier value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |
         <cdecl>
+        <inline: #always>
         increaseReference #{value}.
         releaseReference #{variable swapValue: value}.
     ].
 
     Constant named: #writeBarrierNoIncrement value: [<Void> :value<ObjectHeader pointer> :variable<ObjectHeader pointer pointer> |
         <cdecl>
+        <inline: #always>
         releaseReference #{variable swapValue: value}.
     ].
 
     Constant named: #getPointersBasicSize value: [<UIntPointer> :object<ObjectHeader pointer> |
         <cdecl>
+        <inline: #always>
         object value slotCount
     ].
 
     Constant named: #getIdentityHash value: [<UIntPointer> :object<ObjectHeader pointer> |
         <cdecl>
+        <inline: #always>
         object value identityHash
     ].
 

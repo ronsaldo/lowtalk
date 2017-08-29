@@ -2,7 +2,7 @@
 	"instance" : {
 		"defaultValue" : "RonieSalgado 5/18/2017 20:37",
 		"convertLiteralValue:fromType:at:" : "RonieSalgado 5/18/2017 21:46",
-		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 8/26/2017 02:56",
+		"ssaCoerceCVariadic:with:at:" : "RonieSalgado 8/29/2017 20:53",
 		"arithmeticCoerceWithFloat:" : "RonieSalgado 5/20/2017 21:41",
 		"arithmeticCoerceWithIntegerLiteral:" : "RonieSalgado 5/9/2017 00:02",
 		"canBeExplicitlyConvertedTo:" : "RonieSalgado 5/21/2017 19:15",
@@ -12,9 +12,10 @@
 		"ssaCoerce:implicitlyTo:with:at:" : "RonieSalgado 8/26/2017 18:31",
 		"ssaConvert:explicitlyTo:with:at:" : "RonieSalgado 8/26/2017 18:30",
 		"irConvertExplicitlyTo:with:at:" : "RonieSalgado 7/24/2017 21:38",
-		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/7/2017 22:55",
+		"canBeReinterpretedTo:" : "RonieSalgado 8/29/2017 21:35",
 		"arithmeticCoerceWithInteger:" : "RonieSalgado 5/20/2017 21:41",
 		"defaultSSAValueWith:" : "RonieSalgado 5/20/2017 21:56",
+		"dispatchArithmeticCoerceWith:" : "RonieSalgado 5/7/2017 22:55",
 		"operationSignature" : "RonieSalgado 5/7/2017 23:31"
 	},
 	"class" : { }

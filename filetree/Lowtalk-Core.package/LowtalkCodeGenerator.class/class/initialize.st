@@ -52,6 +52,8 @@ initialize
 		'uint bitXor:' bitxor
 		'uint <<' shiftleft
 		'uint >>' shiftright
+		'uint bitRotateLeft:' rotateleft
+		'uint bitRotateRight:' rotateright
 
 		'int &' bitand
 		'int bitAnd:' bitand
@@ -61,6 +63,8 @@ initialize
 		'int bitXor:' bitxor
 		'int <<' shiftleft
 		'int >>' shiftrightarithmetic
+		'int bitRotateLeft:' rotateleft
+		'int bitRotateRight:' rotateright
 		
 		'object ==' dynObjectIdentityEquals
 		'object ~~' dynObjectIdentityNotEquals

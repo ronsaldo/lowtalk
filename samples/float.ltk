@@ -3,6 +3,7 @@ Constant named: #testFloat value: [<Void> |
     <localReturn>
     let a<Float32> := 1.0.
     let b<Float32> := 2.0.
+    LibC printf #{c'a %f b %f\n' . a . b}.
     LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f negated %f\n' . a + b . a - b . a*b . a/b . b sqrt . a negated}.
     ^ nil
 ].
@@ -11,6 +12,7 @@ Constant named: #testDouble value: [<Void> |
     <localReturn>
     let a<Float64> := 1.0.
     let b<Float64> := 2.0.
+    LibC printf #{c'a %f b %f\n' . a . b}.
     LibC printf #{c'float: + %f - %f * %f / %f sqrt(b) %f negated %f\n' . a + b . a - b . a*b . a/b . b sqrt . a negated}.
     ^ nil
 ].

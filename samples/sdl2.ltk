@@ -6,7 +6,7 @@ Object subclass: #MainClass
 	instanceVariableNames: 'x y vx vy'
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
-    
+
 MainClass category: 'application' methods: {
 :[initialize
     x := 0.0.
@@ -38,7 +38,7 @@ MainClass category: 'application' methods: {
     ].
 
     FileStream stdout << 'onKeyDown '; print: key; lf.
-    
+
 ].
 
 :[onKeyUp: key
@@ -85,7 +85,7 @@ MainClass category: 'application' methods: {
 :[render
     SDL2 SDL_SetRenderDrawColor #{renderer . 0 . 0 . 255 . 255}.
     SDL2 SDL_RenderClear #{renderer}.
-    
+
     let rect<SDL2 SDL_Rect>.
     rect
         x: (x asInteger castTo: Int32) + (640/2);
@@ -94,7 +94,7 @@ MainClass category: 'application' methods: {
         h: 32.
     SDL2 SDL_SetRenderDrawColor #{renderer . 255 . 0 . 0 . 255}.
     SDL2 SDL_RenderFillRect #{renderer . rect address}.
-    
+
     SDL2 SDL_RenderPresent #{renderer}.
 ].
 
@@ -103,14 +103,14 @@ MainClass category: 'application' methods: {
     window := SDL2 SDL_CreateWindow #{c'Lowtalk SDL2 Demo' .
         SDL2 SDL_WINDOWPOS_CENTERED . SDL2 SDL_WINDOWPOS_CENTERED.
         640 . 480 . SDL2 SDL_WINDOW_SHOWN | SDL2 SDL_WINDOW_RESIZABLE}.
-        
+
     renderer := SDL2 SDL_CreateRenderer #{window . 0 . 0}.
 
     [quitting] whileFalse: [
         self processEvents;
             update;
             render.
-        
+
         SDL2 SDL_Delay #{10}
     ].
 

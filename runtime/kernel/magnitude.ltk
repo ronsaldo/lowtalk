@@ -2,12 +2,12 @@
 Namespace named: #ObjectModel members: [
 	"We put this to avoid context metadata in some of the casting functions"
 	let BoxedFloat64Class := BoxedFloat64.
-	
+
 	Structure named: #BoxedFloat64Structure slots: {
 		#header => ObjectHeader.
 		#data => Float64
 	}.
-	
+
 	Constant named: #tryCastToFloat64 value: [<BooleanBit> :oop<ObjectHeader pointer> :result<Float64 pointer> |
 		<cdecl>
 		<localReturn>
@@ -19,14 +19,14 @@ Namespace named: #ObjectModel members: [
 			result value := decodeSmallInteger #{oop reinterpretCastTo: UIntPointer}.
 			^ true.
 		].
-		
+
 		let class := getObjectClass #{oop}.
 		class == (BoxedFloat64Class reinterpretCastTo: ObjectHeader pointer) ifTrue: [
 			let box := oop reinterpretCastTo: BoxedFloat64Structure pointer.
 			result value := box value data.
 			^ true
 		].
-		
+
 		^ false
 	].
 
@@ -41,10 +41,15 @@ Namespace named: #ObjectModel members: [
 	].
 
 	Constant named: #floatToObject value: [<ObjectHeader pointer> :value<Float64> |
-		let result := basicNewBytes #{BoxedFloat64Class reinterpretCastTo: ObjectHeader pointer . 8}.
-		let box := result reinterpretCastTo: BoxedFloat64Structure pointer.
-		box value data := value.
-		result
+		<cdecl>
+        canBeSmallFloat #{value} ifTrue: [
+            encodeSmallFloat #{value} reinterpretCastTo: ObjectHeader pointer
+        ] ifFalse: [
+            let result := basicNewBytes #{BoxedFloat64Class reinterpretCastTo: ObjectHeader pointer . 8}.
+    		let box := result reinterpretCastTo: BoxedFloat64Structure pointer.
+    		box value data := value.
+    		result
+        ]
 	].
 
 	Constant named: #objectToFloat value: [<Float64> :oop<ObjectHeader pointer> |
@@ -55,12 +60,12 @@ Namespace named: #ObjectModel members: [
 			class == (BoxedFloat64Class reinterpretCastTo: ObjectHeader pointer) ifFalse: [
 				InvalidObjectToFloatCast new signal.
 			].
-			
+
 			let box := oop reinterpretCastTo: BoxedFloat64Structure pointer.
 			box value data
 		].
 	].
-	
+
 	Compiler objectModel
 		floatToObjectFunction: floatToObject;
 		yourself
@@ -401,16 +406,16 @@ SmallInteger category: 'bit manipulation' methods: {
 SmallInteger category: 'printing' methods: {
 :[printOn: aStream
 	let buffer<LibC CChar array:64>.
-	
+
 	let value := ObjectModel decodeSmallInteger #{self reinterpretCastTo: UIntPointer}.
 	LibC sprintf #{buffer. '%ld' . value}.
 	let size := LibC strlen #{ buffer }.
-	
+
 	1 to: size do: [:i |
 		let char := ObjectModel encodeCharacter #{buffer at: i}.
 		aStream nextPut: (char reinterpretCastTo: _DynamicObject)
 	]
-	
+
 ].
 
 }.
@@ -445,45 +450,45 @@ SmallInteger category: 'converting' methods: {
 Float category: 'arithmetic' methods: {
 :[+ aNumber
 	let other<Float64>.
-	
+
 	ObjectModel tryCastToFloat64 #{aNumber reinterpretCastTo: ObjectModel ObjectHeader pointer . other address} ifTrue: [
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this + other
 	].
-	
+
 	^ aNumber adaptToFloat: self andSend: #+
 ].
 
 :[- aNumber
 	let other<Float64>.
-	
+
 	ObjectModel tryCastToFloat64 #{aNumber reinterpretCastTo: ObjectModel ObjectHeader pointer . other address} ifTrue: [
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this - other
 	].
-	
+
 	^ aNumber adaptToFloat: self andSend: #-
 ].
 
 :[* aNumber
 	let other<Float64>.
-	
+
 	ObjectModel tryCastToFloat64 #{aNumber reinterpretCastTo: ObjectModel ObjectHeader pointer . other address} ifTrue: [
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this * other
 	].
-	
+
 	^ aNumber adaptToFloat: self andSend: #*
 ].
 
 :[/ aNumber
 	let other<Float64>.
-	
+
 	ObjectModel tryCastToFloat64 #{aNumber reinterpretCastTo: ObjectModel ObjectHeader pointer . other address} ifTrue: [
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this / other
 	].
-	
+
 	^ aNumber adaptToFloat: self andSend: #/
 ].
 
@@ -507,7 +512,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this = other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #=
 ].
 
@@ -518,7 +523,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this ~ other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #~
 ].
 
@@ -529,7 +534,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this < other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #<
 ].
 
@@ -540,7 +545,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this <= other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #<=
 ].
 
@@ -551,7 +556,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this > other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #>
 ].
 
@@ -562,7 +567,7 @@ Float category: 'comparison' methods: {
 		let this := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 		^ this >= other
 	].
-	
+
 	^ aNumber adaptToFloat: self andCompare: #>=
 ].
 }.
@@ -570,11 +575,11 @@ Float category: 'comparison' methods: {
 Float category: 'printing' methods: {
 :[printOn: aStream
 	let buffer<LibC CChar array:64>.
-	
+
 	let value := ObjectModel decodeFloat64 #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
 	LibC sprintf #{buffer. '%f' . value}.
 	let size := LibC strlen #{ buffer }.
-	
+
 	1 to: size do: [:i |
 		let char := ObjectModel encodeCharacter #{buffer at: i}.
 		aStream nextPut: (char reinterpretCastTo: _DynamicObject)
