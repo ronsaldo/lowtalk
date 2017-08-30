@@ -3,6 +3,13 @@ baseline: spec
 	<baseline>
 
 	spec for: #common do: [
+		spec project: 'PetitParser' with: [
+				spec
+					className: #ConfigurationOfPetitParser;
+					versionString: #'development';
+					loads: #('Core' );
+					repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/'
+		].
 		spec project: 'Slovim' with: [ 
 				spec
 					className: #ConfigurationOfSlovim;
@@ -11,6 +18,6 @@ baseline: spec
 		].
 		spec
 			package: 'Lowtalk-Core' with: [
-				spec requires: 'Slovim'
+				spec requires: #('Slovim' 'PetitParser')
 			]
 	].
