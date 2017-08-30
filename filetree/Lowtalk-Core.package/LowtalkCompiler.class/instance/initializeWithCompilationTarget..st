@@ -19,3 +19,5 @@ initializeWithCompilationTarget: aCompilationTarget
 	debugSourceFileDictionary := IdentityDictionary new.
 	capturedCompileTimeVariables := IdentityDictionary new.
 	gensymCount := 0.
+	
+	optimizationLevel := 0.

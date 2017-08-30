@@ -2,7 +2,7 @@ Constant named: #recursiveLeaf value: [
     <localReturn>
     let currentContext := thisContext.
     [currentContext] whileNotNil: [
-        LibC printf #{c'currentContext: %p\n' . currentContext}.
+        LibC printf #{c'currentContext: %p\n' . currentContext reinterpretCastTo: Void pointer}.
         currentContext := currentContext sender
     ].
 

@@ -42,7 +42,8 @@
 		"characterLiteralType",
 		"lazySelectors",
 		"profilingInterpreter",
-		"doubleType"
+		"doubleType",
+		"optimizationLevel"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"
