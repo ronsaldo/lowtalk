@@ -102,7 +102,7 @@ LibC printf #{c'An Integer: %d\n' . 2}.
 ```
 
 ### Method AST expression
-Because Smalltalk does not have an uniform syntax for method definitions, or DoIt expression, in Lowtalk to be able to keep everything in plain text files, there is an expression that returns the AST of a method.
+Because Smalltalk does not have an uniform syntax for method definitions, or DoIt expression, in Lowtalk to be able to keep everything in plain text files, there is an expression that returns the AST of a method:
 
 ```Smalltalk
 :[addWith: other
@@ -110,7 +110,7 @@ Because Smalltalk does not have an uniform syntax for method definitions, or DoI
 ]
 ```
 
-This typically used in the following way:
+This is typically used in the following way:
 ```Smalltalk
 Object category: 'sample' methods: {
 :[addWith: other

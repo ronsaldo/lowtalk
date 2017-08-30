@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CommandLineHandler",
+	"category" : "Lowtalk-Core-FrontEnd",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LowtalkCommandLineHandler",
+	"type" : "normal"
+}

@@ -5,10 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"environment",
-		"node"
-	],
-	"name" : "LTCSemanticError",
+	"instvars" : [ ],
+	"name" : "LTCParseError",
 	"type" : "normal"
 }

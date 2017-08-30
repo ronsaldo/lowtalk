@@ -1,3 +1,5 @@
 compiling
 log: string
-	FileStream stdout nextPutAll: string; lf.
+	verbose ifTrue: [
+		FileStream stdout nextPutAll: string; lf.
+	]
