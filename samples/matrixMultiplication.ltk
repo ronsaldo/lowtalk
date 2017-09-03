@@ -1,0 +1,212 @@
+Structure named: #MatrixData slots: {
+    #rows => UInt32.
+    #columns => UInt32.
+    #data => (Float64 array)
+}.
+
+let MatrixHeaderSize := MatrixData size.
+
+Object variableByteSubclass: #Matrix
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'Kernel-Exceptions'.
+
+Matrix class category: 'construction' methods: {
+:[rows: rows columns: columns
+    ^ (self basicNew: MatrixHeaderSize + (rows*columns*8)) initializeWithRows: rows columns: columns
+]
+}.
+
+Matrix category: 'accessing' methods: {
+:[at: row at: column put: value
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+
+    let index := ((row castTo: UInt32) - 1) * this value columns + (column castTo: UInt32).
+
+    (this value data at: index) := value castTo: Float64.
+].
+:[rows
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    ^ this value rows
+].
+:[columns
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    ^ this value columns
+].
+
+}.
+
+Matrix category: 'arithmetic' methods: {
+:[+ otherMatrix
+
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
+
+    (this value rows ~~ other value rows or: [this value columns ~~ other value rows]) ifTrue: [
+        self error: 'Cannot add matrices with different dimensions.'
+    ].
+
+    let elementCount := this value rows * this value columns.
+    let resultObject := self class rows: this value rows columns: this value columns.
+    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+
+    let left := (this value data at: 1) address.
+    let right := (other value data at: 1) address.
+    let dest := (result value data at: 1) address.
+
+    1 to: elementCount do: [:i |
+        (dest at: i) := (left at: i) + (right at: i)
+    ].
+
+    ^ resultObject
+].
+
+:[- otherMatrix
+
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
+
+    (this value rows ~~ other value rows or: [this value columns ~~ other value rows]) ifTrue: [
+        self error: 'Cannot add matrices with different dimensions.'
+    ].
+
+    let elementCount := this value rows * this value columns.
+    let resultObject := self class rows: this value rows columns: this value columns.
+    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+
+    let left := (this value data at: 1) address.
+    let right := (other value data at: 1) address.
+    let dest := (result value data at: 1) address.
+
+    1 to: elementCount do: [:i |
+        (dest at: i) := (left at: i) - (right at: i)
+    ].
+
+    ^ resultObject
+].
+
+:[* otherMatrixOrScalar
+    ^ otherMatrixOrScalar isNumber ifTrue: [ self timesScalar: otherMatrixOrScalar ] ifFalse: [ self timesMatrix: otherMatrixOrScalar]
+].
+
+:[timesScalar: aScalar
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+
+    let resultObject := self class rows: this value rows columns: this value columns.
+    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+    let factor := aScalar castTo: Float64.
+
+    let elementCount := this value rows * this value columns.
+    let source := (this value data at: 1) address.
+    let dest := (result value data at: 1) address.
+    1 to: elementCount do: [:i |
+        (dest at: i) := (source at: i) * factor
+    ].
+
+    ^ resultObject
+].
+
+:[timesMatrix: otherMatrix
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
+
+    (this value columns ~~ other value rows) ifTrue: [
+        self error: 'Cannot perform matrix multiplication.'
+    ].
+
+    let rows := this value rows.
+    let columns := other value columns.
+    let iterations := this value columns - 1.
+
+    let resultObject := self class rows: rows columns: columns.
+    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+
+    let left := (this value data at: 1) address.
+    let right := (other value data at: 1) address.
+    let dest := (result value data at: 1) address.
+
+    let leftPitch := this value columns.
+    let rightPitch := other value columns.
+
+    let destIndex := 0.
+    0 to: rows - 1 do: [:i |
+        0 to: columns - 1 do: [:j |
+            let sum<Float64> := 0.0.
+            0 to: iterations do: [:k |
+                sum := sum + ((left atOffset: (i*leftPitch + k)) * (right atOffset: (k*rightPitch + j) ))
+            ].
+            dest atOffset: destIndex put: sum.
+            destIndex := destIndex + 1.
+        ].
+    ].
+
+    ^ resultObject
+
+].
+
+}.
+
+Matrix category: 'initialization' methods: {
+:[initializeWithRows: rows columns: columns
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    this value
+        rows: (rows castTo: UInt32);
+        columns: (columns castTo: UInt32)
+]
+}.
+
+Matrix category: 'printing' methods: {
+:[printOn: aStream
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    aStream nextPutAll: 'Matrix rows: '; print: this value rows;
+        nextPutAll: ' columns: '; print: this value columns;
+        nextPutAll: ' content: #('; lf.
+
+    let index := 0.
+    1 to: this value rows do: [:r |
+        1 to: this value columns do: [:c |
+            aStream print: (this value data atOffset: index); space.
+            index := index + 1
+        ].
+        aStream lf
+    ].
+
+    aStream nextPutAll: ')'
+]
+
+}.
+
+Matrix category: 'filling' methods: {
+:[fillWithIndices
+    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    let elementCount := this value rows * this value columns.
+    1 to: elementCount do: [:i |
+        (this value data at: i) := i castTo: Int32
+    ].
+].
+}.
+
+Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    <localReturn>
+
+    let s := 4.
+    argc >= 2 ifTrue: [
+        s := LibC atoi #{argv atOffset: 1}
+    ].
+
+    let out := FileStream stdout.
+    let a := (Matrix rows: s columns: s) fillWithIndices.
+    let b := (Matrix rows: s columns: s) fillWithIndices * 4.0.
+
+"    out nextPutAll: 'A = '; print: a; lf.
+    out nextPutAll: 'B = '; print: b; lf.
+    out nextPutAll: 'A + B = '; print: a + b; lf.
+    out nextPutAll: 'A - B = '; print: a - b; lf.
+    out nextPutAll: 'A * B = '; print: a * b; lf.
+"
+    a + b.
+    a - b.
+    a * b.
+    
+    ^ 0
+]

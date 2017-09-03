@@ -1,0 +1,29 @@
+"More magnitude casts"
+Namespace named: #ObjectModel members: [
+	"We put this to avoid context metadata in some of the casting functions"
+	let BoxedFloat64Class := BoxedFloat64.
+
+	Constant named: #objectToFloat value: [<Float64> :oop<ObjectHeader pointer> |
+        <localReturn>
+		ObjectModel isSmallFloat #{oop reinterpretCastTo: UIntPointer} ifTrue: [
+			^ ObjectModel decodeSmallFloat #{oop reinterpretCastTo: UIntPointer}
+		].
+
+        ObjectModel isSmallInteger #{oop reinterpretCastTo: UIntPointer} ifTrue: [
+			^ ObjectModel decodeSmallInteger #{oop reinterpretCastTo: UIntPointer}
+		].
+
+		let class := getObjectClass #{oop}.
+		class == (BoxedFloat64Class reinterpretCastTo: ObjectHeader pointer) ifTrue: [
+            let box := oop reinterpretCastTo: BoxedFloat64Structure pointer.
+		    ^ box value data
+        ].
+
+        InvalidObjectToFloatCast new signal.
+        ^ 0.0
+    ].
+
+	Compiler objectModel
+        objectToFloatFunction: objectToFloat;
+		yourself
+].

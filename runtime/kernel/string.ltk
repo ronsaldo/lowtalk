@@ -21,6 +21,11 @@ String category: 'testing' methods: {
 ]
 }.
 
+String category: 'testing' methods: {
+:[printOn: aStream
+    aStream nextPut: $'; nextPutAll: self; nextPut: $'
+]
+}.
 
 "Symbol"
 Symbol category: 'testing' methods: {

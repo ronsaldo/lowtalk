@@ -92,7 +92,7 @@ MainClass category: 'application' methods: {
         y: (480/2) - (y asInteger castTo: Int32);
         w: 32;
         h: 32.
-    SDL2 SDL_SetRenderDrawColor #{renderer . 255 . 0 . 0 . 255}.
+    SDL2 SDL_SetRenderDrawColor #{renderer . 255 . rect x & 16rff castTo: UInt8 . 0 . 255}.
     SDL2 SDL_RenderFillRect #{renderer . rect address}.
 
     SDL2 SDL_RenderPresent #{renderer}.

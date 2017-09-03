@@ -19,5 +19,5 @@ checkPointerElementAssignmentMessage: message receiver: receiver
 		message semanticError: 'Cannot assign element through pointer to void..'
 	].
 
-	value type implicitlyConvertedTo: message coercionType at: elementType.
+	value type implicitlyConvertedTo: elementType at: message.
 	message type: elementType ref.
