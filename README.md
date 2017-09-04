@@ -64,7 +64,7 @@ gcc -m32 -no-pie -pthread -o hello hello.o
 Because we do not have support position independent code yet, on OS X for linking it is required to use the following command:
 
 ```bash
-clang -m32 -no-pie -o hello hello.o
+clang -m32 -Wl,-no_pie -read_only_relocs suppress -o hello hello.o
 ```
 
 ## Syntax extensions
