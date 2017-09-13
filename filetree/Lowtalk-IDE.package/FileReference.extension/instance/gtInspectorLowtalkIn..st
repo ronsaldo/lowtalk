@@ -6,6 +6,7 @@ gtInspectorLowtalkIn: composite
 	
 	^ composite custom: (GLMRubricHighlightedTextPresentation new
 		title: 'Lowtalk';
+		font: StandardFonts codeFont;
 		editingMode: [ : rubPresentation |
 			GLMHighlighterTextRubEditingMode withStylerDecorator: (
 				LowtalkHighlighterTextDecorator 
