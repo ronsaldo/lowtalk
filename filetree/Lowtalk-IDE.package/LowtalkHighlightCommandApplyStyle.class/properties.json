@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkHighlightCommand",
+	"category" : "Lowtalk-IDE",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"styleName"
+	],
+	"name" : "LowtalkHighlightCommandApplyStyle",
+	"type" : "normal"
+}

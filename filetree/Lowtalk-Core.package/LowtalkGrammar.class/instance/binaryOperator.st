@@ -1,3 +1,3 @@
 tokens
 binaryOperator
-	^ self token: (PPPredicateObjectParser anyOf: '+-/\*~<>=@,%|&?!') plus
+	^ self operator: (PPPredicateObjectParser anyOf: '+-/\*~<>=@,%|&?!') plus

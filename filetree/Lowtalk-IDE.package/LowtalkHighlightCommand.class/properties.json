@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Lowtalk-IDE",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"TextAttributes"
+	],
+	"instvars" : [
+		"start",
+		"stop"
+	],
+	"name" : "LowtalkHighlightCommand",
+	"type" : "normal"
+}

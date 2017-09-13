@@ -1,3 +1,3 @@
 tokens
 caret
-	^ self token: $^ asParser
+	^ self operator: $^ asParser

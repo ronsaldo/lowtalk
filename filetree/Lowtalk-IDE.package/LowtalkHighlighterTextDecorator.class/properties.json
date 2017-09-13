@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "GLMHighlighterTextStylerDecorator",
+	"category" : "Lowtalk-IDE",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"presentation",
+		"fileReference"
+	],
+	"name" : "LowtalkHighlighterTextDecorator",
+	"type" : "normal"
+}

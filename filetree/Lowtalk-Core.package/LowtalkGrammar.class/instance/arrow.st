@@ -1,3 +1,3 @@
 tokens
 arrow
-	^ self token: '->' asParser
+	^ self operator: '->' asParser

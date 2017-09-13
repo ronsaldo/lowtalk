@@ -1,0 +1,26 @@
+{
+	"instance" : {
+		"executeOn:inPresentation:relativeToFileReference:" : "RonieSalgado 9/13/2017 18:36",
+		"styleName" : "RonieSalgado 9/13/2017 18:27",
+		"styleName:" : "RonieSalgado 9/13/2017 18:27"
+	},
+	"class" : {
+		"multiLineComment" : "RonieSalgado 9/13/2017 22:42",
+		"callBracket" : "RonieSalgado 9/13/2017 18:27",
+		"symbol" : "RonieSalgado 9/13/2017 18:32",
+		"methodBracket" : "RonieSalgado 9/13/2017 18:30",
+		"methodHeaderSelector" : "RonieSalgado 9/13/2017 22:50",
+		"bar" : "RonieSalgado 9/13/2017 23:04",
+		"pragma" : "RonieSalgado 9/13/2017 18:33",
+		"string" : "RonieSalgado 9/13/2017 18:29",
+		"typeExpression" : "RonieSalgado 9/13/2017 18:32",
+		"identifier" : "RonieSalgado 9/13/2017 18:29",
+		"localDefinition" : "RonieSalgado 9/13/2017 22:57",
+		"operator" : "RonieSalgado 9/13/2017 18:31",
+		"commentStyle" : "RonieSalgado 9/13/2017 22:42",
+		"styleNamed:" : "RonieSalgado 9/13/2017 18:28",
+		"literalArrayParent" : "RonieSalgado 9/13/2017 22:46",
+		"keyword" : "RonieSalgado 9/13/2017 18:28",
+		"number" : "RonieSalgado 9/13/2017 18:30"
+	}
+}

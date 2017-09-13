@@ -1,3 +1,3 @@
 tokens
 assignOperator
-	^ self token: ':=' asParser
+	^ self operator: ':=' asParser
