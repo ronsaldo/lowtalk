@@ -24,7 +24,8 @@ generateFunctionBody: body
 	or: [ currentFunction dynamicLiterals isNotEmpty ]]) ifTrue: [ 
 		currentFunction
 			addRequiredDynamicLiteral: method selector;
-			addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler).
+			addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler);
+			hasSelectorAndClassBinding: true
 
 	].
 	
