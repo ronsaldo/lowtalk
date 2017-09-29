@@ -16,7 +16,7 @@ gtInspectorLowtalkIn: composite
 		act: [:rub | 
 			self 
 				ensureDelete; 
-				writeStreamDo: [ :s | s nextPutAll: rub text asString ]] 
+				writeStreamDo: [ :s | s nextPutAll: rub text asString withUnixLineEndings ]] 
 			icon: GLMUIThemeExtraIcons glamorousSave 
 			on: $s
 			entitled: 'Save')

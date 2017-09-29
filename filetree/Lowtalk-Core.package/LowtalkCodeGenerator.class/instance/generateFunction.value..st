@@ -23,6 +23,7 @@ generateFunction: ssaFunction value: functionValue
 		startArgument := 1.
 		selfValue := ssaFunction arguments first.
 		method receiverSSAValue: selfValue.
+		self setupSelfArgument: selfValue.
 	].
 
 	method arguments doWithIndex: [ :arg :index |

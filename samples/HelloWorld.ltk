@@ -1,3 +1,4 @@
+"Main function of the application"
 Constant named: #Main value: [:arguments |
     <localReturn>
     let out :=  FileStream stdout.
