@@ -8,8 +8,8 @@
 	"instvars" : [
 		"type",
 		"valueType",
-		"value",
-		"valueExpression"
+		"valueExpression",
+		"binding"
 	],
 	"name" : "LowtalkInterpreterVariable",
 	"type" : "normal"

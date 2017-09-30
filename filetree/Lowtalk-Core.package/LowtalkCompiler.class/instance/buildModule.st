@@ -2,7 +2,6 @@ module construction
 buildModule
 	| toProcess objectToFinish |
 	self log: 'Building module'.
-	ssaModule := SLVMModule new compilationTarget: compilationTarget.
 	objectToFinish := SLVMOrderedInsertionSet new.
 	
 	[ pendingObjects isNotEmpty ] whileTrue: [

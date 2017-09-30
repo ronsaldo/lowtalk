@@ -26,7 +26,7 @@ generateInterpreterMethod: method
 			ssaValue unmangledName: method methodClass name , '>>' , method selector printString
 		]
 	].
-	ssaModule add: ssaValue.
+	self ssaModule add: ssaValue.
 	compilationTarget emittingDebugInformation ifTrue: [
 		ssaValue debugSourceLocation: (self convertDebugPosition: method node position).
 	].

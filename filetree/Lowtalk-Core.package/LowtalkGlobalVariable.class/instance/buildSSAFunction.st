@@ -16,9 +16,9 @@ buildSSAFunction
 	].
 
 	compiler compilationTarget emittingDebugInformation ifTrue: [
-		ssaValue debugSourceLocation: (compiler convertDebugPosition: value definition node position).
+		ssaValue debugSourceLocation: (compiler convertDebugPosition: self rawValue definition node position).
 	].
 
-	compiler mapValue: value toSSAValue: ssaValue.
-	compiler generateFunction: ssaValue value: value.
+	compiler mapValue: self rawValue toSSAValue: ssaValue.
+	compiler generateFunction: ssaValue value: self rawValue.
 	

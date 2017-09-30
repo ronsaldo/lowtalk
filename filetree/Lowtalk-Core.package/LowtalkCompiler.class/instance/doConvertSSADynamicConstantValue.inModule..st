@@ -4,6 +4,9 @@ doConvertSSADynamicConstantValue: value inModule: module
 	convertedObject := value asLowtalkObjectInstanceWith: self.
 	convertedObject ifNil: [ ^ self convertDynamicObjectSSAConstant: convertedObject ].
 	convertedObject isSLVMObject ifTrue: [ ^ convertedObject ].
+	isSandboxed ifFalse: [ 
+		^ SLVMConstantValue type: compilationTarget dynamicObjectType value: module
+	].
 	
 	variableName := objectInstanceVariableNameMap at: value ifAbsent: [ 
 		metaclassVariableNameMap at: value ifPresent: [:instance | unmangledName := (unmangledSymbolMap at: instance) , '__meta'. (instance , '_meta') asSymbol] ifAbsent: [ nil ]

@@ -1,3 +1,3 @@
 accessing
 resolveValueType
-	^ value inferLowtalkTypeWith: compiler
+	^ self rawValue inferLowtalkTypeWith: compiler

@@ -3,7 +3,11 @@ initializeWithCompilationTarget: aCompilationTarget
 	compilationTarget := aCompilationTarget.
 	profilingInterpreter := false.
 	verbose := false.
-	objectModel := LowtalkObjectModel new compiler: self.
+	compilationTarget isCurrentImage ifTrue: [ 
+		objectModel := LowtalkInImageObjectModel new compiler: self.
+	] ifFalse: [ 
+		objectModel := LowtalkSandboxObjectModel new compiler: self.
+	].
 	compilationTarget objectModel: (LowtalkSLVMObjectModel new compiler: self).
 	self createEnvironment.
 	self gatherLazySelectors.
@@ -19,6 +23,8 @@ initializeWithCompilationTarget: aCompilationTarget
 	debugLocationDictionary := Dictionary new.
 	debugSourceFileDictionary := IdentityDictionary new.
 	capturedCompileTimeVariables := IdentityDictionary new.
+	importedImageLiteralVariables := IdentityDictionary new.
+	importedImageClasses := IdentityDictionary new.
 	gensymCount := 0.
 	
 	optimizationLevel := 0.

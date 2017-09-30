@@ -1,3 +1,3 @@
-module construction
+accessing
 ssaModule
-	^ ssaModule
+	^ ssaModule ifNil: [ssaModule := SLVMModule new compilationTarget: compilationTarget].

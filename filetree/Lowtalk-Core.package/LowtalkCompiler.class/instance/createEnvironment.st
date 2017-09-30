@@ -1,6 +1,12 @@
 compiling
 createEnvironment
+
 	compilerEnvironment := LowtalkNamespace empty name: #_Compiler.
+	isSandboxed := compilationTarget isCurrentImage not.
+	compilationTarget isCurrentImage ifTrue: [
+		compilerEnvironment parent: (LowtalkImageEnvironment new environment: self class environment)
+	].
+
 	compilerEnvironment
 		compileTimeOnly: true;
 		compiler: self;

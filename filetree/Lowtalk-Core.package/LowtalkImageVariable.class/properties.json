@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkVariable",
+	"category" : "Lowtalk-Core-Environment",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"type",
+		"binding"
+	],
+	"name" : "LowtalkImageVariable",
+	"type" : "normal"
+}

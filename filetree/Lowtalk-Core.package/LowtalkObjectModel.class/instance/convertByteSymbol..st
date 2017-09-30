@@ -1,3 +1,3 @@
 object creation
-convertByteSymbol: aSymbol
-	^ convertByteSymbolFunction value: aSymbol
+convertByteSymbol: aByteSymbol
+	self subclassResponsibility

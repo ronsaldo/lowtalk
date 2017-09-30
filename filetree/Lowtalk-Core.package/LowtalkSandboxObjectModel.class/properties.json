@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkObjectModel",
+	"category" : "Lowtalk-Core-FrontEnd",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LowtalkSandboxObjectModel",
+	"type" : "normal"
+}

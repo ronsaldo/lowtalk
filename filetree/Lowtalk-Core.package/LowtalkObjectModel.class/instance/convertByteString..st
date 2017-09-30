@@ -1,3 +1,3 @@
 object creation
-convertByteString: anString
-	^ convertByteStringFunction value: anString
+convertByteString: aByteString
+	self subclassResponsibility

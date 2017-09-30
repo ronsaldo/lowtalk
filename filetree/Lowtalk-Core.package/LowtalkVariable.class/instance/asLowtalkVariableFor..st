@@ -1,0 +1,3 @@
+converting
+asLowtalkVariableFor: aCompiler
+	^ self

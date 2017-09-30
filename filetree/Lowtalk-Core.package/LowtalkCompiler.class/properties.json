@@ -44,7 +44,11 @@
 		"profilingInterpreter",
 		"doubleType",
 		"optimizationLevel",
-		"verbose"
+		"verbose",
+		"importedImageLiteralVariables",
+		"isSandboxed",
+		"importedImageClasses",
+		"finalCodeGenerator"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

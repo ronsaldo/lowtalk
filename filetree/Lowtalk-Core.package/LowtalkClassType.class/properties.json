@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "LowtalkSpecificDynamicObjectType",
+	"super" : "LowtalkAbstractClassType",
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],

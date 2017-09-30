@@ -1,4 +1,4 @@
 accessing
 valueExpression: aValueExpression
-	value := nil.
+	self rawValue: nil.
 	valueExpression := aValueExpression.

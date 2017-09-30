@@ -23,7 +23,9 @@ dispatchSelector: selector receiver: receiver arguments: arguments types: argume
 		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector printString}.
 	].
 
-	self checkMethod: method receiver: receiver node: sendingNode.
+	aCompiler isSandboxed ifTrue: [ 
+		self checkMethod: method receiver: receiver node: sendingNode.
+	]. 
 	
 	OverridenMethods at: method ifPresent: [ :override |
 		^ self perform: override withArguments: { selector . receiver .

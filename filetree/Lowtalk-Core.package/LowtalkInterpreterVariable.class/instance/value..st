@@ -1,4 +1,4 @@
 accessing
 value: anObject
-	value := anObject.
+	self rawValue: anObject.
 	valueExpression := nil.
