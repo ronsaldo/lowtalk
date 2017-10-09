@@ -8,4 +8,5 @@ convertDebugPosition: aPosition
 			startColumn: aPosition column;
 			endLine: aPosition endLine;
 			endColumn: aPosition endColumn;
+			collection: aPosition collection;
 			yourself ]

@@ -3,7 +3,7 @@ visitIdentifierReferenceNode: identifier
 	| result |
 	result := (environment lookSymbolRecursively: identifier value ifAbsent: [
 		identifier environment: environment semanticError: 'Undeclared identifier {1}' format: { identifier value }
-	]) asLowtalkVariableReferenceFor: compiler.
+	]) asLowtalkVariableReferenceFor: self compiler.
 
 	self flag: 'Remove this hack interpreting inlined closures in a proper way'.
 	identifier binding ifNil: [

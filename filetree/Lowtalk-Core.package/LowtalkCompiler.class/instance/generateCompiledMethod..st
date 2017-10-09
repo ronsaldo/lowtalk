@@ -4,4 +4,5 @@ generateCompiledMethod: method
 	self assert: isSandboxed not.
 	ssaFunctionMetadata := self generateInterpreterMethod: method.
 	compiledMethodBinding := self finalCodeGenerator translateFinalModuleElement: ssaFunctionMetadata sourceMethod.
+	compiledMethodBinding value propertyAt: #compilerClass put: LowtalkMethodCompiler.
 	^ compiledMethodBinding value

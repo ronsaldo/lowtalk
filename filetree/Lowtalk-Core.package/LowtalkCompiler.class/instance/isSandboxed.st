@@ -1,3 +1,4 @@
 accessing
 isSandboxed
+	<compileTime>
 	^ isSandboxed
