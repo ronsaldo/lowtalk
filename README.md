@@ -148,32 +148,36 @@ with a C type. Dynamic object types, are used to represent a generic dynamic obj
 Structures, unions, and packed structures (structure with alignment of 1) can be defined in the following ways:
 
 ```Smalltalk
-Structure named: #MyPoint slots: {
-    #x => Float32.
-    #y => Float64.
-}.
+Structure <<< #MyPoint
+    slots: {
+        #x => Float32.
+        #y => Float64.
+    }.
 
-Union named: #MyUnion slots: {
-    #p => MyPoint.
-    #pt => (MyPoint pointer).
-    #f => Float32.
-    #d => Float64.
-}.
+Union <<< #MyUnion
+    slots: {
+        #p => MyPoint.
+        #pt => (MyPoint pointer).
+        #f => Float32.
+        #d => Float64.
+    }.
 
-PackedStructure named: #MyPackedStructure slots: {
-    #a => UInt8.
-    #b => UInt16.
-}.
+PackedStructure <<< #MyPackedStructure
+    slots: {
+        #a => UInt8.
+        #b => UInt16.
+    }.
 ```
 
 The evaluation of the slots of these types is done lazily to be able to resolve
 circular dependencies between types, e.g:
 
 ```Smalltalk
-Structure named: #LinkedListNode slots: {
-    #next => LinkedListNode pointer.
-    #value => Void pointer.
-}.
+Structure <<< #LinkedListNode
+    slots: {
+        #next => LinkedListNode pointer.
+        #value => Void pointer.
+    }.
 ```
 
 ## Future Work

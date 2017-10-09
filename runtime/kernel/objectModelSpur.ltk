@@ -4,7 +4,7 @@ tricky. Before this part, we cannot even define classes, or things like that."
 Namespace named: #ObjectModel members: [
 
     "The object header"
-    Structure named: #ObjectHeader slots: {
+    Structure <<< #ObjectHeader slots: {
         #classIndex => (UInt32 bits: 22).
         #reserved => (UInt32 bits: 2).
         #objectFormat => (UInt32 bits: 5).

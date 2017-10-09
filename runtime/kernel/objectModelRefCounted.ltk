@@ -82,7 +82,7 @@ Namespace named: #ObjectModel members: [
     Global named: #ImmediateClassTable type: (ObjectHeader pointer array: 16).
 
     "The object header"
-    Structure named: #ObjectHeader slots: {
+    Structure <<< #ObjectHeader slots: {
         #classPointer => ObjectHeader pointer.
         #refCount => IntPointer.
 
@@ -92,7 +92,7 @@ Namespace named: #ObjectModel members: [
         #slotCount => UInt32.
     }.
 
-    Structure named: #ObjectVariableHeader slots: {
+    Structure <<< #ObjectVariableHeader slots: {
         #objectHeader => ObjectHeader.
         #name => _DynamicObject.
     }.

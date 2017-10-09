@@ -2,7 +2,7 @@
 Namespace named: #LibC members: [
     "Standard streams"
     Compiler operatingSystemName = #win32 ifTrue: [
-        Structure named: #FILE slots: {
+        Structure <<< #FILE slots: {
             #_ptr => (CChar pointer).
             #_cnt => CInt.
             #_base => (CChar pointer).
@@ -27,7 +27,7 @@ Namespace named: #LibC members: [
         ].
         }.
     ] ifFalse: [
-        Structure named: #FILE slots: {}.
+        Structure <<< #FILE slots: {}.
         
         Compiler operatingSystemName = #osx ifTrue: [
             Global externalC: #__stdoutp type: FILE pointer.

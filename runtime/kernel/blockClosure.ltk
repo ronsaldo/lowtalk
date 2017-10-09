@@ -1,10 +1,10 @@
 Namespace named: #ObjectModel members: [
-    Structure named: #ClosureMetadataHeader slots: {
+    Structure <<< #ClosureMetadataHeader slots: {
         #objectHeader => ObjectHeader.
         #argumentDescriptor => IntPointer.
     }.
 
-    Structure named: #ClosureHeader slots: {
+    Structure <<< #ClosureHeader slots: {
         #metadata => ClosureMetadataHeader.
         #entryPoint => UIntPointer.
     }.

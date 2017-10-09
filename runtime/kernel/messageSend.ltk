@@ -2,31 +2,31 @@ let ObjectHeader := ObjectModel ObjectHeader.
 let Oop := ObjectHeader pointer.
 let DNUSelector<_DynamicObject> := #doesNotUnderstand: .
 
-Structure named: #_ArrayHeader slots: {
+Structure <<< #_ArrayHeader slots: {
     #header => ObjectHeader.
     #slots => Oop array.
 }.
 
-Structure named: #_MethodDictionaryHeader slots: {
+Structure <<< #_MethodDictionaryHeader slots: {
     #header => ObjectHeader.
     #tally => Oop.
     #array => _ArrayHeader pointer.
     #values => _ArrayHeader pointer.
 }.
 
-Structure named: #_AssociationHeader slots: {
+Structure <<< #_AssociationHeader slots: {
     #header => ObjectHeader.
     #key => ObjectHeader pointer.
     #value => ObjectHeader pointer.
 }.
 
-Structure named: #_BehaviorHeader slots: {
+Structure <<< #_BehaviorHeader slots: {
     #header => ObjectHeader.
     #superclass => _BehaviorHeader pointer.
     #methodDict => _MethodDictionaryHeader pointer.
 }.
 
-Structure named: #_CompiledMethod slots: {
+Structure <<< #_CompiledMethod slots: {
     #header => ObjectHeader.
     #entryPoint => UIntPointer.
     #exitPoint => UIntPointer.

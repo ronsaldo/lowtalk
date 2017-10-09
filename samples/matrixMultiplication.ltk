@@ -1,4 +1,4 @@
-Structure named: #MatrixData slots: {
+Structure <<< #MatrixData slots: {
     #rows => UInt32.
     #columns => UInt32.
     #data => (Float64 array)
@@ -6,18 +6,18 @@ Structure named: #MatrixData slots: {
 
 let MatrixHeaderSize := MatrixData size.
 
-Object variableByteSubclass: #Matrix
+Object variableByteSubclass: #LTMatrix
 	instanceVariableNames: ''
 	classVariableNames: ''
 	package: 'Kernel-Exceptions'.
 
-Matrix class category: 'construction' methods: {
+LTMatrix class category: 'construction' methods: {
 :[rows: rows columns: columns
     ^ (self basicNew: MatrixHeaderSize + (rows*columns*8)) initializeWithRows: rows columns: columns
 ]
 }.
 
-Matrix category: 'accessing' methods: {
+LTMatrix category: 'accessing' methods: {
 :[at: row at: column put: value
     let this := self firstFixedFieldPointerOfType: MatrixData pointer.
 
@@ -36,7 +36,7 @@ Matrix category: 'accessing' methods: {
 
 }.
 
-Matrix category: 'arithmetic' methods: {
+LTMatrix category: 'arithmetic' methods: {
 :[+ otherMatrix
 
     let this := self firstFixedFieldPointerOfType: MatrixData pointer.
@@ -146,7 +146,7 @@ Matrix category: 'arithmetic' methods: {
 
 }.
 
-Matrix category: 'initialization' methods: {
+LTMatrix category: 'initialization' methods: {
 :[initializeWithRows: rows columns: columns
     let this := self firstFixedFieldPointerOfType: MatrixData pointer.
     this value
@@ -155,10 +155,10 @@ Matrix category: 'initialization' methods: {
 ]
 }.
 
-Matrix category: 'printing' methods: {
+LTMatrix category: 'printing' methods: {
 :[printOn: aStream
     let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    aStream nextPutAll: 'Matrix rows: '; print: this value rows;
+    aStream nextPutAll: 'LTMatrix rows: '; print: this value rows;
         nextPutAll: ' columns: '; print: this value columns;
         nextPutAll: ' content: #('; lf.
 
@@ -176,7 +176,7 @@ Matrix category: 'printing' methods: {
 
 }.
 
-Matrix category: 'filling' methods: {
+LTMatrix category: 'filling' methods: {
 :[fillWithIndices
     let this := self firstFixedFieldPointerOfType: MatrixData pointer.
     let elementCount := this value rows * this value columns.
@@ -195,8 +195,8 @@ Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString poin
     ].
 
     let out := FileStream stdout.
-    let a := (Matrix rows: s columns: s) fillWithIndices.
-    let b := (Matrix rows: s columns: s) fillWithIndices * 4.0.
+    let a := (LTMatrix rows: s columns: s) fillWithIndices.
+    let b := (LTMatrix rows: s columns: s) fillWithIndices * 4.0.
 
 "    out nextPutAll: 'A = '; print: a; lf.
     out nextPutAll: 'B = '; print: b; lf.
@@ -207,6 +207,6 @@ Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString poin
     a + b.
     a - b.
     a * b.
-    
+
     ^ 0
 ]

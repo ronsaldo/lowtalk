@@ -12,7 +12,7 @@ let EnsurePrimitiveNumber<UIntPointer> := ObjectModel encodeSmallInteger #{198}.
 
 Namespace named: #ObjectModel members: [
 
-Structure named: #ContextHeader slots: {
+Structure <<< #ContextHeader slots: {
     #objectHeader => ObjectHeader.
     #sender => UIntPointer.
     #pc => UIntPointer.

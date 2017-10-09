@@ -221,7 +221,7 @@ ConditionVariable category: 'condition variable' methods: {
 }.
 
 "Semaphore"
-let SemaphoreInternalData := Structure slots: {
+let SemaphoreInternalData := Structure anon slots: {
     #mutex => Unix pthread_mutex_t.
     #condition => Unix pthread_cond_t.
     #signalCount => UInt32

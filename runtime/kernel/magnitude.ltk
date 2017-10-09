@@ -3,7 +3,7 @@ Namespace named: #ObjectModel members: [
 	"We put this to avoid context metadata in some of the casting functions"
 	let BoxedFloat64Class := BoxedFloat64.
 
-	Structure named: #BoxedFloat64Structure slots: {
+	Structure <<< #BoxedFloat64Structure slots: {
 		#header => ObjectHeader.
 		#data => Float64
 	}.
