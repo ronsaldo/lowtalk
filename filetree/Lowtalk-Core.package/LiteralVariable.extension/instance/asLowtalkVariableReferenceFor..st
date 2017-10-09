@@ -1,3 +1,3 @@
 *Lowtalk-Core
-asLowtalkVariableFor: aCompiler
+asLowtalkVariableReferenceFor: aCompiler
 	^ aCompiler importImageLiteralVariable: self

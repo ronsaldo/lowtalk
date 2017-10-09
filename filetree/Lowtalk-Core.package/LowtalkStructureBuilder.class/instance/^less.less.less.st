@@ -1,9 +1,9 @@
 building
-named: nameLazyValue slots: slotsLazyValue
+<<< nameLazyValue
 	<compileTime>
 	<lazy>
 	| structure |
-	structure := self slots: slotsLazyValue. 
+	structure := self anon. 
 	compiler globalBuilder named: nameLazyValue type: structure metaType value: structure.
 	structure name: nameLazyValue value.
 	^ structure
