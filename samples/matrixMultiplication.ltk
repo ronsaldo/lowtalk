@@ -9,7 +9,7 @@ let MatrixHeaderSize := MatrixData size.
 Object variableByteSubclass: #LTMatrix
 	instanceVariableNames: ''
 	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+	package: 'Lowtalk-Samples'.
 
 LTMatrix class category: 'construction' methods: {
 :[rows: rows columns: columns
@@ -186,27 +186,29 @@ LTMatrix category: 'filling' methods: {
 ].
 }.
 
-Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
-    <localReturn>
+Compiler isSandboxed ifTrue: [
+    Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+        <localReturn>
 
-    let s := 4.
-    argc >= 2 ifTrue: [
-        s := LibC atoi #{argv atOffset: 1}
-    ].
+        let s := 4.
+        argc >= 2 ifTrue: [
+            s := LibC atoi #{argv atOffset: 1}
+        ].
 
-    let out := FileStream stdout.
-    let a := (LTMatrix rows: s columns: s) fillWithIndices.
-    let b := (LTMatrix rows: s columns: s) fillWithIndices * 4.0.
+        let out := FileStream stdout.
+        let a := (LTMatrix rows: s columns: s) fillWithIndices.
+        let b := (LTMatrix rows: s columns: s) fillWithIndices * 4.0.
 
-"    out nextPutAll: 'A = '; print: a; lf.
-    out nextPutAll: 'B = '; print: b; lf.
-    out nextPutAll: 'A + B = '; print: a + b; lf.
-    out nextPutAll: 'A - B = '; print: a - b; lf.
-    out nextPutAll: 'A * B = '; print: a * b; lf.
-"
-    a + b.
-    a - b.
-    a * b.
+    "    out nextPutAll: 'A = '; print: a; lf.
+        out nextPutAll: 'B = '; print: b; lf.
+        out nextPutAll: 'A + B = '; print: a + b; lf.
+        out nextPutAll: 'A - B = '; print: a - b; lf.
+        out nextPutAll: 'A * B = '; print: a * b; lf.
+    "
+        a + b.
+        a - b.
+        a * b.
 
-    ^ 0
+        ^ 0
+    ]
 ]
