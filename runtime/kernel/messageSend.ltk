@@ -39,7 +39,7 @@ Constant named: #_MethodDictionary_scanFor value: [ <UIntPointer> :this<_MethodD
     <cdecl>
     <localReturn>
 
-    let finish<UIntPointer> := ObjectModel getPointersBasicSize #{this value array}.
+    let finish<UIntPointer> := ObjectModel getPointersBasicSize #{this value array reinterpretCastTo: Oop}.
     finish == 0 ifTrue: [
         ^ 0
     ].
