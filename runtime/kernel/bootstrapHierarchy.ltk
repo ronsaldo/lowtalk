@@ -1,0 +1,366 @@
+Class <<< #ProtoObject
+	superclass: nil;
+	yourself.
+
+Class <<< #Object
+	superclass: ProtoObject;
+	yourself.
+
+Class <<< #Behavior
+	superclass: Object;
+	slots: {
+		#superclass.
+		#methodDict.
+		#format.
+		#layout.
+	};
+	yourself.
+
+Class <<< #ClassDescription
+	superclass: Behavior;
+	slots: {
+		#instanceVariables.
+		#organization.
+	};
+	yourself.
+
+Class <<< #Metaclass
+	superclass: ClassDescription;
+	slots: {
+		#thisClass.
+		#traitComposition.
+		#localSelectors.
+	};
+	yourself.
+
+Class <<< #Class
+	superclass: ClassDescription;
+	slots: {
+		#subclasses.
+		#name.
+		#classPool.
+		#sharedPools.
+		#environment.
+		#category.
+		#traitComposition.
+		#localSelectors.
+	};
+	yourself.
+
+Class <<< #UndefinedObject
+	superclass: Object;
+	yourself.
+
+Class <<< #Boolean
+	superclass: Object;
+	yourself.
+
+Class <<< #True
+	superclass: Object;
+	yourself.
+
+Class <<< #False
+	superclass: Object;
+	yourself.
+
+Class <<< #Magnitude
+	superclass: Object;
+	yourself.
+
+Class <<< #Character
+	superclass: Magnitude;
+	layoutType: #immediate;
+	yourself.
+
+Class <<< #Number
+	superclass: Magnitude;
+	yourself.
+
+Class <<< #Float
+	superclass: Number;
+	yourself.
+
+Class <<< #BoxedFloat64
+	superclass: Float;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #SmallFloat
+	superclass: Float;
+	layoutType: #immediate;
+	yourself.
+
+Class <<< #Fraction
+	superclass: Number;
+	yourself.
+
+Class <<< #Integer
+	superclass: Number;
+	yourself.
+
+Class <<< #LargeInteger
+	superclass: Integer;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #LargeNegativeInteger
+	superclass: LargeInteger;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #LargePositiveInteger
+	superclass: LargeInteger;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #SmallInteger
+	superclass: Integer;
+	layoutType: #immediate;
+	classSlots: {
+		#minVal.
+		#maxVal.
+	};
+	yourself.
+
+Class <<< #LookupKey
+	superclass: Magnitude;
+	slots: {
+		#key.
+	};
+	yourself.
+
+Class <<< #Association
+	superclass: LookupKey;
+	slots: {
+		#value.
+	};
+	yourself.
+
+Class <<< #LiteralVariable
+	superclass: Association;
+	yourself.
+
+Class <<< #ClassVariable
+	superclass: LiteralVariable;
+	yourself.
+
+Class <<< #GlobalVariable
+	superclass: LiteralVariable;
+	yourself.
+
+Class <<< #WorkspaceVariable
+	superclass: LiteralVariable;
+	yourself.
+
+Class <<< #Point
+	superclass: Object;
+	slots: {
+		#x.
+		#y.
+	};
+	yourself.
+
+Class <<< #Collection
+	superclass: Object;
+	yourself.
+
+Class <<< #HashedCollection
+	superclass: Collection;
+	slots: {
+		#tally.
+		#array.
+	};
+	yourself.
+
+Class <<< #Dictionary
+	superclass: HashedCollection;
+	yourself.
+
+Class <<< #IdentityDictionary
+	superclass: Dictionary;
+	yourself.
+
+Class <<< #SystemDictionary
+	superclass: IdentityDictionary;
+	yourself.
+
+Class <<< #MethodDictionary
+	superclass: Dictionary;
+	slots: {
+		#values.
+	};
+	yourself.
+
+Class <<< #Set
+	superclass: HashedCollection;
+	yourself.
+
+Class <<< #IdentitySet
+	superclass: Set;
+	yourself.
+
+Class <<< #WeakSet
+	superclass: Set;
+	yourself.
+
+Class <<< #SequenceableCollection
+	superclass: Collection;
+	yourself.
+
+Class <<< #OrderedCollection
+	superclass: SequenceableCollection;
+	slots: {
+		#array.
+		#firstIndex.
+		#lastIndex.
+	};
+	yourself.
+
+Class <<< #ArrayedCollection
+	superclass: SequenceableCollection;
+	yourself.
+
+Class <<< #Array
+	superclass: ArrayedCollection;
+	layoutType: #variablePointers;
+	yourself.
+
+Class <<< #WeakArray
+	superclass: Array;
+	layoutType: #variableWeakPointers;
+	yourself.
+
+Class <<< #ByteArray
+	superclass: ArrayedCollection;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #String
+	superclass: ArrayedCollection;
+	yourself.
+
+Class <<< #ByteString
+	superclass: String;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #WideString
+	superclass: String;
+	layoutType: #words;
+	yourself.
+
+Class <<< #Symbol
+	superclass: String;
+	yourself.
+
+Class <<< #ByteSymbol
+	superclass: Symbol;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #WideSymbol
+	superclass: Symbol;
+	layoutType: #words;
+	yourself.
+
+Class <<< #CompiledMethod
+	superclass: Array;
+	layoutType: #variablePointers;
+	slots: {
+		#entryPoint.
+		#exitPoint.
+		#primitive.
+		#argumentsDescriptor.
+	};
+	yourself.
+
+Class <<< #Message
+	superclass: Object;
+	slots: {
+		#selector.
+		#args.
+		#lookupClass.
+	};
+	yourself.
+
+Class <<< #InstructionStream
+	superclass: Object;
+	slots: {
+		#sender.
+		#pc.
+	};
+	yourself.
+
+Class <<< #Context
+	superclass: InstructionStream;
+	layoutType: #mixedObject;
+	slots: {
+		#stackp.
+		#method.
+		#closureOrNil.
+		#argumentDescriptor.
+		#stackFrameDescriptor.
+	};
+	yourself.
+
+Class <<< #BlockClosure
+	superclass: Object;
+	layoutType: #mixedObject;
+	slots: {
+		#argumentDescriptor.
+		#entryPoint.
+	};
+	yourself.
+
+Class <<< #ExternalAddress
+	superclass: Object;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #ExternalObject
+	superclass: Object;
+	slots: {
+		#handle.
+	};
+	yourself.
+
+Class <<< #ExternalFunction
+	superclass: ExternalObject;
+	slots: {
+		#flags.
+		#argTypes.
+	};
+	yourself.
+
+Class <<< #ExternalLibrary
+	superclass: ExternalObject;
+	slots: {
+		#name.
+	};
+	yourself.
+
+Class <<< #ExternalStructure
+	superclass: ExternalObject;
+	yourself.
+
+Class <<< #ExternalData
+	superclass: ExternalStructure;
+	slots: {
+		#type.
+	};
+	yourself.
+
+Class <<< #Alien
+	superclass: ByteArray;
+	layoutType: #bytes;
+	yourself.
+
+Class <<< #UnsafeAlien
+	superclass: Object;
+	slots: {
+		#nonPointerObject.
+	};
+	yourself.
+
+"Class hierarchy short circuit"
+Object class superclass: Class.
