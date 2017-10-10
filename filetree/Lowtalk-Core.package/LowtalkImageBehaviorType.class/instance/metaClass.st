@@ -1,3 +1,3 @@
 accessing
-meta
+metaClass
 	^ self classObject class asLowtalkTypeWith: compiler

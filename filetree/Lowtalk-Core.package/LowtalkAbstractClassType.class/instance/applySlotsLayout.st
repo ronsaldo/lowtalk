@@ -25,5 +25,6 @@ applySlotsLayout
 	nativeSlots doWithIndex: layoutBuildingBlock.
 	contentSize := contentSize alignedTo: contentAlignment.
 	nativeContentSize := contentSize - nativeContentOffset.
-
+	
+	nativeSlots do: [ :slot | slot ssaReceiverCastType: self nativeSlotStructurePointerType ].
 	self selectProperLayout.

@@ -5,5 +5,4 @@ type
 	(compiler objectModel isRegisteredClass: behavior) ifFalse: [ 
 		self error: 'Using object without a class.'
 	].
-
-	^ (LowtalkClassType target: compiler compilationTarget) classObject: behavior
+	^ compiler classTypeForObject: behavior

@@ -48,7 +48,8 @@
 		"importedImageLiteralVariables",
 		"isSandboxed",
 		"importedImageClasses",
-		"finalCodeGenerator"
+		"finalCodeGenerator",
+		"classTypesForObjects"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

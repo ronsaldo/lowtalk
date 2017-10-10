@@ -8,7 +8,6 @@ buildModule
 		toProcess := pendingObjects asArray.
 		pendingObjects removeAll.
 		objectToFinish addAll: toProcess.
-		
 		toProcess do: #prepareToCompile.
 		toProcess do: #compileElement.
 	].

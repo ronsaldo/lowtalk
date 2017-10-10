@@ -9,7 +9,8 @@
 		"name",
 		"type",
 		"index",
-		"offset"
+		"offset",
+		"ssaReceiverCastType"
 	],
 	"name" : "LowtalkSlot",
 	"type" : "normal"

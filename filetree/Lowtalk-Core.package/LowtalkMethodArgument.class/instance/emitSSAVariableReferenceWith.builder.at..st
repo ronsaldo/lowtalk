@@ -1,3 +1,3 @@
 code generation
 emitSSAVariableReferenceWith: codeGenerator builder: builder at: node
-	^ compiler convertCapturedCompileTimeVariable: self
+	self error: 'Cannot get reference to argument'

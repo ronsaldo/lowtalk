@@ -25,7 +25,9 @@
 		"contentAlignment",
 		"nativeContentOffset",
 		"nativeContentSize",
-		"layoutType"
+		"layoutType",
+		"nativeSlotStructureType",
+		"nativeSlotStructurePointerType"
 	],
 	"name" : "LowtalkAbstractClassType",
 	"type" : "normal"

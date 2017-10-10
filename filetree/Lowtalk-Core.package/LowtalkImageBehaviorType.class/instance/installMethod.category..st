@@ -1,8 +1,8 @@
 methods
 installMethod: aMethod category: methodCategory
 	| compiledMethod |
+
 	compiledMethod := compiler generateCompiledMethod: aMethod.
-	"self classObject methodDict at: compiledMethod selector put: compiledMethod"
 	classObject addAndClassifySelector: compiledMethod selector
 		withMethod: compiledMethod
 		inProtocol: methodCategory 

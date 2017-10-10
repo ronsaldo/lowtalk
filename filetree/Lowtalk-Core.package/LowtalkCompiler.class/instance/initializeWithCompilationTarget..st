@@ -25,6 +25,7 @@ initializeWithCompilationTarget: aCompilationTarget
 	capturedCompileTimeVariables := IdentityDictionary new.
 	importedImageLiteralVariables := IdentityDictionary new.
 	importedImageClasses := IdentityDictionary new.
+	classTypesForObjects := IdentityDictionary new.
 	gensymCount := 0.
 	
 	optimizationLevel := 0.

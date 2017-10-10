@@ -2,4 +2,4 @@ accessing
 classSlots: slotsLazyValue
 	<compileTime>
 	<lazy>
-	^ self meta slots: slotsLazyValue
+	^ self metaClass slots: slotsLazyValue

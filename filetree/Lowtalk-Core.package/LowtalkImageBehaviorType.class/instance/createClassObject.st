@@ -14,6 +14,7 @@ createClassObject
 	self flag: 'HACK: remove the methods from the class to avoid triggering recompilation with the wrong compiler.'.
 	(name isNotNil and: [ Smalltalk globals includesKey: name ]) ifTrue: [ 
 		(Smalltalk globals at: name) methodDict removeAll.
+		(Smalltalk globals at: name) class methodDict removeAll.
 	].
 	
 	classObject := sc classInstaller make: [ :builder |
