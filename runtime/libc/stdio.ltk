@@ -28,12 +28,12 @@ Namespace named: #LibC members: [
         }.
     ] ifFalse: [
         Structure <<< #FILE slots: {}.
-        
-        Compiler operatingSystemName = #osx ifTrue: [
+
+        (#(osx freebsd) includes: Compiler operatingSystemName) ifTrue: [
             Global externalC: #__stdoutp type: FILE pointer.
             Global externalC: #__stdinp type: FILE pointer.
-            Global externalC: #__stderrp type: FILE pointer.        
-            
+            Global externalC: #__stderrp type: FILE pointer.
+
             self category: 'accessing' methods: {
             :[stdin -> FILE pointer.
                 ^ __stdinp
@@ -45,11 +45,11 @@ Namespace named: #LibC members: [
                 ^ __stderrp
             ].
             }.
-        
+
         ] ifFalse: [
             Global externalC: #stdout type: FILE pointer.
             Global externalC: #stdin type: FILE pointer.
-            Global externalC: #stderr type: FILE pointer.        
+            Global externalC: #stderr type: FILE pointer.
         ]
     ].
 
@@ -68,7 +68,7 @@ Namespace named: #LibC members: [
 
     "Printing"
     Constant externalC: #printf type: (ConstCString -> CInt) cvariadic.
-    
+
     Constant externalC: #sprintf type: ((CChar pointer , ConstCString) -> CInt) cvariadic.
     Constant externalC: #fprintf type: ((FILE pointer , ConstCString) -> CInt) cvariadic.
 ]

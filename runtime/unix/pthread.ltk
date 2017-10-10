@@ -52,6 +52,20 @@ Namespace named: #Unix members: [
         Constant named: #PTHREAD_MUTEX_DEFAULT type: LibC CInt value: 0.
     ].
 
+    Compiler operatingSystemName = #freebsd ifTrue: [
+        Constant named: #pthread_attr_t value: (UIntPointer array: 1). "sizeof(pthread_attr_t) = 8"
+        Constant named: #pthread_mutex_t value: (UIntPointer array: 1). "sizeof(pthread_mutex_t) = 8"
+        Constant named: #pthread_mutexattr_t value: (UIntPointer array: 1). "sizeof(pthread_mutexattr_t) = 8"
+        Constant named: #pthread_cond_t value: (UIntPointer array: 1). "sizeof(pthread_cond_t) = 8"
+        Constant named: #pthread_condattr_t value: (UIntPointer array: 1). "sizeof(pthread_condattr_t) = 8"
+        Constant named: #pthread_rwlock_t value: (UIntPointer array: 1). "sizeof(pthread_rwlock_t) = 8"
+        Constant named: #pthread_rwlockattr_t value: (UIntPointer array: 1). "sizeof(pthread_rwlockattr_t) = 8"
+        Constant named: #PTHREAD_MUTEX_NORMAL type: LibC CInt value: 3.
+        Constant named: #PTHREAD_MUTEX_ERRORCHECK type: LibC CInt value: 1.
+        Constant named: #PTHREAD_MUTEX_RECURSIVE type: LibC CInt value: 2.
+        Constant named: #PTHREAD_MUTEX_DEFAULT type: LibC CInt value: 1.
+    ].
+
     Constant named: #pthread_start_routine_t value: Void pointer -> Void pointer.
 
     "Posix threads"
