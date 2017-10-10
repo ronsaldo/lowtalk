@@ -1,4 +1,4 @@
-accessing
+methods
 concretizeMethod: aMethod
 	| actualMethod |
 	actualMethod := aMethod compiledMethodForReceiverTypeValue: self ref.

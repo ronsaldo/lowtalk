@@ -5,10 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"behavior",
-		"compiler"
-	],
+	"instvars" : [ ],
 	"name" : "LowtalkImageBehaviorType",
 	"type" : "normal"
 }

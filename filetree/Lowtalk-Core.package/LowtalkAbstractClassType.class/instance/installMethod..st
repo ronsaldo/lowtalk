@@ -1,0 +1,3 @@
+methods
+installMethod: aMethod
+	self subclassResponsibility

@@ -1,7 +1,8 @@
 initialization
 initialize
+	super initialize.
 	fields := #().
 	fieldNames := #().
-	pendingMethods := Dictionary new.
-	methods := Dictionary new.
+	pendingMethods := OrderedDictionary new.
+	methods := OrderedDictionary new.
 	

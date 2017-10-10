@@ -1,0 +1,3 @@
+slots
+selectProperLayout
+	self subclassResponsibility

@@ -1,3 +1,3 @@
 accessing
 classBindingWithCompiler: aCompiler
-	^ behavior binding
+	^ self classObject binding

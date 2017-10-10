@@ -1,3 +1,3 @@
 accessing
 value
-	^ binding value
+	^ binding value asLowtalkImportedValueWith: compiler

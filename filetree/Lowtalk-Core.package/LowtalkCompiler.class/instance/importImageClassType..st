@@ -4,5 +4,5 @@ importImageClassType: aBehavior
 	^ importedImageClasses at: aBehavior ifAbsentPut: [
 		(LowtalkImageBehaviorType target: compilationTarget)
 			compiler: self;
-			behavior: aBehavior
+			classObject: aBehavior
 	]

@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "LowtalkInterpreterVariable",
+	"super" : "LowtalkAbstractCompileTimeVariable",
 	"category" : "Lowtalk-Core-Environment",
 	"classinstvars" : [ ],
 	"pools" : [ ],

@@ -1,0 +1,4 @@
+accessing
+layoutType
+	<compileTime>
+	^ layoutType

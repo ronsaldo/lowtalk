@@ -17,6 +17,10 @@ createEnvironment
 		setCompileTimeVariable: #Namespace value: (LowtalkNamespaceBuilder new compiler: self);
 		setCompileTimeVariable: #Global value: (globalBuilder := LowtalkGlobalBuilder new compiler: self);
 		setCompileTimeVariable: #Constant value: (LowtalkConstantBuilder new compiler: self).
+	
+	compilerEnvironment
+		setCompileTimeVariable: #Class value: (LowtalkClassBuilder new compiler: self).
+	
 	LowtalkType addStandardTypesToEnvironment: compilerEnvironment target: compilationTarget.
 
 	voidType := (compilerEnvironment lookSymbol: #Void) value.

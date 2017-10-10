@@ -2,6 +2,16 @@ visiting
 visitIdentifierReferenceNode: node
 	| binding |
 	binding := node binding.
+	node type isCompileTimeType ifTrue: [ 
+		^ binding emitSSAVariableCompileTimeValueWith: self builder: builder at: node
+	].
+
+	node type isReferenceType ifTrue: [ 
+		^ binding emitSSAVariableReferenceWith: self builder: builder at: node
+	] ifFalse: [ 
+		^ binding emitSSAVariableLoadWith: self builder: builder at: node
+	].
+
 	binding isVariable ifTrue: [
 		binding isCompileTimeVariable ifTrue: [
 			node type isReferenceType ifTrue: [ 
