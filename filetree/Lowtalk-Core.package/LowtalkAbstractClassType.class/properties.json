@@ -12,6 +12,7 @@
 		"compiler",
 		"pendingMethods",
 		"slotsExpression",
+		"metaSlotsExpression",
 		"superclassExpression",
 		"superclass",
 		"superclassEvaluated",

@@ -7,7 +7,7 @@ dispatchSelector: selector receiver: receiver lazyArguments: arguments inSupercl
 
 	method := superClass lookupSelector: selector.
 	method ifNil: [
-		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector printString}.
+		^ receiver lowtalkDispatchSelector: selector lazyArguments: arguments inSuperclass: superClass node: sendingNode compiler: aCompiler
 	].
 
 	self checkMethod: method receiver: receiver node: sendingNode.

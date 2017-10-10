@@ -1,3 +1,7 @@
 accessing
 name
-	^ self getClassDescription name
+	classObject ifNotNil: [ 
+		^ self getClassDescription name.
+	].
+	
+	^ super name

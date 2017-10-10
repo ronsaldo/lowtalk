@@ -20,7 +20,7 @@ dispatchSelector: selector receiver: receiver arguments: arguments types: argume
 
 	method := actualSuperClass lookupSelector: selector.
 	method ifNil: [
-		^ sendingNode semanticError: 'Compile time expression calling unexistent selector {1}' format: { selector printString}.
+		^ receiver lowtalkDispatchSelector: selector arguments: arguments types: argumentTypes inSuperclass: superClass node: sendingNode compiler: aCompiler
 	].
 
 	aCompiler isSandboxed ifTrue: [ 

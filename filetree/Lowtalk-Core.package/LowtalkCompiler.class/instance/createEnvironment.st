@@ -40,6 +40,8 @@ createEnvironment
 	doubleType := (compilerEnvironment lookSymbol: #Float64) value.
 	thisContextType  := (compilerEnvironment lookSymbol: #_ThisContext) value.
 	compileTimeType := LowtalkCompileTimeType target: compilationTarget.
+	classBuilder := (compilerEnvironment lookSymbol: #Class) value.
+	structureBuilder := (compilerEnvironment lookSymbol: #Structure) value.
 
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GlobalNamespace.
 	globalEnvironment

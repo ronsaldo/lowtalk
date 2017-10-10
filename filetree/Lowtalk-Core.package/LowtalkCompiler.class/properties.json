@@ -49,7 +49,9 @@
 		"isSandboxed",
 		"importedImageClasses",
 		"finalCodeGenerator",
-		"classTypesForObjects"
+		"classTypesForObjects",
+		"classBuilder",
+		"structureBuilder"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

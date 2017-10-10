@@ -1,3 +1,7 @@
 superclass
 superclass
-	^ self getClassDescription superclass ifNotNil: [ :co | co classObject asClassType ]
+	classObject ifNotNil: [
+		^ self getClassDescription superclass ifNotNil: [ :co | co classObject asClassType ].
+	].
+
+	^ super superclass
