@@ -1,10 +1,17 @@
-let ContextStackMetadataElementCount<IntPointer> := 4.
-
 let SignedPointerSize<IntPointer> := UIntPointer size castTo: IntPointer.
-let ContextCompiledMethodPointerOffset<IntPointer> := -1 * UIntPointer size castTo: IntPointer.
-let ContextMarriedContextPointerOffset<IntPointer> := -2 * UIntPointer size castTo: IntPointer.
-let ContextArgumentDescriptorOffset<IntPointer> := -3 * UIntPointer size castTo: IntPointer.
-let ContextStackDescriptorOffset<IntPointer> := -4 * UIntPointer size castTo: IntPointer.
+
+"In some architectures and platforms (i386 in Linux and OS X), we need to reserve space for the GOT
+pointer for PIC code."
+let ContextMetadataBaseOffset<IntPointer> := 0.
+Compiler compilationTarget needsSlotForGOTPointer ifTrue: [
+    ContextMetadataBaseOffset := -1 * UIntPointer size castTo: IntPointer
+].
+
+let ContextCompiledMethodPointerOffset<IntPointer> := (UIntPointer size * -1) + ContextMetadataBaseOffset castTo: IntPointer.
+let ContextMarriedContextPointerOffset<IntPointer> := (UIntPointer size * -2) + ContextMetadataBaseOffset castTo: IntPointer.
+let ContextArgumentDescriptorOffset<IntPointer> := (UIntPointer size * -3) + ContextMetadataBaseOffset castTo: IntPointer.
+let ContextStackDescriptorOffset<IntPointer> := (UIntPointer size * -4) + ContextMetadataBaseOffset castTo: IntPointer.
+let ContextStackMetadataLastOffset<IntPointer> := ContextStackDescriptorOffset.
 
 let contextFixedFields := InstructionStream instanceVariables size + Context instanceVariables size castTo: UInt32.
 
@@ -35,7 +42,7 @@ Constant named: #marryThisContext value: [<ContextHeader pointer> :framePointer<
 
     let previousContext := marriedContextPointer value.
     previousContext ifNotNil: [
-        LibC printf #{c'Previous context %p\n' . previousContext}.
+        "LibC printf #{c'Previous context %p\n' . previousContext}."
         ObjectModel increaseReference #{previousContext reinterpretCastTo: ObjectModel ObjectHeader pointer}.
         ^ previousContext
     ].
@@ -169,7 +176,7 @@ Constant named: #cleanFrameForUnwinding value: [<Void> :framePointer<UIntPointer
 
     widowThisContext #{framePointer reinterpretCastTo: UInt8 pointer}.
 
-    let localsBase := framePointer - ((ContextStackMetadataElementCount + registersToPreserve) * SignedPointerSize).
+    let localsBase := framePointer + ContextStackMetadataLastOffset - (registersToPreserve * SignedPointerSize).
     1 to: oopLocals do: [:i |
         let localPointer := localsBase - (i*SignedPointerSize) reinterpretCastTo: ObjectHeader pointer pointer.
         let localValue := localPointer value.

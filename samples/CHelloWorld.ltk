@@ -1,4 +1,6 @@
 Constant namedC: #main value: [<Int32> :argc<Int32> :argv<LibC ConstCString pointer> |
+    LibC printf #{c'Printing arguments\n'}.
+
     1 to: argc do: [ :i |
         LibC printf #{c'Iteration %d\n' . i}.
         LibC printf #{c'Argument %d: %s\n' . i . argv at: i}.
