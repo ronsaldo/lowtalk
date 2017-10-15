@@ -1,5 +1,6 @@
 Class <<< #ProtoObject
 	superclass: nil;
+	metaSuperclass: Class;
 	yourself.
 
 Class <<< #Object
@@ -32,6 +33,7 @@ Class <<< #Metaclass
 		#localSelectors.
 	};
 	yourself.
+ProtoObject metaClassClass: Metaclass.
 
 Class <<< #Class
 	superclass: ClassDescription;
@@ -362,5 +364,7 @@ Class <<< #UnsafeAlien
 	};
 	yourself.
 
-"Class hierarchy short circuit"
-Object class superclass: Class.
+Compiler objectModel
+    globalVariableClass: GlobalVariable;
+    classVariableClass: ClassVariable;
+	yourself

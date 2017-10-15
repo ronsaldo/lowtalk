@@ -1,0 +1,44 @@
+CompiledMethod category: 'accessing' methods: {
+:[entryPoint
+    ^ entryPoint
+].
+:[entryPoint: newEntryPoint
+    entryPoint := newEntryPoint
+].
+
+:[exitPoint
+    ^ exitPoint
+].
+:[exitPoint: newExitPoint
+    exitPoint := newExitPoint
+].
+
+:[primitive
+    ^ primitive
+].
+:[primitive: newPrimitive
+    primitive := newPrimitive
+].
+
+:[argumentsDescriptor
+    ^ argumentsDescriptor
+].
+:[argumentsDescriptor: newArgumentsDescriptor
+    argumentsDescriptor := newArgumentsDescriptor
+].
+
+}.
+
+Compiler objectModel
+    convertMethodContextMetadataFunction: [:entryPoint :literals |
+        let result := CompiledMethod basicNew: literals size.
+        entryPoint ifNotNil: [
+            result entryPoint: entryPoint;
+                exitPoint: entryPoint exitPoint;
+                primitive: entryPoint primitive;
+                argumentsDescriptor: entryPoint argumentsDescriptor.
+        ].
+        1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
+        result
+    ];
+    yourself

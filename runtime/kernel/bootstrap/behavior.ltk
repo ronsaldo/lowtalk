@@ -1,0 +1,354 @@
+"Method dictionary"
+HashedCollection category: 'initialization' methods: {
+:[initialize: n
+	"Initialize array to an array size of n"
+	array := Array new: n.
+	tally := 0
+].
+}.
+
+HashedCollection class category: 'instance creation' methods: {
+:[new
+	^ self basicNew
+		initialize: 5;
+		yourself
+].
+
+:[new: nElements
+	"Create a Set large enough to hold nElements without growing"
+	^ self basicNew initialize: (self sizeFor: nElements)
+].
+
+:[sizeFor: nElements
+	"Large enough size to hold nElements with some slop (see fullCheck)"
+	
+	nElements < 4 ifTrue: [ ^5 ].
+	^ nElements * 4 // 3
+	"^ HashTableSizes atLeast: nElements +1 * 4 // 3"
+].
+
+}.
+
+MethodDictionary category: 'initialization' methods: {
+:[initialize: n
+	"Initialize array to an array size of n"
+	array := Array new: n.
+	tally := 0.
+    values := Array new: n.
+].
+}.
+
+MethodDictionary category: 'scanning' methods: {
+:[scanFor: key
+    let finish<UIntPointer> := array basicSize castTo: UIntPointer.
+    finish == 0 ifTrue: [
+        ^ 0
+    ].
+
+    let start<UIntPointer> := ((key identityHash castTo: UIntPointer) \\ finish) + 1.
+    let element := nil.
+
+    "Search from (hash mod size) to the end."
+    start to: finish do: [:index<UIntPointer> |
+        ((element := array basicAt: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    "Search from 1 to where we started."
+    1 to: start-1 do: [:index<UIntPointer> |
+        ((element := array basicAt: index) == nil or: [element == key])
+            ifTrue: [^ index ]
+    ].
+
+    ^ 0  "No match AND no empty slot"
+].
+}.
+
+MethodDictionary category: 'accessing' methods: {
+:[atOrNil: key
+    let index := self scanFor: key.
+    ^ index ~= 0 ifTrue: [values basicAt: index] ifFalse: [nil].
+].
+
+:[at: key putNoCheck: value
+    let index := self scanFor: key.
+    array basicAt: index put: key.
+    values basicAt: index put: value.
+    tally := tally + 1.
+].
+
+:[at: key put: value 
+    let index := self scanFor: key.
+    index = 0 ifTrue: [
+        self grow.
+        index := self scanFor: key
+    ].
+
+    (array basicAt: index) ifNil: [
+        tally := tally + 1.
+        tally >= (array basicSize * 3 // 4) ifTrue: [
+            self grow.
+            index := self scanFor: key
+        ]
+    ].
+
+    array basicAt: index put: key.
+    values basicAt: index put: value.
+].
+}.
+
+MethodDictionary category: 'private' methods: {
+:[grow
+    let oldKeys := array.
+    let oldValues := values.
+    let oldSize := array basicSize.
+    let newSize := oldSize * 2.
+    newSize < 8 ifTrue: [ newSize := 8 ].
+
+    array := Array basicNew: newSize.
+    values := Array basicNew: newSize.
+
+    tally := 0.
+    1 to: oldSize do: [:i |
+        let key := oldKeys basicAt: i.
+        let value := oldValues basicAt: i.
+        key ifNotNil: [
+            self at: key putNoCheck: value.
+        ]
+    ].
+].
+}.
+
+"Behavior accessing"
+Behavior category: 'accessing' methods: {
+:[superclass
+	^ superclass
+].
+
+:[methodDict
+	^ methodDict
+].
+
+:[lookupSelector: selector
+    let position := self.
+    [position == nil] whileFalse: [
+        let result := position methodDict atOrNil: selector.
+        result ifNotNil: [^ result].
+        position := position superclass castTo: Behavior
+    ].
+
+    ^ nil
+].
+
+}.
+
+ClassDescription category: 'method addition' methods: {
+:[category: aCategoryName methods: aCollectionOfMethods
+    aCollectionOfMethods do: [:method |
+        let compiledMethod := method compiledMethodForReceiverType: self.
+        methodDict at: compiledMethod selector put: compiledMethod
+    ]
+].
+}.
+
+"Class creation primitives"
+Behavior category: 'instance creation' methods: {
+:[basicNew
+    let result := ObjectModel basicNewFixed #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer}.
+    ^ result reinterpretCastTo: _DynamicObject
+].
+
+:[basicNew: size
+    let result := ObjectModel basicNewVariable #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer . size reinterpretCastTo: UIntPointer}.
+    ^ result reinterpretCastTo: _DynamicObject
+].
+
+:[new
+    ^ self basicNew initialize; yourself
+].
+
+:[new: size
+    ^ (self basicNew: size) initialize; yourself
+].
+
+}.
+
+Behavior category: 'format specification' methods: {
+:[instSize
+    ^ format bitAnd: 16rffff
+].
+
+:[instSpec
+    ^ format >> 16 bitAnd: 16r1f
+].
+
+}.
+
+"More accessing methods, to finish the class hierarchy bootstrapping process"
+Behavior category: 'accessing' methods: {
+:[superclass: aSuperclass
+    superclass := aSuperclass
+].
+
+:[format
+    ^ format
+].
+
+:[format: aFormat
+    format := aFormat
+].
+
+:[layout
+    ^ layout
+].
+
+:[layout: aLayout
+    layout := aLayout
+].
+
+:[methodDict: aMethodDictionary
+    methodDict := aMethodDictionary
+].
+
+}.
+
+ClassDescription category: 'accessing' methods: {
+:[instanceVariables
+    ^ instanceVariables
+].
+
+:[basicSetInstanceVariables: anArray
+    instanceVariables := anArray
+].
+}.
+
+Class category: 'accessing' methods: {
+:[environment
+    ^ environment
+].
+
+:[environment: anEnvironment
+    environment := anEnvironment
+].
+
+:[name
+    ^ name
+].
+
+:[name: aName
+    name := aName
+].
+
+:[subclasses
+    ^ subclasses ifNil: [ #() ] ifNotNil: [ subclasses copy ]
+].
+
+:[subclasses: aCollectionOfSubclasses
+    subclasses := aCollectionOfSubclasses
+].
+
+:[addSubclass: aSubClass
+    self subclasses: (self subclasses copyWith: aSubClass)
+].
+
+}.
+
+Metaclass category: 'accessing' methods: {
+:[name
+    ^ thisClass name , ' class'
+].
+
+:[thisClass
+    ^ thisClass
+].
+
+:[thisClass: aClass
+    thisClass := aClass
+].
+
+}.
+
+"Meta data importing"
+Class category: 'metadata importing' methods: {
+:[importDataFromType: aType
+	superclass := aType superclass.
+	format := aType format.
+
+    name := aType name.
+	self class thisClass: self.
+    environment := aType environment.
+].
+
+:[finishImportDataFromType: aType
+    subclasses := aType subclasses.
+    methodDict := MethodDictionary new.
+    aType methodDict keysAndValuesDo: [:selector :method |
+        methodDict at: selector put: method
+    ]
+].
+}.
+
+Metaclass category: 'metadata importing' methods: {
+:[importDataFromType: aType
+	superclass := aType superclass.
+	format := aType format.
+].
+
+:[finishImportDataFromType: aType
+    methodDict := MethodDictionary new.
+    aType methodDict keysAndValuesDo: [:selector :method |
+        methodDict at: selector put: method
+    ]
+].
+}.
+
+Behavior category: 'enumerating' methods: {
+:[withAllSubclassesDo: aBlock
+    aBlock value: self.
+    self allSubclassesDo: aBlock
+].
+
+:[allSubclassesDo: aBlock
+	"Evaluate the argument, aBlock, for each of the receiver's subclasses."
+
+	self subclassesDo: [:cl |
+		aBlock value: cl.
+		cl allSubclassesDo: aBlock
+    ]
+].
+
+:[subclassesDo: aBlock
+    self subclasses do: aBlock
+].
+
+}.
+
+Class category: 'enumerating' methods: {
+:[subclassesDo: aBlock
+    subclasses ifNotNil: [
+        subclasses do: aBlock
+    ]
+].
+}.
+
+Class category: 'printing' methods: {
+:[printOn: aStream
+    aStream nextPutAll: name
+]
+}.
+
+"Class binding"
+Behavior category: 'accessing' methods: {
+:[binding
+    ^ Association key: nil value: self
+]
+}.
+
+Class category: 'accessing' methods: {
+:[binding
+    "Answer a binding for the receiver, sharing if possible"
+    | binding |
+    binding := self environment associationAt: self name ifAbsent: [Association key: nil value: self].
+    ^ binding value == self ifTrue: [binding] ifFalse: [Association key: nil value: self]
+]
+}

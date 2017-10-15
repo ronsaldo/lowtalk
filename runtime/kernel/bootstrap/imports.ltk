@@ -1,0 +1,63 @@
+"Object model conversion functions. Used by the compiler to convert objects into the proper format."
+Compiler objectModel
+    convertArrayFunction: [:array |
+        let result := Array basicNew: array size.
+        1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
+        Compiler objectModel setObject: result identityHash: array identityHash.
+        result
+    ];
+    convertByteSymbolFunction: [:symbol |
+        let result := ByteSymbol basicNew: symbol size.
+        1 to: symbol size do: [:i | result basicAt: i put: (symbol basicAt: i)].
+        Compiler objectModel setObject: result identityHash: symbol identityHash.
+        result
+    ];
+    convertByteStringFunction: [:string |
+        let result := ByteString basicNew: string size.
+        1 to: string size do: [:i | result basicAt: i put: (string basicAt: i)].
+        Compiler objectModel setObject: result identityHash: string identityHash.
+        result
+    ];
+    convertBoxedFloat64Function: [:data |
+        let result := BoxedFloat64 basicNew: 8.
+        1 to: 8 do: [:i | result basicAt: i put: (data at:i) ].
+        result
+    ];
+    globalVariableClass: GlobalVariable;
+    classVariableClass: ClassVariable;
+    yourself.
+
+"Set the classes of the special literals."
+Compiler objectModel
+    setObject: nil class: UndefinedObject;
+    setObject: true class: True;
+    setObject: false class: False.
+
+"Instantiate the special literals."
+Constant
+    named: #nil type: _DynamicObject value: nil;
+    named: #true type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: True);
+    named: #false type: _DynamicObject value: (Compiler objectModel setObject: (Compiler objectModel newObjectWithPointers: 0) class: False).
+
+Compiler objectModel
+    trueVariable: (_GlobalNamespace variableAt: #true);
+    falseVariable: (_GlobalNamespace variableAt: #false).
+
+"Register the immediate classes."
+let oopSize := UIntPointer size.
+
+let Oop := ObjectModel ObjectHeader pointer.
+oopSize = 4 ifTrue: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: (UndefinedObject reinterpretCastTo: Oop);
+        atOffset: 1 put: (SmallInteger reinterpretCastTo: Oop);
+        atOffset: 2 put: (Character reinterpretCastTo: Oop);
+        atOffset: 3 put: (SmallInteger reinterpretCastTo: Oop).
+] ifFalse: [
+    ObjectModel ImmediateClassTable
+        atOffset: 0 put: (UndefinedObject reinterpretCastTo: Oop);
+        atOffset: 1 put: (SmallInteger reinterpretCastTo: Oop);
+        atOffset: 2 put: (Character reinterpretCastTo: Oop);
+        atOffset: 4 put: (SmallFloat reinterpretCastTo: Oop).
+].
+

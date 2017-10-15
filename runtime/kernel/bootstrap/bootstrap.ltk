@@ -1,0 +1,11 @@
+Compiler
+    evaluateFileNamed: 'objectModel.ltk';
+    evaluateFileNamed: 'hierarchy.ltk';
+    evaluateFileNamed: 'behavior.ltk';
+    evaluateFileNamed: 'object.ltk';
+    evaluateFileNamed: 'compiledMethod.ltk';
+    evaluateFileNamed: 'association.ltk';
+    evaluateFileNamed: 'messageSend.ltk';
+    evaluateFileNamed: 'undefinedObject.ltk';
+    evaluateFileNamed: 'imports.ltk'
+

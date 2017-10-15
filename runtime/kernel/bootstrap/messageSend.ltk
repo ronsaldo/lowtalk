@@ -68,6 +68,7 @@ Constant named: #_MethodDictionary_atOrNil value: [ <Oop> :this<_MethodDictionar
     <localReturn>
 
     let index := _MethodDictionary_scanFor #{this . key}.
+    "LibC printf #{c'atOrNil index %p\n' . index}."
     ^ index ~= 0 ifTrue: [this value values value slots at: index] ifFalse: [nil].
 ].
 
@@ -128,7 +129,6 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
     <smalltalk_send>
     <localReturn>
     "LibC printf #{c'Send %p selector [p: %p]\n' . receiver . selector}."
-
     "LibC printf #{c'Send selector [p: %p, ih: %08X, v: %.*s]\n' .
         selector . selector value identityHash . (ObjectModel getBytesObjectSize #{selector}) .  (ObjectModel getFirstFixedFieldPointer #{selector})}."
 
@@ -154,7 +154,7 @@ Constant named: #sendTrampoline value: [ :selector<ObjectModel ObjectHeader poin
         let entryPoint := compiledMethod value entryPoint - 1 reinterpretCastTo: Void pointer.
         thisContext uncheckedReplaceFunctionWith: entryPoint.
     ] ifFalse: [
-        LibC fprintf #{LibC stderr. c'TODO: dispatch to non compiled method\n'}.
+        LibC fprintf #{LibC stderr. c'TODO: dispatch to non compiled method: %p\n' . method}.
         LibC abort #{}
     ].
 

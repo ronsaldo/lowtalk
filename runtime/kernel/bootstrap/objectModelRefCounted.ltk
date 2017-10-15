@@ -714,6 +714,7 @@ newObjectHeaderWithWords
         newObjectHeaderWithBytes: newObjectHeaderWithBytes;
         setIdentityHashFunction: setIdentityHash;
         truncateIdentityHashFunction: truncateIdentityHash;
+        createNamedFormatSpec: createNamedFormatSpec;
 
         setObjectClassFunction: [<Void> :header<ObjectHeader pointer> :classPointer <ObjectHeader pointer> |
             header value classPointer: classPointer

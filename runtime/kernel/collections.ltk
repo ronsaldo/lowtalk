@@ -167,45 +167,6 @@ SequenceableCollection category: 'accessing ordinals' methods: {
 
 }.
 
-HashedCollection category: 'initialization' methods: {
-:[initialize: n
-	"Initialize array to an array size of n"
-	array := Array new: n.
-	tally := 0
-].
-}.
-
-MethodDictionary category: 'initialization' methods: {
-:[initialize: n
-	"Initialize array to an array size of n"
-	array := Array new: n.
-	tally := 0.
-    values := Array new: n.
-].
-}.
-
-HashedCollection class category: 'instance creation' methods: {
-:[new
-	^ self basicNew
-		initialize: 5;
-		yourself
-].
-
-:[new: nElements
-	"Create a Set large enough to hold nElements without growing"
-	^ self basicNew initialize: (self sizeFor: nElements)
-].
-
-:[sizeFor: nElements
-	"Large enough size to hold nElements with some slop (see fullCheck)"
-	
-	nElements < 4 ifTrue: [ ^5 ].
-	^ nElements * 4 // 3
-	"^ HashTableSizes atLeast: nElements +1 * 4 // 3"
-].
-
-}.
-
 HashedCollection category: 'private' methods: {
 :[atNewIndex: index put: anObject
 	array at: index put: anObject.

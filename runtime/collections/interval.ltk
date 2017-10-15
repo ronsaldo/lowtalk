@@ -1,6 +1,10 @@
-SequenceableCollection subclass: #Interval
-	instanceVariableNames: 'start stop step'
-	classVariableNames: ''
+Class <<< #Interval
+    superclass: SequenceableCollection;
+    slots: {
+        #start.
+        #stop.
+        #step
+    };
 	package: 'Collections-Sequenceable'.
     
 Number category: 'interval' methods: {

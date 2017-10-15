@@ -1,0 +1,59 @@
+ProtoObject category: 'initialization' methods: {
+:[initialize
+    "By default do nothing"
+].
+
+:[finalize
+    "By default do nothing"
+].
+}.
+
+ProtoObject category: 'accessing' methods: {
+:[at: index
+    ^ self basicAt: index
+].
+
+:[at: index put: value
+    ^ self basicAt: index put: value
+].
+
+:[class
+    ^ ObjectModel getObjectClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer} reinterpretCastTo: _DynamicObject
+].
+
+:[size
+    ^ self basicSize
+].
+
+:[basicAt: index
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    let result := ObjectModel uncheckedIndexableBasicAt #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . indexValue}.
+    ^ result reinterpretCastTo: _DynamicObject
+].
+
+:[basicAt: index put: value
+    let indexValue := index castTo: UIntPointer.
+    let size := ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    (indexValue < 1 or: [indexValue > size]) ifTrue: [
+        self errorSubscriptBounds: index
+    ].
+
+    ObjectModel uncheckedIndexableBasicAtPut #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . indexValue . value reinterpretCastTo: ObjectModel ObjectHeader pointer}.
+    ^ value
+].
+
+:[basicSize
+    ^ ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
+].
+
+:[yourself
+    ^ self
+].
+
+}.
+

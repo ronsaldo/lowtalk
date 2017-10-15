@@ -9,7 +9,7 @@ Namespace named: #ObjectModel members: [
         #entryPoint => UIntPointer.
     }.
 
-    let closureFixedFields := BlockClosure instanceVariables size castTo: UInt32.
+    let closureFixedFields := BlockClosure instanceSize castTo: UInt32.
     Compiler staticAssert: (ClosureHeader size - ObjectHeader size) = (closureFixedFields * UIntPointer size).
 
     Constant named: #instantiateClosure value: [<ObjectHeader pointer> :entryPoint<UIntPointer> :argumentDescriptor<UIntPointer> :dynamicSlotCount<UIntPointer> :size<UIntPointer> |

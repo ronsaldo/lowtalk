@@ -1,14 +1,9 @@
 Compiler
-    evaluateFileNamed: 'objectModel.ltk';
-    evaluateFileNamed: 'bootstrap.ltk';
-    evaluateFileNamed: 'messageSend.ltk';
-    evaluateFileNamed: 'undefinedObject.ltk';
+    evaluateFileNamed: 'bootstrap/bootstrap.ltk';
     evaluateFileNamed: 'magnitude.ltk';
     evaluateFileNamed: 'boolean.ltk';
     evaluateFileNamed: 'blockClosure.ltk';
     evaluateFileNamed: 'collections.ltk';
-    evaluateFileNamed: 'class.ltk';
-    evaluateFileNamed: 'association.ltk';
 
     evaluateFileNamed: 'moreKernelClasses.ltk';
     evaluateFileNamed: 'magnitudeCasts.ltk';

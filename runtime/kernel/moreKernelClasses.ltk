@@ -1,124 +1,150 @@
 "Exception classes"
-Object subclass: #Exception
-	instanceVariableNames: 'messageText tag signaler signalContext handlerContext outerContext'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-Exception subclass: #Error
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #Exception
+	superclass: Object;
+    slots: {
+        #messageText.
+        #tag.
+        #signaler.
+        #signalContext.
+        #handlerContext.
+        #outerContext
+    };
+    package: 'Kernel-Exceptions'.
 
-Exception subclass: #UnhandledError
-	instanceVariableNames: 'exception'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #Error
+	superclass: Exception;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 
-Error subclass: #ArithmeticError
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-ArithmeticError subclass: #DomainError
-	instanceVariableNames: 'from to'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-ArithmeticError subclass: #FloatingPointException
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-ArithmeticError subclass: #NaNException
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-ArithmeticError subclass: #ZeroDivide
-	instanceVariableNames: 'dividend'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-Error subclass: #AssertionFailure
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-	
-Error subclass: #MessageNotUnderstood
-	instanceVariableNames: 'message receiver reachedDefaultHandler'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #UnhandledError
+	superclass: Exception;
+    slots: {
+        #exception
+    };
+    package: 'Kernel-Exceptions'.
 
-Error subclass: #SubscriptOutOfBounds
-	instanceVariableNames: 'subscript lowerBound upperBound'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #ArithmeticError
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 
-Error subclass: #InvalidObjectToNativeCast
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-InvalidObjectToNativeCast subclass: #InvalidObjectToPointerCast
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-InvalidObjectToNativeCast subclass: #InvalidObjectToFloatCast
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
-InvalidObjectToNativeCast subclass: #InvalidObjectToIntegerCast
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #DomainError
+	superclass: ArithmeticError;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 	
-Error subclass: #CannotReturn
-	instanceVariableNames: 'result'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #FloatingPointException
+	superclass: ArithmeticError;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 
-CannotReturn subclass: #BlockCannotReturn
-	instanceVariableNames: 'home'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #NaNException
+	superclass: ArithmeticError;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 
-CannotReturn subclass: #ContextCannotReturn
-	instanceVariableNames: 'target'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #ZeroDivide
+	superclass: ArithmeticError;
+    slots: {};
+    package: 'Kernel-Exceptions'.
 
-"More reflection"	
-Object subclass: #NamespaceClass
-	instanceVariableNames: 'name variables methodDict'
-	classVariableNames: ''
-	package: 'Kernel-Reflection'.
+Class <<< #AssertionFailure
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #MessageNotUnderstood
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #SubscriptOutOfBounds
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #InvalidObjectToNativeCast
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #InvalidObjectToPointerCast
+	superclass: InvalidObjectToNativeCast;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #InvalidObjectToFloatCast
+	superclass: InvalidObjectToNativeCast;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #InvalidObjectToIntegerCast
+	superclass: InvalidObjectToNativeCast;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #CannotReturn
+	superclass: Error;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #BlockCannotReturn
+	superclass: CannotReturn;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+Class <<< #ContextCannotReturn
+	superclass: CannotReturn;
+    slots: {};
+    package: 'Kernel-Exceptions'.
+
+"More reflection classes"	
+Class <<< #NamespaceClass
+	superclass: Object;
+    slots: {
+        #name.
+        #variables.
+        #methodDict
+    };
+    package: 'Kernel-Reflection'.
 
 "Stream classes. Used for printing"
-Object subclass: #Stream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
+Class <<< #Stream
+	superclass: Object;
+    slots: {};
+    package: 'Collections-Streams'.
 
-Stream subclass: #PositionableStream
-	instanceVariableNames: 'collection position readLimit'
-	classVariableNames: ''
-	package: 'Collections-Streams'.
+Class <<< #PositionableStream
+	superclass: Stream;
+    slots: {
+        #collection.
+        #position.
+        #readLimit.
+    };
+    package: 'Collections-Streams'.
 
-PositionableStream subclass: #ReadStream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
+Class <<< #ReadStream
+	superclass: PositionableStream;
+    slots: {};
+    package: 'Collections-Streams'.
 
-PositionableStream subclass: #WriteStream
-	instanceVariableNames: 'writeLimit'
-	classVariableNames: ''
-	package: 'Collections-Streams'.
+Class <<< #WriteStream
+	superclass: PositionableStream;
+    slots: {
+        #writeLimit
+    };
+    package: 'Collections-Streams'.
 
-WriteStream subclass: #ReadWriteStream
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'Collections-Streams'.
+Class <<< #ReadWriteStream
+	superclass: WriteStream;
+    slots: {};
+    package: 'Collections-Streams'.
 
-ReadWriteStream subclass: #FileStream
-	instanceVariableNames: 'rwmode'
-	classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles'
-	package: 'Files-Deprecated'.
+Class <<< #FileStream
+	superclass: ReadWriteStream;
+    slots: {
+        #rwmode
+    };
+    classVariableNames: 'Stderr Stdin StdioFiles Stdout TheStdioHandles';
+    package: 'Files-Deprecated'.
+

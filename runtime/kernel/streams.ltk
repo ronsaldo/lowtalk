@@ -177,9 +177,11 @@ UnhandledError category: 'exception description' methods: {
 }.
 
 "Standard IO streams implementation"
-FileStream subclass: #StandardFileStream
-	instanceVariableNames: 'handle'
-	classVariableNames: ''
+Class <<< #StandardFileStream
+    superclass: FileStream;
+    slots: {
+        #handle
+    };
 	package: 'Files-Deprecated'.
 	
 StandardFileStream class category: 'construction' methods: {

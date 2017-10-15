@@ -1,29 +1,38 @@
-Object subclass: #Thread
-    instanceVariableNames: 'handle entryPoint result'
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
+"Standard IO streams implementation"
+Class <<< #Thread
+    superclass: Object;
+    slots: {
+        #handle.
+        #entryPoint.
+        #result
+    };
+	package: 'Kernel-Thread'.
 
 "Normal non-recursive mutex"
-Object variableByteSubclass: #UniqueLock
-    instanceVariableNames: ''
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
+Class <<< #UniqueLock
+    superclass: Object;
+    layoutType: #bytes;
+    slots: {};
+	package: 'Kernel-Thread'.
 
 "Recursive mutex"
-UniqueLock variableByteSubclass: #Mutex
-    instanceVariableNames: ''
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
+Class <<< #Mutex
+    superclass: UniqueLock;
+    layoutType: #bytes;
+    slots: {};
+	package: 'Kernel-Thread'.
 
-Object variableByteSubclass: #ConditionVariable
-    instanceVariableNames: ''
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
+Class <<< #ConditionVariable
+    superclass: Object;
+    layoutType: #bytes;
+    slots: {};
+	package: 'Kernel-Thread'.
 
-Object variableByteSubclass: #Semaphore
-    instanceVariableNames: ''
-    classVariableNames: ''
-    package: 'Kernel-Thread'.
+Class <<< #Semaphore
+    superclass: Object;
+    layoutType: #bytes;
+    slots: {};
+	package: 'Kernel-Thread'.
 
 let MutexByteSize := Unix pthread_mutex_t size.
 let ConditionVariableByteSize := Unix pthread_cond_t size.

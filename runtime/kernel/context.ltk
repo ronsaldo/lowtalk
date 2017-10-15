@@ -13,7 +13,7 @@ let ContextArgumentDescriptorOffset<IntPointer> := (UIntPointer size * -3) + Con
 let ContextStackDescriptorOffset<IntPointer> := (UIntPointer size * -4) + ContextMetadataBaseOffset castTo: IntPointer.
 let ContextStackMetadataLastOffset<IntPointer> := ContextStackDescriptorOffset.
 
-let contextFixedFields := InstructionStream instanceVariables size + Context instanceVariables size castTo: UInt32.
+let contextFixedFields := Context instanceSize castTo: UInt32.
 
 let EnsurePrimitiveNumber<UIntPointer> := ObjectModel encodeSmallInteger #{198}.
 
