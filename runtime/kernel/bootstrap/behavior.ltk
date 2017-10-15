@@ -281,7 +281,7 @@ Class category: 'metadata importing' methods: {
 
 :[finishImportDataFromType: aType
     subclasses := aType subclasses.
-    methodDict := MethodDictionary new.
+    methodDict := MethodDictionary new: aType methodDict size.
     aType methodDict keysAndValuesDo: [:selector :method |
         methodDict at: selector put: method
     ]
@@ -295,7 +295,7 @@ Metaclass category: 'metadata importing' methods: {
 ].
 
 :[finishImportDataFromType: aType
-    methodDict := MethodDictionary new.
+    methodDict := MethodDictionary new: aType methodDict size.
     aType methodDict keysAndValuesDo: [:selector :method |
         methodDict at: selector put: method
     ]

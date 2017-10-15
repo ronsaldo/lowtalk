@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"isConstant:" : " 10/12/2017 18:32:27",
+		"initialize" : " 10/12/2017 18:32:27",
+		"valueType" : " 10/12/2017 18:32:27",
+		"asLowtalkVariableReferenceFor:" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"type" : " 10/12/2017 18:32:27",
+		"isMethodReceiverSlot" : " 10/12/2017 18:32:27",
+		"emitSSAVariableReferenceWith:builder:at:" : " 10/12/2017 18:32:27",
+		"isConstant" : " 10/12/2017 18:32:27",
+		"name:" : " 10/12/2017 18:32:27",
+		"isCompileTimeVariable" : " 10/12/2017 18:32:27",
+		"emitSSAVariableLoadWith:builder:at:" : " 10/12/2017 18:32:27",
+		"isImageVariable" : " 10/12/2017 18:32:27",
+		"definitionNode" : " 10/12/2017 18:32:27",
+		"definitionNode:" : " 10/12/2017 18:32:27",
+		"isVariable" : " 10/12/2017 18:32:27",
+		"compiler" : " 10/12/2017 18:32:27",
+		"isInterpreterVariable" : " 10/12/2017 18:32:27",
+		"compiler:" : " 10/12/2017 18:32:27",
+		"value" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

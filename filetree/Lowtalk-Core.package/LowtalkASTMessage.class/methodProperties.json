@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"accept:" : " 10/12/2017 18:32:27",
+		"selector" : " 10/12/2017 18:32:27",
+		"coercionType" : " 10/12/2017 18:32:27",
+		"isCascaded:" : " 10/12/2017 18:32:27",
+		"initialize" : " 10/12/2017 18:32:27",
+		"coercionType:" : " 10/12/2017 18:32:27",
+		"selector:" : " 10/12/2017 18:32:27",
+		"arguments" : " 10/12/2017 18:32:27",
+		"receiver:" : " 10/12/2017 18:32:27",
+		"receiver" : " 10/12/2017 18:32:27",
+		"specialMessageType" : " 10/12/2017 18:32:27",
+		"compileTimeMessageLookup" : " 10/12/2017 18:32:27",
+		"isMessageSend" : " 10/12/2017 18:32:27",
+		"isCascaded" : " 10/12/2017 18:32:27",
+		"specialMessageType:" : " 10/12/2017 18:32:27",
+		"compileTimeMessageLookup:" : " 10/12/2017 18:32:27",
+		"compileTimeValue:" : " 10/12/2017 18:32:27",
+		"compileTimeValue" : " 10/12/2017 18:32:27",
+		"printOn:" : " 10/12/2017 18:32:27",
+		"arguments:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

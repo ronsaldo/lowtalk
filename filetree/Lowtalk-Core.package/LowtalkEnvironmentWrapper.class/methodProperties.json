@@ -1,0 +1,16 @@
+{
+	"instance" : {
+		"namespaceEnvironment" : " 10/12/2017 18:32:27",
+		"environment" : " 10/12/2017 18:32:27",
+		"lookSymbol:ifAbsent:" : " 10/12/2017 18:32:27",
+		"receiver" : " 10/12/2017 18:32:27",
+		"receiverType" : " 10/12/2017 18:32:27",
+		"lookSymbol:ifAbsentPut:" : " 10/12/2017 18:32:27",
+		"setSymbol:value:" : " 10/12/2017 18:32:27",
+		"lookSymbol:" : " 10/12/2017 18:32:27",
+		"environment:" : " 10/12/2017 18:32:27",
+		"lookSymbol:ifPresent:" : " 10/12/2017 18:32:27",
+		"setSymbol:value:ifPresent:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

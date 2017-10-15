@@ -1,0 +1,22 @@
+{
+	"instance" : {
+		"defaultValue" : " 10/12/2017 18:32:27",
+		"convertLiteralValue:fromType:at:" : " 10/12/2017 18:32:27",
+		"ssaCoerceCVariadic:with:at:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithFloat:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithIntegerLiteral:" : " 10/12/2017 18:32:27",
+		"canBeExplicitlyConvertedTo:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithFloatLiteral:" : " 10/12/2017 18:32:27",
+		"isFloatType" : " 10/12/2017 18:32:27",
+		"canBeImplicitlyConvertedTo:" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"ssaConvert:explicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"irConvertExplicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"canBeReinterpretedTo:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithInteger:" : " 10/12/2017 18:32:27",
+		"defaultSSAValueWith:" : " 10/12/2017 18:32:27",
+		"dispatchArithmeticCoerceWith:" : " 10/12/2017 18:32:27",
+		"operationSignature" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

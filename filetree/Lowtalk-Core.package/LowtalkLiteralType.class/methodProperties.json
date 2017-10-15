@@ -1,0 +1,12 @@
+{
+	"instance" : {
+		"ssaConvert:explicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"asDefaultReturnTypeWith:" : " 10/12/2017 18:32:27",
+		"convertValue:toType:at:" : " 10/12/2017 18:32:27",
+		"isLiteralType" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"irCoerceImplicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"canBeImplicitlyConvertedTo:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

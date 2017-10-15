@@ -17,5 +17,8 @@ initialize
 		castTo: primitive_castTo:
 		reinterpretCastTo: primitive_reinterpretCastTo:
 		yourself primitive_yourself
+		__fillAllSlotsWithElementsOf: primitive_fillAllSlotsWithElementsOf:
+		__fillAllSlotsWithIntegerElementsOf: primitive_fillAllSlotsWithIntegerElementsOf:
+		__fillAllVariableSlotsWithElementsOf: primitive_fillAllVariableSlotsWithElementsOf:
 		).
 	

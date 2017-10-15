@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"defaultValue" : " 10/12/2017 18:32:27",
+		"alignment" : " 10/12/2017 18:32:27",
+		"convertValue:toSSAConstantWith:" : " 10/12/2017 18:32:27",
+		"specialMessageTypeForSelector:" : " 10/12/2017 18:32:27",
+		"buildSSAType" : " 10/12/2017 18:32:27",
+		"isArrayType" : " 10/12/2017 18:32:27",
+		"size" : " 10/12/2017 18:32:27",
+		"elements" : " 10/12/2017 18:32:27",
+		"baseType:" : " 10/12/2017 18:32:27",
+		"baseType" : " 10/12/2017 18:32:27",
+		"elements:" : " 10/12/2017 18:32:27"
+	},
+	"class" : {
+		"initialize" : " 10/12/2017 18:32:27"
+	}
+}

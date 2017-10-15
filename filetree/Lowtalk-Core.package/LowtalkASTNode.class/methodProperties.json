@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"isLiteralNode" : " 10/12/2017 18:32:27",
+		"accept:" : " 10/12/2017 18:32:27",
+		"isSuper" : " 10/12/2017 18:32:27",
+		"type" : " 10/12/2017 18:32:27",
+		"superClassForValue:" : " 10/12/2017 18:32:27",
+		"type:" : " 10/12/2017 18:32:27",
+		"environment:semanticError:format:" : " 10/12/2017 18:32:27",
+		"isIdentifierReference" : " 10/12/2017 18:32:27",
+		"position" : " 10/12/2017 18:32:27",
+		"isBlockNode" : " 10/12/2017 18:32:27",
+		"isSelf" : " 10/12/2017 18:32:27",
+		"position:" : " 10/12/2017 18:32:27",
+		"isMessageSend" : " 10/12/2017 18:32:27",
+		"semanticError:" : " 10/12/2017 18:32:27",
+		"isThisContext" : " 10/12/2017 18:32:27",
+		"environment:semanticError:" : " 10/12/2017 18:32:27",
+		"sourceCode" : " 10/12/2017 18:32:27",
+		"semanticError:format:" : " 10/12/2017 18:32:27",
+		"setTypeIfNil:" : " 10/12/2017 18:32:27",
+		"asLowtalkASTPosition" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

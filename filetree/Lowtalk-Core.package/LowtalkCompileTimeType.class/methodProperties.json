@@ -1,0 +1,11 @@
+{
+	"instance" : {
+		"name:" : " 10/12/2017 18:32:27",
+		"isCompileTimeType" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"irCoerceImplicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"canBeImplicitlyConvertedTo:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

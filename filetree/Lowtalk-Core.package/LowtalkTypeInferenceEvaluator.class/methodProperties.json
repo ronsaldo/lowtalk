@@ -1,0 +1,19 @@
+{
+	"instance" : {
+		"asTypeInferenceEvaluator" : " 10/12/2017 18:32:27",
+		"visitBlockNode:" : " 10/12/2017 18:32:27",
+		"visitIdentifierReferenceNode:" : " 10/12/2017 18:32:27",
+		"visitCharacterLiteralNode:" : " 10/12/2017 18:32:27",
+		"evaluate:" : " 10/12/2017 18:32:27",
+		"visitMessageChainNode:" : " 10/12/2017 18:32:27",
+		"visitBooleanLiteralNode:" : " 10/12/2017 18:32:27",
+		"visitIntegerLiteralNode:" : " 10/12/2017 18:32:27",
+		"visitFloatLiteralNode:" : " 10/12/2017 18:32:27",
+		"visitMessageNode:" : " 10/12/2017 18:32:27",
+		"visitSymbolLiteralNode:" : " 10/12/2017 18:32:27",
+		"visitStringLiteralNode:" : " 10/12/2017 18:32:27"
+	},
+	"class" : {
+		"evaluate:environment:" : " 10/12/2017 18:32:27"
+	}
+}

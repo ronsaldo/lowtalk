@@ -38,7 +38,7 @@ Compiler objectModel
                 primitive: entryPoint primitive;
                 argumentsDescriptor: entryPoint argumentsDescriptor.
         ].
-        1 to: literals size do: [:i | result basicAt: i put: (literals at: i)].
+		  result __fillAllVariableSlotsWithElementsOf: literals.
         result
     ];
     yourself

@@ -1,0 +1,31 @@
+{
+	"instance" : {
+		"alignment" : " 10/12/2017 18:32:27",
+		"dispatchArithmeticCoerceWith:" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"pointed" : " 10/12/2017 18:32:27",
+		"pointed:" : " 10/12/2017 18:32:27",
+		"canBeExplicitlyConvertedTo:" : " 10/12/2017 18:32:27",
+		"specialMessageTypeForSelector:" : " 10/12/2017 18:32:27",
+		"buildSSAType" : " 10/12/2017 18:32:27",
+		"canBeReinterpretedTo:" : " 10/12/2017 18:32:27",
+		"canBeImplicitlyConvertedTo:" : " 10/12/2017 18:32:27",
+		"size" : " 10/12/2017 18:32:27",
+		"restrict" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"convertValue:toSSAConstantWith:" : "RonieSalgado 10/14/2017 21:42",
+		"defaultValue" : " 10/12/2017 18:32:27",
+		"ssaCoerceCVariadic:with:at:" : " 10/12/2017 18:32:27",
+		"operationSignature" : " 10/12/2017 18:32:27",
+		"irCoerceImplicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"hash" : " 10/12/2017 18:32:27",
+		"isPointerType" : " 10/12/2017 18:32:27",
+		"=" : " 10/12/2017 18:32:27",
+		"defaultSSAValueWith:" : " 10/12/2017 18:32:27",
+		"printOn:" : " 10/12/2017 18:32:27",
+		"ssaConvert:explicitlyTo:with:at:" : " 10/12/2017 18:32:27"
+	},
+	"class" : {
+		"initialize" : " 10/12/2017 18:32:27"
+	}
+}

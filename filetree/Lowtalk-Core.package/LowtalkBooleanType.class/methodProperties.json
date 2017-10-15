@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"defaultValue" : " 10/12/2017 18:32:27",
+		"ssaConvert:explicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"buildSSAType" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithBoolean:" : " 10/12/2017 18:32:27",
+		"convertBooleanValue:toObjectWith:at:" : " 10/12/2017 18:32:27",
+		"size" : " 10/12/2017 18:32:27",
+		"isBooleanType" : " 10/12/2017 18:32:27",
+		"dispatchArithmeticCoerceWith:" : " 10/12/2017 18:32:27",
+		"operationSignature" : " 10/12/2017 18:32:27",
+		"defaultSSAValueWith:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithBooleanLiteral:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}

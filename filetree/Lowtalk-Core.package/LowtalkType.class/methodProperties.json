@@ -1,0 +1,38 @@
+{
+	"instance" : {
+		"alignment" : " 10/12/2017 18:32:27",
+		"convertValue:toType:at:" : " 10/12/2017 18:32:27",
+		"asValueTypeKeepVoid" : " 10/12/2017 18:32:27",
+		"asConstantValueType" : " 10/12/2017 18:32:27",
+		"initialize" : " 10/12/2017 18:32:27",
+		"readOnly" : " 10/12/2017 18:32:27",
+		"withoutReferences" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"readOnly:" : " 10/12/2017 18:32:27",
+		"asTypeExpression" : " 10/12/2017 18:32:27",
+		"ssaType" : " 10/12/2017 18:32:27",
+		"buildSSAType" : " 10/12/2017 18:32:27",
+		"asIntegerTypeAt:" : " 10/12/2017 18:32:27",
+		"size" : " 10/12/2017 18:32:27",
+		"asValueType" : " 10/12/2017 18:32:27",
+		"convertValue:toSSAConstantWith:" : " 10/12/2017 18:32:27",
+		"lowtalkPerform:withArguments:types:inSuperclass:node:compiler:" : " 10/12/2017 18:32:27",
+		"inferLowtalkTypeWith:" : " 10/12/2017 18:32:27",
+		"defaultValue" : " 10/12/2017 18:32:27",
+		"sandbox_class" : " 10/12/2017 18:32:27",
+		"resultTypeForSelector:message:compiler:evaluator:" : " 10/12/2017 18:32:27",
+		"compilationTarget:" : " 10/12/2017 18:32:27",
+		"hash" : " 10/12/2017 18:32:27",
+		"asLowtalkObjectInstanceWith:" : " 10/12/2017 18:32:27",
+		"compilationTarget" : " 10/12/2017 18:32:27",
+		"=" : " 10/12/2017 18:32:27",
+		"defaultSSAValueWith:" : " 10/12/2017 18:32:27",
+		"slot" : " 10/12/2017 18:32:27",
+		"convertLiteralValue:fromType:at:" : " 10/12/2017 18:32:27",
+		"lowtalkPerform:withLazyArguments:inSuperclass:node:compiler:" : " 10/12/2017 18:32:27"
+	},
+	"class" : {
+		"target:" : " 10/12/2017 18:32:27",
+		"addStandardTypesToEnvironment:target:" : " 10/12/2017 18:32:27"
+	}
+}

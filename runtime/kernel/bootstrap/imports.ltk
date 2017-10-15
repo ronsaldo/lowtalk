@@ -2,25 +2,25 @@
 Compiler objectModel
     convertArrayFunction: [:array |
         let result := Array basicNew: array size.
-        1 to: array size do: [:i | result basicAt: i put: (array basicAt: i)].
+		  result __fillAllSlotsWithElementsOf: array.
         Compiler objectModel setObject: result identityHash: array identityHash.
         result
     ];
     convertByteSymbolFunction: [:symbol |
         let result := ByteSymbol basicNew: symbol size.
-        1 to: symbol size do: [:i | result basicAt: i put: (symbol basicAt: i)].
+		  result __fillAllSlotsWithIntegerElementsOf: symbol.
         Compiler objectModel setObject: result identityHash: symbol identityHash.
         result
     ];
     convertByteStringFunction: [:string |
         let result := ByteString basicNew: string size.
-        1 to: string size do: [:i | result basicAt: i put: (string basicAt: i)].
+		  result __fillAllSlotsWithIntegerElementsOf: string.
         Compiler objectModel setObject: result identityHash: string identityHash.
         result
     ];
     convertBoxedFloat64Function: [:data |
         let result := BoxedFloat64 basicNew: 8.
-        1 to: 8 do: [:i | result basicAt: i put: (data at:i) ].
+		  result __fillAllSlotsWithElementsOf: data.
         result
     ];
     globalVariableClass: GlobalVariable;

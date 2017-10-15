@@ -1,0 +1,15 @@
+{
+	"instance" : {
+		"ssaCoerceCVariadic:with:at:" : " 10/12/2017 18:32:27",
+		"ssaConvert:explicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"name" : " 10/12/2017 18:32:27",
+		"ssaCoerce:implicitlyTo:with:at:" : " 10/12/2017 18:32:27",
+		"canBeImplicitlyConvertedTo:" : " 10/12/2017 18:32:27",
+		"asIntegerTypeAt:" : " 10/12/2017 18:32:27",
+		"asValueType" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithInteger:" : " 10/12/2017 18:32:27",
+		"dispatchArithmeticCoerceWith:" : " 10/12/2017 18:32:27",
+		"arithmeticCoerceWithCharacter:" : " 10/12/2017 18:32:27"
+	},
+	"class" : { }
+}
