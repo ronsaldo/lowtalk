@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkAbstractClassType",
+	"category" : "Lowtalk-Core-Types",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"NewObjectForType"
+	],
+	"instvars" : [
+		"methodDict",
+		"metaClassClass",
+		"metaClass",
+		"thisClass",
+		"classBinding"
+	],
+	"name" : "LowtalkBehaviorType",
+	"type" : "normal"
+}

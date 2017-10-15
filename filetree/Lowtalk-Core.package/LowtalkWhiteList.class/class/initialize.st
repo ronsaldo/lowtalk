@@ -45,6 +45,8 @@ initialize
 		at:ifPresent:ifAbsentPut:
 		
 		"Collection iteration"
+		associationsDo:
+		keysAndValuesDo:
 		do:
 		to:by:
 		to:by:do:

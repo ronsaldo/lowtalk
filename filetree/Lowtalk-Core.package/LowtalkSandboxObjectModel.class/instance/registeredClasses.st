@@ -1,3 +1,0 @@
-accessing
-registeredClasses
-	^ classes

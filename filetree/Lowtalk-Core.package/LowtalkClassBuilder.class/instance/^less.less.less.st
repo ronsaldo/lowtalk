@@ -2,8 +2,14 @@ building
 <<< nameLazyValue
 	<compileTime>
 	<lazy>
-	| class |
+	| class variable baseEnvironment definitionEnvironment |
 	class := self anon. 
-	compiler globalBuilder named: nameLazyValue type: class metaType value: class.
+	
+	baseEnvironment := nameLazyValue environment.
+	definitionEnvironment := baseEnvironment namespaceEnvironment.
+	class environment: definitionEnvironment.
+
+	variable := compiler globalBuilder named: nameLazyValue type: class metaType value: class.
+	compiler registerVariable: variable objectInstanceValue: class.
 	class name: nameLazyValue value.
 	^ class

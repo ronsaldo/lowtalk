@@ -4,5 +4,5 @@ initialize
 	fields := #().
 	fieldNames := #().
 	pendingMethods := OrderedDictionary new.
-	methods := OrderedDictionary new.
+	methodDict := OrderedDictionary new.
 	

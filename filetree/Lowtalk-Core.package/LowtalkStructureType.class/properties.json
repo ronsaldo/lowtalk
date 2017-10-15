@@ -16,7 +16,7 @@
 		"slotsExpression",
 		"compiler",
 		"pendingMethods",
-		"methods"
+		"methodDict"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

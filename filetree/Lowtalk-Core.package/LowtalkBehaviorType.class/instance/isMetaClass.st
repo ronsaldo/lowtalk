@@ -1,0 +1,3 @@
+testing
+isMetaClass
+	^ thisClass isNotNil

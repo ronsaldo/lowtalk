@@ -1,0 +1,4 @@
+accessing
+methodDict
+	<compileTime>
+	^ methodDict

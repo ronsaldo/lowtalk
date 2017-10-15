@@ -1,12 +1,16 @@
 module construction
 doConvertSSADynamicConstantValue: value inModule: module
-	| variableName convertedObject valueType variable header slotType slotConstants unmangledName |
+	| variableName convertedObject valueType variable unmangledName |
+	convertedSSAObjects at: value ifPresent: [ :ssaObject | ^ ssaObject ].
+	
 	convertedObject := value asLowtalkObjectInstanceWith: self.
 	convertedObject ifNil: [ ^ self convertDynamicObjectSSAConstant: convertedObject ].
 	convertedObject isSLVMObject ifTrue: [ ^ convertedObject ].
 	isSandboxed ifFalse: [ 
-		^ SLVMConstantValue type: compilationTarget dynamicObjectType value: module
+		^ self recordObject: value convertedObject: convertedObject ssaValue: (SLVMConstantValue type: compilationTarget dynamicObjectType value: module)
 	].
+
+	convertedSSAObjects at: convertedObject ifPresent: [ :ssaObject | ^ ssaObject ].
 	
 	variableName := objectInstanceVariableNameMap at: value ifAbsent: [ 
 		metaclassVariableNameMap at: value ifPresent: [:instance | unmangledName := (unmangledSymbolMap at: instance) , '__meta'. (instance , '_meta') asSymbol] ifAbsent: [ nil ]
@@ -24,7 +28,7 @@ doConvertSSADynamicConstantValue: value inModule: module
 	
 	self assert: convertedObject class == LowtalkObjectInstance.
 	module globalNamed: variableName ifPresent: [ :result |
-		^ SLVMConstant pointer: result castTo: compilationTarget dynamicObjectType
+		^ self recordObject: value convertedObject: convertedObject ssaValue: (SLVMConstant pointer: result castTo: compilationTarget dynamicObjectType)
 	].
 
 	valueType := convertedObject ssaValueType.
@@ -36,12 +40,15 @@ doConvertSSADynamicConstantValue: value inModule: module
 		variable propertyAt: #omitDebugInformation put: true
 	].
 	unmangledName ifNotNil: [ variable unmangledName: unmangledName ].
+
+	objectBuilders at: convertedObject ifPresent: [ :builder |
+
+		pendingObjectsInitializers add: [
+			builder finishBuildingObject.
+			variable initialValue: (self createObjectInstanceSSAData: convertedObject valueType: valueType inModule: module)
+		]
+	] ifAbsent: [ 
+		variable initialValue: (self createObjectInstanceSSAData: convertedObject valueType: valueType inModule: module)
+	].
 	
-	header := convertedObject header asSSAConstantValueIn: module.
-	slotType := convertedObject slotType.
-	slotConstants := convertedObject slots collect: [ :slotValue | slotType convertValue: slotValue toSSAConstantWith: self ] as: Array.
-	slotConstants := SLVMConstant array: convertedObject slotsType ssaType slots: slotConstants.
-	
-	variable initialValue: (SLVMConstant structure: valueType slots: { header . slotConstants }).
-	
-	^ SLVMConstant pointer: variable castTo: compilationTarget dynamicObjectType
+	^ self recordObject: value convertedObject: convertedObject ssaValue: (SLVMConstant pointer: variable castTo: compilationTarget dynamicObjectType)

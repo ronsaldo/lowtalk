@@ -1,0 +1,4 @@
+accessing
+metaClassClass
+	<compileTime>
+	^ metaClassClass

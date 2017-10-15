@@ -1,10 +1,9 @@
 initialization
 initialize
 	super initialize.
-	fields := #().
-	fieldNames := #().
 	superclassEvaluated := false.
+	metaSuperclassEvaluated := false.
 	pendingMethods := OrderedDictionary new.
 	category := 'Uncategorized'.
 	organization := IdentityDictionary new.
-	
+	subclasses := #().

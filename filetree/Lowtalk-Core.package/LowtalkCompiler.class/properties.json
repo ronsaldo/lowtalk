@@ -51,7 +51,10 @@
 		"finalCodeGenerator",
 		"classTypesForObjects",
 		"classBuilder",
-		"structureBuilder"
+		"structureBuilder",
+		"objectBuilders",
+		"pendingObjectsInitializers",
+		"convertedSSAObjects"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

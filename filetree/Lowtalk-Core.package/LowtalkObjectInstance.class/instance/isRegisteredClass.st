@@ -1,3 +1,3 @@
 testing
 isRegisteredClass
-	^ compiler objectModel isRegisteredClass: self
+	^ compiler isRegisteredClassObject: self

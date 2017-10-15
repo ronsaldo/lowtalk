@@ -6,7 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"classes",
 		"characterShift",
 		"characterTag",
 		"characterTagMask",
@@ -26,7 +25,6 @@
 		"headerType",
 		"globalVariableClass",
 		"increaseReference",
-		"lookupSelectorFunction",
 		"marryThisContextFunction",
 		"methodDictionarySlotIndex",
 		"namespaceCreationFunction",
@@ -56,7 +54,8 @@
 		"truncateIdentityHashFunction",
 		"widowThisContextFunction",
 		"writeBarrier",
-		"writeBarrierNoIncrement"
+		"writeBarrierNoIncrement",
+		"createNamedFormatSpec"
 	],
 	"name" : "LowtalkSandboxObjectModel",
 	"type" : "normal"

@@ -1,3 +1,3 @@
 building
 typeClass
-	^ compiler isSandboxed ifTrue: [ LowtalkClassType ] ifFalse: [ LowtalkImageBehaviorType ]
+	^ compiler isSandboxed ifTrue: [ LowtalkBehaviorType ] ifFalse: [ LowtalkImageBehaviorType ]

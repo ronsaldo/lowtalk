@@ -4,7 +4,7 @@ buildSlots
 	slots := Dictionary new.
 	slotsList := (slotsExpression value ifNil: #()) collect: [:sl | sl asLowtalkSlotWith: compiler].
 	self superclass ifNotNil: [ :sc |
-		slotsList := slotsList , (sc slotsList collect: #copy)
+		slotsList := (sc slotsList collect: #copy) , slotsList
 	].
 
 	self fillSlotDictionary.

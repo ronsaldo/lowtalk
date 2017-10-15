@@ -1,0 +1,3 @@
+testing
+isMetaClass
+	self subclassResponsibility

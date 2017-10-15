@@ -1,3 +1,3 @@
 converting
 asLowtalkObjectInstanceWith: aCompiler
-	^ self ssaValue headerReferenceOfType: aCompiler objectType
+	^ self ssaValue ifNotNil: [:value | value headerReferenceOfType: aCompiler objectType]

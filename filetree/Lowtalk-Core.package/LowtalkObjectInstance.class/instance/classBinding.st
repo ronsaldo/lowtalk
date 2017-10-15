@@ -1,3 +1,3 @@
 accessing
 classBinding
-	^ (compiler objectModel getClassDescription: self) classBinding
+	^ self asClassType classBinding

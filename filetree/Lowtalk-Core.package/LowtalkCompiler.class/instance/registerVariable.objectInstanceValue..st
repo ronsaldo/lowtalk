@@ -1,12 +1,8 @@
 module construction
 registerVariable: variable objectInstanceValue: object
-	| behavior |
-	objectInstanceVariableNameMap at: object ifAbsentPut: [ self registerMangledNameOf: variable ].
+	objectInstanceVariableNameMap at: object ifPresent: [ ^ self ] ifAbsentPut: [ self registerMangledNameOf: variable ].
 	objectInstanceVariableMap at: object ifAbsentPut: [ variable ].
 	
-	(object isLowtalkBObject and: [ object isObjectInstance and: [ object isRegisteredClass ] ]) ifTrue: 	[
-		behavior := object behavior.
-		behavior ifNotNil: [ 
-			metaclassVariableNameMap at: behavior ifAbsentPut: [ self registerMangledNameOf: variable ]
-		]
+	(object isLowtalkBObject and: [ object isLowtalkType and: [ object isClassType and: [object bindingVariable isNil ]]]) ifTrue: 	[
+		object bindingVariable: variable.
 	]

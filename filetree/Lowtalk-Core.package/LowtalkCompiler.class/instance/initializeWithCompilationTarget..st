@@ -26,6 +26,9 @@ initializeWithCompilationTarget: aCompilationTarget
 	importedImageLiteralVariables := IdentityDictionary new.
 	importedImageClasses := IdentityDictionary new.
 	classTypesForObjects := IdentityDictionary new.
+	objectBuilders := IdentityDictionary new.
+	convertedSSAObjects := IdentityDictionary new.
+	pendingObjectsInitializers := OrderedCollection new.
 	gensymCount := 0.
 	
 	optimizationLevel := 0.

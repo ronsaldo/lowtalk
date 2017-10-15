@@ -9,5 +9,5 @@ slots: slotsLazyValue
 	definitionEnvironment := baseEnvironment namespaceEnvironment.
 
 	self
-		environment: baseEnvironment;
+		environment: definitionEnvironment;
 		slotsExpression: slotsLazyValue.

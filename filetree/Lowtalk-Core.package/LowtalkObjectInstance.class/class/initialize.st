@@ -18,9 +18,4 @@ initialize
 		reinterpretCastTo: primitive_reinterpretCastTo:
 		yourself primitive_yourself
 		).
-	NewObjectForType := Dictionary newFromPairs: #(
-		pointers newObjectWithPointers:
-		variablePointers newObjectWithPointers:
-		bytes newObjectWithBytes:
-	)
 	

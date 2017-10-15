@@ -10,9 +10,9 @@
 		"name",
 		"compileTimeOnly",
 		"pendingMethods",
-		"methods",
 		"ssaValue",
-		"namespaceObject"
+		"namespaceObject",
+		"methodDict"
 	],
 	"name" : "LowtalkNamespace",
 	"type" : "normal"

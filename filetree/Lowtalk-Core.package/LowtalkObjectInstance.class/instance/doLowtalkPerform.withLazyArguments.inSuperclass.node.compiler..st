@@ -12,7 +12,7 @@ doLowtalkPerform: selector withLazyArguments: arguments inSuperclass: superClass
 		^ self perform: implementation withArguments: (arguments collect: #value)
 	].
 
-	method := compiler objectModel lookupSelectorFunction value: self behavior value: selector.
+	method := self behavior asClassType lookupSelector: selector.
 	method ifNil: [
 		self flag: 'TODO: Send doesNotUnderstand:'.
 		sendingNode semanticError: 'Unsupported selector {1} ' format: { selector printString }

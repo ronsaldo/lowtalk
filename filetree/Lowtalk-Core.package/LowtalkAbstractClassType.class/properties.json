@@ -28,7 +28,12 @@
 		"nativeContentSize",
 		"layoutType",
 		"nativeSlotStructureType",
-		"nativeSlotStructurePointerType"
+		"nativeSlotStructurePointerType",
+		"metaSuperclassExpression",
+		"metaSuperclassEvaluated",
+		"metaSuperclass",
+		"subclasses",
+		"bindingVariable"
 	],
 	"name" : "LowtalkAbstractClassType",
 	"type" : "normal"

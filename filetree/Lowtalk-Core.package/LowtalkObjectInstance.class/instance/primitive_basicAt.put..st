@@ -1,5 +1,5 @@
 object primitives
 primitive_basicAt: index put: value
-	| description |
-	description := self behavior getClassDescription.
-	^ slots at: description instanceSize + index put: value
+	| type |
+	type := self behavior asClassType.
+	^ slots at: type instanceSize + index put: value

@@ -9,4 +9,4 @@ concretizeMethod: aMethod
 	actualMethod
 		publicSymbol: methodPublicSymbol asSymbol;
 		unmangledName: self fullName , '>>' , aMethod selector printString.
-	methods at: actualMethod selector put: actualMethod
+	methodDict at: actualMethod selector put: actualMethod

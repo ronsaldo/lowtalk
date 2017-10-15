@@ -12,6 +12,14 @@ buildModule
 		toProcess do: #compileElement.
 	].
 
+	[ pendingObjectsInitializers isNotEmpty ] whileTrue: [
+		toProcess := pendingObjectsInitializers asArray.
+		pendingObjectsInitializers removeAll.
+		toProcess do: #value
+	].
+
+	self assert: pendingObjects isEmpty.
+
 	objectToFinish do: #finishCompiling.
 	self assert: pendingObjects isEmpty.
 	
