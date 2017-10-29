@@ -1,8 +1,0 @@
-{
-	"instance" : {
-		"emitSSAVariableLoadWith:builder:at:" : " 10/12/2017 18:32:27",
-		"emitSSAVariableReferenceWith:builder:at:" : " 10/12/2017 18:32:27",
-		"isCompileTimeVariable" : " 10/12/2017 18:32:27"
-	},
-	"class" : { }
-}

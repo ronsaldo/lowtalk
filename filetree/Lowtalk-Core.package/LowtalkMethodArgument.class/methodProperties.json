@@ -1,9 +1,0 @@
-{
-	"instance" : {
-		"valueType:" : " 10/12/2017 18:32:27",
-		"emitSSAVariableLoadWith:builder:at:" : " 10/12/2017 18:32:27",
-		"emitSSAVariableReferenceWith:builder:at:" : " 10/12/2017 18:32:27",
-		"isArgument" : " 10/12/2017 18:32:27"
-	},
-	"class" : { }
-}
