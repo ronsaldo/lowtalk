@@ -441,7 +441,7 @@ newObjectHeaderWithWords
             ^ createFormatSpec #{ObjectFormatIndexable32 . 0 }
         ].
         type == #bytes ifTrue: [
-            ^ createFormatSpec #{ObjectFormatIndexable8 . 0 }
+            ^ createFormatSpec #{ObjectFormatIndexable8 . instanceSize }
         ].
         type == #mixedObject ifTrue: [
             ^ createFormatSpec #{ObjectFormatMixedObject . 0 }

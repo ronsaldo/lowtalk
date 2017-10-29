@@ -12,7 +12,9 @@ Class <<< #Thread
 Class <<< #UniqueLock
     superclass: Object;
     layoutType: #bytes;
-    slots: {};
+    slots: {
+        #handle => Unix pthread_mutex_t.
+    };
 	package: 'Kernel-Thread'.
 
 "Recursive mutex"
@@ -25,17 +27,20 @@ Class <<< #Mutex
 Class <<< #ConditionVariable
     superclass: Object;
     layoutType: #bytes;
-    slots: {};
+    slots: {
+        #handle => Unix pthread_cond_t.
+    };
 	package: 'Kernel-Thread'.
 
 Class <<< #Semaphore
     superclass: Object;
     layoutType: #bytes;
-    slots: {};
+    slots: {
+        #mutex => Unix pthread_mutex_t.
+        #condition => Unix pthread_cond_t.
+        #signalCount => UInt32
+    };
 	package: 'Kernel-Thread'.
-
-let MutexByteSize := Unix pthread_mutex_t size.
-let ConditionVariableByteSize := Unix pthread_cond_t size.
 
 Namespace named: #ObjectModel members: [
 
@@ -127,21 +132,13 @@ UniqueLock category: 'testing' methods: {
 ]
 }.
 
-UniqueLock class category: 'construction' methods: {
-:[new
-    ^ self new: MutexByteSize
-]
-}.
-
 UniqueLock category: 'initialization' methods: {
 :[initialize
-    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-    Unix pthread_mutex_init #{this . nil}
+    Unix pthread_mutex_init #{handle address . nil}
 ].
 
 :[finalize
-    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-    Unix pthread_mutex_destroy #{this}.
+    Unix pthread_mutex_destroy #{handle address}.
 ].
 }.
 
@@ -152,14 +149,11 @@ UniqueLock category: 'mutual exclusion' methods: {
 ].
 
 :[lock
-    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-    Unix pthread_mutex_lock #{this}.
+    Unix pthread_mutex_lock #{handle address}.
 ].
 
 :[unlock
-    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-
-    Unix pthread_mutex_unlock #{this}.
+    Unix pthread_mutex_unlock #{handle address}.
 ].
 
 }.
@@ -172,8 +166,7 @@ Mutex category: 'initialization' methods: {
     Unix pthread_mutexattr_init #{attr address}.
     Unix pthread_mutexattr_settype #{attr address . Unix PTHREAD_MUTEX_RECURSIVE}.
 
-    let this := self firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
-    Unix pthread_mutex_init #{this . attr address}.
+    Unix pthread_mutex_init #{handle address . attr address}.
 
     Unix pthread_mutexattr_destroy #{attr address}.
 ].
@@ -181,12 +174,6 @@ Mutex category: 'initialization' methods: {
 }.
 
 "Condition variable"
-ConditionVariable class category: 'construction' methods: {
-:[new
-    ^ self new: ConditionVariableByteSize
-]
-}.
-
 ConditionVariable category: 'initialization' methods: {
 :[initialize
     let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
@@ -194,8 +181,7 @@ ConditionVariable category: 'initialization' methods: {
 ].
 
 :[finalize
-    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
-    Unix pthread_cond_destroy #{this}.
+    Unix pthread_cond_destroy #{handle address}.
 ].
 }.
 
@@ -205,8 +191,7 @@ ConditionVariable category: 'condition variable' methods: {
         self error: 'Expected an UniqueLock or a Mutex'
     ].
 
-    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
-    let mutex := anUniqueLockOrMutex firstFixedFieldPointerOfType: Unix pthread_mutex_t pointer.
+    let mutex := anUniqueLockOrMutex castTo: UniqueLock.
 ].
 
 :[wait: anUniqueLockOrMutex until: targetTimePoint
@@ -218,13 +203,11 @@ ConditionVariable category: 'condition variable' methods: {
 ].
 
 :[signal
-    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
-    Unix pthread_cond_signal #{this}
+    Unix pthread_cond_signal #{handle address}
 ].
 
 :[signalAll
-    let this := self firstFixedFieldPointerOfType: Unix pthread_cond_t pointer.
-    Unix pthread_cond_broadcast #{this}
+    Unix pthread_cond_broadcast #{handle address}
 ].
 
 }.
@@ -236,12 +219,7 @@ let SemaphoreInternalData := Structure anon slots: {
     #signalCount => UInt32
 }.
 
-let SemaphoreInternalDataByteSize := SemaphoreInternalData size.
 Semaphore class category: 'construction' methods: {
-:[new
-    ^ self new: SemaphoreInternalDataByteSize
-].
-
 :[forMutualExclusion
     ^ self new signal
 ].
@@ -249,41 +227,41 @@ Semaphore class category: 'construction' methods: {
 
 Semaphore category: 'initialization' methods: {
 :[initialize
-    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
-    Unix pthread_mutex_init #{this value mutex address . nil}.
-    Unix pthread_cond_init #{this value condition address . nil}.
+    Unix pthread_mutex_init #{mutex address . nil}.
+    Unix pthread_cond_init #{condition address . nil}.
 ].
 
 :[finalize
-    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
-    Unix pthread_mutex_destroy #{this value mutex address}.
-    Unix pthread_cond_destroy #{this value condition address}.
+    Unix pthread_mutex_destroy #{mutex address}.
+    Unix pthread_cond_destroy #{condition address}.
 ].
 }.
 
 Semaphore category: 'communication' methods: {
 :[consumeAllSignals
-    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
-    this value signalCount := 0.
+    signalCount := 0.
 ].
 
 :[signal
-    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
-    Unix pthread_mutex_lock #{this value mutex address}.
-    this value signalCount := this value signalCount + 1.
-    "TODO: Check whether signal can be used instead of broadcast."
-    Unix pthread_cond_broadcast #{this value condition address}.
-    Unix pthread_mutex_unlock #{this value mutex address}.
+    Unix pthread_mutex_lock #{mutex address}.
+
+    signalCount := signalCount + 1.
+    Unix pthread_cond_signal #{condition address}.
+
+    Unix pthread_mutex_unlock #{mutex address}.
 ].
 
 :[wait
-    let this := self firstFixedFieldPointerOfType: SemaphoreInternalData pointer.
-    Unix pthread_mutex_lock #{this value mutex address}.
-    [this value signalCount == 0] whileTrue: [
-        Unix pthread_cond_wait #{this value condition address . this value mutex address}
+    Unix pthread_mutex_lock #{mutex address}.
+
+    "Wait for at least one signal"
+    [signalCount == 0] whileTrue: [
+        Unix pthread_cond_wait #{condition address . mutex address}
     ].
 
-    this value signalCount := this value signalCount - 1.
-    Unix pthread_mutex_unlock #{this value mutex address}.
+    "Consume the signal"
+    signalCount := signalCount - 1.
+
+    Unix pthread_mutex_unlock #{mutex address}.
 ].
 }.
