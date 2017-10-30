@@ -2,10 +2,14 @@ let quitting := false.
 let window<SDL2 SDL_Window pointer>.
 let renderer<SDL2 SDL_Renderer pointer>.
 
-Object subclass: #MainClass
-	instanceVariableNames: 'x y vx vy'
-	classVariableNames: ''
-	package: 'Kernel-Exceptions'.
+Class <<< #MainClass
+	slots: {
+		#x => Float32.
+		#y => Float32.
+		#vx => Float32.
+		#vy => Float32.
+	};
+	package: 'Lowtalk-Samples'.
 
 MainClass category: 'application' methods: {
 :[initialize
@@ -88,8 +92,8 @@ MainClass category: 'application' methods: {
 
     let rect<SDL2 SDL_Rect>.
     rect
-        x: (x asInteger castTo: Int32) + (640/2);
-        y: (480/2) - (y asInteger castTo: Int32);
+        x: (x castTo: Int32) + (640/2);
+        y: (480/2) - (y castTo: Int32);
         w: 32;
         h: 32.
     SDL2 SDL_SetRenderDrawColor #{renderer . 255 . rect x & 16rff castTo: UInt8 . 0 . 255}.
