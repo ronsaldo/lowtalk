@@ -21,7 +21,7 @@ HashedCollection class category: 'instance creation' methods: {
 
 :[sizeFor: nElements
 	"Large enough size to hold nElements with some slop (see fullCheck)"
-	
+
 	nElements < 4 ifTrue: [ ^5 ].
 	^ nElements * 4 // 3
 	"^ HashTableSizes atLeast: nElements +1 * 4 // 3"
@@ -77,7 +77,7 @@ MethodDictionary category: 'accessing' methods: {
     tally := tally + 1.
 ].
 
-:[at: key put: value 
+:[at: key put: value
     let index := self scanFor: key.
     index = 0 ifTrue: [
         self grow.
@@ -153,21 +153,21 @@ ClassDescription category: 'method addition' methods: {
 
 "Class creation primitives"
 Behavior category: 'instance creation' methods: {
-:[basicNew
+:[basicNew -> _SelfInstanceType.
     let result := ObjectModel basicNewFixed #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer}.
-    ^ result reinterpretCastTo: _DynamicObject
+    ^ result reinterpretCastTo: _SelfInstanceType
 ].
 
-:[basicNew: size
+:[basicNew: size -> _SelfInstanceType.
     let result := ObjectModel basicNewVariable #{self reinterpretCastTo: ObjectModel ObjectHeader pointer . format reinterpretCastTo: UIntPointer . size reinterpretCastTo: UIntPointer}.
-    ^ result reinterpretCastTo: _DynamicObject
+    ^ result reinterpretCastTo: _SelfInstanceType
 ].
 
-:[new
+:[new -> _SelfInstanceType.
     ^ self basicNew initialize; yourself
 ].
 
-:[new: size
+:[new: size -> _SelfInstanceType.
     ^ (self basicNew: size) initialize; yourself
 ].
 

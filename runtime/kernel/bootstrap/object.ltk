@@ -17,8 +17,8 @@ ProtoObject category: 'accessing' methods: {
     ^ self basicAt: index put: value
 ].
 
-:[class
-    ^ ObjectModel getObjectClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer} reinterpretCastTo: _DynamicObject
+:[class -> _SelfClassType.
+    ^ ObjectModel getObjectClass #{self reinterpretCastTo: ObjectModel ObjectHeader pointer} reinterpretCastTo: _SelfClassType
 ].
 
 :[size
@@ -51,9 +51,8 @@ ProtoObject category: 'accessing' methods: {
     ^ ObjectModel getObjectIndexableSize #{self reinterpretCastTo: ObjectModel ObjectHeader pointer}
 ].
 
-:[yourself
+:[yourself -> _SelfType.
     ^ self
 ].
 
 }.
-

@@ -1,132 +1,116 @@
-Structure <<< #MatrixData slots: {
-    #rows => UInt32.
-    #columns => UInt32.
-    #data => (Float64 array)
-}.
-
-let MatrixHeaderSize := MatrixData size.
-
-Object variableByteSubclass: #LTMatrix
-	instanceVariableNames: ''
-	classVariableNames: ''
+Class <<< #LTMatrix
+	slots: {
+        #rows => UInt32.
+        #columns => UInt32.
+        #data => (Float64 array)
+	};
 	package: 'Lowtalk-Samples'.
 
 LTMatrix class category: 'construction' methods: {
-:[rows: rows columns: columns
-    ^ (self basicNew: MatrixHeaderSize + (rows*columns*8)) initializeWithRows: rows columns: columns
+:[rows: rows columns: columns -> _SelfInstanceType.
+    ^ (self basicNew: rows*columns*8)
+		initializeWithRows: rows columns: columns;
+		yourself
+]
+}.
+
+LTMatrix category: 'initialization' methods: {
+:[initializeWithRows: numberOfRows columns: numberOfColumns
+	self assert: (numberOfRows ~= 0 and: [numberOfColumns ~= 0]).
+
+    rows := (numberOfRows castTo: UInt32).
+    columns := (numberOfColumns castTo: UInt32).
 ]
 }.
 
 LTMatrix category: 'accessing' methods: {
 :[at: row at: column put: value
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
+    let index := ((row castTo: UInt32) - 1) * columns + (column castTo: UInt32).
 
-    let index := ((row castTo: UInt32) - 1) * this value columns + (column castTo: UInt32).
-
-    (this value data at: index) := value castTo: Float64.
+    (data at: index) := value castTo: Float64.
 ].
+
 :[rows
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    ^ this value rows
-].
-:[columns
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    ^ this value columns
+	^ rows
 ].
 
+:[columns
+	^ columns
+].
 }.
 
+
 LTMatrix category: 'arithmetic' methods: {
-:[+ otherMatrix
+:[+ <_SelfType>other
 
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
-
-    (this value rows ~~ other value rows or: [this value columns ~~ other value rows]) ifTrue: [
+    (rows ~~ other __private rows or: [columns ~~ other __private rows]) ifTrue: [
         self error: 'Cannot add matrices with different dimensions.'
     ].
 
-    let elementCount := this value rows * this value columns.
-    let resultObject := self class rows: this value rows columns: this value columns.
-    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+    let elementCount := rows * columns.
+    let result := self class rows: rows columns: columns.
 
-    let left := (this value data at: 1) address.
-    let right := (other value data at: 1) address.
-    let dest := (result value data at: 1) address.
+    let left := (data at: 1) address.
+    let right := (other __private data at: 1) address.
+    let dest := (result __private data at: 1) address.
 
     1 to: elementCount do: [:i |
         (dest at: i) := (left at: i) + (right at: i)
     ].
 
-    ^ resultObject
+    ^ result
 ].
 
-:[- otherMatrix
+:[- <_SelfType>other
 
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
-
-    (this value rows ~~ other value rows or: [this value columns ~~ other value rows]) ifTrue: [
-        self error: 'Cannot add matrices with different dimensions.'
+    (rows ~~ other __private rows or: [columns ~~ other __private rows]) ifTrue: [
+        self error: 'Cannot subtract matrices with different dimensions.'
     ].
 
-    let elementCount := this value rows * this value columns.
-    let resultObject := self class rows: this value rows columns: this value columns.
-    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+    let elementCount := rows * columns.
+    let result := self class rows: rows columns: columns.
 
-    let left := (this value data at: 1) address.
-    let right := (other value data at: 1) address.
-    let dest := (result value data at: 1) address.
+    let left := (data at: 1) address.
+    let right := (other __private data at: 1) address.
+    let dest := (result __private data at: 1) address.
 
     1 to: elementCount do: [:i |
         (dest at: i) := (left at: i) - (right at: i)
     ].
 
-    ^ resultObject
+    ^ result
 ].
 
 :[* otherMatrixOrScalar
-    ^ otherMatrixOrScalar isNumber ifTrue: [ self timesScalar: otherMatrixOrScalar ] ifFalse: [ self timesMatrix: otherMatrixOrScalar]
+    ^ otherMatrixOrScalar isNumber ifTrue: [ self timesScalar: otherMatrixOrScalar ] ifFalse: [ self timesMatrix: (otherMatrixOrScalar castTo: _SelfType)]
 ].
 
 :[timesScalar: aScalar
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-
-    let resultObject := self class rows: this value rows columns: this value columns.
-    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+    let result := self class rows: rows columns: columns.
     let factor := aScalar castTo: Float64.
 
-    let elementCount := this value rows * this value columns.
-    let source := (this value data at: 1) address.
-    let dest := (result value data at: 1) address.
+    let elementCount := rows * columns.
     1 to: elementCount do: [:i |
-        (dest at: i) := (source at: i) * factor
+        (result __private data at: i) := (data at: i) * factor
     ].
 
-    ^ resultObject
+    ^ result
 ].
 
-:[timesMatrix: otherMatrix
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    let other := otherMatrix firstFixedFieldPointerOfType: MatrixData pointer.
-
-    (this value columns ~~ other value rows) ifTrue: [
+:[timesMatrix: <_SelfType>other
+    (columns ~~ other __private rows) ifTrue: [
         self error: 'Cannot perform matrix multiplication.'
     ].
 
-    let rows := this value rows.
-    let columns := other value columns.
-    let iterations := this value columns - 1.
+    let result := self class rows: rows columns: columns.
+    let iterations := columns - 1.
 
-    let resultObject := self class rows: rows columns: columns.
-    let result := resultObject firstFixedFieldPointerOfType: MatrixData pointer.
+    let left := (data at: 1) address.
+    let right := (other __private data at: 1) address.
+    let dest := (result __private data at: 1) address.
 
-    let left := (this value data at: 1) address.
-    let right := (other value data at: 1) address.
-    let dest := (result value data at: 1) address.
-
-    let leftPitch := this value columns.
-    let rightPitch := other value columns.
+    let leftPitch := columns.
+    let rightPitch := other __private columns.
 
     let destIndex := 0.
     0 to: rows - 1 do: [:i |
@@ -140,32 +124,21 @@ LTMatrix category: 'arithmetic' methods: {
         ].
     ].
 
-    ^ resultObject
-
+    ^ result
 ].
 
 }.
 
-LTMatrix category: 'initialization' methods: {
-:[initializeWithRows: rows columns: columns
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    this value
-        rows: (rows castTo: UInt32);
-        columns: (columns castTo: UInt32)
-]
-}.
-
 LTMatrix category: 'printing' methods: {
 :[printOn: aStream
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    aStream nextPutAll: 'LTMatrix rows: '; print: this value rows;
-        nextPutAll: ' columns: '; print: this value columns;
+    aStream nextPutAll: 'LTMatrix rows: '; print: rows;
+        nextPutAll: ' columns: '; print: columns;
         nextPutAll: ' content: #('; lf.
 
     let index := 0.
-    1 to: this value rows do: [:r |
-        1 to: this value columns do: [:c |
-            aStream print: (this value data atOffset: index); space.
+    1 to: rows do: [:r |
+        1 to: columns do: [:c |
+            aStream print: (data atOffset: index); space.
             index := index + 1
         ].
         aStream lf
@@ -178,10 +151,9 @@ LTMatrix category: 'printing' methods: {
 
 LTMatrix category: 'filling' methods: {
 :[fillWithIndices
-    let this := self firstFixedFieldPointerOfType: MatrixData pointer.
-    let elementCount := this value rows * this value columns.
+    let elementCount := rows * columns.
     1 to: elementCount do: [:i |
-        (this value data at: i) := i castTo: Int32
+        (data at: i) := i castTo: Int32
     ].
 ].
 }.
@@ -199,16 +171,18 @@ Compiler isSandboxed ifTrue: [
         let a := (LTMatrix rows: s columns: s) fillWithIndices.
         let b := (LTMatrix rows: s columns: s) fillWithIndices * 4.0.
 
-    "    out nextPutAll: 'A = '; print: a; lf.
-        out nextPutAll: 'B = '; print: b; lf.
-        out nextPutAll: 'A + B = '; print: a + b; lf.
-        out nextPutAll: 'A - B = '; print: a - b; lf.
-        out nextPutAll: 'A * B = '; print: a * b; lf.
-    "
-        a + b.
-        a - b.
-        a * b.
+		argc <= 2 ifTrue: [
+        	out nextPutAll: 'A = '; print: a; lf.
+        	out nextPutAll: 'B = '; print: b; lf.
+        	out nextPutAll: 'A + B = '; print: a + b; lf.
+        	out nextPutAll: 'A - B = '; print: a - b; lf.
+        	out nextPutAll: 'A * B = '; print: a * b; lf.
+		] ifFalse: [
+			a + b.
+	        a - b.
+	        a * b.
+		].
 
         ^ 0
-    ]
+	]
 ]

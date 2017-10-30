@@ -365,6 +365,7 @@ Class <<< #UnsafeAlien
 	yourself.
 
 Compiler objectModel
+	defaultSuperclass: Object;
     globalVariableClass: GlobalVariable;
     classVariableClass: ClassVariable;
 	yourself
