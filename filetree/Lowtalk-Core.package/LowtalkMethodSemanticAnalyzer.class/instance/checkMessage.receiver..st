@@ -18,7 +18,7 @@ checkMessage: message receiver: receiver
 		^ self evaluateCompileTimeMessage: message receiver: receiver
 	].
 
-	message specialMessageType: (receiver type specialMessageTypeForSelector: message selector).
+	message specialMessageType: (receiver type specialMessageTypeForSelector: message selector environment: environment at: message).
 	message specialMessageType ifNil: [ 
 		message specialMessageType: (receiverValueType specialMessageTypeForSelector: message selector).
 	].

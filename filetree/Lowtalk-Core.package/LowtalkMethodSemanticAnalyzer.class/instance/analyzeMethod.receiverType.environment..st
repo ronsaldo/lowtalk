@@ -2,16 +2,19 @@ as yet unclassified
 analyzeMethod: methodNode receiverType: receiverType environment: baseEnvironment
 	| methodEnvironment topEnvironment arguments returnType argumentTypes callingConvention functionType |
 	compiler := baseEnvironment compiler.
-	
+
 	self withEnvironment: baseEnvironment do: [
-		returnType := self solveTypeExpression: methodNode returnTypeExpression defaultType: (receiverType asDefaultReturnTypeWith: compiler).
+		"Solve the arguments first."
 		arguments := methodNode arguments collect: [ :arg |
 			LowtalkMethodArgument new
 				definitionNode: arg;
 				valueType: (self solveTypeExpression: arg typeExpression);
 				name: arg name;
 				isConstant: true.
-		]
+		].
+
+		"Solve the return type."
+		returnType := self solveTypeExpression: methodNode returnTypeExpression defaultType: (receiverType asDefaultReturnTypeWith: compiler).
 	].
 
 	argumentTypes := arguments collect: #valueType.

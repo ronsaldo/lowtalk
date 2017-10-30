@@ -54,7 +54,9 @@
 		"structureBuilder",
 		"objectBuilders",
 		"pendingObjectsInitializers",
-		"convertedSSAObjects"
+		"convertedSSAObjects",
+		"specialSelfType",
+		"specialSelfInstanceType"
 	],
 	"name" : "LowtalkCompiler",
 	"type" : "normal"

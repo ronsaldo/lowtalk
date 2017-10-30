@@ -1,0 +1,3 @@
+type expression
+typeChainReceiver
+	^ typeBinaryExpression

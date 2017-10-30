@@ -31,7 +31,11 @@ addStandardTypesToEnvironment: anEnvironment target: aCompilationTarget
 		addCompileTimeVariableValue: (LowtalkIntegerLiteralType target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkRationalLiteralType target: aCompilationTarget);
 		addCompileTimeVariableValue: (LowtalkStringLiteralType target: aCompilationTarget);
-		addCompileTimeVariableValue: (LowtalkSymbolLiteralType target: aCompilationTarget).
+		addCompileTimeVariableValue: (LowtalkSymbolLiteralType target: aCompilationTarget);
+		
+		addCompileTimeVariableValue: (LowtalkSpecialSelfType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkSpecialSelfInstanceType target: aCompilationTarget);
+		addCompileTimeVariableValue: (LowtalkSpecialSelfClassType target: aCompilationTarget).
 		
 	aCompilationTarget pointerSize == 4 ifTrue: [ 
 		anEnvironment

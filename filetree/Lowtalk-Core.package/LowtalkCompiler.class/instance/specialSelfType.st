@@ -1,0 +1,3 @@
+types
+specialSelfType
+	^ specialSelfType

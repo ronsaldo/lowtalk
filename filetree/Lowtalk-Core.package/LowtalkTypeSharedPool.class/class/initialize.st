@@ -65,6 +65,10 @@ initialize
 		reinterpretCastTo: ReinterpretCastTo
 		
 		yourself Yourself
+		
+		__private Invalid
+		firstFixedFieldPointer 			Invalid
+		firstFixedFieldPointerOfType:  Invalid
 	).
 	
 	BlockSpecialMessages  := Dictionary newFromPairs: #(

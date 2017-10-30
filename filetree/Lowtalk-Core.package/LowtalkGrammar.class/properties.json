@@ -113,7 +113,13 @@
 		"pragmaChainedMessage",
 		"methodHeaderReturnType",
 		"arrow",
-		"character"
+		"character",
+		"typeChainReceiver",
+		"typeChainKeywordMessage",
+		"typeChainedMessage",
+		"typeBinaryExpression",
+		"typeBinaryOperator",
+		"typeChainExpression"
 	],
 	"name" : "LowtalkGrammar",
 	"type" : "normal"

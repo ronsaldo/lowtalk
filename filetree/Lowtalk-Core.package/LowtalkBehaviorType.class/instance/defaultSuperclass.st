@@ -1,3 +1,3 @@
 superclass
 defaultSuperclass
-	^ nil
+	^ compiler objectModel defaultSuperclass

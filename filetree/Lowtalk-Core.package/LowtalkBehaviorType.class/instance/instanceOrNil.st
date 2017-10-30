@@ -1,0 +1,4 @@
+accessing
+instanceOrNil
+	<compileTime>
+	^ thisClass

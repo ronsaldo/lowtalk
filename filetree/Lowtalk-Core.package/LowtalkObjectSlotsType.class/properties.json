@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkSpecificDynamicObjectType",
+	"category" : "Lowtalk-Core-Types",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"objectType",
+		"accessMode"
+	],
+	"name" : "LowtalkObjectSlotsType",
+	"type" : "normal"
+}

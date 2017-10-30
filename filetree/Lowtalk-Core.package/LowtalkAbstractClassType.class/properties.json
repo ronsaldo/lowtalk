@@ -4,7 +4,9 @@
 	"category" : "Lowtalk-Core-Types",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"SpecificClassObjectSpecialMessages"
+	],
 	"instvars" : [
 		"name",
 		"environment",
@@ -33,7 +35,8 @@
 		"metaSuperclassEvaluated",
 		"metaSuperclass",
 		"subclasses",
-		"bindingVariable"
+		"bindingVariable",
+		"methodSignatureDictionary"
 	],
 	"name" : "LowtalkAbstractClassType",
 	"type" : "normal"

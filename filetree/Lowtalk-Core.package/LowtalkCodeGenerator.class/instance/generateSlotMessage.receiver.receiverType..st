@@ -1,17 +1,17 @@
 messages
 generateSlotMessage: message receiver: receiver receiverType: receiverType
-	| referenceType structureType slot structurePointer |
-	structurePointer := receiver.
+	| referenceType objectType slot objectPointer |
+	objectPointer := receiver.
 	referenceType := receiverType.
-	structureType := referenceType withoutReferences.
+	objectType := referenceType withoutReferences.
 	
-	"Make sure we have a pointer to the structure."
-	self assert: structureType isStructureType.
-	referenceType isReferenceType ifFalse: [
+	"Make sure we have a pointer to the pointer instead of a value."
+	self assert: (objectType isStructureType or: [objectType isObjectSlots]).
+	(objectType isStructureType and: [referenceType isReferenceType not]) ifTrue: [
 		self assert: referenceType isStructureType.
-		structurePointer := allocaBuilder alloca: structureType ssaType.
-		self store: receiver in: structurePointer
+		objectPointer := allocaBuilder alloca: objectType ssaType.
+		self store: receiver in: objectPointer
 	].
 	
-	slot := structureType slotNamed: message selector.
-	^ builder getReference: structurePointer element: (builder constInt: slot index).
+	slot := objectType slotNamed: message selector.
+	^ slot emitSSASlotReferenceOf: objectPointer builder: builder at: message

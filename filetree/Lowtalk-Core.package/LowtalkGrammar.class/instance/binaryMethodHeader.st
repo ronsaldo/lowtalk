@@ -1,3 +1,3 @@
 expressions
 binaryMethodHeader
-	^ binaryOperator , identifier, optionalTypeExpression
+	^ binaryOperator , optionalTypeExpression , identifier

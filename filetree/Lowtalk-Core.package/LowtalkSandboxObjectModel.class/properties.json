@@ -55,7 +55,8 @@
 		"widowThisContextFunction",
 		"writeBarrier",
 		"writeBarrierNoIncrement",
-		"createNamedFormatSpec"
+		"createNamedFormatSpec",
+		"defaultSuperclass"
 	],
 	"name" : "LowtalkSandboxObjectModel",
 	"type" : "normal"

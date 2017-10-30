@@ -43,6 +43,9 @@ createEnvironment
 	classBuilder := (compilerEnvironment lookSymbol: #Class) value.
 	structureBuilder := (compilerEnvironment lookSymbol: #Structure) value.
 
+	specialSelfType := (compilerEnvironment lookSymbol: #_SelfType) value.
+	specialSelfInstanceType := (compilerEnvironment lookSymbol: #_SelfInstanceType) value.
+
 	globalEnvironment := 	(LowtalkNamespace parent: compilerEnvironment) name: #_GlobalNamespace.
 	globalEnvironment
 		compiler: self;

@@ -1,21 +1,21 @@
 messages
 generateSetSlotMessage: message receiver: receiver receiverType: receiverType
-	| referenceType structureType slot structurePointer slotPointer newValue newValueType |
+	| referenceType objectType slot objectPointer slotPointer newValue newValueType |
 	self assert: message arguments size = 1.
-	structurePointer := receiver.
+	objectPointer := receiver.
 	referenceType := receiverType.
-	structureType := referenceType withoutReferences.
+	objectType := referenceType withoutReferences.
 	
 	"Make sure we have a pointer to the structure."
-	self assert: structureType isStructureType.
-	referenceType isReferenceType ifFalse: [
+	self assert: (objectType isStructureType or: [objectType isObjectSlots]).
+	(objectType isStructureType and: [referenceType isReferenceType not]) ifTrue: [
 		self assert: referenceType isStructureType.
-		structurePointer := allocaBuilder alloca: structureType ssaType.
-		self store: receiver in: structurePointer
+		objectPointer := allocaBuilder alloca: objectType ssaType.
+		self store: receiver in: objectPointer
 	].
 	
 	"Get the slot pointer"
-	slot := structureType slotNamed: message selector allButLast.
+	slot := objectType slotNamed: message selector allButLast.
 	
 	"Convert the slot value"
 	newValue := self visitNode: message arguments first.
@@ -23,7 +23,7 @@ generateSetSlotMessage: message receiver: receiver receiverType: receiverType
 	newValue := self coerceImplicitly: newValue type: newValueType to: slot type at: message.
 
 	"Set the slot value"	
-	slotPointer := builder getReference: structurePointer element: (builder constInt: slot index).
+	slotPointer := slot emitSSASlotReferenceOf: objectPointer builder: builder at: message.
 	self store: newValue in: slotPointer.
 	
 	"Return the slot pointer"
