@@ -1,4 +1,5 @@
 instance creation
 new
 	<compileTime>
-	^ self basicNew initialize
+	self flag: 'TODO: Put the structure value in a box.'.
+	^ self newValue

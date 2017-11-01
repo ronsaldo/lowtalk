@@ -1,8 +1,10 @@
 initialization
 initialize
 	StructureMetaMessageTypes := Dictionary newFromPairs: #(
-		basicNew StructureNew
-		new StructureNew
+		basicNew StructureNewObject
+		new StructureNewObject
+		basicNewValue StructureNew
+		newValue StructureNew
 		basicNewPointer StructureNewPointer
 		newPointer StructureNewPointer
 	)

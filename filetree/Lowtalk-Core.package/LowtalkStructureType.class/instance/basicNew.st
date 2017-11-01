@@ -1,9 +1,5 @@
 instance creation
 basicNew
 	<compileTime>
-	self slots.
-	
-	^ LowtalkStructureInstance basicNew 
-		type: self;
-		slots: (self fields collect: [:fieldType | LowtalkStructureInstanceSlotVariable new valueType: fieldType; value: fieldType defaultValue ]);
-		yourself
+	self flag: 'TODO: Put the structure value in a box.'.
+	^ self basicNewValue
