@@ -364,7 +364,7 @@ newObjectHeaderWithWords
 
     Constant named: #newObjectHeaderWithPointers value: [<ObjectHeader> :slotCount<UInt32> |
         <cdecl>
-        ObjectHeader new
+        ObjectHeader newValue
             slotCount: slotCount;
             flags: StaticOopFlag;
             format: ((slotCount > 0 ifTrue: [ObjectFormatFixedSize] ifFalse: [ObjectFormatEmpty]) castTo: UInt8);
@@ -373,7 +373,7 @@ newObjectHeaderWithWords
 
     Constant named: #newObjectHeaderWithBytes value: [<ObjectHeader> :slotCount<UInt32> |
         <cdecl>
-        ObjectHeader new
+        ObjectHeader newValue
             slotCount: ((slotCount + OopSize - 1) // OopSize castTo: UInt32);
             flags: StaticOopFlag;
             format: (ObjectFormatIndexable8 + ( (OopSize - slotCount) \\ OopSize) castTo: UInt8);
@@ -724,7 +724,7 @@ newObjectHeaderWithWords
         ];
 
         objectVariableHeaderCreationFunction: [<ObjectVariableHeader> :variableClass<ObjectHeader pointer> :name |
-            ObjectVariableHeader new
+            ObjectVariableHeader newValue
                 objectHeader: (newObjectHeaderWithPointers #{2}
                     classPointer: variableClass;
                     yourself
