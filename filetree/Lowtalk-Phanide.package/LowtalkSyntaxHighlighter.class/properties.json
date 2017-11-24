@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "LowtalkGrammar",
+	"category" : "Lowtalk-Phanide",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"commands"
+	],
+	"name" : "LowtalkSyntaxHighlighter",
+	"type" : "normal"
+}
