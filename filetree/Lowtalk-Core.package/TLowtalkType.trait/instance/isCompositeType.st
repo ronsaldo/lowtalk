@@ -1,0 +1,3 @@
+testing
+isCompositeType
+	^ false

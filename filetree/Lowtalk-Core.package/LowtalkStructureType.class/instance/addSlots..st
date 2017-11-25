@@ -1,4 +1,4 @@
-slots
+adding
 addSlots: aCollectionOfSlots
 	aCollectionOfSlots ifNil: [ ^ self ].
 	slots ifNil: [ slots := Dictionary new ].
@@ -10,5 +10,6 @@ addSlots: aCollectionOfSlots
 		] ifAbsentPut: [ slot ].
 	].
 
+	allSlots := allSlots , aCollectionOfSlots.
 	fields := fields , (aCollectionOfSlots collect: #type).
 	fieldNames := fieldNames , (aCollectionOfSlots collect: #name).

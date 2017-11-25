@@ -16,7 +16,13 @@
 		"slotsExpression",
 		"compiler",
 		"pendingMethods",
-		"methodDict"
+		"methodDict",
+		"category",
+		"classObject",
+		"allSlots",
+		"methodSignatureDictionary",
+		"organization",
+		"bindingVariable"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

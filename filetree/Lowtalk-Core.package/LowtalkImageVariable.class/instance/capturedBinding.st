@@ -1,0 +1,3 @@
+accessing
+capturedBinding
+	^ self binding

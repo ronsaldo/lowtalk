@@ -1,6 +1,7 @@
 as yet unclassified
 evaluateNormalMessage: message receiver: receiver receiverType: receiverType inSuperclass: superClass
 	| arguments argumentTypes |
+	<lowtalkEnvironmentHolder>
  
 	receiverType isCompileTimeType ifTrue: [
 		receiver isNamespace ifTrue: [ 

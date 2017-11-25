@@ -13,6 +13,10 @@ buildSSAVariable
 		].
 	].
 	
+	ssaBindingValue ifNotNil: [ 
+		ssaValue propertyAt: #binding put: ssaBindingValue
+	].
+		
 	self isExternal ifTrue: [
 		ssaValue makeExternal.
 	] ifFalse: [ 

@@ -1,3 +1,2 @@
 lazy compilation
 finishCompiling
-	self concretizeAllPendingMethods

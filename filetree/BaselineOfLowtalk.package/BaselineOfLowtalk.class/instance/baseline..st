@@ -20,9 +20,8 @@ baseline: spec
 			package: 'Lowtalk-Core' with: [
 				spec requires: #('Slovim' 'PetitParser')
 			].
-		spec
+		"spec
 			package: 'Lowtalk-IDE' with: [
 				spec requires: #('Lowtalk-Core')
-			]
-
+			]"
 	].

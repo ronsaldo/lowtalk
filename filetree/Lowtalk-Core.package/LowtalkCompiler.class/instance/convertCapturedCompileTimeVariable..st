@@ -19,7 +19,7 @@ convertCapturedCompileTimeVariable: compileTimeVariable
 	valueType isAnyDynamicObjectType ifTrue: [
 		variable customSection: #'.oopRef'
 	].
-	variable propertyAt: #binding put: compileTimeVariable binding.
+	variable propertyAt: #binding put: compileTimeVariable capturedBinding.
 	capturedCompileTimeVariables at: compileTimeVariable put: variable.
 	
 	variable initialValue: (valueType convertValue: compileTimeVariable value toSSAConstantWith: self).

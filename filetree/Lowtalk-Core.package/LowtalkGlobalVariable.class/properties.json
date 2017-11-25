@@ -11,7 +11,8 @@
 		"isExternal",
 		"isVisibleInC",
 		"typeExpression",
-		"bindingObject"
+		"bindingObject",
+		"ssaBindingValue"
 	],
 	"name" : "LowtalkGlobalVariable",
 	"type" : "normal"

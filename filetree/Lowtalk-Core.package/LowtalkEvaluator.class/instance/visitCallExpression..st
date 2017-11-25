@@ -8,7 +8,7 @@ visitCallExpression: expression
 		returnType := receiverType returnType.
 		expectedArgumentTypes := receiverType arguments.
 	] ifFalse: [
-		expectedArgumentTypes expression arguments collect: [ :a | compiler objectType ].
+		expectedArgumentTypes := expression arguments collect: [ :a | compiler objectType ].
 	].
 
 	expression setTypeIfNil: returnType.

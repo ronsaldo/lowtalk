@@ -4,4 +4,5 @@ canBeExplicitlyConvertedTo: targetType
 	targetType isSpecificDynamicObjectType ifTrue: [ ^ true ].
 	targetType isPrimitiveType ifTrue: [ ^ true ].
 	targetType isPointerType ifTrue: [ ^ true ].
+	targetType isStructureType ifTrue: [ ^ true ].
 	^ false
