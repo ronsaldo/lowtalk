@@ -1,0 +1,3 @@
+visibility
+isPrivate
+	^ visibility == #private

@@ -26,4 +26,7 @@ createInImageClassObject
 	].
 	
 	compiler importImageClassType: classObject importedValue: self.
+	bindingVariable ifNotNil: [
+		bindingVariable ssaBindingValue: classObject binding
+	].
 	self createPublicAccessors

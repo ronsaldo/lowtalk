@@ -1,0 +1,3 @@
+visibility
+isProtected
+	^ visibility == #protected

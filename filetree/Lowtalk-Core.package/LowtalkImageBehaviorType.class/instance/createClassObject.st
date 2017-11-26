@@ -29,3 +29,7 @@ createClassObject
 			sharedPools: '';
 			category: self category
 	].
+
+	bindingVariable ifNotNil: [
+		bindingVariable ssaBindingValue: classObject binding
+	]
