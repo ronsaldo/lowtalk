@@ -1,0 +1,3 @@
+adding
+addExtensionMethods: aCollectionOfExtensionMethods
+	extensionMethods addAll: aCollectionOfExtensionMethods

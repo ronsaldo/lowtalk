@@ -1,0 +1,1 @@
+I am an exporter from Pharo into Lowtalk.

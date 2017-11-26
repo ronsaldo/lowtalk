@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "RonieSalgado 11/25/2017 19:07",
+	"super" : "Object",
+	"category" : "Lowtalk-Exporter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packages",
+		"classes",
+		"extensionMethods",
+		"out"
+	],
+	"name" : "LowtalkExporter",
+	"type" : "normal"
+}
