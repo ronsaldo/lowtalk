@@ -1,6 +1,14 @@
 messages
 generateNormalMessage: message receiver: receiver receiverType: receiverType inSuperClass: inSuperClass
-	| arguments receiverValue instruction |
+	| arguments receiverValue instruction receiverValueType concreteMethod |
+	receiverValueType := receiverType withoutReferences.
+	receiverValueType isAnyDynamicObjectType ifFalse: [ 
+		concreteMethod := receiverValueType concreteMethodForSelector: message selector.
+		concreteMethod ifNotNil: [
+			^ self generateNormalMessage: message receiver: receiver receiverType: receiverType inSuperClass: inSuperClass concreteMethod: concreteMethod
+		]
+	].
+
 	receiverValue := self coerceImplicitly: receiver type: receiverType to: compiler objectType at: message.
 	arguments := message arguments collect: [ :arg |
 		self coerceImplicitly: (self visitNode: arg) type: arg type to: compiler objectType at: message

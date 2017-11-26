@@ -27,6 +27,7 @@ generateAndMessage: message receiver: receiver receiverType: receiverType
 		continueResult := blockResultType ssaConvert: continueResult explicitlyTo: message type with: builder at: message
 	].
 	
+	continueBlock := builder currentBlock.
 	builder jump: mergeBlock.
 
 	"Continue"	
