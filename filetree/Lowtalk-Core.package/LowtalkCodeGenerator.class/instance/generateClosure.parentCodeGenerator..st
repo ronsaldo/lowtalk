@@ -17,6 +17,7 @@ generateClosure: node parentCodeGenerator: aParentCodeGenerator
 	"Create the builders"
 	allocaBuilder := SLVMBuilder on: ssaFunction.
 	builder := SLVMBuilder on: ssaFunction.
+	builder allocaBuilder: allocaBuilder.
 	
 	allocaBlock := allocaBuilder newBasicBlock: #entry.
 	allocaBuilder currentBlock: allocaBlock.
