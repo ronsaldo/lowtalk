@@ -4,6 +4,7 @@ checkArithmeticMessage: message receiver: receiver
 	self assert: message arguments size = 1.
 	left := receiver.
 	leftType := receiver type withoutReferences.
+	leftType isAggregateType ifTrue: [ ^ self checkNormalMessage: message receiver: receiver ].
 	
 	right := message arguments first.
 	self visitNode: right.

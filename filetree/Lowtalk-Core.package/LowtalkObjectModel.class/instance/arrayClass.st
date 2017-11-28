@@ -1,0 +1,3 @@
+accessing
+arrayClass
+	^ self subclassResponsibility

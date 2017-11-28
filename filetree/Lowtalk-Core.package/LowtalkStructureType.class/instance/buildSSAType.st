@@ -5,6 +5,7 @@ buildSSAType
 	ssaType name: self validName;
 		kind: self ssaTypeClass genericKind;
 		types: (fields collect: #ssaType);
-		names: self validFieldNames.
+		names: self validFieldNames;
+		minimalAlignment: minimalAlignment.
 	compiler isSandboxed ifFalse: [ ssaType behavior: self classObject ].
 	^ ssaType

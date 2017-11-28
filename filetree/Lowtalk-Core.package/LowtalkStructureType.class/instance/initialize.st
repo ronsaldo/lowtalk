@@ -8,4 +8,5 @@ initialize
 	methodSignatureDictionary := Dictionary new.
 	methodDict := OrderedDictionary new.
 	organization := IdentityDictionary new.
+	minimalAlignment := 1.
 	

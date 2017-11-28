@@ -25,6 +25,7 @@ createInImageClassObject
 			category: self category
 	].
 	
+	classObject classLayout minimalAlignment: minimalAlignment.
 	compiler importImageClassType: classObject importedValue: self.
 	bindingVariable ifNotNil: [
 		bindingVariable ssaBindingValue: classObject binding

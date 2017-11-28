@@ -11,4 +11,4 @@ emitSSASlotReferenceOf: objectValue builder: builder at: node
 		slotContainerValue := builder bitCast: slotContainerValue target: ssaReceiverCastType
 	].
 
-	^ builder getReference: slotContainerValue element: (SLVMConstantValue int: index)
+	^ builder getReference: slotContainerValue element: (builder constInt: index)

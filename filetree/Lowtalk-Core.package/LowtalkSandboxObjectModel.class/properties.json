@@ -56,7 +56,8 @@
 		"writeBarrier",
 		"writeBarrierNoIncrement",
 		"createNamedFormatSpec",
-		"defaultSuperclass"
+		"defaultSuperclass",
+		"arrayClass"
 	],
 	"name" : "LowtalkSandboxObjectModel",
 	"type" : "normal"

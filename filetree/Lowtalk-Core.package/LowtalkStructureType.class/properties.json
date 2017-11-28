@@ -22,7 +22,8 @@
 		"allSlots",
 		"methodSignatureDictionary",
 		"organization",
-		"bindingVariable"
+		"bindingVariable",
+		"minimalAlignment"
 	],
 	"name" : "LowtalkStructureType",
 	"type" : "normal"

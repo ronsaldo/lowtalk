@@ -1,3 +1,3 @@
 testing
-isCompositeType
+isAggregateType
 	^ false

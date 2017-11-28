@@ -1,0 +1,4 @@
+accessing
+arrayClass
+	<compileTime>
+	^ arrayClass
