@@ -368,4 +368,5 @@ Compiler objectModel
 	defaultSuperclass: Object;
     globalVariableClass: GlobalVariable;
     classVariableClass: ClassVariable;
+	arrayClass: Array;
 	yourself
