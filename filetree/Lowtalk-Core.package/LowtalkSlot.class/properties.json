@@ -11,7 +11,8 @@
 		"index",
 		"offset",
 		"ssaReceiverCastType",
-		"visibility"
+		"visibility",
+		"properties"
 	],
 	"name" : "LowtalkSlot",
 	"type" : "normal"

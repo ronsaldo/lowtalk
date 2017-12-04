@@ -3,7 +3,7 @@ createInImageClassObject
 	| layoutClass instanceSlots superClassObject |
 	layoutClass := self inImageStructureLayoutClass.
 	self slots.
-	instanceSlots := allSlots collect: [:slot | (SLVMStructureFieldSlot named: slot name) type: slot type ssaType].
+	instanceSlots := allSlots collect: #asSLVMStructureFieldSlot.
 	
 	self flag: 'HACK: remove the methods from the class to avoid triggering recompilation with the wrong compiler.'.
 	(name isNotNil and: [ Smalltalk globals includesKey: name ]) ifTrue: [ 

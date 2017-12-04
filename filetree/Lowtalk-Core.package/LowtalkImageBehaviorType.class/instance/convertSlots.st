@@ -8,5 +8,5 @@ convertSlots
 		myNativeSlots := myNativeSlots allButFirst: sc nativeSlots size.
 	].
 	
-	^ (myObjectSlots collect: [ :slot | InstanceVariableSlot named: slot name ]) ,
-	  (myNativeSlots collect: [:slot | (SLVMStructureFieldSlot named: slot name) type: slot type ssaType])
+	^ (myObjectSlots collect: #asInstanceVariableSlot) ,
+	  (myNativeSlots collect: #asSLVMStructureFieldSlot)
