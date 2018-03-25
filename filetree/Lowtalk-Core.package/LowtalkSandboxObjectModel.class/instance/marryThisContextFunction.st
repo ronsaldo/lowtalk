@@ -1,4 +1,0 @@
-accessing
-marryThisContextFunction
-	<compileTime>
-	^ marryThisContextFunction

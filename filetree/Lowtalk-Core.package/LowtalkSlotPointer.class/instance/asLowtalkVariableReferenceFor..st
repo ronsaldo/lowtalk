@@ -1,3 +1,0 @@
-converting
-asLowtalkVariableReferenceFor: aCompiler
-	^ self

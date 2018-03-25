@@ -1,3 +1,0 @@
-types
-integerLiteralType
-	^ integerLiteralType

@@ -1,3 +1,0 @@
-expressions
-optionalExpression
-	^ expression optional

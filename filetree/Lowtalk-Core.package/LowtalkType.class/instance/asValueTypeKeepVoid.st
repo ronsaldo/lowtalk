@@ -1,3 +1,0 @@
-accessing
-asValueTypeKeepVoid
-	^ self asValueType

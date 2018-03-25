@@ -1,3 +1,0 @@
-visibility
-isPrivate
-	^ visibility == #private

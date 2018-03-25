@@ -1,4 +1,0 @@
-accessing
-convertMethodContextMetadataFunction
-	<compileTime>
-	^ convertMethodContextMetadataFunction

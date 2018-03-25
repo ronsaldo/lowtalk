@@ -1,4 +1,0 @@
-accessing
-methodDictionarySlotIndex
-	<compileTime>
-	^ methodDictionarySlotIndex

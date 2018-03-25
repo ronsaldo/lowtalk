@@ -1,3 +1,0 @@
-object creation
-convertByteSymbol: aByteSymbol
-	self subclassResponsibility

@@ -1,4 +1,0 @@
-accessing
-createGlobalVariableAssociationFunction
-	<compileTime>
-	^ createGlobalVariableAssociationFunction

@@ -1,4 +1,0 @@
-accessing
-layoutType
-	<compileTime>
-	^ layoutType

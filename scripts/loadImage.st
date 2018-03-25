@@ -1,6 +1,6 @@
 Metacello new
   baseline: 'Lowtalk';
-  repository: 'filetree://filetree';
+  repository: 'tonel://tonel';
   load.
 
 "Save the image"

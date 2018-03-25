@@ -1,4 +1,0 @@
-accessing
-setIdentityHashFunction
-	<compileTime>
-	^ setIdentityHashFunction

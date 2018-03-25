@@ -1,3 +1,0 @@
-accessing
-alignment
-	^ compilationTarget pointerAlignment

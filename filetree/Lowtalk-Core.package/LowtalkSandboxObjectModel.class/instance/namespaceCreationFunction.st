@@ -1,4 +1,0 @@
-accessing
-namespaceCreationFunction
-	<compileTime>
-	^ namespaceCreationFunction

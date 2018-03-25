@@ -1,4 +1,0 @@
-accessing
-newObjectHeaderWithWeakPointers
-	<compileTime>
-	^ newObjectHeaderWithWeakPointers

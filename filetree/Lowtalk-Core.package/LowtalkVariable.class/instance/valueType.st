@@ -1,3 +1,0 @@
-accessing
-valueType
-	self subclassResponsibility

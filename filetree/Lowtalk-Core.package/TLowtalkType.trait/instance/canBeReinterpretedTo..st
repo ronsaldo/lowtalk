@@ -1,3 +1,0 @@
-coercions
-canBeReinterpretedTo: targetType
-	^ false

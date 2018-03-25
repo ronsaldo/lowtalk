@@ -1,3 +1,0 @@
-converting
-asLowtalkTypeWith: aCompiler
-	^ self

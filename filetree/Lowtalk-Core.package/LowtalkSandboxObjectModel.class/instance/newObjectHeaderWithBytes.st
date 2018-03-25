@@ -1,4 +1,0 @@
-accessing
-newObjectHeaderWithBytes
-	<compileTime>
-	^ newObjectHeaderWithBytes

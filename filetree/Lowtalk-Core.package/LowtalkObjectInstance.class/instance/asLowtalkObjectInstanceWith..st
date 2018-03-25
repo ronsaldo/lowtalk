@@ -1,3 +1,0 @@
-converting
-asLowtalkObjectInstanceWith: aCompiler
-	^ self

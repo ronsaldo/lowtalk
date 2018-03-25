@@ -1,4 +1,0 @@
-accessing
-convertByteStringFunction
-	<compileTime>
-	^ convertByteStringFunction

@@ -1,3 +1,0 @@
-accessing
-namespaceEnvironment
-	^ parent namespaceEnvironment

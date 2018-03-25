@@ -1,3 +1,0 @@
-converting
-asLowtalkSlotWith: aCompiler
-	^ self

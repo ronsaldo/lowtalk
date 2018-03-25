@@ -1,4 +1,0 @@
-accessing
-methodDict
-	<compileTime>
-	^ methodDict

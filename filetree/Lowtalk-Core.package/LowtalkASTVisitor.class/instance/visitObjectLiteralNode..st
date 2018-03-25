@@ -1,3 +1,0 @@
-visiting
-visitObjectLiteralNode: node
-	self subclassResponsibility

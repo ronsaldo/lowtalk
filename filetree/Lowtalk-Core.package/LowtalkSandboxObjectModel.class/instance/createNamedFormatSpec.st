@@ -1,4 +1,0 @@
-accessing
-createNamedFormatSpec
-	<compileTime>
-	^ createNamedFormatSpec

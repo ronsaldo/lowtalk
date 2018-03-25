@@ -1,3 +1,0 @@
-visiting
-visitBlockNode: aNode
-	self subclassResponsibility

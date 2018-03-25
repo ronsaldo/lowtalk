@@ -1,3 +1,0 @@
-special messages
-operationSignature
-	self explicitRequirement

@@ -1,3 +1,0 @@
-types
-booleanLiteralType
-	^ booleanLiteralType

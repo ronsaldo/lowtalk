@@ -1,1 +1,0 @@
-I am a type that can only vary on its compilation target

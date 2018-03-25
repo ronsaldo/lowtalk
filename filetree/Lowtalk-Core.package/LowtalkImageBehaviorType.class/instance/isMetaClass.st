@@ -1,3 +1,0 @@
-testing
-isMetaClass
-	^ classObject isMeta

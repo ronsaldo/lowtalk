@@ -1,3 +1,0 @@
-testing
-isInlineArgument
-	^ false

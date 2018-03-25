@@ -1,4 +1,0 @@
-accessing
-falseVariable
-	<compileTime>
-	^ falseVariable

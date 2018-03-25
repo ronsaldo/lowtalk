@@ -1,3 +1,0 @@
-testing
-isMetaClass
-	self subclassResponsibility

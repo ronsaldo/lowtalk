@@ -1,4 +1,0 @@
-accessing
-pointerToObjectFunction
-	<compileTime>
-	^ pointerToObjectFunction

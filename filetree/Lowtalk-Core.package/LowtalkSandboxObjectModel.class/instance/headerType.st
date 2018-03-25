@@ -1,4 +1,0 @@
-accessing
-headerType
-	<compileTime>
-	^ headerType

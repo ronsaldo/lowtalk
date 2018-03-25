@@ -1,4 +1,0 @@
-accessing
-category
-	<compileTime>
-	^ category

@@ -1,3 +1,0 @@
-accessing
-hasLocalReturns
-	^ hasLocalReturns

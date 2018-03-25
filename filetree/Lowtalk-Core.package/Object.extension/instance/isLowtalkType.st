@@ -1,3 +1,0 @@
-*Lowtalk-Core
-isLowtalkType
-	^ false

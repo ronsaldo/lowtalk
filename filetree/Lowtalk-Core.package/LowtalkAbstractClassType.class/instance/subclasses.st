@@ -1,4 +1,0 @@
-accessing
-subclasses
-	<compileTime>
-	^ subclasses

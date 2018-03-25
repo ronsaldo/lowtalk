@@ -1,3 +1,0 @@
-visiting
-visitBlockArgumentNode: node
-	self subclassResponsibility

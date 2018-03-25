@@ -1,3 +1,0 @@
-visiting
-visitArrayNode: aNode
-	self subclassResponsibility

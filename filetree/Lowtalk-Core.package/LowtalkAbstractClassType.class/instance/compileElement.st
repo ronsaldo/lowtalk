@@ -1,3 +1,0 @@
-lazy compilation
-compileElement
-	self concretizeAllPendingMethods.

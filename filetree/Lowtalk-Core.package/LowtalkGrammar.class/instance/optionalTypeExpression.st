@@ -1,3 +1,0 @@
-expressions
-optionalTypeExpression
-	^ typeSpecifier optional

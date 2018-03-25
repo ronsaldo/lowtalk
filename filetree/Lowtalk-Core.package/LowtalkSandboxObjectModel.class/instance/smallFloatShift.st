@@ -1,4 +1,0 @@
-accessing
-smallFloatShift
-	<compileTime>
-	^ smallFloatShift

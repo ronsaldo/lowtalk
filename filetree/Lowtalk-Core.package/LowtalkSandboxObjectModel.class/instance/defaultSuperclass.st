@@ -1,4 +1,0 @@
-accessing
-defaultSuperclass
-	<compileTime>
-	^ defaultSuperclass

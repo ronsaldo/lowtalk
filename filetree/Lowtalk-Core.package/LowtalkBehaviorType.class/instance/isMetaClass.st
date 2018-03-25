@@ -1,3 +1,0 @@
-testing
-isMetaClass
-	^ thisClass isNotNil

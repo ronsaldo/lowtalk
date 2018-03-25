@@ -1,3 +1,0 @@
-expressions
-identifierExpression
-	^ identifier

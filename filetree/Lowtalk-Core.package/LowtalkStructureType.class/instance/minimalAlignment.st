@@ -1,4 +1,0 @@
-accessing
-minimalAlignment
-	<compileTime>
-	^ minimalAlignment

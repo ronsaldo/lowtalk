@@ -1,3 +1,0 @@
-compilation
-finishCompiling
-	self namespaceObject

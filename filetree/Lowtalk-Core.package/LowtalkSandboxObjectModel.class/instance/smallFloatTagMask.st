@@ -1,4 +1,0 @@
-accessing
-smallFloatTagMask
-	<compileTime>
-	^ smallFloatTagMask

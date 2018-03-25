@@ -1,3 +1,0 @@
-compilation
-compileElement
-	self ssaValue

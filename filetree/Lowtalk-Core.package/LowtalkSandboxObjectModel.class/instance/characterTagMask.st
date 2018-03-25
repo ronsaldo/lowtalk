@@ -1,4 +1,0 @@
-accessing
-characterTagMask
-	<compileTime>
-	^ characterTagMask

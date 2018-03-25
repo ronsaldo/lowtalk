@@ -1,3 +1,0 @@
-expressions
-localDeclaration
-	^ identifier , optionalTypeExpression

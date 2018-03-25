@@ -1,4 +1,0 @@
-accessing
-readBarrier
-	<compileTime>
-	^ readBarrier

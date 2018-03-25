@@ -1,3 +1,0 @@
-visibility
-isProtected
-	^ visibility == #protected

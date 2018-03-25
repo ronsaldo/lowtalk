@@ -1,4 +1,0 @@
-accessing
-isSandboxed
-	<compileTime>
-	^ isSandboxed

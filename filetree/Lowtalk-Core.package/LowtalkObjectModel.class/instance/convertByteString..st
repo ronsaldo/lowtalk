@@ -1,3 +1,0 @@
-object creation
-convertByteString: aByteString
-	self subclassResponsibility

@@ -1,3 +1,0 @@
-coercions
-arithmeticCoerceWithSymbolLiteral: otherType
-	^ otherType

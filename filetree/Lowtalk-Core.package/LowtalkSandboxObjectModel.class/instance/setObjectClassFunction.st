@@ -1,4 +1,0 @@
-accessing
-setObjectClassFunction
-	<compileTime>
-	^ setObjectClassFunction

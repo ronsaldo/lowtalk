@@ -1,3 +1,0 @@
-expressions
-chainReceiver
-	^ binaryExpression

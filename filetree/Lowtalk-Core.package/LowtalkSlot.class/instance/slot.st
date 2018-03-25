@@ -1,4 +1,0 @@
-accessing
-slot
-	<compileTime>
-	^ self

@@ -1,4 +1,0 @@
-accessing
-convertArrayFunction
-	<compileTime>
-	^ convertArrayFunction

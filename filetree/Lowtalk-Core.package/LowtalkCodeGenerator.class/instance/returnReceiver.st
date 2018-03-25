@@ -1,3 +1,0 @@
-instructions
-returnReceiver
-	self halt

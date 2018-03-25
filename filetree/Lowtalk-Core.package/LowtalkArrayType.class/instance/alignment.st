@@ -1,3 +1,0 @@
-accessing
-alignment
-	^ baseType alignment

@@ -1,3 +1,0 @@
-converting
-asValueType
-	^ referenced asValueType

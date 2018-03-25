@@ -1,3 +1,0 @@
-accessing
-readBarrier
-	^ compiler ssaReadBarrier

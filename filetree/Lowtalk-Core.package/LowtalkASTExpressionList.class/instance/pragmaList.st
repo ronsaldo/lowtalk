@@ -1,3 +1,0 @@
-accessing
-pragmaList
-	^ pragmaList

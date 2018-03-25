@@ -1,3 +1,0 @@
-superclass
-defaultSuperclass
-	^ Object

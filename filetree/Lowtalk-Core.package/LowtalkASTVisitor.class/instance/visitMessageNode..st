@@ -1,3 +1,0 @@
-visiting
-visitMessageNode: aNode
-	self subclassResponsibility

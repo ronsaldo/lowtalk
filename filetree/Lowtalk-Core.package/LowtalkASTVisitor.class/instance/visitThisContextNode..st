@@ -1,3 +1,0 @@
-visiting
-visitThisContextNode: aNode
-	self subclassResponsibility

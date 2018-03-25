@@ -1,3 +1,0 @@
-visiting
-visitMethodExpression: aNode
-	self subclassResponsibility

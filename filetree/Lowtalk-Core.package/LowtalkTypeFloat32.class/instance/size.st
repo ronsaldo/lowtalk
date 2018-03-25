@@ -1,3 +1,0 @@
-testing
-size
-	^ 4

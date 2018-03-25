@@ -1,3 +1,0 @@
-accessing
-slotValues
-	^ slots

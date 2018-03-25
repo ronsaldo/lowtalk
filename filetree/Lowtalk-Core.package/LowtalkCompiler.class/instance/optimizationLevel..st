@@ -1,3 +1,0 @@
-accessing
-optimizationLevel: anOptimizationLevel
-	optimizationLevel := anOptimizationLevel

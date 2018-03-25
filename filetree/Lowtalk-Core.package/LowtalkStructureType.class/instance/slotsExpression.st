@@ -1,3 +1,0 @@
-slots
-slotsExpression
-	^ slotsExpression

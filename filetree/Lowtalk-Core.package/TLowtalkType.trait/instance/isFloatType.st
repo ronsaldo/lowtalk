@@ -1,3 +1,0 @@
-testing
-isFloatType
-	^ false

@@ -1,3 +1,0 @@
-structure class
-inImageStructureLayoutClass
-	^ SLVMPackedStructureLayout

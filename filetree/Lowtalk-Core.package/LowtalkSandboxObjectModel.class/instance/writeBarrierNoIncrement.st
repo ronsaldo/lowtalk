@@ -1,4 +1,0 @@
-accessing
-writeBarrierNoIncrement
-	<compileTime>
-	^ writeBarrierNoIncrement

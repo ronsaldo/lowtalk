@@ -1,3 +1,0 @@
-coercions
-arithmeticCoerceWithBooleanLiteral: otherType
-	^ nil

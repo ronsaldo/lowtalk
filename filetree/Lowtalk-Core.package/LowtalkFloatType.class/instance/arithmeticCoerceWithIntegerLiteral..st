@@ -1,3 +1,0 @@
-coercions
-arithmeticCoerceWithIntegerLiteral: otherType
-	^ self

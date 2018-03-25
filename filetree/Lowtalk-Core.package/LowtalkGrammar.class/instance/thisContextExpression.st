@@ -1,3 +1,0 @@
-expressions
-thisContextExpression
-	^ thisContextKeyword

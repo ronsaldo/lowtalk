@@ -1,4 +1,0 @@
-accessing
-floatToObjectFunction
-	<compileTime>
-	^ floatToObjectFunction

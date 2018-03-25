@@ -1,3 +1,0 @@
-evaluating
-valueType
-	^ description type

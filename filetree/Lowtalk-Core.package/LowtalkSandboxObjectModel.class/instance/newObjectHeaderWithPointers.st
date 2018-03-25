@@ -1,4 +1,0 @@
-accessing
-newObjectHeaderWithPointers
-	<compileTime>
-	^ newObjectHeaderWithPointers

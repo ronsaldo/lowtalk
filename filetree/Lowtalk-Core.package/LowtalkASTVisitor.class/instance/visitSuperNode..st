@@ -1,3 +1,0 @@
-visiting
-visitSuperNode: aNode
-	self subclassResponsibility

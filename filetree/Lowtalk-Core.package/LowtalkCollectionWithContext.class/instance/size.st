@@ -1,3 +1,0 @@
-converting
-size
-	^ collection size

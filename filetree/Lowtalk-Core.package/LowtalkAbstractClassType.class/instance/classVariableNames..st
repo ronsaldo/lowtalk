@@ -1,3 +1,0 @@
-accessing
-classVariableNames: aStringWithClassVariableNames
-	<compileTime>

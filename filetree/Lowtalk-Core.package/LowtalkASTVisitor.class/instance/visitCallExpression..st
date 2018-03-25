@@ -1,3 +1,0 @@
-visiting
-visitCallExpression: node
-	self subclassResponsibility

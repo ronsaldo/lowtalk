@@ -1,3 +1,0 @@
-accessing
-asTypeExpression
-	^ self

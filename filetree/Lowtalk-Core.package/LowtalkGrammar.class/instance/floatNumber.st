@@ -1,3 +1,0 @@
-expressions
-floatNumber
-	^ dottedFloatNumber / scientificFloatNumber
