@@ -580,7 +580,7 @@ LowtalkStructureType >> specialMessageTypeForSelector: selector [
 LowtalkStructureType >> ssaCoerce: value implicitlyTo: targetType with: builder at: node [
 	| temp |
 	targetType isDynamicObjectType ifTrue: [
-		^ builder structureToDynamicObjectCast: value target: targetType typeObject: (builder addDynamicLiteral: self)
+		^ builder structureToDynamicObjectCast: value target: targetType ssaType typeObject: (builder addDynamicLiteral: self)
 	].
 
 	(targetType isReferenceType and: [ targetType referenced == self ]) ifTrue: [
