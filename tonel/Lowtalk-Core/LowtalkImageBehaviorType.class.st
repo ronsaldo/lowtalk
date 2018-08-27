@@ -166,6 +166,12 @@ LowtalkImageBehaviorType >> metaClass [
 	^ self classObject class asLowtalkTypeWith: compiler
 ]
 
+{ #category : #'instance creation' }
+LowtalkImageBehaviorType >> new [
+	self flag: 'Fix this ugly hack.'.
+	^ classObject new
+]
+
 { #category : #'as yet unclassified' }
 LowtalkImageBehaviorType >> selectLayoutClassWithSuperclass: aSuperclass [
 	layoutType ifNotNil: [

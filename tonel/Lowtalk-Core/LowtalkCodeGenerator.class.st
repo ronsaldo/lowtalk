@@ -131,6 +131,11 @@ LowtalkCodeGenerator class >> initialize [
 		'float <=' ufle
 		'float >' ufgt
 		'float >=' ufge
+				
+		'bool =' ieq
+		'bool ==' ieq
+		'bool ~=' ine
+		'bool ~~' ine
 	).
 	
 	MessageConditionTypes := Dictionary newFromPairs: #(
