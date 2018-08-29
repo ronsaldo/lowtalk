@@ -181,6 +181,11 @@ LowtalkStructureType >> compiler: anObject [
 ]
 
 { #category : #methods }
+LowtalkStructureType >> concreteMethodForMetaSelector: selector [
+	^ self metaClass ifNotNil: [ :meta | meta concreteMethodForSelector: selector ]
+]
+
+{ #category : #methods }
 LowtalkStructureType >> concreteMethodForSelector: selector [
 	pendingMethods at: selector ifPresent: [ :pendingMethod | self concretizeMethod: pendingMethod ].
 	^ methodDict at: selector ifAbsent: [ nil ]
@@ -271,6 +276,11 @@ LowtalkStructureType >> defaultSSAValueWith: builder [
 { #category : #accessing }
 LowtalkStructureType >> defaultValue [
 	^ self basicNew
+]
+
+{ #category : #coercions }
+LowtalkStructureType >> dispatchArithmeticCoerceWith: otherType [
+	^ otherType arithmeticCoerceWithStructureType: self
 ]
 
 { #category : #methods }

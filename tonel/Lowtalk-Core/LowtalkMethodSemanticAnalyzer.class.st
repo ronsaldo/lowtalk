@@ -65,7 +65,17 @@ LowtalkMethodSemanticAnalyzer >> analyzeBlock: aBlockNode environment: baseEnvir
 			method primitive: (self asEvaluator evaluateValue: pragma arguments first)
 		]
 	].
-	
+
+	aBlockNode pragmaAt: #inline: ifPresent: [ :pragma |
+		self withEnvironment: baseEnvironment do: [ 	
+			method inlineMode: (self asEvaluator evaluateValue: pragma arguments first)
+		]
+	].
+
+	aBlockNode pragmaAt: #inline ifPresent: [ :pragma |
+		method inlineMode: true
+	].
+
 	topEnvironment := baseEnvironment.
 	aBlockNode selfType isVoidType ifFalse: [
 		topEnvironment := (LowtalkReceiverEnvironment parent: baseEnvironment)
@@ -139,6 +149,16 @@ LowtalkMethodSemanticAnalyzer >> analyzeMethod: methodNode receiverType: receive
 		self withEnvironment: baseEnvironment do: [ 	
 			method primitive: (self asEvaluator evaluateValue: pragma arguments first)
 		]
+	].
+
+	methodNode pragmaAt: #inline: ifPresent: [ :pragma |
+		self withEnvironment: baseEnvironment do: [ 	
+			method inlineMode: (self asEvaluator evaluateValue: pragma arguments first)
+		]
+	].
+
+	methodNode pragmaAt: #inline ifPresent: [ :pragma |
+		method inlineMode: true
 	].
 
 	self withEnvironment: methodEnvironment do: [ 

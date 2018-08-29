@@ -55,6 +55,11 @@ LowtalkNilType >> arithmeticCoerceWithStringLiteral: otherType [
 ]
 
 { #category : #coercions }
+LowtalkNilType >> arithmeticCoerceWithStructureType: otherType [
+	^ otherType
+]
+
+{ #category : #coercions }
 LowtalkNilType >> arithmeticCoerceWithSymbolLiteral: otherType [
 	^ otherType
 ]

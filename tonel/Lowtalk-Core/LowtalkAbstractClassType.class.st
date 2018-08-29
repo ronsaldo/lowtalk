@@ -217,15 +217,19 @@ LowtalkAbstractClassType >> compiler: anObject [
 
 { #category : #methods }
 LowtalkAbstractClassType >> concretizeAllPendingMethods [
-	pendingMethods values copy do: [ :pending | self concretizeMethod: pending ]
+	| toConcretize |
+	toConcretize := pendingMethods values copy.
+	toConcretize do: [ :pending | self concretizeMethod: pending ]
 ]
 
 { #category : #methods }
 LowtalkAbstractClassType >> concretizeMethod: aMethod [
 	| actualMethod |
+	pendingMethods at: aMethod selector ifAbsent: [ ^ self ].
+	
 	methodSignatureDictionary at: aMethod selector ifAbsentPut: [ aMethod methodSignatureForReceiverTypeValue: self ].
-	actualMethod := aMethod compiledMethodForReceiverTypeValue: self.
 	pendingMethods removeKey: aMethod selector.
+	actualMethod := aMethod compiledMethodForReceiverTypeValue: self.
 	self installMethod: actualMethod category: 	(organization at: aMethod ifAbsent: [ self defaultMethodCategory ]).
 ]
 

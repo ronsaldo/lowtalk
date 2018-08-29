@@ -512,7 +512,7 @@ LowtalkCodeGenerator >> generateFunction: ssaFunction value: functionValue [
 	selfType := method receiverType.
 	method ssaFunction: ssaFunction.
 	currentFunction := ssaFunction.
-	
+
 	"Create the builders"
 	allocaBuilder := SLVMBuilder on: ssaFunction.
 	builder := SLVMBuilder on: ssaFunction.
@@ -720,11 +720,9 @@ LowtalkCodeGenerator >> generateMessageWithCompileTimeLookup: message receiver: 
 LowtalkCodeGenerator >> generateNormalMessage: message receiver: receiver receiverType: receiverType inSuperClass: inSuperClass [
 	| arguments receiverValue instruction receiverValueType concreteMethod |
 	receiverValueType := receiverType withoutReferences.
-	receiverValueType isAnyDynamicObjectType ifFalse: [ 
-		concreteMethod := receiverValueType concreteMethodForSelector: message selector.
-		concreteMethod ifNotNil: [
-			^ self generateNormalMessage: message receiver: receiver receiverType: receiverType inSuperClass: inSuperClass concreteMethod: concreteMethod
-		]
+	concreteMethod := receiverValueType concreteMethodForNormalMessageSendWithSelector: message selector inSuperClass: inSuperClass.
+	concreteMethod ifNotNil: [
+		^ self generateNormalMessage: message receiver: receiver receiverType: receiverType inSuperClass: inSuperClass concreteMethod: concreteMethod
 	].
 
 	receiverValue := self coerceImplicitly: receiver type: receiverType to: compiler objectType at: message.
@@ -1046,21 +1044,21 @@ LowtalkCodeGenerator >> generateSpecialMessage: message receiver: receiver recei
 
 { #category : #messages }
 LowtalkCodeGenerator >> generateStructureNewMessage: message receiver: receiver receiverType: receiverType [
-	| structureType structureVariable slotPointer |
+	| structureType structureVariable structureValue |
 	structureType := receiverType withoutReferences.
 	self assert: structureType isMetaType.
 	structureType := structureType instanceType.
 	self assert: structureType isStructureType.
 	
-	structureVariable := allocaBuilder alloca: structureType ssaType.
+	structureValue := structureType defaultSSAValueWith: builder.
 	
-	structureType fields doWithIndex: [ :field :index |
-		slotPointer := builder getReference: structureVariable element: (builder constInt: index - 1).
-		self store: (field defaultSSAValueWith: builder) in: slotPointer
-	].
-
-	^ message type isReferenceType ifTrue: [ structureVariable ] ifFalse: [ builder load: structureVariable ]
-	
+	^ message type isReferenceType ifTrue: [ 
+		structureVariable := allocaBuilder alloca: structureType ssaType.
+		builder store: structureValue in: structureVariable.
+		structureVariable
+	] ifFalse: [
+		structureValue
+	]
 ]
 
 { #category : #messages }
@@ -1528,12 +1526,14 @@ LowtalkCodeGenerator >> visitLetExpressionNode: node [
 
 { #category : #visiting }
 LowtalkCodeGenerator >> visitMessageChainNode: chain [
-	| receiver receiverType result isSuper |
+	| receiver receiverType result isSuper temp |
 	receiver := self visitNode: chain receiver.
 	receiverType := chain receiver type.
 	
-	(receiverType isReferenceType and: [ receiverType isStructureType and: [receiver type isPointerType not]]) ifTrue: [ 
-		self halt.
+	(receiverType isReferenceType and: [receiver type isPointerType not]) ifTrue: [
+		temp := allocaBuilder alloca: receiver type.
+		builder store: receiver in: temp.
+		receiver := temp
 	].
 
 	result := receiver.

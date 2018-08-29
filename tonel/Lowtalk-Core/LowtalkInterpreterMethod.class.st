@@ -20,9 +20,10 @@ Class {
 		'hasLazySelector',
 		'bytecodeMethods',
 		'capturedVariable',
-		'outerClosureVariables'
+		'outerClosureVariables',
+		'inlineMode'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #initialization }
@@ -157,6 +158,16 @@ LowtalkInterpreterMethod >> initialize [
 	outerClosureVariables := SLVMOrderedInsertionSet new.
 ]
 
+{ #category : #accessing }
+LowtalkInterpreterMethod >> inlineMode [
+	^ inlineMode
+]
+
+{ #category : #accessing }
+LowtalkInterpreterMethod >> inlineMode: anObject [
+	inlineMode := anObject
+]
+
 { #category : #evaluating }
 LowtalkInterpreterMethod >> interpretASTWithArguments: evaluationArguments types: evaluationArgumentTypes closureEnvironment: closureEnvironment compiler: aLowtalkCompiler at: aNode [
 	| activationEnvironment argumentDefinition convertedArgument argumentVariable result resultType actualArguments actualArgumentTypes receiverValue receiverValueType receiverActivationEnvironment |
@@ -227,6 +238,11 @@ LowtalkInterpreterMethod >> interpretASTWithArguments: evaluationArguments types
 	].
 	
 	^ returnType isVoidType ifTrue: [nil] ifFalse: [resultType convertValue: result toType: returnType at: node]
+]
+
+{ #category : #testing }
+LowtalkInterpreterMethod >> isInlined [
+	^ inlineMode isNotNil and: [ inlineMode ~~ false ]
 ]
 
 { #category : #evaluating }

@@ -91,6 +91,11 @@ TLowtalkType >> arithmeticCoerceWithStringLiteral: otherType [
 ]
 
 { #category : #coercions }
+TLowtalkType >> arithmeticCoerceWithStructureType: otherType [
+	^ nil
+]
+
+{ #category : #coercions }
 TLowtalkType >> arithmeticCoerceWithSymbolLiteral: otherType [
 	^ nil
 ]
@@ -157,6 +162,25 @@ TLowtalkType >> classBindingWithCompiler: aCompiler [
 { #category : #accessing }
 TLowtalkType >> compilationTarget [
 	self explicitRequirement
+]
+
+{ #category : #methods }
+TLowtalkType >> concreteMethodForMetaSelector: selector [
+	^ nil
+]
+
+{ #category : #methods }
+TLowtalkType >> concreteMethodForNormalMessageSendWithSelector: selector inSuperClass: inSuperClass [
+	| method |
+	(inSuperClass and: [ self isAnyDynamicObjectType ]) ifTrue: [ ^ self ].
+
+	method := self concreteMethodForSelector: selector.
+	"If we are a dynamic object, only use the concrete method when it is inlined."
+	self isAnyDynamicObjectType ifTrue: [
+		(method isNil or: [ method isInlined not]) ifTrue: [ ^ nil ].
+	].
+
+	^ method
 ]
 
 { #category : #methods }

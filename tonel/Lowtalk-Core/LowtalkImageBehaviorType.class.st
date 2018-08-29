@@ -1,10 +1,13 @@
 Class {
 	#name : #LowtalkImageBehaviorType,
 	#superclass : #LowtalkAbstractClassType,
+	#instVars : [
+		'lowtalkMethodDict'
+	],
 	#classVars : [
 		'MethodSignatureSpecs'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }
@@ -40,6 +43,12 @@ LowtalkImageBehaviorType >> classBindingWithCompiler: aCompiler [
 LowtalkImageBehaviorType >> classObject: aClassObject [
 	super classObject: aClassObject.
 	self name: aClassObject name.
+]
+
+{ #category : #methods }
+LowtalkImageBehaviorType >> concreteMethodForSelector: aSelector [
+	pendingMethods at: aSelector ifPresent: [ :pendingMethod | self concretizeMethod: pendingMethod ].
+	^ lowtalkMethodDict ifNotNil: [ lowtalkMethodDict at: aSelector ifAbsent: [ nil ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -143,6 +152,7 @@ LowtalkImageBehaviorType >> installMethod: aMethod category: methodCategory [
 	classObject instanceSide 
 		noteCompilationOfMethod: compiledMethod 
 		meta: classObject isClassSide.
+	self lowtalkMethodDict at: aMethod selector put: aMethod
 ]
 
 { #category : #accessing }
@@ -159,6 +169,11 @@ LowtalkImageBehaviorType >> instanceOrNil [
 { #category : #testing }
 LowtalkImageBehaviorType >> isMetaClass [
 	^ classObject isMeta
+]
+
+{ #category : #methods }
+LowtalkImageBehaviorType >> lowtalkMethodDict [
+	^ lowtalkMethodDict ifNil: [ lowtalkMethodDict := IdentityDictionary new ]
 ]
 
 { #category : #accessing }

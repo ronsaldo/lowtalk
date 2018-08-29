@@ -514,6 +514,7 @@ LowtalkCompiler >> generateInterpreterMethod: method [
 	].
 	
 	method primitive ifNotNil: [ ssaValue primitive: method ].
+	method inlineMode ifNotNil: [ ssaValue inlineMode: method inlineMode ].
 	method unmangledName ifNotNil: [ 
 		ssaValue unmangledName: method unmangledName
 	] ifNil: [ 

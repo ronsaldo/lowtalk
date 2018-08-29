@@ -10,6 +10,18 @@ Class {
 	#category : 'Lowtalk-Core-Types'
 }
 
+{ #category : #testing }
+LowtalkMetaType >> canBeImplicitlyConvertedTo: targetType [
+	(super canBeImplicitlyConvertedTo: targetType) ifTrue: [ ^ true ].
+	((instanceType respondsTo: #metaClass) and: [ targetType == instanceType metaClass ]) ifTrue: [ ^ true ].
+	^ false
+]
+
+{ #category : #methods }
+LowtalkMetaType >> concreteMethodForSelector: selector [
+	^ instanceType concreteMethodForMetaSelector: selector
+]
+
 { #category : #converting }
 LowtalkMetaType >> convertValue: value toSSAConstantWith: compiler [
 	^ compiler convertDynamicObjectSSAConstant: value
@@ -58,4 +70,13 @@ LowtalkMetaType >> specialMessageTypeForSelector: selector [
 	].
 
 	^ super specialMessageTypeForSelector: selector
+]
+
+{ #category : #coercions }
+LowtalkMetaType >> ssaCoerce: value implicitlyTo: targetType with: builder at: node [
+	((instanceType respondsTo: #metaClass) and: [ targetType == instanceType metaClass ]) ifTrue: [
+		^ value
+	].
+
+	^ super ssaCoerce: value implicitlyTo: targetType with: builder at: node
 ]
