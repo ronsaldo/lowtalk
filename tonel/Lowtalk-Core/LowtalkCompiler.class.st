@@ -52,9 +52,11 @@ Class {
 		'pendingObjectsInitializers',
 		'convertedSSAObjects',
 		'specialSelfType',
-		'specialSelfInstanceType'
+		'specialSelfInstanceType',
+		'imageMethodAdditions',
+		'shouldGC'
 	],
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #accessing }
@@ -65,6 +67,11 @@ LowtalkCompiler class >> compilationTarget: aCompilationTarget [
 { #category : #accessing }
 LowtalkCompiler class >> new [
 	^ self compilationTarget: SLVM32BitsPointerCompilationTarget new.
+]
+
+{ #category : #adding }
+LowtalkCompiler >> addImageMethodAddition: methodAddition [
+	self imageMethodAdditions add: methodAddition
 ]
 
 { #category : #adding }
@@ -113,6 +120,15 @@ LowtalkCompiler >> buildModule [
 	objectToFinish do: #finishCompiling.
 	self assert: pendingObjects isEmpty.
 	
+	imageMethodAdditions ifNotNil: [
+		imageMethodAdditions do: #finishApplying.
+		imageMethodAdditions removeAll.
+	].
+
+	shouldGC ifTrue: [
+		"For migrateClasses: old to: new using: anInstanceModification"
+		Smalltalk garbageCollect
+	].
 	
 ]
 
@@ -134,6 +150,16 @@ LowtalkCompiler >> classBuilder [
 { #category : #'as yet unclassified' }
 LowtalkCompiler >> classTypeForObject: anObject [
 	^ classTypesForObjects at: anObject
+]
+
+{ #category : #'as yet unclassified' }
+LowtalkCompiler >> clearImageBehaviorNamed: behaviorName [
+	| behavior |
+	behaviorName ifNil: [ ^ self ].
+	behavior := Smalltalk globals at: behaviorName ifAbsent: [ ^ self ].
+	behavior methodDict removeAll.
+	behavior class methodDict removeAll.
+	shouldGC := true.
 ]
 
 { #category : #accessing }
@@ -550,6 +576,11 @@ LowtalkCompiler >> globalBuilder [
 	^ globalBuilder
 ]
 
+{ #category : #accessing }
+LowtalkCompiler >> imageMethodAdditions [
+	^ imageMethodAdditions ifNil: [ imageMethodAdditions := OrderedCollection new ]
+]
+
 { #category : #'as yet unclassified' }
 LowtalkCompiler >> importImageClassType: aBehavior [
 	| result |
@@ -615,6 +646,7 @@ LowtalkCompiler >> initializeWithCompilationTarget: aCompilationTarget [
 	gensymCount := 0.
 	
 	optimizationLevel := 0.
+	shouldGC := false.
 ]
 
 { #category : #types }

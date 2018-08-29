@@ -79,13 +79,8 @@ LowtalkImageBehaviorType >> createClassObject [
 	layoutClass := self selectLayoutClassWithSuperclass: sc.
 	instanceSlots := self convertSlots.
 	
-	self flag: 'HACK: remove the methods from the class to avoid triggering recompilation with the wrong compiler.'.
-	(name isNotNil and: [ Smalltalk globals includesKey: name ]) ifTrue: [ 
-		(Smalltalk globals at: name) methodDict removeAll.
-		(Smalltalk globals at: name) class methodDict removeAll.
-	].
-	
-	classObject := sc classInstaller make: [ :builder |
+	self compiler clearImageBehaviorNamed: name.
+	classObject := LowtalkClassInstaller make: [ :builder |
 		name ifNotNil: [
 			builder name: name asSymbol
 		].
@@ -142,16 +137,15 @@ LowtalkImageBehaviorType >> importSlots [
 
 { #category : #methods }
 LowtalkImageBehaviorType >> installMethod: aMethod category: methodCategory [
-	| compiledMethod |
+	| compiledMethod methodAddition |
 
 	compiledMethod := compiler generateCompiledMethod: aMethod.
-	classObject addAndClassifySelector: compiledMethod selector
-		withMethod: compiledMethod
-		inProtocol: methodCategory 
-		notifying: nil.
-	classObject instanceSide 
-		noteCompilationOfMethod: compiledMethod 
-		meta: classObject isClassSide.
+	methodAddition := LowtalkMethodAddition new method: compiledMethod;
+		behavior: classObject;
+		category: methodCategory.
+
+	self compiler addImageMethodAddition: methodAddition.
+	methodAddition install.
 	self lowtalkMethodDict at: aMethod selector put: aMethod
 ]
 
