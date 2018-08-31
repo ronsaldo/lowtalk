@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkPackedStructureType,
 	#superclass : #LowtalkStructureType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #'structure class' }

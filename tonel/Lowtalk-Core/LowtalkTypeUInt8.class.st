@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkTypeUInt8,
 	#superclass : #LowtalkTypeInt8,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

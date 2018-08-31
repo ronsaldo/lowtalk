@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkVoidType,
 	#superclass : #LowtalkOpaqueType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #associating }

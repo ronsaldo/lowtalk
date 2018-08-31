@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'compiler'
 	],
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #converting }

@@ -80,7 +80,7 @@ LowtalkImageBehaviorType >> createClassObject [
 	instanceSlots := self convertSlots.
 	
 	self compiler clearImageBehaviorNamed: name.
-	classObject := LowtalkClassInstaller make: [ :builder |
+	classObject := compiler classInstaller make: [ :builder |
 		name ifNotNil: [
 			builder name: name asSymbol
 		].

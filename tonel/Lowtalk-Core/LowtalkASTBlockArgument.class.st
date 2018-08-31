@@ -6,7 +6,7 @@ Class {
 		'typeExpression',
 		'binding'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

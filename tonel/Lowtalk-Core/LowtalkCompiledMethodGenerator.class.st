@@ -14,7 +14,7 @@ Class {
 	#classVars : [
 		'BlockMessages'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #initialization }

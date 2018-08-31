@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'PointerMessages'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }

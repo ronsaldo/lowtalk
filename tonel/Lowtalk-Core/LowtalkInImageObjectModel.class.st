@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkInImageObjectModel,
 	#superclass : #LowtalkObjectModel,
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #accessing }

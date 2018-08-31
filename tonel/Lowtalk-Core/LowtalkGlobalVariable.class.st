@@ -10,7 +10,7 @@ Class {
 		'bindingObject',
 		'ssaBindingValue'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #converting }

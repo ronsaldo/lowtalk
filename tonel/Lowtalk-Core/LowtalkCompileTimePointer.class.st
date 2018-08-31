@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkCompileTimePointer,
 	#superclass : #LowtalkBObject,
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #testing }

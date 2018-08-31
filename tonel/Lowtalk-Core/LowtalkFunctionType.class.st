@@ -8,7 +8,7 @@ Class {
 		'variadic',
 		'name'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

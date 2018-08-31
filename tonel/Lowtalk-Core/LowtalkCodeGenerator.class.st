@@ -26,7 +26,7 @@ Class {
 		'MessageConditionTypes',
 		'PerformSelectors'
 	],
-	#category : 'Lowtalk-Core-CodeGeneration'
+	#category : #'Lowtalk-Core-CodeGeneration'
 }
 
 { #category : #initialization }

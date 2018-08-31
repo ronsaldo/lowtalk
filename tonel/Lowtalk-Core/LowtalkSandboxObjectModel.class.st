@@ -55,7 +55,7 @@ Class {
 		'defaultSuperclass',
 		'arrayClass'
 	],
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #initialization }

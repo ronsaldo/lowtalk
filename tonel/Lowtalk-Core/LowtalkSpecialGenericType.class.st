@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkSpecialGenericType,
 	#superclass : #LowtalkSpecificDynamicObjectType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

@@ -22,7 +22,7 @@ Class {
 	#classVars : [
 		'StructureMetaMessageTypes'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }
@@ -227,7 +227,7 @@ LowtalkStructureType >> createInImageClassObject [
 	self compiler clearImageBehaviorNamed: name.
 
 	superClassObject := SLVMInternalStructure.
-	classObject := LowtalkClassInstaller make: [ :builder |
+	classObject := compiler classInstaller make: [ :builder |
 		name ifNotNil: [
 			builder name: name asSymbol
 		].

@@ -8,7 +8,7 @@ Class {
 		'evaluated',
 		'type'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #'as yet unclassified' }

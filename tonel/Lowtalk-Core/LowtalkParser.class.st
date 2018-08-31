@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'CEscapeSequenceMap'
 	],
-	#category : 'Lowtalk-Core-Parser'
+	#category : #'Lowtalk-Core-Parser'
 }
 
 { #category : #initialization }

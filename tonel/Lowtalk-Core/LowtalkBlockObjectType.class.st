@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'functionType'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

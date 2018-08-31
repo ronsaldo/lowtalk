@@ -15,7 +15,7 @@ Class {
 		'floatToObjectFunction',
 		'objectToFloatFunction'
 	],
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #accessing }

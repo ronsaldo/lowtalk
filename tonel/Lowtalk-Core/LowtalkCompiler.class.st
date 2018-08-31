@@ -147,6 +147,11 @@ LowtalkCompiler >> classBuilder [
 	^ classBuilder
 ]
 
+{ #category : #'subclass creation' }
+LowtalkCompiler >> classInstaller [
+	^ Smalltalk globals at: #LowtalkClassInstaller ifAbsent: [ Smalltalk classInstaller ]
+]
+
 { #category : #'as yet unclassified' }
 LowtalkCompiler >> classTypeForObject: anObject [
 	^ classTypesForObjects at: anObject

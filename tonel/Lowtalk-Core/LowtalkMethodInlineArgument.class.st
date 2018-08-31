@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkMethodInlineArgument,
 	#superclass : #LowtalkMethodArgument,
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

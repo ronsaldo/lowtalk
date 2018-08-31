@@ -11,7 +11,7 @@ Class {
 	#classVars : [
 		'NewObjectForType'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }

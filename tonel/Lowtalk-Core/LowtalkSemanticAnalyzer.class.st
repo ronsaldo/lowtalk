@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'CallingConventionNames'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #initialization }

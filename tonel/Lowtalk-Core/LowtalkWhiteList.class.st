@@ -6,7 +6,7 @@ Class {
 		'OverridenMethods',
 		'SelectorsAlwaysAllowed'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #overrides }

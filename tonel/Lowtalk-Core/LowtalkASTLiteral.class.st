@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #converting }

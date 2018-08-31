@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'TypeSpecialMessageType'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #testing }

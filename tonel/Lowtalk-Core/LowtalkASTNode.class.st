@@ -5,7 +5,7 @@ Class {
 		'position',
 		'type'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

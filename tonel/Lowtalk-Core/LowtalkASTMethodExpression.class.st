@@ -7,7 +7,7 @@ Class {
 		'arguments',
 		'body'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

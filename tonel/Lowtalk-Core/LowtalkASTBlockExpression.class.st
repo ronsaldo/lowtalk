@@ -11,7 +11,7 @@ Class {
 		'definition',
 		'inlined'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

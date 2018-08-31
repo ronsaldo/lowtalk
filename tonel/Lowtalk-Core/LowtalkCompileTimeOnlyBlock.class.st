@@ -6,7 +6,7 @@ Class {
 		'environment',
 		'compiler'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #accessing }

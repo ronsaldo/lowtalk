@@ -1,6 +1,6 @@
 Trait {
 	#name : #TLowtalkType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #associating }

@@ -5,7 +5,7 @@ Class {
 		'receiver',
 		'messages'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

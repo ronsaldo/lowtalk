@@ -5,7 +5,7 @@ Class {
 		'name',
 		'typeExpression'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #accessing }

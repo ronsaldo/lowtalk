@@ -118,7 +118,7 @@ Class {
 	#classVars : [
 		'Keywords'
 	],
-	#category : 'Lowtalk-Core-Parser'
+	#category : #'Lowtalk-Core-Parser'
 }
 
 { #category : #initialization }

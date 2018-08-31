@@ -6,7 +6,7 @@ Class {
 		'object',
 		'type'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #converting }

@@ -7,7 +7,7 @@ Class {
 		'CommonTypeSpecialMessages',
 		'DynamicObjectSpecialMessages'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

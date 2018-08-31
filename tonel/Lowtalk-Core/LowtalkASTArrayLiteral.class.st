@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkASTArrayLiteral,
 	#superclass : #LowtalkASTLiteral,
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

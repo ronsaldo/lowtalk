@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkMethodDummyParseTree,
 	#superclass : #Object,
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #visiting }

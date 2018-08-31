@@ -5,7 +5,7 @@ Class {
 		'method',
 		'ssaValue'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #'code generation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkASTThisContextReference,
 	#superclass : #LowtalkASTExpression,
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

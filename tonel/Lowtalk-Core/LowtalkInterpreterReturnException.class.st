@@ -8,7 +8,7 @@ Class {
 		'value',
 		'type'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #accessing }

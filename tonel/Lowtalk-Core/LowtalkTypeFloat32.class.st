@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkTypeFloat32,
 	#superclass : #LowtalkFloatType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #accessing }

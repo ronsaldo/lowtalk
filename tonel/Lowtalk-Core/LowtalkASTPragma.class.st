@@ -5,7 +5,7 @@ Class {
 		'selector',
 		'arguments'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

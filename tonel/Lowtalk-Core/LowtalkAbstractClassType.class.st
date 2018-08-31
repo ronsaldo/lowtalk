@@ -35,7 +35,7 @@ Class {
 	#classVars : [
 		'SpecificClassObjectSpecialMessages'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }

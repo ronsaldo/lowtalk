@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'expressionList'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkNamespaceBuilder,
 	#superclass : #LowtalkGlobalObjectBuilder,
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #'as yet unclassified' }

@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'ThisContextSpecialMessageTypes'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #initialization }

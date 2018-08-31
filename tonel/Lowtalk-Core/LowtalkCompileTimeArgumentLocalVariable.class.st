@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkCompileTimeArgumentLocalVariable,
 	#superclass : #LowtalkCompileTimeLocalVariable,
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

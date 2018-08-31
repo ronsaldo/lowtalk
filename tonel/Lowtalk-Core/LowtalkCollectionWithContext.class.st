@@ -6,7 +6,7 @@ Class {
 		'name',
 		'newlines'
 	],
-	#category : 'Lowtalk-Core-Parser'
+	#category : #'Lowtalk-Core-Parser'
 }
 
 { #category : #converting }

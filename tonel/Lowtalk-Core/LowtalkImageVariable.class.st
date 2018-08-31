@@ -6,7 +6,7 @@ Class {
 		'binding',
 		'ssaValue'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

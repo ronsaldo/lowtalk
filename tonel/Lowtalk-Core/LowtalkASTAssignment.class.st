@@ -5,7 +5,7 @@ Class {
 		'reference',
 		'value'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

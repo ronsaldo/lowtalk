@@ -6,7 +6,7 @@ Class {
 		'pragmaList',
 		'locals'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

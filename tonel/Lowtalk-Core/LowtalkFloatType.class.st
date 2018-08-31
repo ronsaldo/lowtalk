@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkFloatType,
 	#superclass : #LowtalkNumberType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #coercions }

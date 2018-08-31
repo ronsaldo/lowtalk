@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'SpecialLiterals'
 	],
-	#category : 'Lowtalk-Core-FrontEnd'
+	#category : #'Lowtalk-Core-FrontEnd'
 }
 
 { #category : #accessing }

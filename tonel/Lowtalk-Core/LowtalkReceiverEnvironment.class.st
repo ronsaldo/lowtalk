@@ -5,7 +5,7 @@ Class {
 		'receiverType',
 		'receiver'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

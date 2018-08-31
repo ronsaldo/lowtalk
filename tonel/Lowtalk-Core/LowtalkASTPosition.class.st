@@ -10,7 +10,7 @@ Class {
 		'endLine',
 		'endColumn'
 	],
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #requirements }

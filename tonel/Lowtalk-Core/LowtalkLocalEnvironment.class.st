@@ -1,5 +1,5 @@
 Class {
 	#name : #LowtalkLocalEnvironment,
 	#superclass : #LowtalkEnvironment,
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }

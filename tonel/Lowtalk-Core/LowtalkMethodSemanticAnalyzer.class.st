@@ -8,7 +8,7 @@ Class {
 		'BlockMessages',
 		'BooleanControlFlowMessages'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #initialization }

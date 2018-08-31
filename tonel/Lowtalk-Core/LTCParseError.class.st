@@ -1,7 +1,7 @@
 Class {
 	#name : #LTCParseError,
 	#superclass : #LTCError,
-	#category : 'Lowtalk-Core-Exception'
+	#category : #'Lowtalk-Core-Exception'
 }
 
 { #category : #accessing }

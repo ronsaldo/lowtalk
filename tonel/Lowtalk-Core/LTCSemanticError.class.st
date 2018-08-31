@@ -5,7 +5,7 @@ Class {
 		'environment',
 		'node'
 	],
-	#category : 'Lowtalk-Core-Exception'
+	#category : #'Lowtalk-Core-Exception'
 }
 
 { #category : #accessing }

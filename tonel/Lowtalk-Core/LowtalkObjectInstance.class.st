@@ -10,7 +10,7 @@ Class {
 		'ClassPrimitiveSelectors',
 		'ObjectPrimitiveSelectors'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #initialization }

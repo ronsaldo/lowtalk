@@ -11,7 +11,7 @@ Class {
 	#pools : [
 		'LowtalkTypeSharedPool'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #adding }

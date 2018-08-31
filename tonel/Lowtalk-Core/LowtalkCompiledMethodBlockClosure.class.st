@@ -9,7 +9,7 @@ Class {
 		'CullSelectors',
 		'ValueSelectors'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #initialization }

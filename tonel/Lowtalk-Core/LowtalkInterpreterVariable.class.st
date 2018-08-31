@@ -7,7 +7,7 @@ Class {
 		'valueExpression',
 		'binding'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

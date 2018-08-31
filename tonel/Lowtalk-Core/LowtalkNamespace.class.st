@@ -10,7 +10,7 @@ Class {
 		'namespaceObject',
 		'methodDict'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #converting }

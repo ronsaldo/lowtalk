@@ -5,7 +5,7 @@ Class {
 		'description',
 		'type'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #accessing }

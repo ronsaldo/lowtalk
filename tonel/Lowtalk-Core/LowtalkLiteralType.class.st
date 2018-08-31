@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkLiteralType,
 	#superclass : #LowtalkSingletonType,
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #converting }

@@ -5,7 +5,7 @@ Class {
 		'BlockMessages',
 		'InlineMessages'
 	],
-	#category : 'Lowtalk-Core-Interpreter'
+	#category : #'Lowtalk-Core-Interpreter'
 }
 
 { #category : #'public access' }

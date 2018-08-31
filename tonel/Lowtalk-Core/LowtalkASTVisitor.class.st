@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkASTVisitor,
 	#superclass : #Object,
-	#category : 'Lowtalk-Core-AST'
+	#category : #'Lowtalk-Core-AST'
 }
 
 { #category : #visiting }

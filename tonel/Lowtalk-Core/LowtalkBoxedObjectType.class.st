@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'boxed'
 	],
-	#category : 'Lowtalk-Core-Types'
+	#category : #'Lowtalk-Core-Types'
 }
 
 { #category : #converting }

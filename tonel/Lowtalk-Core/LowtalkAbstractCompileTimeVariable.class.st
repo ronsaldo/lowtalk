@@ -1,7 +1,7 @@
 Class {
 	#name : #LowtalkAbstractCompileTimeVariable,
 	#superclass : #LowtalkInterpreterVariable,
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #'code generation' }

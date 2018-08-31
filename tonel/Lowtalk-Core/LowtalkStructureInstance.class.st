@@ -5,7 +5,7 @@ Class {
 		'type',
 		'slots'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #converting }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'symbols'
 	],
-	#category : 'Lowtalk-Core-Environment'
+	#category : #'Lowtalk-Core-Environment'
 }
 
 { #category : #'gt-inspector-extension' }
