@@ -18,7 +18,8 @@ BaselineOfLowtalk >> baseline: spec [
 		].
 		spec baseline: #'Slovim' with: [ 
 				spec
-					repository: 'github://ronsaldo/slovim/tonel'.
+					repository: 'github://ronsaldo/slovim/tonel';
+					loads: #('NoLLVM').
 		].
 		spec baseline: #'Phanide' with: [ 
 				spec
