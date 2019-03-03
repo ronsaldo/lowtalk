@@ -16,6 +16,7 @@ LowtalkMethodArgument >> emitSSAVariableLoadWith: codeGenerator builder: builder
 
 { #category : #'code generation' }
 LowtalkMethodArgument >> emitSSAVariableReferenceWith: codeGenerator builder: builder at: node [
+	valueType isReferenceType ifTrue: [ ^ self emitSSAVariableLoadWith: codeGenerator builder: builder at: node ].
 	self error: 'Cannot get reference to argument'
 ]
 
