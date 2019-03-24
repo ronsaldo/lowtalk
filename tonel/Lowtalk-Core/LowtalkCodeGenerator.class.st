@@ -325,7 +325,7 @@ LowtalkCodeGenerator >> generateAndMessage: message receiver: receiver receiverT
 	
 	"Perform the branch"
 	branch := builder branch: condition ifTrue: continueBlock ifFalse: mergeBlock.
-	branch mergeBlock: mergeBlock.
+	branch block mergeBlock: mergeBlock.
 	
 	"Evaluate the inline block"
 	builder currentBlock: continueBlock.
@@ -619,7 +619,7 @@ LowtalkCodeGenerator >> generateIfSelectionMessage: message receiver: receiver r
 	
 	"Perform the branch"
 	branch := builder branch: condition ifTrue: trueBlock ifFalse: falseBlock.
-	branch mergeBlock: mergeBlock.
+	branch block mergeBlock: mergeBlock.
 	selectionBlock := builder currentBlock.
 	
 	"Generate the true block."
@@ -667,14 +667,14 @@ LowtalkCodeGenerator >> generateIfSelectionMessage: message receiver: receiver r
 	mergeBlock predecessors ifEmpty: [
 		builder currentBlock: mergeBlock.
 		builder unreachable.
-		^ branch addUnreachableSuccessors.
+		^ branch block addUnreachableStructuredSuccessors.
 	] ifNotEmpty: [
 		mergeBlock predecessors size = 1 ifTrue: [
 			jumpFromTrue ifTrue: [
-				branch mergeBlock: trueBlock.
+				branch block mergeBlock: trueBlock.
 			] ifFalse: [
 				self assert: jumpFromFalse.
-				branch mergeBlock: falseBlock.
+				branch block mergeBlock: falseBlock.
 			]
 		].
 	
@@ -800,7 +800,7 @@ LowtalkCodeGenerator >> generateOrMessage: message receiver: receiver receiverTy
 	
 	"Perform the branch"
 	branch := builder branch: condition ifTrue: mergeBlock ifFalse: continueBlock.
-	branch mergeBlock: mergeBlock.
+	branch block mergeBlock: mergeBlock.
 	
 	"Evaluate the inline block"
 	builder currentBlock: continueBlock.
@@ -935,7 +935,7 @@ LowtalkCodeGenerator >> generateRangeLoopMessage: message receiver: receiver rec
 		negativeComparisonBlock := builder newBasicBlock: #negativeIncrementComparison.
 		incrementComparisonMerge := builder newBasicBlock: #incrementComparisonMerge.
 		incrementSignBranch := builder branch: positiveIncrement ifTrue: positiveComparisonBlock ifFalse: negativeComparisonBlock.
-		incrementSignBranch mergeBlock: incrementComparisonMerge.
+		loopHeader mergeBlock: incrementComparisonMerge.
 		
 		"Positive increment"
 		builder currentBlock: positiveComparisonBlock.
@@ -1168,7 +1168,7 @@ LowtalkCodeGenerator >> generateWhileLoopMessage: message [
 	condition := self convertValue: condition type: conditionType toConditionOf: message selector at: message.
 
 	branch := builder branch: condition ifTrue: loopBody ifFalse: loopMerge.
-	branch
+	loopHeader
 		continueBlock: loopHeader;
 		mergeBlock: loopMerge.
 		

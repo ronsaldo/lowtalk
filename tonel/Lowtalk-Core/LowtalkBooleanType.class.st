@@ -27,7 +27,7 @@ LowtalkBooleanType >> convertBooleanValue: value toObjectWith: builder at: node 
 	mergeBlock := builder newBasicBlock: #boolMergeCase.
 		
 	branch := builder branch: value ifTrue: trueBlock ifFalse: falseBlock.
-	branch mergeBlock: mergeBlock.
+	branch block mergeBlock: mergeBlock.
 		
 	builder
 		currentBlock: trueBlock;
