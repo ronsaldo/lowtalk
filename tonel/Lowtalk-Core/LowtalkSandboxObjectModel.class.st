@@ -149,6 +149,11 @@ LowtalkSandboxObjectModel >> closureInstantiateFunction: anObject [
 ]
 
 { #category : #'object creation' }
+LowtalkSandboxObjectModel >> convertAdditionalMethodState: methodState [
+	^ self convertByteSymbol: methodState selector
+]
+
+{ #category : #'object creation' }
 LowtalkSandboxObjectModel >> convertArray: anArray [
 	^ convertArrayFunction value: anArray
 ]

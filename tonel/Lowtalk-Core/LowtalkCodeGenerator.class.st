@@ -573,7 +573,7 @@ LowtalkCodeGenerator >> generateFunctionBody: body [
 	[ (method methodClass classBindingWithCompiler: compiler) isNotNil
 	or: [ currentFunction dynamicLiterals isNotEmpty ]]) ifTrue: [ 
 		currentFunction
-			addRequiredDynamicLiteral: method selector;
+			addRequiredDynamicLiteral: method selectorRequiredLiteral;
 			addRequiredDynamicLiteral: (method methodClass classBindingWithCompiler: compiler);
 			hasSelectorAndClassBinding: true
 

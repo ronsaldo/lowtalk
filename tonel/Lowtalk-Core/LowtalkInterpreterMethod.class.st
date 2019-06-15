@@ -21,7 +21,8 @@ Class {
 		'bytecodeMethods',
 		'capturedVariable',
 		'outerClosureVariables',
-		'inlineMode'
+		'inlineMode',
+		'pragmas'
 	],
 	#category : #'Lowtalk-Core-Interpreter'
 }
@@ -36,6 +37,11 @@ LowtalkInterpreterMethod >> addCapturedVariable: aVariable [
 LowtalkInterpreterMethod >> addOuterClosureVariable: aVariable [
 	outerClosureVariables add: aVariable
 	
+]
+
+{ #category : #adding }
+LowtalkInterpreterMethod >> addPragma: aPragma [
+	^ self pragmas add: aPragma
 ]
 
 { #category : #adding }
@@ -307,6 +313,11 @@ LowtalkInterpreterMethod >> pointerForSlotDescription: slotDescription [
 ]
 
 { #category : #accessing }
+LowtalkInterpreterMethod >> pragmas [
+	^ pragmas ifNil: [pragmas := OrderedCollection new.]
+]
+
+{ #category : #accessing }
 LowtalkInterpreterMethod >> primitive [
 	^ primitive
 ]
@@ -366,6 +377,20 @@ LowtalkInterpreterMethod >> selector [
 LowtalkInterpreterMethod >> selector: anObject [
 	<compileTime>
 	selector := anObject
+]
+
+{ #category : #'as yet unclassified' }
+LowtalkInterpreterMethod >> selectorRequiredLiteral [
+	| additionalMethodState |
+	(pragmas isNotNil and: [ pragmas isNotEmpty ]) ifTrue: [
+		additionalMethodState := AdditionalMethodState forSelector: selector.
+		pragmas do: [ :pragma |
+			additionalMethodState := additionalMethodState copyWith: pragma
+		].
+		^ additionalMethodState
+	].
+
+	^ selector
 ]
 
 { #category : #accessing }

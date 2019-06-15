@@ -10,6 +10,11 @@ LowtalkInImageObjectModel >> arrayClass [
 ]
 
 { #category : #'object creation' }
+LowtalkInImageObjectModel >> convertAdditionalMethodState: anArray [
+	^ anArray
+]
+
+{ #category : #'object creation' }
 LowtalkInImageObjectModel >> convertArray: anArray [
 	^ anArray
 ]

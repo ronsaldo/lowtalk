@@ -1262,6 +1262,14 @@ LowtalkMethodSemanticAnalyzer >> visitNilLiteralNode: node [
 { #category : #visiting }
 LowtalkMethodSemanticAnalyzer >> visitPragmaNode: node [
 	"Ignored"
+	| selector arguments pragma |
+	selector := node selector.
+	arguments := node arguments collect: [ :arg |
+		self assert: arg isLiteralNode.
+		arg value.
+	].
+	pragma := Pragma keyword: selector arguments: arguments.
+	method addPragma: pragma
 ]
 
 { #category : #visiting }

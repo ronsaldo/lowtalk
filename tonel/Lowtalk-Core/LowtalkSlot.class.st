@@ -50,6 +50,7 @@ LowtalkSlot >> createGetterOn: behavior [
 	| source methodExpression |
 	source := ByteString streamContents: [:out |
 		out << ':[' << name; lf.
+		out tab << '<accessor>'; lf.
 		out tab << ' ^ ' << name; lf.
 		out << ']'.
 	].
@@ -71,6 +72,7 @@ LowtalkSlot >> createSetterOn: behavior [
 	| source methodExpression |
 	source := ByteString streamContents: [:out |
 		out << ':[' << name << ': newValueFor_' << name; lf.
+		out tab << '<accessor>'; lf.
 		out tab << name << ' := newValueFor_' << name; lf.
 		out << ']'.
 	].

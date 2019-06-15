@@ -26,6 +26,11 @@ LowtalkObjectModel >> compiler: anObject [
 ]
 
 { #category : #'object creation' }
+LowtalkObjectModel >> convertAdditionalMethodState: anArray [
+	self subclassResponsibility
+]
+
+{ #category : #'object creation' }
 LowtalkObjectModel >> convertArray: anArray [
 	self subclassResponsibility
 ]
